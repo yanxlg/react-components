@@ -1,3 +1,10 @@
+import "antd/es/popover/style/css";
+import _Popover from "antd/es/popover";
+import "antd/es/checkbox/style/css";
+import _Checkbox from "antd/es/checkbox";
+import "antd/es/tooltip/style/css";
+import _Tooltip from "antd/es/tooltip";
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -44,7 +51,6 @@ var __spreadArrays = this && this.__spreadArrays || function () {
 import React from 'react';
 import { ConfigConsumer } from "antd/es/config-provider/context";
 import { PushpinOutlined, SettingOutlined, VerticalAlignMiddleOutlined } from '@ant-design/icons';
-import { Checkbox, Popover, Tooltip } from 'antd';
 import { DndProvider } from 'react-dnd';
 import Backend from 'react-dnd-html5-backend';
 import DnDItem from './DndItem';
@@ -61,7 +67,7 @@ var ToolTipIcon = function ToolTipIcon(_a) {
       fixed = _a.fixed;
 
   if (show) {
-    return React.createElement(Tooltip, {
+    return React.createElement(_Tooltip, {
       title: title
     }, React.createElement("span", {
       onClick: function onClick() {
@@ -94,7 +100,7 @@ var CheckboxListItem = function CheckboxListItem(_a) {
   return React.createElement("span", {
     className: className + "-list-item",
     key: columnKey
-  }, React.createElement(Checkbox, {
+  }, React.createElement(_Checkbox, {
     onChange: function onChange(e) {
       var _a;
 
@@ -308,11 +314,11 @@ var ColumnSetting = function ColumnSetting(props) {
     var getPrefixCls = _a.getPrefixCls;
     var className = getPrefixCls('pro-table-column-setting');
     var toolBarClassName = getPrefixCls('pro-table-toolbar');
-    return React.createElement(Popover, {
+    return React.createElement(_Popover, {
       arrowPointAtCenter: true,
       title: React.createElement("div", {
         className: className + "-title"
-      }, React.createElement(Checkbox, {
+      }, React.createElement(_Checkbox, {
         indeterminate: indeterminate,
         checked: selectKeys.length === 0 && selectKeys.length !== localColumns.length,
         onChange: function onChange(e) {
@@ -338,7 +344,7 @@ var ColumnSetting = function ColumnSetting(props) {
         setColumnsMap: setColumnsMap,
         columnsMap: columnsMap
       })
-    }, React.createElement(Tooltip, {
+    }, React.createElement(_Tooltip, {
       title: '列设置'
     }, React.createElement(SettingOutlined, {
       className: toolBarClassName + "-item-icon",

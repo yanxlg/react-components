@@ -1,3 +1,6 @@
+import "antd/es/skeleton/style/css";
+import _Skeleton from "antd/es/skeleton";
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -31,8 +34,6 @@ import React, { forwardRef } from 'react';
 import LazyLoad from 'react-lazyload';
 import classNames from 'classnames'; // import styles from '../../temp/JsonForm/_form.less';
 
-import { Skeleton } from 'antd';
-
 var LazyImage = function LazyImage(_a, ref) {
   var _b = _a.scrollContainer,
       scrollContainer = _b === void 0 ? '.ant-table-body' : _b,
@@ -43,7 +44,7 @@ var LazyImage = function LazyImage(_a, ref) {
     scrollContainer: scrollContainer,
     offset: 100,
     throttle: true,
-    placeholder: React.createElement(Skeleton.Input, {
+    placeholder: React.createElement(_Skeleton.Input, {
       active: true,
       className: classNames(className, "inline-block")
     })

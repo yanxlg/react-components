@@ -1,6 +1,7 @@
+import "antd/es/alert/style/css";
+import _Alert from "antd/es/alert";
 import React, { forwardRef, useImperativeHandle, useMemo, useState } from 'react';
 import { ConfigConsumer } from "antd/es/config-provider/context";
-import { Alert } from 'antd';
 import './index.less';
 
 var defaultAlertOptionRender = function defaultAlertOptionRender(props) {
@@ -59,7 +60,7 @@ var TableAlert = function TableAlert(_a, ref) {
 
       return React.createElement("div", {
         className: className
-      }, React.createElement(Alert, {
+      }, React.createElement(_Alert, {
         message: React.createElement("div", {
           className: className + "-info"
         }, React.createElement("div", {

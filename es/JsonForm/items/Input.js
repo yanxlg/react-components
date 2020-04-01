@@ -1,3 +1,6 @@
+import "antd/es/form/style/css";
+import _Form from "antd/es/form";
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -27,7 +30,6 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-import { Form } from 'antd';
 import React, { useMemo } from 'react';
 import { transNullValue, transNumber, transNumberStrArr, transStrArr } from '../utils';
 import RichInput from '../../RichInput';
@@ -56,7 +58,7 @@ var FormInput = function FormInput(props) {
     } : {};
   }, []);
   return useMemo(function () {
-    return React.createElement(Form.Item, {
+    return React.createElement(_Form.Item, {
       className: formItemClassName,
       name: name,
       label: React.createElement("span", {

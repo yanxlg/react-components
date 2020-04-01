@@ -1,3 +1,8 @@
+import "antd/es/input-number/style/css";
+import _InputNumber from "antd/es/input-number";
+import "antd/es/form/style/css";
+import _Form from "antd/es/form";
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -15,7 +20,6 @@ var __assign = this && this.__assign || function () {
 };
 
 import React, { useMemo } from 'react';
-import { Form, InputNumber } from 'antd';
 import formStyles from '../_form.less';
 import { transNumber } from '../utils';
 var typeList = ['inputRange'];
@@ -76,38 +80,38 @@ var FormInputRange = function FormInputRange(props) {
   }, []);
   return useMemo(function () {
     var itemClassName = [formStyles.formInline, formStyles.inlineBlock, formStyles.marginNone, formStyles.verticalMiddle].join(' ');
-    return React.createElement(Form.Item, {
+    return React.createElement(_Form.Item, {
       label: React.createElement("span", {
         className: labelClassName
       }, label),
       className: "" + formItemClassName
-    }, React.createElement(Form.Item, {
+    }, React.createElement(_Form.Item, {
       shouldUpdate: function shouldUpdate(prevValues, currentValues) {
         return prevValues[name2] !== currentValues[name2];
       },
       className: itemClassName
-    }, React.createElement(Form.Item, {
+    }, React.createElement(_Form.Item, {
       name: name1,
       className: formStyles.marginNone,
       validateTrigger: "onBlur",
       rules: rules === null || rules === void 0 ? void 0 : rules[0]
-    }, React.createElement(InputNumber, __assign({
+    }, React.createElement(_InputNumber, __assign({
       min: 0,
       precision: precision,
       className: className
     }, event1Props)))), React.createElement("span", {
       className: [formStyles.formColon, formStyles.verticalMiddle].join(' ')
-    }, "-"), React.createElement(Form.Item, {
+    }, "-"), React.createElement(_Form.Item, {
       className: itemClassName,
       shouldUpdate: function shouldUpdate(prevValues, currentValues) {
         return prevValues[name1] !== currentValues[name1];
       }
-    }, React.createElement(Form.Item, {
+    }, React.createElement(_Form.Item, {
       name: name2,
       className: formStyles.marginNone,
       validateTrigger: "onBlur",
       rules: rules === null || rules === void 0 ? void 0 : rules[1]
-    }, React.createElement(InputNumber, __assign({
+    }, React.createElement(_InputNumber, __assign({
       min: 0,
       precision: precision,
       className: className

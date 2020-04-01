@@ -1,3 +1,8 @@
+import "antd/es/divider/style/css";
+import _Divider from "antd/es/divider";
+import "antd/es/tooltip/style/css";
+import _Tooltip from "antd/es/tooltip";
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -29,7 +34,6 @@ var __rest = this && this.__rest || function (s, e) {
 
 import React, { forwardRef, useImperativeHandle, useMemo, useState } from 'react';
 import { ReloadOutlined, SettingOutlined } from '@ant-design/icons';
-import { Divider, Tooltip } from 'antd';
 import { ConfigConsumer } from "antd/es/config-provider/context";
 import ColumnSetting from '../columnSetting';
 import './index.less';
@@ -109,7 +113,7 @@ var renderDefaultOption = function renderDefaultOption(options, className, defau
         },
         className: className,
         onClick: value && typeof value === 'function' ? value : undefined
-      }, React.createElement(Tooltip, {
+      }, React.createElement(_Tooltip, {
         title: optionItem.text
       }, optionItem.icon));
     }
@@ -176,7 +180,7 @@ var ToolBar = function ToolBar(_a, ref) {
       }, node);
     }), React.createElement("div", {
       className: className + "-default-option"
-    }, optionDom.length > 0 && actions.length > 0 && React.createElement(Divider, {
+    }, optionDom.length > 0 && actions.length > 0 && React.createElement(_Divider, {
       type: "vertical"
     }), optionDom)));
   }, [actions, optionDom, toolBarRender]);

@@ -1,3 +1,6 @@
+import "antd/es/input-number/style/css";
+import _InputNumber from "antd/es/input-number";
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -28,14 +31,13 @@ var __rest = this && this.__rest || function (s, e) {
 };
 
 import React from 'react';
-import { InputNumber } from 'antd';
 import { intFormatter, positiveIntFormatter } from "../RichInput/utils";
 
 var IntegerInput = function IntegerInput(_a) {
   var positive = _a.positive,
       props = __rest(_a, ["positive"]);
 
-  return React.createElement(InputNumber, __assign({}, props, {
+  return React.createElement(_InputNumber, __assign({}, props, {
     min: 0,
     formatter: positive ? positiveIntFormatter : intFormatter
   }));

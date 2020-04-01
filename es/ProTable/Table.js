@@ -1,3 +1,14 @@
+import "antd/es/card/style/css";
+import _Card from "antd/es/card";
+import "antd/es/config-provider/style/css";
+import _ConfigProvider from "antd/es/config-provider";
+import "antd/es/empty/style/css";
+import _Empty from "antd/es/empty";
+import "antd/es/typography/style/css";
+import _Typography from "antd/es/typography";
+import "antd/es/tooltip/style/css";
+import _Tooltip from "antd/es/tooltip";
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -29,7 +40,6 @@ var __rest = this && this.__rest || function (s, e) {
 
 import './index.less';
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
-import { ConfigProvider, Card, Typography, Empty, Tooltip } from 'antd';
 import classNames from 'classnames';
 import { ConfigConsumer } from "antd/es/config-provider";
 import Toolbar from './component/toolBar';
@@ -50,14 +60,14 @@ var genEllipsis = function genEllipsis(dom, item, text) {
     return dom;
   }
 
-  return React.createElement(Tooltip, {
+  return React.createElement(_Tooltip, {
     title: text
   }, React.createElement("div", null, dom));
 };
 
 var genCopyable = function genCopyable(dom, item) {
   if (item.copyable || item.ellipsis) {
-    return React.createElement(Typography.Paragraph, {
+    return React.createElement(_Typography.Paragraph, {
       style: {
         width: item.width && item.width - 32,
         margin: 0,
@@ -418,10 +428,10 @@ var ProTable = function ProTable(props) {
   }, [columns, pagination, size, propsRowSelection, loading]);
 
   if (proColumns.length < 1) {
-    return React.createElement(Empty, null);
+    return React.createElement(_Empty, null);
   }
 
-  return React.createElement(ConfigProvider, {
+  return React.createElement(_ConfigProvider, {
     getPopupContainer: function getPopupContainer() {
       return rootRef.current || document.body;
     }
@@ -430,7 +440,7 @@ var ProTable = function ProTable(props) {
     id: "ant-design-pro-table",
     style: style,
     ref: rootRef
-  }, React.createElement(Card, {
+  }, React.createElement(_Card, {
     bordered: true,
     style: {
       height: '100%'

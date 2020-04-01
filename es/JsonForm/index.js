@@ -1,3 +1,12 @@
+import "antd/es/row/style/css";
+import _Row from "antd/es/row";
+import "antd/es/col/style/css";
+import _Col from "antd/es/col";
+import "antd/es/button/style/css";
+import _Button from "antd/es/button";
+import "antd/es/form/style/css";
+import _Form from "antd/es/form";
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -28,7 +37,6 @@ var __rest = this && this.__rest || function (s, e) {
 };
 
 import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useRef, useState } from 'react';
-import { Button, Col, Form, Row } from 'antd';
 import FormInput from './items/Input';
 import FormSelect from './items/Select';
 import FormCheckbox from './items/Checkbox';
@@ -65,7 +73,8 @@ var JsonForm = function JsonForm(props, ref) {
       collapseBtnVisible = _e[0],
       setCollapseBtnVisible = _e[1];
 
-  var form = Form.useForm()[0];
+  var form = _Form.useForm()[0];
+
   var wrapRef = useRef(null);
   var btnWrap = useRef(null);
 
@@ -155,7 +164,7 @@ var JsonForm = function JsonForm(props, ref) {
           justifyContent: 'flex-end',
           visibility: collapseBtnVisible ? 'visible' : 'hidden'
         }
-      }, React.createElement(Button, {
+      }, React.createElement(_Button, {
         type: "link",
         className: formStyles.formItem,
         style: {
@@ -174,7 +183,7 @@ var JsonForm = function JsonForm(props, ref) {
 
 
     if (itemCol) {
-      return React.createElement(Col, __assign({}, itemCol), children);
+      return React.createElement(_Col, __assign({}, itemCol), children);
     } else {
       return children;
     }
@@ -268,7 +277,7 @@ var JsonForm = function JsonForm(props, ref) {
     });
 
     if (itemCol) {
-      return React.createElement(Row, __assign({}, itemRow ? itemRow : {}, {
+      return React.createElement(_Row, __assign({}, itemRow ? itemRow : {}, {
         className: formStyles.formRow
       }), fields);
     } else {
@@ -292,7 +301,7 @@ var JsonForm = function JsonForm(props, ref) {
   var formComponent = useMemo(function () {
     return React.createElement(RcResizeObserver, {
       onResize: onResize
-    }, React.createElement("div", null, React.createElement(Form, __assign({
+    }, React.createElement("div", null, React.createElement(_Form, __assign({
       layout: "inline"
     }, _props, {
       form: form

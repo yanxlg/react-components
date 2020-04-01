@@ -1,3 +1,8 @@
+import "antd/es/date-picker/style/css";
+import _DatePicker from "antd/es/date-picker";
+import "antd/es/form/style/css";
+import _Form from "antd/es/form";
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -14,7 +19,6 @@ var __assign = this && this.__assign || function () {
   return __assign.apply(this, arguments);
 };
 
-import { DatePicker, Form } from 'antd';
 import React, { useMemo } from 'react';
 import { transNullValue, transEndDate, transStartDate } from '../utils';
 import formStyles from '../_form.less';
@@ -49,12 +53,12 @@ var FormDateRanger = function FormDateRanger(props) {
   }, []);
   return useMemo(function () {
     var itemClassName = classNames(formStyles.formInline, formStyles.inlineBlock, formStyles.marginNone, formStyles.verticalMiddle);
-    return React.createElement(Form.Item, {
+    return React.createElement(_Form.Item, {
       label: React.createElement("span", {
         className: labelClassName
       }, label),
       className: "" + formItemClassName
-    }, React.createElement(Form.Item, {
+    }, React.createElement(_Form.Item, {
       shouldUpdate: function shouldUpdate(prevValues, currentValues) {
         return prevValues[name2] !== currentValues[name2];
       },
@@ -62,11 +66,11 @@ var FormDateRanger = function FormDateRanger(props) {
     }, function (_a) {
       var getFieldValue = _a.getFieldValue;
       var endTime = getFieldValue(name2);
-      return React.createElement(Form.Item, {
+      return React.createElement(_Form.Item, {
         name: name1,
         className: formStyles.marginNone,
         rules: rules === null || rules === void 0 ? void 0 : rules[0]
-      }, React.createElement(DatePicker, __assign({
+      }, React.createElement(_DatePicker, __assign({
         disabledDate: function disabledDate(currentDate) {
           return currentDate ? endTime ? currentDate.isAfter(endTime) : false : false;
         },
@@ -74,7 +78,7 @@ var FormDateRanger = function FormDateRanger(props) {
       }, event1Props)));
     }), React.createElement("span", {
       className: [formStyles.formColon, formStyles.verticalMiddle].join(' ')
-    }, "-"), React.createElement(Form.Item, {
+    }, "-"), React.createElement(_Form.Item, {
       className: itemClassName,
       shouldUpdate: function shouldUpdate(prevValues, currentValues) {
         return prevValues[name1] !== currentValues[name1];
@@ -82,11 +86,11 @@ var FormDateRanger = function FormDateRanger(props) {
     }, function (_a) {
       var getFieldValue = _a.getFieldValue;
       var startTime = getFieldValue(name1);
-      return React.createElement(Form.Item, {
+      return React.createElement(_Form.Item, {
         name: name2,
         className: formStyles.marginNone,
         rules: rules === null || rules === void 0 ? void 0 : rules[1]
-      }, React.createElement(DatePicker, __assign({
+      }, React.createElement(_DatePicker, __assign({
         disabledDate: function disabledDate(currentDate) {
           return currentDate ? startTime ? currentDate.isBefore(startTime) : false : false;
         },

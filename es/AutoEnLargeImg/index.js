@@ -1,5 +1,6 @@
+import "antd/es/popover/style/css";
+import _Popover from "antd/es/popover";
 import React, { useMemo } from 'react';
-import { Popover } from 'antd';
 import styles from './_index.less';
 import LazyImage from '../LazyImage';
 
@@ -12,7 +13,7 @@ var AutoEnLargeImg = function AutoEnLargeImg(_a) {
       children = _a.children,
       enlargeContent = _a.enlargeContent;
   return useMemo(function () {
-    return src || children ? React.createElement(Popover, {
+    return src || children ? React.createElement(_Popover, {
       placement: "right",
       content: src ? React.createElement("img", {
         src: src.replace('150_150', '240_240'),

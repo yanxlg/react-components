@@ -1,3 +1,6 @@
+import "antd/es/input-number/style/css";
+import _InputNumber from "antd/es/input-number";
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -15,11 +18,10 @@ var __assign = this && this.__assign || function () {
 };
 
 import React from 'react';
-import { InputNumber } from 'antd';
 import { numberFormatter } from "../RichInput/utils";
 
 var NumberInput = function NumberInput(props) {
-  return React.createElement(InputNumber, __assign({}, props, {
+  return React.createElement(_InputNumber, __assign({}, props, {
     min: 0,
     formatter: numberFormatter
   }));

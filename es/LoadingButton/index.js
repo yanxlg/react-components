@@ -1,3 +1,6 @@
+import "antd/es/button/style/css";
+import _Button from "antd/es/button";
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -28,7 +31,6 @@ var __rest = this && this.__rest || function (s, e) {
 };
 
 import React, { useCallback, useMemo, useState } from 'react';
-import { Button } from 'antd';
 import btnStyles from '@/styles/_btn.less';
 import classNames from 'classnames';
 
@@ -50,7 +52,7 @@ var LoadingButton = function LoadingButton(props) {
   }, [props.onClick]);
   var currentLoading = outerLoading || loading;
   return useMemo(function () {
-    return React.createElement(Button, __assign({}, _props, {
+    return React.createElement(_Button, __assign({}, _props, {
       icon: icon,
       className: classNames(className, icon ? btnStyles.btnWithoutAnim : ''),
       loading: currentLoading,

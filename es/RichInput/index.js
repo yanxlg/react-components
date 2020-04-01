@@ -1,3 +1,6 @@
+import "antd/es/input/style/css";
+import _Input from "antd/es/input";
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -28,7 +31,6 @@ var __rest = this && this.__rest || function (s, e) {
 };
 
 import React, { useCallback, useMemo, useState } from 'react';
-import { Input } from 'antd';
 import { intFormatter, numberFormatter, positiveIntFormatter } from "./utils";
 
 var RichInput = function RichInput(_a) {
@@ -58,7 +60,7 @@ var RichInput = function RichInput(_a) {
   }, [value, onChange, richType]);
   var showValue = value !== void 0 ? value : innerValue;
   return useMemo(function () {
-    return React.createElement(Input, __assign({
+    return React.createElement(_Input, __assign({
       value: showValue,
       allowClear: true
     }, props, {

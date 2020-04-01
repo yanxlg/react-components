@@ -1,3 +1,8 @@
+import "antd/es/checkbox/style/css";
+import _Checkbox from "antd/es/checkbox";
+import "antd/es/form/style/css";
+import _Form from "antd/es/form";
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -15,7 +20,6 @@ var __assign = this && this.__assign || function () {
 };
 
 import React, { useMemo } from 'react';
-import { Checkbox, Form } from 'antd';
 var typeList = ['checkbox'];
 
 var FormCheckbox = function FormCheckbox(props) {
@@ -33,12 +37,12 @@ var FormCheckbox = function FormCheckbox(props) {
       }
     } : {};
   }, []);
-  return React.createElement(Form.Item, {
+  return React.createElement(_Form.Item, {
     name: name,
     className: formItemClassName,
     valuePropName: "checked",
     rules: rules
-  }, React.createElement(Checkbox, __assign({
+  }, React.createElement(_Checkbox, __assign({
     className: className
   }, eventProps), label));
 };

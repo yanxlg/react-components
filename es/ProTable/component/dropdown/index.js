@@ -1,7 +1,12 @@
+import "antd/es/button/style/css";
+import _Button from "antd/es/button";
+import "antd/es/dropdown/style/css";
+import _Dropdown from "antd/es/dropdown";
+import "antd/es/menu/style/css";
+import _Menu from "antd/es/menu";
 import React from 'react';
 import classnames from 'classnames';
 import { DownOutlined, EllipsisOutlined } from '@ant-design/icons';
-import { Dropdown, Menu, Button } from 'antd';
 import { ConfigConsumer } from "antd/es/config-provider/context";
 import './index.less';
 /**
@@ -19,19 +24,19 @@ var DropdownButton = function DropdownButton(_a) {
   return React.createElement(ConfigConsumer, null, function (_a) {
     var getPrefixCls = _a.getPrefixCls;
     var tempClassName = getPrefixCls('pro-table-dropdown');
-    var menu = React.createElement(Menu, {
+    var menu = React.createElement(_Menu, {
       onClick: function onClick(params) {
         return onSelect && onSelect(params.key);
       }
     }, menus.map(function (item) {
-      return React.createElement(Menu.Item, {
+      return React.createElement(_Menu.Item, {
         key: item.key
       }, item.name);
     }));
-    return React.createElement(Dropdown, {
+    return React.createElement(_Dropdown, {
       overlay: menu,
       className: classnames(tempClassName, className)
-    }, React.createElement(Button, {
+    }, React.createElement(_Button, {
       style: style
     }, children, " ", React.createElement(DownOutlined, null)));
   });
@@ -46,16 +51,16 @@ var TableDropdown = function TableDropdown(_a) {
   return React.createElement(ConfigConsumer, null, function (_a) {
     var getPrefixCls = _a.getPrefixCls;
     var className = getPrefixCls('pro-table-dropdown');
-    var menu = React.createElement(Menu, {
+    var menu = React.createElement(_Menu, {
       onClick: function onClick(params) {
         return onSelect && onSelect(params.key);
       }
     }, menus.map(function (item) {
-      return React.createElement(Menu.Item, {
+      return React.createElement(_Menu.Item, {
         key: item.key
       }, item.name);
     }));
-    return React.createElement(Dropdown, {
+    return React.createElement(_Dropdown, {
       overlay: menu,
       className: classnames(className, propsClassName)
     }, React.createElement("a", {

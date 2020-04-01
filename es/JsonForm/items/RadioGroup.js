@@ -1,3 +1,8 @@
+import "antd/es/radio/style/css";
+import _Radio from "antd/es/radio";
+import "antd/es/form/style/css";
+import _Form from "antd/es/form";
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -28,7 +33,6 @@ var __rest = this && this.__rest || function (s, e) {
 };
 
 import React, { useMemo } from 'react';
-import { Form, Radio } from 'antd';
 var typeList = ['radioGroup'];
 
 var FormRadioGroup = function FormRadioGroup(props) {
@@ -49,14 +53,14 @@ var FormRadioGroup = function FormRadioGroup(props) {
       }
     } : {};
   }, []);
-  return React.createElement(Form.Item, {
+  return React.createElement(_Form.Item, {
     name: name,
     label: label ? React.createElement("span", {
       className: labelClassName
     }, label) : undefined,
     className: formItemClassName,
     rules: rules
-  }, React.createElement(Radio.Group, __assign({
+  }, React.createElement(_Radio.Group, __assign({
     className: className
   }, eventProps, _props)));
 };

@@ -1,3 +1,8 @@
+import "antd/es/button/style/css";
+import _Button from "antd/es/button";
+import "antd/es/popconfirm/style/css";
+import _Popconfirm from "antd/es/popconfirm";
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -15,7 +20,6 @@ var __assign = this && this.__assign || function () {
 };
 
 import React, { useCallback, useMemo, useState } from 'react';
-import { Button, Popconfirm } from 'antd';
 
 var PopConfirmLoadingButton = function PopConfirmLoadingButton(_a) {
   var popConfirmProps = _a.popConfirmProps,
@@ -32,9 +36,9 @@ var PopConfirmLoadingButton = function PopConfirmLoadingButton(_a) {
     });
   }, [popConfirmProps === null || popConfirmProps === void 0 ? void 0 : popConfirmProps.onConfirm]);
   return useMemo(function () {
-    return React.createElement(Popconfirm, __assign({}, popConfirmProps, {
+    return React.createElement(_Popconfirm, __assign({}, popConfirmProps, {
       onConfirm: onConfirm
-    }), React.createElement(Button, __assign({}, buttonProps, {
+    }), React.createElement(_Button, __assign({}, buttonProps, {
       loading: loading
     })));
   }, [popConfirmProps, buttonProps, loading]);

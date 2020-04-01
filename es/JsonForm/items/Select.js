@@ -1,3 +1,8 @@
+import "antd/es/select/style/css";
+import _Select from "antd/es/select";
+import "antd/es/form/style/css";
+import _Form from "antd/es/form";
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -14,7 +19,6 @@ var __assign = this && this.__assign || function () {
   return __assign.apply(this, arguments);
 };
 
-import { Form, Select } from 'antd';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { transNullValue, transNumber, transJoinStr } from '../utils';
 import formStyles from '../_form.less';
@@ -109,30 +113,30 @@ var FormSelect = function FormSelect(props) {
           loading = _a.loading,
           list = _a.optionList;
 
-      return React.createElement(Form.Item, {
+      return React.createElement(_Form.Item, {
         name: name,
         className: formItemClassName,
         label: React.createElement("span", {
           className: labelClassName
         }, label),
         rules: rules
-      }, React.createElement(Select, __assign({
+      }, React.createElement(_Select, __assign({
         className: className,
         loading: loading,
         mode: mode,
         maxTagCount: maxTagCount
       }, eventProps, {
         placeholder: placeholder
-      }), syncDefaultOption ? React.createElement(Select.Option, {
+      }), syncDefaultOption ? React.createElement(_Select.Option, {
         value: syncDefaultOption.value
       }, syncDefaultOption.name) : null, list.map(function (item) {
-        return React.createElement(Select.Option, {
+        return React.createElement(_Select.Option, {
           key: item.value,
           value: item.value
         }, item.name);
       })));
     } else {
-      return React.createElement(Form.Item, {
+      return React.createElement(_Form.Item, {
         noStyle: true,
         shouldUpdate: function shouldUpdate(prevValues, currentValues) {
           var name = optionListDependence.name;
@@ -156,20 +160,20 @@ var FormSelect = function FormSelect(props) {
             loading = _b.loading,
             list = _b.optionList;
 
-        return React.createElement(Form.Item, {
+        return React.createElement(_Form.Item, {
           name: name,
           className: formItemClassName,
           label: React.createElement("span", {
             className: labelClassName
           }, label),
           rules: rules
-        }, React.createElement(Select, __assign({
+        }, React.createElement(_Select, __assign({
           className: className,
           loading: loading
-        }, eventProps), syncDefaultOption ? React.createElement(Select.Option, {
+        }, eventProps), syncDefaultOption ? React.createElement(_Select.Option, {
           value: syncDefaultOption.value
         }, syncDefaultOption.name) : null, list.map(function (item) {
-          return React.createElement(Select.Option, {
+          return React.createElement(_Select.Option, {
             key: item.value,
             value: item.value
           }, item.name);

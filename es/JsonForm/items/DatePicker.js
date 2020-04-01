@@ -1,3 +1,8 @@
+import "antd/es/date-picker/style/css";
+import _DatePicker from "antd/es/date-picker";
+import "antd/es/form/style/css";
+import _Form from "antd/es/form";
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -14,7 +19,6 @@ var __assign = this && this.__assign || function () {
   return __assign.apply(this, arguments);
 };
 
-import { DatePicker, Form } from 'antd';
 import React, { useCallback, useMemo } from 'react';
 import moment from 'moment';
 import { transNullValue, transEndDate, transStartDate } from '../utils';
@@ -98,14 +102,14 @@ var FormDatePicker = function FormDatePicker(props) {
       }
     } : {};
   }, []);
-  return React.createElement(Form.Item, {
+  return React.createElement(_Form.Item, {
     name: name,
     className: formItemClassName,
     label: React.createElement("span", {
       className: labelClassName
     }, label),
     rules: rules
-  }, React.createElement(DatePicker, __assign({
+  }, React.createElement(_DatePicker, __assign({
     className: className,
     placeholder: placeholder,
     disabledDate: disabledDate

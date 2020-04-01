@@ -1,6 +1,7 @@
+import "antd/es/tooltip/style/css";
+import _Tooltip from "antd/es/tooltip";
 import React, { useEffect, useMemo, useState } from 'react';
 import { FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons';
-import { Tooltip } from 'antd';
 
 var FullScreenIcon = function FullScreenIcon() {
   var _a = useState(false),
@@ -13,9 +14,9 @@ var FullScreenIcon = function FullScreenIcon() {
     };
   }, []);
   return useMemo(function () {
-    return fullscreen ? React.createElement(Tooltip, {
+    return fullscreen ? React.createElement(_Tooltip, {
       title: '退出全屏'
-    }, React.createElement(FullscreenExitOutlined, null)) : React.createElement(Tooltip, {
+    }, React.createElement(FullscreenExitOutlined, null)) : React.createElement(_Tooltip, {
       title: '全屏'
     }, React.createElement(FullscreenOutlined, null));
   }, [fullscreen]);
