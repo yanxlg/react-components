@@ -98,7 +98,7 @@ function FitTable<T extends object>({
                 />
             </div>
         );
-    }, [props, propsScroll, rowSelection, columns]);
+    }, [props, propsScroll, rowSelection, columns,pagination,onChange]);
 }
 
 export default FitTable;
