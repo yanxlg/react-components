@@ -90,7 +90,7 @@ function FitTable(_a) {
       pagination: pagination,
       onChange: onChange ? onPaginationChange : undefined
     })));
-  }, [props, propsScroll, rowSelection, columns]);
+  }, [props, propsScroll, rowSelection, columns, pagination, onChange]);
 }
 
 export default FitTable;
