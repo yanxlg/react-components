@@ -38,17 +38,18 @@ import FormInputRange, {
 import { Store, ValidateFields } from 'rc-field-form/lib/interface';
 import { FormInstance } from 'antd/es/form';
 import RcResizeObserver from 'rc-resize-observer';
-import './index.less';
 import { UpOutlined, DownOutlined } from '@ant-design/icons';
 import { ColProps } from 'antd/lib/grid/col';
 import { RowProps } from 'antd/lib/grid/row';
-import formStyles from './_form.less';
 import FormCheckboxGroup, {
     CheckboxGroupProps,
     CheckboxGroupType,
 } from './items/CheckboxGroup';
 import FormRadioGroup, { RadioGroupProps, RadioGroupType } from './items/RadioGroup';
 import classNames from 'classnames';
+
+import './index.less';
+import formStyles from './_form.less';
 
 export declare interface CustomFormProps {
     labelClassName?: string;

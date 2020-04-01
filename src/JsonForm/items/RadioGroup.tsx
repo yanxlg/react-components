@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Form, Radio } from 'antd';
-import { CustomFormProps, FormItemName } from '../';
+import { CustomFormProps, FormItemName } from '../index';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
 import { FormInstance, Rule } from 'antd/es/form';
 import { RadioGroupProps as AntdRadioGroupProps } from 'antd/lib/radio/interface';

@@ -1,6 +1,6 @@
 import { Form } from 'antd';
 import React, { useMemo } from 'react';
-import { CustomFormProps, FormItemName } from '../';
+import { CustomFormProps, FormItemName } from '../index';
 import { FormInstance, Rule } from 'antd/es/form';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
 import { transNullValue, transNumber, transNumberStrArr, transStrArr } from '../utils';

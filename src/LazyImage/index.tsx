@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import LazyLoad from 'react-lazyload';
 import classNames from 'classnames';
-import styles from '../JsonForm/_form.less';
+// import styles from '../../temp/JsonForm/_form.less';
 import { Skeleton } from 'antd';
 
 const LazyImage = (
@@ -22,7 +22,7 @@ const LazyImage = (
             placeholder={
                 <Skeleton.Input
                     active={true}
-                    className={classNames(className, styles.inlineBlock)}
+                    className={classNames(className, "inline-block")}
                 />
             }
         >

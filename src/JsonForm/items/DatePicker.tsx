@@ -1,6 +1,6 @@
 import { DatePicker, Form } from 'antd';
 import React, { useCallback, useMemo } from 'react';
-import { CustomFormProps, FormItemName } from '../';
+import { CustomFormProps, FormItemName } from '../index';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
 import { FormInstance, Rule } from 'antd/es/form';
 import moment, { Moment } from 'moment';

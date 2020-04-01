@@ -1,0 +1,133 @@
+@itemSpacing: 24px;
+@inputWidth: 150px;
+@inputLargeWidth: 320px;
+@inputSmallWidth: 87px;
+
+.form-item {
+    margin-top: @itemSpacing !important;
+}
+
+.form-card {
+    :global {
+        .ant-card-body {
+            padding-top: 0 !important;
+            padding-bottom: @itemSpacing !important;
+        }
+    }
+}
+
+.form-item-bottom {
+    margin-bottom: @itemSpacing;
+}
+
+.form-s-item {
+    margin-top: @itemSpacing / 2;
+}
+
+.form-inline {
+    margin-bottom: 0 !important;
+}
+
+.form-colon {
+    margin: 0 10px;
+}
+
+.form-help-absolute {
+    :global {
+        .ant-form-item-explain {
+            position: absolute !important;
+            white-space: nowrap;
+            top: 100%;
+        }
+        .ant-form-item-with-help {
+            margin-bottom: 0 !important;
+        }
+    }
+}
+
+.form-horizon {
+    display: inline-flex;
+    margin-right: 16px !important; // form
+}
+
+.form-required-hide {
+    :global .ant-form-item-required {
+        &:before {
+            visibility: hidden;
+        }
+    }
+}
+
+.form-required-absolute {
+    :global {
+        .ant-form-item-label {
+            overflow: visible;
+        }
+
+        .ant-form-item-required {
+            &:before {
+                position: absolute;
+                transform: translateX(-100%);
+                left: -4px;
+            }
+        }
+    }
+}
+
+.form-row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.form-item-default {
+    width: @inputWidth !important;
+}
+
+.form-item-large {
+    width: @inputLargeWidth !important;
+}
+.form-item-small {
+    width: @inputSmallWidth !important;
+}
+
+.form-checkbox {
+    margin: 0 8px 8px 0 !important;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-row {
+    &:extend(.flex);
+    flex-direction: row;
+}
+.flex-column {
+    &:extend(.flex);
+    flex-direction: column;
+}
+.flex-1 {
+    flex: 1;
+}
+.flex-align {
+    align-items: center;
+}
+.flex-inline {
+    display: inline-flex;
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+
+.inline-block {
+    display: inline-block !important;
+}
+
+.vertical-middle {
+    vertical-align: middle !important;
+}
+
+.margin-none {
+    margin: 0 !important;
+}

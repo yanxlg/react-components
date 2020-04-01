@@ -67,7 +67,9 @@ export const parsingValueEnumToArray = (
                 text: string;
             }) || '';
         return {
-            text: ((value.text || value || '') as unknown) as string,
+            text: (((value as {
+                text: string;
+            }).text || value || '') as unknown) as string,
             value: key,
         };
     });

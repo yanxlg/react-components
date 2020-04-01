@@ -212,7 +212,6 @@ const GroupCheckboxList: React.FC<{
     const rightList: (ProColumns<any> & { index?: number })[] = [];
     const leftList: (ProColumns<any> & { index?: number })[] = [];
     const list: (ProColumns<any> & { index?: number })[] = [];
-    const intl = useIntl();
     localColumns.forEach(item => {
         const { fixed } = item;
         if (fixed === 'left') {
@@ -234,7 +233,7 @@ const GroupCheckboxList: React.FC<{
                 setColumnsMap={setColumnsMap}
                 setSortKeyColumns={setSortKeyColumns}
                 sortKeyColumns={sortKeyColumns}
-                title={intl.getMessage('tableToolBar.leftFixedTitle', '固定在左侧')}
+                title={'固定在左侧'}
                 list={leftList}
                 className={className}
             />
@@ -245,7 +244,7 @@ const GroupCheckboxList: React.FC<{
                 setSortKeyColumns={setSortKeyColumns}
                 sortKeyColumns={sortKeyColumns}
                 list={list}
-                title={intl.getMessage('tableToolBar.noFixedTitle', '不固定')}
+                title={'不固定'}
                 showTitle={showLeft || showRight}
                 className={className}
             />
@@ -254,7 +253,7 @@ const GroupCheckboxList: React.FC<{
                 setColumnsMap={setColumnsMap}
                 setSortKeyColumns={setSortKeyColumns}
                 sortKeyColumns={sortKeyColumns}
-                title={intl.getMessage('tableToolBar.rightFixedTitle', '固定在右侧')}
+                title={'固定在右侧'}
                 list={rightList}
                 className={className}
             />
@@ -287,7 +286,6 @@ const ColumnSetting = <T, U = {}>(props: ColumnSettingProps<T>) => {
 
     const indeterminate = selectKeys.length > 0 && selectKeys.length !== localColumns.length;
 
-    const intl = useIntl();
     return (
         <ConfigConsumer>
             {({ getPrefixCls }: ConfigConsumerProps) => {
@@ -312,7 +310,7 @@ const ColumnSetting = <T, U = {}>(props: ColumnSettingProps<T>) => {
                                         }
                                     }}
                                 >
-                                    {intl.getMessage('tableToolBar.columnDisplay', '列展示')}
+                                    列展示
                                 </Checkbox>
                                 <a
                                     onClick={() => {
@@ -320,7 +318,7 @@ const ColumnSetting = <T, U = {}>(props: ColumnSettingProps<T>) => {
                                         setSortKeyColumns([]);
                                     }}
                                 >
-                                    {intl.getMessage('tableToolBar.reset', '重置')}
+                                    重置
                                 </a>
                             </div>
                         }
@@ -337,7 +335,7 @@ const ColumnSetting = <T, U = {}>(props: ColumnSettingProps<T>) => {
                             />
                         }
                     >
-                        <Tooltip title={intl.getMessage('tableToolBar.columnSetting', '列设置')}>
+                        <Tooltip title={'列设置'}>
                             <SettingOutlined
                                 className={`${toolBarClassName}-item-icon`}
                                 style={{
