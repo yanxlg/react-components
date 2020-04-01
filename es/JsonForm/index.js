@@ -36,12 +36,12 @@ import FormDatePicker from './items/DatePicker';
 import FormDateRanger from './items/DateRanger';
 import FormInputRange from './items/InputRange';
 import RcResizeObserver from 'rc-resize-observer';
-import './index.less';
 import { UpOutlined, DownOutlined } from '@ant-design/icons';
-import formStyles from './_form.less';
 import FormCheckboxGroup from './items/CheckboxGroup';
 import FormRadioGroup from './items/RadioGroup';
 import classNames from 'classnames';
+import './index.less';
+import formStyles from './_form.less';
 
 var JsonForm = function JsonForm(props, ref) {
   var fieldList = props.fieldList,

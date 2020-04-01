@@ -8,11 +8,11 @@ import { DateRangerProps } from './items/DateRanger';
 import { InputRangeProps } from './items/InputRange';
 import { Store, ValidateFields } from 'rc-field-form/lib/interface';
 import { FormInstance } from 'antd/es/form';
-import './index.less';
 import { ColProps } from 'antd/lib/grid/col';
 import { RowProps } from 'antd/lib/grid/row';
 import { CheckboxGroupProps } from './items/CheckboxGroup';
 import { RadioGroupProps } from './items/RadioGroup';
+import './index.less';
 export declare interface CustomFormProps {
     labelClassName?: string;
 }
