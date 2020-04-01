@@ -349,6 +349,21 @@ const ProTable = <T extends {}, U extends object>(
         onSelectedRowKeysUpdate,
     );
 
+    const filterColumns = useMemo(()=>{
+        return columns.filter(item => {
+            const { key, dataIndex } = item;
+            const columnKey = genColumnKey(key, dataIndex);
+            if (!columnKey) {
+                return true;
+            }
+            const config = columnsMap[columnKey];
+            if (config && config.show === false) {
+                return false;
+            }
+            return true;
+        })
+    },[columns,columnsMap]);
+
     /**
      * 需要清除选中状态时
      */
@@ -481,7 +496,7 @@ const ProTable = <T extends {}, U extends object>(
                 rowSelection={propsRowSelection === false ? undefined : rowSelection}
                 className={tableClassName}
                 style={tableStyle}
-                columns={columns as any}
+                columns={filterColumns as any}
                 loading={loading}
                 dataSource={dataSource}
                 rowKey={rowKey}

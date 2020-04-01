@@ -293,10 +293,29 @@ var ProTable = function ProTable(props) {
       columns = _q.columns,
       rowSelection = _q.rowSelection,
       clearCheckedRows = _q.clearCheckedRows;
+
+  var filterColumns = useMemo(function () {
+    return columns.filter(function (item) {
+      var key = item.key,
+          dataIndex = item.dataIndex;
+      var columnKey = genColumnKey(key, dataIndex);
+
+      if (!columnKey) {
+        return true;
+      }
+
+      var config = columnsMap[columnKey];
+
+      if (config && config.show === false) {
+        return false;
+      }
+
+      return true;
+    });
+  }, [columns, columnsMap]);
   /**
    * 需要清除选中状态时
    */
-
 
   useEffect(function () {
     onCleanSelected();
@@ -413,7 +432,7 @@ var ProTable = function ProTable(props) {
       rowSelection: propsRowSelection === false ? undefined : rowSelection,
       className: tableClassName,
       style: tableStyle,
-      columns: columns,
+      columns: filterColumns,
       loading: loading,
       dataSource: dataSource,
       rowKey: rowKey,
