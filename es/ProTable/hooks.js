@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useRef } from 'react';
 import OptimizeCheckbox from './component/Checkbox';
+import styles from "./_index.less";
 
 function useRowSelection(columns, rowKey, dataSource, rowSelection, optimize, onSelectedRowKeysUpdate) {
   var onChange = rowSelection.onChange,
@@ -115,6 +116,7 @@ function useRowSelection(columns, rowKey, dataSource, rowSelection, optimize, on
       width: columnWidth,
       align: 'center',
       copyable: false,
+      className: styles.rowSelectionRow,
       render: function render(_, record, index) {
         var rowValue = isString ? record[rowKey] : rowKey ? rowKey(record) : index;
         return React.createElement(OptimizeCheckbox, {

@@ -5,6 +5,7 @@ import OptimizeCheckbox, {
 } from './component/Checkbox';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { ProColumns, SimpleRowSelection } from './Table';
+import styles from "./_index.less";
 
 function useRowSelection<T, U>(
     columns: ProColumns<T>[],
@@ -132,6 +133,7 @@ function useRowSelection<T, U>(
             width: columnWidth,
             align: 'center',
             copyable: false,
+            className: styles.rowSelectionRow,
             render: (_, record, index) => {
                 const rowValue = isString
                     ? (record as any)[rowKey as string]
