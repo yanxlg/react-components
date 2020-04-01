@@ -17,7 +17,6 @@ var __assign = this && this.__assign || function () {
 import React, { useMemo } from 'react';
 import { Form, InputNumber } from 'antd';
 import formStyles from '../_form.less';
-import styles from '../_index.less';
 import { transNumber } from '../utils';
 var typeList = ['inputRange'];
 
@@ -76,7 +75,7 @@ var FormInputRange = function FormInputRange(props) {
     } : {};
   }, []);
   return useMemo(function () {
-    var itemClassName = [formStyles.formInline, styles.inlineBlock, styles.marginNone, styles.verticalMiddle].join(' ');
+    var itemClassName = [formStyles.formInline, formStyles.inlineBlock, formStyles.marginNone, formStyles.verticalMiddle].join(' ');
     return React.createElement(Form.Item, {
       label: React.createElement("span", {
         className: labelClassName
@@ -89,7 +88,7 @@ var FormInputRange = function FormInputRange(props) {
       className: itemClassName
     }, React.createElement(Form.Item, {
       name: name1,
-      className: styles.marginNone,
+      className: formStyles.marginNone,
       validateTrigger: "onBlur",
       rules: rules === null || rules === void 0 ? void 0 : rules[0]
     }, React.createElement(InputNumber, __assign({
@@ -97,7 +96,7 @@ var FormInputRange = function FormInputRange(props) {
       precision: precision,
       className: className
     }, event1Props)))), React.createElement("span", {
-      className: [formStyles.formColon, styles.verticalMiddle].join(' ')
+      className: [formStyles.formColon, formStyles.verticalMiddle].join(' ')
     }, "-"), React.createElement(Form.Item, {
       className: itemClassName,
       shouldUpdate: function shouldUpdate(prevValues, currentValues) {
@@ -105,7 +104,7 @@ var FormInputRange = function FormInputRange(props) {
       }
     }, React.createElement(Form.Item, {
       name: name2,
-      className: styles.marginNone,
+      className: formStyles.marginNone,
       validateTrigger: "onBlur",
       rules: rules === null || rules === void 0 ? void 0 : rules[1]
     }, React.createElement(InputNumber, __assign({

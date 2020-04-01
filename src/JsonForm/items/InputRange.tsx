@@ -4,7 +4,6 @@ import { CustomFormProps, FormItemName } from '../index';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
 import { FormInstance, Rule } from 'antd/es/form';
 import formStyles from '../_form.less';
-import styles from '../_index.less';
 import { transNumber } from '../utils';
 
 export type InputRangeType = 'inputRange';
@@ -86,9 +85,9 @@ const FormInputRange = (props: InputRangeProps) => {
     return useMemo(() => {
         const itemClassName = [
             formStyles.formInline,
-            styles.inlineBlock,
-            styles.marginNone,
-            styles.verticalMiddle,
+            formStyles.inlineBlock,
+            formStyles.marginNone,
+            formStyles.verticalMiddle,
         ].join(' ');
         return (
             <Form.Item
@@ -103,7 +102,7 @@ const FormInputRange = (props: InputRangeProps) => {
                 >
                     <Form.Item
                         name={name1}
-                        className={styles.marginNone}
+                        className={formStyles.marginNone}
                         validateTrigger="onBlur"
                         rules={rules?.[0]}
                     >
@@ -115,7 +114,7 @@ const FormInputRange = (props: InputRangeProps) => {
                         />
                     </Form.Item>
                 </Form.Item>
-                <span className={[formStyles.formColon, styles.verticalMiddle].join(' ')}>-</span>
+                <span className={[formStyles.formColon, formStyles.verticalMiddle].join(' ')}>-</span>
                 <Form.Item
                     className={itemClassName}
                     shouldUpdate={(prevValues, currentValues) =>
@@ -124,7 +123,7 @@ const FormInputRange = (props: InputRangeProps) => {
                 >
                     <Form.Item
                         name={name2}
-                        className={styles.marginNone}
+                        className={formStyles.marginNone}
                         validateTrigger="onBlur"
                         rules={rules?.[1]}
                     >
