@@ -9,5 +9,5 @@ export declare function transNumberStrArr(value: string | undefined): string[] |
  * 日期转换成unix
  * @param moment
  */
-export declare function transStartDate(moment?: Moment): number | Moment;
-export declare function transEndDate(moment?: Moment): number | Moment;
+export declare function transStartDate(moment?: Moment): number | undefined;
+export declare function transEndDate(moment?: Moment): number | undefined;

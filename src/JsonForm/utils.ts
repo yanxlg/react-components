@@ -48,7 +48,7 @@ export function transNumberStrArr(value: string | undefined): string[] | undefin
  * 日期转换成unix
  * @param moment
  */
-export function transStartDate(moment?: Moment) {
+export function transStartDate(moment?: Moment):number|undefined {
     return moment
         ? moment
               .clone()
@@ -56,10 +56,10 @@ export function transStartDate(moment?: Moment) {
               .minute(0)
               .second(0)
               .unix()
-        : moment;
+        : undefined;
 }
 
-export function transEndDate(moment?: Moment) {
+export function transEndDate(moment?: Moment):number|undefined {
     return moment
         ? moment
               .clone()
@@ -68,5 +68,5 @@ export function transEndDate(moment?: Moment) {
               .minute(0)
               .second(0)
               .unix()
-        : moment;
+        : undefined;
 }

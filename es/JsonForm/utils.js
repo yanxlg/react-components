@@ -36,8 +36,8 @@ export function transNumberStrArr(value) {
  */
 
 export function transStartDate(moment) {
-  return moment ? moment.clone().hour(0).minute(0).second(0).unix() : moment;
+  return moment ? moment.clone().hour(0).minute(0).second(0).unix() : undefined;
 }
 export function transEndDate(moment) {
-  return moment ? moment.clone().add(1, 'd').hour(0).minute(0).second(0).unix() : moment;
+  return moment ? moment.clone().add(1, 'd').hour(0).minute(0).second(0).unix() : undefined;
 }
