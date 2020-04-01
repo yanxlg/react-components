@@ -101,6 +101,11 @@ function FitTable<T extends object>({
     }, [props, propsScroll, rowSelection, columns,pagination,onChange]);
 }
 
+FitTable.showTotal=showTotal;
+FitTable.goButton=goButton;
+FitTable.useScrollXY=useScrollXY;
+
 export default FitTable;
+
 
 export {useScrollXY};
