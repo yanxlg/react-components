@@ -11,7 +11,8 @@ var AutoEnLargeImg = function AutoEnLargeImg(_a) {
       enLargeClassName = _c === void 0 ? '' : _c,
       src = _a.src,
       children = _a.children,
-      enlargeContent = _a.enlargeContent;
+      enlargeContent = _a.enlargeContent,
+      scrollContainer = _a.scrollContainer;
   return useMemo(function () {
     return src || children ? React.createElement(_Popover, {
       placement: "right",
@@ -25,7 +26,8 @@ var AutoEnLargeImg = function AutoEnLargeImg(_a) {
     }, src ? React.createElement(LazyImage, {
       src: src,
       className: className,
-      alt: ""
+      alt: "",
+      scrollContainer: scrollContainer
     }) : // <img src={src} className={className} alt="" />
     children) : null;
   }, [className, enLargeClassName, src]);

@@ -4,6 +4,7 @@ declare interface IAutoEnLargeImgProps {
     enLargeClassName?: string;
     src?: string;
     enlargeContent?: ReactElement;
+    scrollContainer?: string | Element | undefined;
 }
 declare const AutoEnLargeImg: React.FC<IAutoEnLargeImgProps>;
 export default AutoEnLargeImg;

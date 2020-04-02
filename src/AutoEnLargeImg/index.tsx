@@ -8,6 +8,7 @@ declare interface IAutoEnLargeImgProps {
     enLargeClassName?: string;
     src?: string;
     enlargeContent?: ReactElement;
+    scrollContainer?: string | Element | undefined;
 }
 
 const AutoEnLargeImg: React.FC<IAutoEnLargeImgProps> = ({
@@ -16,6 +17,7 @@ const AutoEnLargeImg: React.FC<IAutoEnLargeImgProps> = ({
     src,
     children,
     enlargeContent,
+    scrollContainer,
 }) => {
     return useMemo(() => {
         return src || children ? (
@@ -36,7 +38,7 @@ const AutoEnLargeImg: React.FC<IAutoEnLargeImgProps> = ({
                 autoAdjustOverflow={true}
             >
                 {src ? (
-                    <LazyImage src={src} className={className} alt="" />
+                    <LazyImage src={src} className={className} alt="" scrollContainer={scrollContainer}/>
                 ) : (
                     // <img src={src} className={className} alt="" />
                     (children as React.ReactElement)
