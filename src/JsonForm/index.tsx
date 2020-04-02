@@ -110,6 +110,7 @@ export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, la
                     labelClassName={labelClassName}
                     form={form}
                 />,
+                itemCol
             );
         }
         if (FormSelect.typeList.includes(type)) {
@@ -121,6 +122,7 @@ export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, la
                     labelClassName={labelClassName}
                     form={form}
                 />,
+                itemCol
             );
         }
         if (FormCheckbox.typeList.includes(type)) {
@@ -132,6 +134,7 @@ export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, la
                     labelClassName={labelClassName}
                     form={form}
                 />,
+                itemCol
             );
         }
         if (FormDatePicker.typeList.includes(type)) {
@@ -143,6 +146,7 @@ export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, la
                     labelClassName={labelClassName}
                     form={form}
                 />,
+                itemCol
             );
         }
         if (FormDateRanger.typeList.includes(type)) {
@@ -154,6 +158,7 @@ export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, la
                     labelClassName={labelClassName}
                     form={form}
                 />,
+                itemCol
             );
         }
 
@@ -166,6 +171,7 @@ export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, la
                     labelClassName={labelClassName}
                     form={form}
                 />,
+                itemCol
             );
         }
         if (FormRadioGroup.typeList.includes(type)) {
@@ -177,6 +183,7 @@ export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, la
                     labelClassName={labelClassName}
                     form={form}
                 />,
+                itemCol
             );
         }
         if (FormInputRange.typeList.includes(type)) {
@@ -201,7 +208,8 @@ export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, la
                         form={form}
                         itemRow={itemRow}
                         itemCol={itemCol}
-                    />
+                    />,
+                    itemCol
                 )
             );
         }

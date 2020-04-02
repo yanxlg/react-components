@@ -76,7 +76,7 @@ export var getFormItems = function getFormItems(fieldList, form, labelClassName,
         type: type,
         labelClassName: labelClassName,
         form: form
-      })));
+      })), itemCol);
     }
 
     if (FormSelect.typeList.includes(type)) {
@@ -86,7 +86,7 @@ export var getFormItems = function getFormItems(fieldList, form, labelClassName,
         type: type,
         labelClassName: labelClassName,
         form: form
-      })));
+      })), itemCol);
     }
 
     if (FormCheckbox.typeList.includes(type)) {
@@ -96,7 +96,7 @@ export var getFormItems = function getFormItems(fieldList, form, labelClassName,
         type: type,
         labelClassName: labelClassName,
         form: form
-      })));
+      })), itemCol);
     }
 
     if (FormDatePicker.typeList.includes(type)) {
@@ -106,7 +106,7 @@ export var getFormItems = function getFormItems(fieldList, form, labelClassName,
         type: type,
         labelClassName: labelClassName,
         form: form
-      })));
+      })), itemCol);
     }
 
     if (FormDateRanger.typeList.includes(type)) {
@@ -116,7 +116,7 @@ export var getFormItems = function getFormItems(fieldList, form, labelClassName,
         type: type,
         labelClassName: labelClassName,
         form: form
-      })));
+      })), itemCol);
     }
 
     if (FormCheckboxGroup.typeList.includes(type)) {
@@ -126,7 +126,7 @@ export var getFormItems = function getFormItems(fieldList, form, labelClassName,
         type: type,
         labelClassName: labelClassName,
         form: form
-      })));
+      })), itemCol);
     }
 
     if (FormRadioGroup.typeList.includes(type)) {
@@ -136,7 +136,7 @@ export var getFormItems = function getFormItems(fieldList, form, labelClassName,
         type: type,
         labelClassName: labelClassName,
         form: form
-      })));
+      })), itemCol);
     }
 
     if (FormInputRange.typeList.includes(type)) {
@@ -158,7 +158,7 @@ export var getFormItems = function getFormItems(fieldList, form, labelClassName,
         form: form,
         itemRow: itemRow,
         itemCol: itemCol
-      })));
+      })), itemCol);
     }
 
     return null;
