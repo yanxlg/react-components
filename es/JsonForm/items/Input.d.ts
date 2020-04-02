@@ -17,7 +17,7 @@ export declare type InputProps<T = string> = FormItemLabelProps & CustomFormProp
     name: FormItemName<T>;
     formatter?: InputFormatter;
     rules?: Rule[];
-} & Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form'>;
+} & Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange'>;
 declare const FormInput: {
     (props: InputProps<string>): JSX.Element;
     typeList: string[];

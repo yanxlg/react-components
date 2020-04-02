@@ -26,7 +26,7 @@ export type DatePickerProps<T = string> = FormItemLabelProps &
         dateEndWith?: Array<FormItemName<T> | 'now'>;
         formatter?: DatePickerFormatter;
         rules?: Rule[];
-    }&PickerProps<Moment>;
+    }&Omit<PickerProps<Moment>, "onChange">;
 
 const FormDatePicker = (props: DatePickerProps) => {
     const {

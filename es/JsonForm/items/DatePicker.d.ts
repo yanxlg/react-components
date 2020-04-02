@@ -19,7 +19,7 @@ export declare type DatePickerProps<T = string> = FormItemLabelProps & CustomFor
     dateEndWith?: Array<FormItemName<T> | 'now'>;
     formatter?: DatePickerFormatter;
     rules?: Rule[];
-} & PickerProps<Moment>;
+} & Omit<PickerProps<Moment>, "onChange">;
 declare const FormDatePicker: {
     (props: DatePickerProps<string>): JSX.Element;
     typeList: string[];

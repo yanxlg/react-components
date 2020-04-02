@@ -18,7 +18,7 @@ export type CheckboxProps<T = string> = FormItemLabelProps &
     name: FormItemName<T>;
     formatter?: undefined;
     rules?: Rule[];
-} & AntdCheckboxProps;
+} & Omit<AntdCheckboxProps, "onChange"|"name">;
 
 const FormCheckbox = (props: CheckboxProps) => {
     const {name, label, formItemClassName, className, onChange, form, rules} = props;

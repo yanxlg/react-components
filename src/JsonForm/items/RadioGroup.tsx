@@ -19,7 +19,7 @@ export type RadioGroupProps<T = string> = FormItemLabelProps &
     formatter?: undefined;
     rules?: Rule[];
     radioType?: "button" | "radio"
-} & AntdRadioGroupProps;
+} & Omit<AntdRadioGroupProps, "onChange">;
 
 const FormRadioGroup = (props: RadioGroupProps) => {
     const {

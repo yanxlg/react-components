@@ -13,7 +13,7 @@ export declare type CheckboxProps<T = string> = FormItemLabelProps & CustomFormP
     name: FormItemName<T>;
     formatter?: undefined;
     rules?: Rule[];
-} & AntdCheckboxProps;
+} & Omit<AntdCheckboxProps, "onChange" | "name">;
 declare const FormCheckbox: {
     (props: CheckboxProps<string>): JSX.Element;
     typeList: string[];

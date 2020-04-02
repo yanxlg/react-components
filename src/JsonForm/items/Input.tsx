@@ -24,7 +24,7 @@ export type InputProps<T = string> = FormItemLabelProps &
         name: FormItemName<T>;
         formatter?: InputFormatter;
         rules?: Rule[];
-    } & Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form'>;
+    } & Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form' |'onChange'>;
 
 const FormInput = (props: InputProps) => {
     const {
