@@ -6,6 +6,7 @@ import { FormInstance, Rule } from 'antd/es/form';
 import moment, { Moment } from 'moment';
 import { transNullValue, transEndDate, transStartDate } from '../utils';
 import formStyles from '../_form.less';
+import { PickerProps } from 'antd/es/date-picker/generatePicker';
 
 export type DatePickerFormatter = 'start_date' | 'end_date';
 
@@ -25,7 +26,7 @@ export type DatePickerProps<T = string> = FormItemLabelProps &
         dateEndWith?: Array<FormItemName<T> | 'now'>;
         formatter?: DatePickerFormatter;
         rules?: Rule[];
-    };
+    }&PickerProps<Moment>;
 
 const FormDatePicker = (props: DatePickerProps) => {
     const {

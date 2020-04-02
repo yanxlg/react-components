@@ -8,8 +8,8 @@ import React, {
     useRef,
     useState,
 } from 'react';
-import { Button, Col, Form, Row } from 'antd';
-import { FormProps } from 'antd/lib/form/Form';
+import {Button, Col, Form, Row} from 'antd';
+import {FormProps} from 'antd/lib/form/Form';
 import FormInput, {
     InputType,
     InputProps,
@@ -20,7 +20,7 @@ import FormSelect, {
     SelectProps,
     SelectFormatter,
 } from './items/Select';
-import FormCheckbox, { CheckboxType, CheckboxProps } from './items/Checkbox';
+import FormCheckbox, {CheckboxType, CheckboxProps} from './items/Checkbox';
 import FormDatePicker, {
     DatePickerProps,
     DatePickerType,
@@ -35,21 +35,22 @@ import FormInputRange, {
     InputRangeType,
     InputRangeProps,
 } from './items/InputRange';
-import { Store, ValidateFields } from 'rc-field-form/lib/interface';
-import { FormInstance } from 'antd/es/form';
+import {Store, ValidateFields} from 'rc-field-form/lib/interface';
+import {FormInstance} from 'antd/es/form';
 import RcResizeObserver from 'rc-resize-observer';
-import { UpOutlined, DownOutlined } from '@ant-design/icons';
-import { ColProps } from 'antd/lib/grid/col';
-import { RowProps } from 'antd/lib/grid/row';
+import {UpOutlined, DownOutlined} from '@ant-design/icons';
+import {ColProps} from 'antd/lib/grid/col';
+import {RowProps} from 'antd/lib/grid/row';
 import FormCheckboxGroup, {
     CheckboxGroupProps,
     CheckboxGroupType,
 } from './items/CheckboxGroup';
-import FormRadioGroup, { RadioGroupProps, RadioGroupType } from './items/RadioGroup';
+import FormRadioGroup, {RadioGroupProps, RadioGroupType} from './items/RadioGroup';
 import classNames from 'classnames';
 
 import './index.less';
 import formStyles from './_form.less';
+import Layout, {LayoutType, LayoutProps} from "./layout";
 
 export declare interface CustomFormProps {
     labelClassName?: string;
@@ -64,7 +65,8 @@ export type FormField<T = string> = (
     | Omit<CheckboxGroupProps<T>, 'form'>
     | Omit<RadioGroupProps<T>, 'form'>
     | Omit<InputRangeProps<T>, 'form'>
-) & {
+    | Omit<LayoutProps<T>, 'form'>
+    ) & {
     form?: FormInstance;
 };
 
@@ -87,6 +89,135 @@ export interface JsonFormRef {
     getFieldsValue: () => Store;
     validateFields: ValidateFields;
 }
+
+export const getColChildren = (children: ReactElement, itemCol?: ColProps, times: number = 1) => {
+    if (itemCol) {
+        return <Col {...itemCol}>{children}</Col>;
+    } else {
+        return children;
+    }
+};
+
+export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, labelClassName?: string, itemCol?: ColProps, itemRow?: RowProps) => {
+    const fields = fieldList.map(({type, ...field},index) => {
+        const name = field["name"];
+        if (FormInput.typeList.includes(type)) {
+            return getColChildren(
+                <FormInput
+                    key={String(name)}
+                    {...(field as InputProps)}
+                    type={type as InputType}
+                    labelClassName={labelClassName}
+                    form={form}
+                />,
+            );
+        }
+        if (FormSelect.typeList.includes(type)) {
+            return getColChildren(
+                <FormSelect
+                    key={String(name)}
+                    {...(field as SelectProps)}
+                    type={type as SelectType}
+                    labelClassName={labelClassName}
+                    form={form}
+                />,
+            );
+        }
+        if (FormCheckbox.typeList.includes(type)) {
+            return getColChildren(
+                <FormCheckbox
+                    key={String(name)}
+                    {...(field as CheckboxProps)}
+                    type={type as CheckboxType}
+                    labelClassName={labelClassName}
+                    form={form}
+                />,
+            );
+        }
+        if (FormDatePicker.typeList.includes(type)) {
+            return getColChildren(
+                <FormDatePicker
+                    key={String(name)}
+                    {...(field as DatePickerProps)}
+                    type={type as DatePickerType}
+                    labelClassName={labelClassName}
+                    form={form}
+                />,
+            );
+        }
+        if (FormDateRanger.typeList.includes(type)) {
+            return getColChildren(
+                <FormDateRanger
+                    key={String(name)}
+                    {...(field as DateRangerProps)}
+                    type={type as DateRangerType}
+                    labelClassName={labelClassName}
+                    form={form}
+                />,
+            );
+        }
+
+        if (FormCheckboxGroup.typeList.includes(type)) {
+            return getColChildren(
+                <FormCheckboxGroup
+                    key={String(name)}
+                    {...(field as CheckboxGroupProps)}
+                    type={type as CheckboxGroupType}
+                    labelClassName={labelClassName}
+                    form={form}
+                />,
+            );
+        }
+        if (FormRadioGroup.typeList.includes(type)) {
+            return getColChildren(
+                <FormRadioGroup
+                    key={String(name)}
+                    {...(field as RadioGroupProps)}
+                    type={type as RadioGroupType}
+                    labelClassName={labelClassName}
+                    form={form}
+                />,
+            );
+        }
+        if (FormInputRange.typeList.includes(type)) {
+            return (
+                <FormInputRange
+                    key={String(name)}
+                    {...(field as InputRangeProps)}
+                    type={type as InputRangeType}
+                    labelClassName={labelClassName}
+                    form={form}
+                />
+            );
+        }
+        if (Layout.typeList.includes(type)) {
+            return (
+                getColChildren(
+                    <Layout
+                        key={String(index)}
+                        {...(field as LayoutProps)}
+                        type={type as LayoutType}
+                        labelClassName={labelClassName}
+                        form={form}
+                        itemRow={itemRow}
+                        itemCol={itemCol}
+                    />
+                )
+            );
+        }
+        return null;
+    });
+
+    if (itemCol) {
+        return (
+            <Row {...(itemRow ? itemRow : {})} className={formStyles.formRow}>
+                {fields}
+            </Row>
+        );
+    } else {
+        return fields;
+    }
+};
 
 const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, ref) => {
     const {
@@ -129,35 +260,43 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         [],
     );
 
-    const getValues = useCallback(() => {
+    const getValues = useCallback((targetFieldList?:FormField[]) => {
         let values: Store = {};
-        fieldList.map(({ type, name, formatter }) => {
-            if (FormInput.typeList.includes(type)) {
-                values[name as string] = FormInput.formatter(formatter as InputFormatter)(
-                    form.getFieldValue(name),
-                );
-            } else if (FormSelect.typeList.includes(type)) {
-                values[name as string] = FormSelect.formatter(formatter as SelectFormatter)(
-                    form.getFieldValue(name),
-                );
-            } else if (FormDateRanger.typeList.includes(type)) {
-                const [name1, name2] = name;
-                values[name1] = FormDateRanger.formatter(formatter?.[0] as DateRangerFormatter)(
-                    form.getFieldValue(name1),
-                );
-                values[name2] = FormDateRanger.formatter(formatter?.[1] as DateRangerFormatter)(
-                    form.getFieldValue(name2),
-                );
-            } else if (FormDatePicker.typeList.includes(type)) {
-                values[name as string] = FormDatePicker.formatter(formatter as DatePickerFormatter)(
-                    form.getFieldValue(name),
-                );
-            } else if (FormInputRange.typeList.includes(type)) {
-                const [name1, name2] = name;
-                values[name1 as string] = FormInputRange.formatter()(form.getFieldValue(name1));
-                values[name2 as string] = FormInputRange.formatter()(form.getFieldValue(name2));
-            } else {
-                return form.getFieldValue(name);
+        const target = targetFieldList||fieldList;
+        target.map((field) => {
+            const {type,} = field;
+            if(Layout.typeList.includes(type)){
+                // layout 组件
+                Object.assign(values,getValues((field as LayoutProps).fieldList));
+            }else{
+                const {formatter,name} = field as unknown as any;
+                if (FormInput.typeList.includes(type)) {
+                    values[name as string] = FormInput.formatter(formatter as InputFormatter)(
+                        form.getFieldValue(name),
+                    );
+                } else if (FormSelect.typeList.includes(type)) {
+                    values[name as string] = FormSelect.formatter(formatter as SelectFormatter)(
+                        form.getFieldValue(name),
+                    );
+                } else if (FormDateRanger.typeList.includes(type)) {
+                    const [name1, name2] = name;
+                    values[name1] = FormDateRanger.formatter(formatter?.[0] as DateRangerFormatter)(
+                        form.getFieldValue(name1),
+                    );
+                    values[name2] = FormDateRanger.formatter(formatter?.[1] as DateRangerFormatter)(
+                        form.getFieldValue(name2),
+                    );
+                } else if (FormDatePicker.typeList.includes(type)) {
+                    values[name as string] = FormDatePicker.formatter(formatter as DatePickerFormatter)(
+                        form.getFieldValue(name),
+                    );
+                } else if (FormInputRange.typeList.includes(type)) {
+                    const [name1, name2] = name;
+                    values[name1 as string] = FormInputRange.formatter()(form.getFieldValue(name1));
+                    values[name2 as string] = FormInputRange.formatter()(form.getFieldValue(name2));
+                } else {
+                    return form.getFieldValue(name);
+                }
             }
         });
         return values;
@@ -172,7 +311,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         return Math.abs(value - size) <= 1;
     }, []);
 
-    const onResize = useCallback(({ height, width }) => {
+    const onResize = useCallback(({height, width}) => {
         if (enableCollapse) {
             const btnWrapOffsetLeft = btnWrap.current!.offsetLeft;
             if (btnWrapOffsetLeft === 0) {
@@ -208,18 +347,18 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                     <Button
                         type="link"
                         className={formStyles.formItem}
-                        style={{ float: 'right' }}
+                        style={{float: 'right'}}
                         onClick={onCollapseChange}
                     >
                         {collapse ? (
                             <>
                                 收起至一行
-                                <UpOutlined />
+                                <UpOutlined/>
                             </>
                         ) : (
                             <>
                                 展开
-                                <DownOutlined />
+                                <DownOutlined/>
                             </>
                         )}
                     </Button>
@@ -230,118 +369,8 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         }
     }, [collapseBtnVisible, collapse]);
 
-    const getColChildren = useCallback((children: ReactElement, times: number = 1) => {
-        //TODO 暂时不支持时间关联使用col方式布局
-        if (itemCol) {
-            return <Col {...itemCol}>{children}</Col>;
-        } else {
-            return children;
-        }
-    }, []);
-
     const fromItemList = useMemo(() => {
-        const fields = fieldList.map(({ type, ...field }) => {
-            if (FormInput.typeList.includes(type)) {
-                return getColChildren(
-                    <FormInput
-                        key={String(field.name)}
-                        {...(field as InputProps)}
-                        type={type as InputType}
-                        labelClassName={labelClassName}
-                        form={form}
-                    />,
-                );
-            }
-            if (FormSelect.typeList.includes(type)) {
-                return getColChildren(
-                    <FormSelect
-                        key={String(field.name)}
-                        {...(field as SelectProps)}
-                        type={type as SelectType}
-                        labelClassName={labelClassName}
-                        form={form}
-                    />,
-                );
-            }
-            if (FormCheckbox.typeList.includes(type)) {
-                return getColChildren(
-                    <FormCheckbox
-                        key={String(field.name)}
-                        {...(field as CheckboxProps)}
-                        type={type as CheckboxType}
-                        labelClassName={labelClassName}
-                        form={form}
-                    />,
-                );
-            }
-            if (FormDatePicker.typeList.includes(type)) {
-                return getColChildren(
-                    <FormDatePicker
-                        key={String(field.name)}
-                        {...(field as DatePickerProps)}
-                        type={type as DatePickerType}
-                        labelClassName={labelClassName}
-                        form={form}
-                    />,
-                );
-            }
-            if (FormDateRanger.typeList.includes(type)) {
-                return getColChildren(
-                    <FormDateRanger
-                        key={String(field.name)}
-                        {...(field as DateRangerProps)}
-                        type={type as DateRangerType}
-                        labelClassName={labelClassName}
-                        form={form}
-                    />,
-                );
-            }
-
-            if (FormCheckboxGroup.typeList.includes(type)) {
-                return getColChildren(
-                    <FormCheckboxGroup
-                        key={String(field.name)}
-                        {...(field as CheckboxGroupProps)}
-                        type={type as CheckboxGroupType}
-                        labelClassName={labelClassName}
-                        form={form}
-                    />,
-                );
-            }
-            if (FormRadioGroup.typeList.includes(type)) {
-                return getColChildren(
-                    <FormRadioGroup
-                        key={String(field.name)}
-                        {...(field as RadioGroupProps)}
-                        type={type as RadioGroupType}
-                        labelClassName={labelClassName}
-                        form={form}
-                    />,
-                );
-            }
-            if (FormInputRange.typeList.includes(type)) {
-                return (
-                    <FormInputRange
-                        key={String(field.name)}
-                        {...(field as InputRangeProps)}
-                        type={type as InputRangeType}
-                        labelClassName={labelClassName}
-                        form={form}
-                    />
-                );
-            }
-            return null;
-        });
-
-        if (itemCol) {
-            return (
-                <Row {...(itemRow ? itemRow : {})} className={formStyles.formRow}>
-                    {fields}
-                </Row>
-            );
-        } else {
-            return fields;
-        }
+        return getFormItems(fieldList, form, labelClassName, itemCol, itemRow);
     }, [fieldList]);
 
     const formContent = useMemo(() => {
@@ -358,7 +387,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                 <div className={classNames(formStyles.flex, formStyles.flex1)}>
                     <div
                         className={classNames(formStyles.flex1, formStyles.flexRow)}
-                        style={{ flexWrap: 'wrap' }}
+                        style={{flexWrap: 'wrap'}}
                     >
                         {fromItemList}
                     </div>
@@ -385,13 +414,13 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         const style = enableCollapse
             ? collapse
                 ? {
-                      overflow: 'hidden',
-                      height: formHeight,
-                  }
+                    overflow: 'hidden',
+                    height: formHeight,
+                }
                 : {
-                      overflow: 'hidden',
-                      height: rowHeight,
-                  }
+                    overflow: 'hidden',
+                    height: rowHeight,
+                }
             : {};
 
         return (
