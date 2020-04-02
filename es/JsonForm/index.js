@@ -185,7 +185,8 @@ var JsonForm = function JsonForm(props, ref) {
       enableCollapse = _c === void 0 ? true : _c,
       itemCol = props.itemCol,
       itemRow = props.itemRow,
-      _props = __rest(props, ["fieldList", "children", "labelClassName", "rowHeight", "defaultCollapse", "enableCollapse", "itemCol", "itemRow"]);
+      proForm = props.form,
+      _props = __rest(props, ["fieldList", "children", "labelClassName", "rowHeight", "defaultCollapse", "enableCollapse", "itemCol", "itemRow", "form"]);
 
   var _d = useState(defaultCollapse),
       collapse = _d[0],
@@ -195,7 +196,7 @@ var JsonForm = function JsonForm(props, ref) {
       collapseBtnVisible = _e[0],
       setCollapseBtnVisible = _e[1];
 
-  var form = _Form.useForm()[0];
+  var form = _Form.useForm(proForm)[0];
 
   var wrapRef = useRef(null);
   var btnWrap = useRef(null);
@@ -211,6 +212,9 @@ var JsonForm = function JsonForm(props, ref) {
         return form.validateFields().then(function () {
           return getValues();
         });
+      },
+      setFieldsValue: function setFieldsValue(value) {
+        form.setFieldsValue(value);
       }
     };
   }, []);

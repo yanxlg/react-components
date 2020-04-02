@@ -35,6 +35,7 @@ export declare interface CustomFormProps {
 export interface JsonFormRef {
     getFieldsValue: () => Store;
     validateFields: ValidateFields;
+    setFieldsValue: (value: Store) => void;
 }
 export declare const getColChildren: (children: React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)>) | (new (props: any) => React.Component<any, any, any>)>, itemCol?: ColProps, times?: number) => JSX.Element;
 export declare const getFormItems: (fieldList: FormField<string>[], form: FormInstance, labelClassName?: string, itemCol?: ColProps, itemRow?: RowProps) => JSX.Element | JSX.Element[];

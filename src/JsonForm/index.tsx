@@ -88,6 +88,7 @@ export declare interface CustomFormProps {
 export interface JsonFormRef {
     getFieldsValue: () => Store;
     validateFields: ValidateFields;
+    setFieldsValue: (value: Store) => void;
 }
 
 export const getColChildren = (children: ReactElement, itemCol?: ColProps, times: number = 1) => {
@@ -99,7 +100,7 @@ export const getColChildren = (children: ReactElement, itemCol?: ColProps, times
 };
 
 export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, labelClassName?: string, itemCol?: ColProps, itemRow?: RowProps) => {
-    const fields = fieldList.map(({type, ...field},index) => {
+    const fields = fieldList.map(({type, ...field}, index) => {
         const name = field["name"];
         if (FormInput.typeList.includes(type)) {
             return getColChildren(
@@ -237,6 +238,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         enableCollapse = true,
         itemCol,
         itemRow,
+        form: proForm,
         ..._props
     } = props;
 
@@ -244,7 +246,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
 
     const [collapseBtnVisible, setCollapseBtnVisible] = useState(false);
 
-    const [form] = Form.useForm();
+    const [form] = Form.useForm(proForm);
 
     const wrapRef = useRef<HTMLDivElement>(null);
     const btnWrap = useRef<HTMLDivElement>(null);
@@ -263,24 +265,27 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                         return getValues();
                     });
                 },
+                setFieldsValue: (value: Store) => {
+                    form.setFieldsValue(value);
+                }
             };
         },
         [],
     );
 
-    const getValues = useCallback((targetFieldList?:FormField[]) => {
+    const getValues = useCallback((targetFieldList?: FormField[]) => {
         let values: Store = {};
-        const target = targetFieldList||fieldList;
-        (target as any[]).map((field:any) => {
+        const target = targetFieldList || fieldList;
+        (target as any[]).map((field: any) => {
             const {type} = field;
-            if(Layout.typeList.includes(type)){
+            if (Layout.typeList.includes(type)) {
                 // layout 组件
                 values = {
                     ...values,
                     ...getValues((field as LayoutProps).fieldList)
                 };
-            }else{
-                const {formatter,name} = field as unknown as any;
+            } else {
+                const {formatter, name} = field as unknown as any;
                 if (FormInput.typeList.includes(type)) {
                     values[name as string] = FormInput.formatter(formatter as InputFormatter)(
                         form.getFieldValue(name),
