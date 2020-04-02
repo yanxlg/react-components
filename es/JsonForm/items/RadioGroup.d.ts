@@ -13,6 +13,7 @@ export declare type RadioGroupProps<T = string> = FormItemLabelProps & CustomFor
     name: FormItemName<T>;
     formatter?: undefined;
     rules?: Rule[];
+    radioType?: "button" | "radio";
 } & AntdRadioGroupProps;
 declare const FormRadioGroup: {
     (props: RadioGroupProps<string>): JSX.Element;

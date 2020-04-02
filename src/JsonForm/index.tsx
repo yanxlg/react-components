@@ -263,11 +263,14 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
     const getValues = useCallback((targetFieldList?:FormField[]) => {
         let values: Store = {};
         const target = targetFieldList||fieldList;
-        target.map((field) => {
-            const {type,} = field;
+        (target as any[]).map((field:any) => {
+            const {type} = field;
             if(Layout.typeList.includes(type)){
                 // layout 组件
-                Object.assign(values,getValues((field as LayoutProps).fieldList));
+                values = {
+                    ...values,
+                    ...getValues((field as LayoutProps).fieldList)
+                };
             }else{
                 const {formatter,name} = field as unknown as any;
                 if (FormInput.typeList.includes(type)) {
@@ -295,7 +298,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                     values[name1 as string] = FormInputRange.formatter()(form.getFieldValue(name1));
                     values[name2 as string] = FormInputRange.formatter()(form.getFieldValue(name2));
                 } else {
-                    return form.getFieldValue(name);
+                    values[name] = form.getFieldValue(name);
                 }
             }
         });

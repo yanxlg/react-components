@@ -2,6 +2,7 @@
 import { CustomFormProps, FormItemName } from '../index';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
 import { FormInstance, Rule } from 'antd/es/form';
+import { CheckboxProps as AntdCheckboxProps } from "antd/es/checkbox/Checkbox";
 export declare type CheckboxType = 'checkbox';
 export declare type CheckboxProps<T = string> = FormItemLabelProps & CustomFormProps & {
     form: FormInstance;
@@ -12,7 +13,7 @@ export declare type CheckboxProps<T = string> = FormItemLabelProps & CustomFormP
     name: FormItemName<T>;
     formatter?: undefined;
     rules?: Rule[];
-};
+} & AntdCheckboxProps;
 declare const FormCheckbox: {
     (props: CheckboxProps<string>): JSX.Element;
     typeList: string[];
