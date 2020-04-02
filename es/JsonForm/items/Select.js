@@ -2,6 +2,8 @@ import "antd/es/select/style/css";
 import _Select from "antd/es/select";
 import "antd/es/form/style/css";
 import _Form from "antd/es/form";
+import "antd/es/radio/style/css";
+import _Radio from "antd/es/radio";
 
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
@@ -39,11 +41,13 @@ var FormSelect = function FormSelect(props) {
       rules = props.rules,
       mode = props.mode,
       maxTagCount = props.maxTagCount,
-      placeholder = props.placeholder;
+      placeholder = props.placeholder,
+      _b = props.isShortcut,
+      isShortcut = _b === void 0 ? false : _b;
 
-  var _b = useState(undefined),
-      options = _b[0],
-      setOptions = _b[1];
+  var _c = useState(undefined),
+      options = _c[0],
+      setOptions = _c[1];
 
   var isFunction = typeof optionList === 'function';
   useEffect(function () {
@@ -107,6 +111,45 @@ var FormSelect = function FormSelect(props) {
       }
     } : {};
   }, []);
+  var dropdownRender = useCallback(function (menu) {
+    var list = getOptionList().optionList;
+
+    if (isShortcut) {
+      return React.createElement("div", null, React.createElement(_Radio.Group, {
+        style: {
+          display: "flex",
+          padding: "5px 0"
+        },
+        value: ""
+      }, React.createElement(_Radio.Button, {
+        value: "1",
+        style: {
+          flex: 1,
+          textAlign: "center"
+        },
+        onClick: function onClick() {
+          var _a;
+
+          form.setFieldsValue((_a = {}, _a[name] = list.map(function (item) {
+            return item.value;
+          }), _a));
+        }
+      }, "\u5168\u9009"), React.createElement(_Radio.Button, {
+        value: "0",
+        style: {
+          flex: 1,
+          textAlign: "center"
+        },
+        onClick: function onClick() {
+          var _a;
+
+          form.setFieldsValue((_a = {}, _a[name] = [], _a));
+        }
+      }, "\u53D6\u6D88\u5168\u9009")), menu);
+    }
+
+    return menu;
+  }, [isShortcut, getOptionList]);
   return useMemo(function () {
     if (optionListDependence === void 0) {
       var _a = getOptionList(),
@@ -126,7 +169,8 @@ var FormSelect = function FormSelect(props) {
         mode: mode,
         maxTagCount: maxTagCount
       }, eventProps, {
-        placeholder: placeholder
+        placeholder: placeholder,
+        dropdownRender: dropdownRender
       }), syncDefaultOption ? React.createElement(_Select.Option, {
         value: syncDefaultOption.value
       }, syncDefaultOption.name) : null, list.map(function (item) {
@@ -169,8 +213,12 @@ var FormSelect = function FormSelect(props) {
           rules: rules
         }, React.createElement(_Select, __assign({
           className: className,
-          loading: loading
-        }, eventProps), syncDefaultOption ? React.createElement(_Select.Option, {
+          loading: loading,
+          mode: mode,
+          maxTagCount: maxTagCount
+        }, eventProps, {
+          dropdownRender: dropdownRender
+        }), syncDefaultOption ? React.createElement(_Select.Option, {
           value: syncDefaultOption.value
         }, syncDefaultOption.name) : null, list.map(function (item) {
           return React.createElement(_Select.Option, {

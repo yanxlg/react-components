@@ -1,14 +1,15 @@
-import { Form, Select } from 'antd';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { CustomFormProps, FormItemName } from '../index';
-import { FormInstance, Rule } from 'antd/es/form';
-import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
-import { transNullValue, transNumber, transJoinStr } from '../utils';
+import {Form, Select, Radio} from 'antd';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import {CustomFormProps, FormItemName} from '../index';
+import {FormInstance, Rule} from 'antd/es/form';
+import {FormItemLabelProps} from 'antd/es/form/FormItemLabel';
+import {transNullValue, transNumber, transJoinStr} from '../utils';
 import formStyles from '../_form.less';
 
 export declare interface IOptionItem {
     name: string;
     value: string | number;
+
     [key: string]: any; // 子节点key
 }
 
@@ -21,24 +22,25 @@ const typeList = ['select'];
 
 export type SelectProps<T = string> = FormItemLabelProps &
     CustomFormProps & {
-        type: SelectType;
-        form: FormInstance;
-        placeholder?: string;
-        optionList?: IOptionItem[] | OptionsPromise; // 支持异步获取
-        syncDefaultOption?: IOptionItem; // 异步获取options是默认选项，通常用于胚子'全部'
-        optionListDependence?: {
-            name: FormItemName | FormItemName[]; // 依赖名成
-            key: string; // 关联key，暂时不支持多个对应
-        };
-        className?: string;
-        formItemClassName?: string;
-        onChange?: (name: FormItemName<T>, form: FormInstance) => void; // change监听，支持外部执行表单操作，可以实现关联筛选，重置等操作
-        name: FormItemName<T>;
-        formatter?: SelectFormatter;
-        rules?: Rule[];
-        mode?: 'multiple' | 'tags';
-        maxTagCount?: number;
+    type: SelectType;
+    form: FormInstance;
+    placeholder?: string;
+    optionList?: IOptionItem[] | OptionsPromise; // 支持异步获取
+    syncDefaultOption?: IOptionItem; // 异步获取options是默认选项，通常用于胚子'全部'
+    optionListDependence?: {
+        name: FormItemName | FormItemName[]; // 依赖名成
+        key: string; // 关联key，暂时不支持多个对应
     };
+    className?: string;
+    formItemClassName?: string;
+    onChange?: (name: FormItemName<T>, form: FormInstance) => void; // change监听，支持外部执行表单操作，可以实现关联筛选，重置等操作
+    name: FormItemName<T>;
+    formatter?: SelectFormatter;
+    rules?: Rule[];
+    mode?: 'multiple' | 'tags';
+    maxTagCount?: number;
+    isShortcut?: boolean;
+};
 
 const FormSelect = (props: SelectProps) => {
     const {
@@ -56,6 +58,7 @@ const FormSelect = (props: SelectProps) => {
         mode,
         maxTagCount,
         placeholder,
+        isShortcut = false,
     } = props;
     const [options, setOptions] = useState<IOptionItem[] | undefined>(undefined);
 
@@ -79,14 +82,14 @@ const FormSelect = (props: SelectProps) => {
     } => {
         if (isFunction) {
             if (optionListDependence) {
-                const { name, key: dependenceKey } = optionListDependence;
+                const {name, key: dependenceKey} = optionListDependence;
                 const dependenceNameList = typeof name === 'string' ? [name] : name || [];
                 let parentItem = options;
                 for (let i = 0; i < dependenceNameList.length; i++) {
                     const dependenceName = dependenceNameList[i];
                     const dependenceValue = form?.getFieldValue(dependenceName);
 
-                    const siblings = parentItem?.find(({ value }) => {
+                    const siblings = parentItem?.find(({value}) => {
                         return value === dependenceValue;
                     });
                     parentItem = siblings?.[dependenceKey] ?? undefined;
@@ -116,16 +119,56 @@ const FormSelect = (props: SelectProps) => {
     const eventProps = useMemo(() => {
         return onChange
             ? {
-                  onChange: () => {
-                      onChange(name as FormItemName, form);
-                  },
-              }
+                onChange: () => {
+                    onChange(name as FormItemName, form);
+                },
+            }
             : {};
     }, []);
 
+    const dropdownRender = useCallback(
+        (menu: React.ReactElement): React.ReactElement => {
+            const {optionList: list} = getOptionList();
+            if (isShortcut) {
+                return (
+                    <div>
+                        {/* value={size} onChange={this.handleSizeChange} */}
+                        <Radio.Group style={{display: "flex", padding: "5px 0"}} value="">
+                            <Radio.Button
+                                value="1"
+                                style={{flex: 1, textAlign: "center"}}
+                                onClick={() => {
+                                    form!.setFieldsValue({
+                                        [name]: list!.map(item => item.value),
+                                    });
+                                }}
+                            >
+                                全选
+                            </Radio.Button>
+                            <Radio.Button
+                                value="0"
+                                style={{flex: 1, textAlign: "center"}}
+                                onClick={() => {
+                                    form!.setFieldsValue({
+                                        [name]: [],
+                                    });
+                                }}
+                            >
+                                取消全选
+                            </Radio.Button>
+                        </Radio.Group>
+                        {menu}
+                    </div>
+                );
+            }
+            return menu;
+        },
+        [isShortcut, getOptionList],
+    );
+
     return useMemo(() => {
         if (optionListDependence === void 0) {
-            const { loading, optionList: list } = getOptionList();
+            const {loading, optionList: list} = getOptionList();
             return (
                 <Form.Item
                     name={name}
@@ -140,6 +183,7 @@ const FormSelect = (props: SelectProps) => {
                         maxTagCount={maxTagCount}
                         {...eventProps}
                         placeholder={placeholder}
+                        dropdownRender={dropdownRender}
                     >
                         {syncDefaultOption ? (
                             <Select.Option value={syncDefaultOption.value}>
@@ -159,7 +203,7 @@ const FormSelect = (props: SelectProps) => {
                 <Form.Item
                     noStyle={true}
                     shouldUpdate={(prevValues, currentValues) => {
-                        const { name } = optionListDependence;
+                        const {name} = optionListDependence;
                         const dependenceNameList = typeof name === 'string' ? [name] : name || [];
                         let updated = false;
                         let i = 0;
@@ -172,8 +216,8 @@ const FormSelect = (props: SelectProps) => {
                         return updated;
                     }}
                 >
-                    {({ getFieldValue }) => {
-                        const { loading, optionList: list } = getOptionList();
+                    {({getFieldValue}) => {
+                        const {loading, optionList: list} = getOptionList();
                         return (
                             <Form.Item
                                 name={name}
@@ -181,7 +225,14 @@ const FormSelect = (props: SelectProps) => {
                                 label={<span className={labelClassName}>{label}</span>}
                                 rules={rules}
                             >
-                                <Select className={className} loading={loading} {...eventProps}>
+                                <Select
+                                    className={className}
+                                    loading={loading}
+                                    mode={mode}
+                                    maxTagCount={maxTagCount}
+                                    {...eventProps}
+                                    dropdownRender={dropdownRender}
+                                >
                                     {syncDefaultOption ? (
                                         <Select.Option value={syncDefaultOption.value}>
                                             {syncDefaultOption.name}
