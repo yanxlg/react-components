@@ -1,5 +1,5 @@
-import React, { CSSProperties } from 'react';
-import './index.less';
+import React, { CSSProperties } from "react";
+import "./index.less";
 interface StatusProps {
     className?: string;
     style?: CSSProperties;

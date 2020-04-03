@@ -19,11 +19,7 @@
     "start": "rc-tools run server",
     "compile": "rc-tools run compile --babel-runtime",
     "pub": "node publish.js",
-    "lint": "rc-tools run lint --no-js-lint",
-    "karma": "rc-test run karma",
-    "saucelabs": "rc-test run saucelabs",
-    "test": "rc-test run test",
-    "chrome-test": "rc-test run chrome-test",
+    "replace":"node replace.js",
     "coverage": "rc-test run coverage",
     "prepublish": "rc-tools run guard"
   },
