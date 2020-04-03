@@ -429,7 +429,7 @@ var ProTable = function ProTable(props) {
     return React.createElement(FitTable, __assign({}, rest, {
       scroll: propsScroll,
       size: size,
-      rowSelection: propsRowSelection === false ? undefined : rowSelection,
+      rowSelection: propsRowSelection === undefined ? undefined : rowSelection,
       className: tableClassName,
       style: tableStyle,
       columns: filterColumns,

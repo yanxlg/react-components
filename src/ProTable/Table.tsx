@@ -493,7 +493,7 @@ const ProTable = <T extends {}, U extends object>(
                 {...rest}
                 scroll={propsScroll}
                 size={size}
-                rowSelection={propsRowSelection === false ? undefined : rowSelection}
+                rowSelection={propsRowSelection === undefined ? undefined : rowSelection}
                 className={tableClassName}
                 style={tableStyle}
                 columns={filterColumns as any}
