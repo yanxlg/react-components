@@ -1,6 +1,6 @@
 {
   "name": "react-components",
-  "version": "0.0.4",
+  "version": "0.0.4-alpha",
   "description": "",
   "repository": {
     "type": "git",
@@ -34,13 +34,15 @@
   ],
   "dependencies": {
     "antd": "^4.0.0",
-    "@ant-design/icons":"^4.0.2",
+    "@ant-design/icons": "^4.0.2",
     "react-lazyload": "^2.6.6",
     "dnd-core": "^10.0.2",
     "react-dnd": "^10.0.2",
-    "react-dnd-html5-backend": "^10.0.2"
+    "react-dnd-html5-backend": "^10.0.2",
+    "react-highlight-words": "^0.16.0"
   },
   "devDependencies": {
+    "@types/react-highlight-words": "^0.16.1",
     "@types/lodash": "^4.14.149",
     "@types/classnames": "^2.2.10",
     "@types/jest": "^23.1.4",
@@ -71,15 +73,15 @@
     "tslint-config-prettier": "^1.13.0",
     "tslint-react": "^3.6.0",
     "typescript": "^3.7.5",
-    "babel-preset-env":"^1.7.0",
-    "babel-preset-stage-3":"^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
     "babel-preset-react-app": "^3.1.2",
-    "babel-plugin-add-module-exports":"^1.0.0",
-    "babel-plugin-react-require":"^3.0.0",
-    "babel-plugin-syntax-dynamic-import":"^6.18.0",
-    "babel-plugin-transform-decorators":"^6.24.1",
+    "babel-plugin-add-module-exports": "^1.0.0",
+    "babel-plugin-react-require": "^3.0.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-decorators": "^6.24.1",
     "babel-plugin-transform-import": "^1.5.4",
-    "babel-plugin-import":"^1.9.1",
+    "babel-plugin-import": "^1.9.1",
     "shelljs": "^0.8.3",
     "gulp": "^4.0.2"
   },

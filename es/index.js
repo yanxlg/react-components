@@ -9,3 +9,4 @@ export { default as FitTable } from "./FitTable";
 export { default as ProTable } from "./ProTable";
 export { default as LoadingButton } from "./LoadingButton";
 export { default as PopConfirmLoadingButton } from "./PopConfirmLoadingButton";
+export { default as Config } from "./Config";
