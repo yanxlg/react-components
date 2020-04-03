@@ -40,6 +40,7 @@ export type SelectProps<T = string> = FormItemLabelProps &
     mode?: 'multiple' | 'tags';
     maxTagCount?: number;
     isShortcut?: boolean;
+    disabled?: boolean;
 };
 
 const FormSelect = (props: SelectProps) => {
@@ -59,6 +60,7 @@ const FormSelect = (props: SelectProps) => {
         maxTagCount,
         placeholder,
         isShortcut = false,
+        disabled,
     } = props;
     const [options, setOptions] = useState<IOptionItem[] | undefined>(undefined);
 
@@ -177,6 +179,7 @@ const FormSelect = (props: SelectProps) => {
                     rules={rules}
                 >
                     <Select
+                        disabled={disabled}
                         className={className}
                         loading={loading}
                         mode={mode}
@@ -226,6 +229,7 @@ const FormSelect = (props: SelectProps) => {
                                 rules={rules}
                             >
                                 <Select
+                                    disabled={disabled}
                                     className={className}
                                     loading={loading}
                                     mode={mode}

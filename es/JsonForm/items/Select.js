@@ -43,7 +43,8 @@ var FormSelect = function FormSelect(props) {
       maxTagCount = props.maxTagCount,
       placeholder = props.placeholder,
       _b = props.isShortcut,
-      isShortcut = _b === void 0 ? false : _b;
+      isShortcut = _b === void 0 ? false : _b,
+      disabled = props.disabled;
 
   var _c = useState(undefined),
       options = _c[0],
@@ -164,6 +165,7 @@ var FormSelect = function FormSelect(props) {
         }, label),
         rules: rules
       }, React.createElement(_Select, __assign({
+        disabled: disabled,
         className: className,
         loading: loading,
         mode: mode,
@@ -212,6 +214,7 @@ var FormSelect = function FormSelect(props) {
           }, label),
           rules: rules
         }, React.createElement(_Select, __assign({
+          disabled: disabled,
           className: className,
           loading: loading,
           mode: mode,

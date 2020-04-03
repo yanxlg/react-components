@@ -30,6 +30,7 @@ export declare type SelectProps<T = string> = FormItemLabelProps & CustomFormPro
     mode?: 'multiple' | 'tags';
     maxTagCount?: number;
     isShortcut?: boolean;
+    disabled?: boolean;
 };
 declare const FormSelect: {
     (props: SelectProps<string>): JSX.Element;
