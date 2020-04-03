@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react';
-declare interface IAutoEnLargeImgProps {
+import { LazyImageProps } from '../LazyImage';
+declare type IAutoEnLargeImgProps = {
     className?: string;
     enLargeClassName?: string;
     src?: string;
     enlargeContent?: ReactElement;
-    scrollContainer?: string | Element | undefined;
-}
+} & LazyImageProps;
 declare const AutoEnLargeImg: React.FC<IAutoEnLargeImgProps>;
 export default AutoEnLargeImg;

@@ -32,21 +32,42 @@ var __rest = this && this.__rest || function (s, e) {
 
 import React, { forwardRef } from 'react';
 import LazyLoad from 'react-lazyload';
-import classNames from 'classnames'; // import styles from '../../temp/JsonForm/_form.less';
+import classNames from 'classnames';
+import formStyles from "../JsonForm/_form.less";
 
 var LazyImage = function LazyImage(_a, ref) {
-  var _b = _a.scrollContainer,
-      scrollContainer = _b === void 0 ? '.ant-table-body' : _b,
-      className = _a.className,
-      props = __rest(_a, ["scrollContainer", "className"]);
+  var className = _a.className,
+      once = _a.once,
+      height = _a.height,
+      _b = _a.offset,
+      offset = _b === void 0 ? 100 : _b,
+      _c = _a.overflow,
+      overflow = _c === void 0 ? true : _c,
+      resize = _a.resize,
+      scroll = _a.scroll,
+      _d = _a.throttle,
+      throttle = _d === void 0 ? true : _d,
+      debounce = _a.debounce,
+      scrollContainer = _a.scrollContainer,
+      unmountIfInvisible = _a.unmountIfInvisible,
+      preventLoading = _a.preventLoading,
+      props = __rest(_a, ["className", "once", "height", "offset", "overflow", "resize", "scroll", "throttle", "debounce", "scrollContainer", "unmountIfInvisible", "preventLoading"]);
 
   return React.createElement(LazyLoad, {
     scrollContainer: scrollContainer,
-    offset: 100,
-    throttle: true,
+    once: once,
+    height: height,
+    offset: offset,
+    overflow: overflow,
+    resize: resize,
+    scroll: scroll,
+    debounce: debounce,
+    throttle: throttle,
+    unmountIfInvisible: unmountIfInvisible,
+    preventLoading: preventLoading,
     placeholder: React.createElement(_Skeleton.Input, {
       active: true,
-      className: classNames(className, "inline-block")
+      className: classNames(className, formStyles.inlineBlock)
     })
   }, React.createElement("img", __assign({}, props, {
     className: className
