@@ -48,6 +48,7 @@ import { useRowSelection } from './hooks';
 import TableAlert from './component/alert';
 import FitTable, { goButton, showTotal } from '../FitTable';
 import { defaultPageSizeOptions } from './config';
+import { isEmptyObject } from "../utils";
 /**
  * 生成 Ellipsis 的 tooltip
  * @param dom
@@ -429,7 +430,7 @@ var ProTable = function ProTable(props) {
     return React.createElement(FitTable, __assign({}, rest, {
       scroll: propsScroll,
       size: size,
-      rowSelection: propsRowSelection === undefined ? undefined : rowSelection,
+      rowSelection: propsRowSelection === undefined || isEmptyObject(propsRowSelection) ? undefined : rowSelection,
       className: tableClassName,
       style: tableStyle,
       columns: filterColumns,

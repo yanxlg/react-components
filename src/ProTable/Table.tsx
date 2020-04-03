@@ -1,25 +1,26 @@
 import './index.less';
 
-import React, { useEffect, CSSProperties, useRef, useState, useCallback, useMemo } from 'react';
-import { ConfigProvider, Card, Typography, Empty, Tooltip } from 'antd';
+import React, {useEffect, CSSProperties, useRef, useState, useCallback, useMemo} from 'react';
+import {ConfigProvider, Card, Typography, Empty, Tooltip} from 'antd';
 import classNames from 'classnames';
-import { ColumnsType, ColumnType } from 'antd/es/table';
-import { ConfigConsumer, ConfigConsumerProps } from 'antd/lib/config-provider';
+import {ColumnsType, ColumnType} from 'antd/es/table';
+import {ConfigConsumer, ConfigConsumerProps} from 'antd/lib/config-provider';
 
-import Toolbar, { OptionConfig, ToolBarProps, ToolBarRef } from './component/toolBar';
+import Toolbar, {OptionConfig, ToolBarProps, ToolBarRef} from './component/toolBar';
 
-import { RenderedCell } from 'rc-table/lib/interface';
-import { TableRowSelection } from 'antd/es/table/interface';
+import {RenderedCell} from 'rc-table/lib/interface';
+import {TableRowSelection} from 'antd/es/table/interface';
 
-import { checkUndefinedOrNull, genColumnKey, useDeepCompareEffect } from './component/util';
+import {checkUndefinedOrNull, genColumnKey, useDeepCompareEffect} from './component/util';
 
-import { DensitySize } from './component/toolBar/DensityIcon';
-import { useRowSelection } from './hooks';
-import TableAlert, { TableAlertRef } from './component/alert';
-import { SizeType } from 'antd/es/config-provider/SizeContext';
-import { TableProps } from 'antd/lib/table';
-import FitTable, { goButton, showTotal } from '../FitTable';
-import { defaultPageSizeOptions } from './config';
+import {DensitySize} from './component/toolBar/DensityIcon';
+import {useRowSelection} from './hooks';
+import TableAlert, {TableAlertRef} from './component/alert';
+import {SizeType} from 'antd/es/config-provider/SizeContext';
+import {TableProps} from 'antd/lib/table';
+import FitTable, {goButton, showTotal} from '../FitTable';
+import {defaultPageSizeOptions} from './config';
+import {isEmptyObject} from "../utils";
 
 export interface ColumnsState {
     show?: boolean;
@@ -52,8 +53,7 @@ export interface ProColumnGroupType<RecordType> extends ProColumnType<RecordType
 
 export type ProColumns<T> = ProColumnGroupType<T> | ProColumnType<T>;
 
-export type SimpleRowSelection<T> = Omit<
-    TableRowSelection<T>,
+export type SimpleRowSelection<T> = Omit<TableRowSelection<T>,
     | 'type'
     | 'getCheckboxProps'
     | 'onSelect'
@@ -62,8 +62,7 @@ export type SimpleRowSelection<T> = Omit<
     | 'onSelectInvert'
     | 'selections'
     | 'hideDefaultSelections'
-    | 'columnTitle'
->;
+    | 'columnTitle'>;
 
 export interface ProTableProps<T, U extends { [key: string]: any }>
     extends Omit<TableProps<T>, 'columns' | 'rowSelection'> {
@@ -98,8 +97,8 @@ export interface ProTableProps<T, U extends { [key: string]: any }>
      */
     options?:
         | (Omit<OptionConfig, 'density'> & {
-              density: boolean;
-          })
+        density: boolean;
+    })
         | false;
 
     /**
@@ -172,7 +171,7 @@ const genCopyable = (dom: React.ReactNode, item: ProColumns<any>) => {
  * 这个组件负责单元格的具体渲染
  * @param param0
  */
-const columRender = <T, U = any>({ item, text, row, index }: ColumRenderInterface<T>): any => {
+const columRender = <T, U = any>({item, text, row, index}: ColumRenderInterface<T>): any => {
     const dom: React.ReactNode = genEllipsis(genCopyable(text, item), item, text);
     if (item.render) {
         const renderDom = item.render(text, row, index, dom);
@@ -193,9 +192,9 @@ const genColumnList = <T, U = {}>(
     },
 ): (ColumnsType<T>[number] & { index?: number })[] => {
     return columns.map((item, columnsIndex) => {
-        const { key, dataIndex } = item;
+        const {key, dataIndex} = item;
         const columnKey = genColumnKey(key, dataIndex);
-        const config = columnKey ? map[columnKey] || { fixed: item.fixed } : { fixed: item.fixed };
+        const config = columnKey ? map[columnKey] || {fixed: item.fixed} : {fixed: item.fixed};
         const tempColumns = {
             ...item,
             ellipsis: false,
@@ -204,7 +203,7 @@ const genColumnList = <T, U = {}>(
             // @ts-ignore
             children: item.children ? genColumnList(item.children, map) : undefined,
             render: (text: any, row: T, index: number) =>
-                columRender<T>({ item, text, row, index }),
+                columRender<T>({item, text, row, index}),
         };
         if (!tempColumns.children || !tempColumns.children.length) {
             delete tempColumns.children;
@@ -255,7 +254,7 @@ const ProTable = <T extends {}, U extends object>(
         rowKey = '',
         ...rest
     } = props;
-    const { selectedRowKeys, onChange } = propsRowSelection;
+    const {selectedRowKeys, onChange} = propsRowSelection;
     const rootRef = useRef<HTMLDivElement>(null);
     const [sortKeyColumns, setSortKeyColumns] = useState<(string | number)[]>([]);
 
@@ -340,7 +339,7 @@ const ProTable = <T extends {}, U extends object>(
         alertRef.current?.updateSelectedState(selectedRowKeys);
     }, []);
 
-    const { columns, rowSelection, clearCheckedRows } = useRowSelection(
+    const {columns, rowSelection, clearCheckedRows} = useRowSelection(
         tableColumns,
         rowKey,
         dataSource,
@@ -349,9 +348,9 @@ const ProTable = <T extends {}, U extends object>(
         onSelectedRowKeysUpdate,
     );
 
-    const filterColumns = useMemo(()=>{
+    const filterColumns = useMemo(() => {
         return columns.filter(item => {
-            const { key, dataIndex } = item;
+            const {key, dataIndex} = item;
             const columnKey = genColumnKey(key, dataIndex);
             if (!columnKey) {
                 return true;
@@ -362,7 +361,7 @@ const ProTable = <T extends {}, U extends object>(
             }
             return true;
         })
-    },[columns,columnsMap]);
+    }, [columns, columnsMap]);
 
     /**
      * 需要清除选中状态时
@@ -398,21 +397,21 @@ const ProTable = <T extends {}, U extends object>(
         if (!proOptions) {
             return proOptions;
         }
-        const { density, fullScreen } = proOptions;
+        const {density, fullScreen} = proOptions;
         return {
             ...proOptions,
             ...(density
                 ? {
-                      density: {
-                          tableSize: size,
-                          setTableSize: updateTableSize,
-                      },
-                  }
+                    density: {
+                        tableSize: size,
+                        setTableSize: updateTableSize,
+                    },
+                }
                 : {}),
             ...(fullScreen
                 ? {
-                      fullScreen: fullScreenFn,
-                  }
+                    fullScreen: fullScreenFn,
+                }
                 : {}),
         };
     }, [proOptions, size]);
@@ -493,7 +492,7 @@ const ProTable = <T extends {}, U extends object>(
                 {...rest}
                 scroll={propsScroll}
                 size={size}
-                rowSelection={propsRowSelection === undefined ? undefined : rowSelection}
+                rowSelection={propsRowSelection === undefined || isEmptyObject(propsRowSelection) ? undefined : rowSelection}
                 className={tableClassName}
                 style={tableStyle}
                 columns={filterColumns as any}
@@ -513,7 +512,7 @@ const ProTable = <T extends {}, U extends object>(
     }, [columns, pagination, size, propsRowSelection, loading]);
 
     if (proColumns.length < 1) {
-        return <Empty />;
+        return <Empty/>;
     }
 
     return (
@@ -546,7 +545,7 @@ const ProTable = <T extends {}, U extends object>(
  */
 const ProviderWarp = <T, U extends { [key: string]: any } = {}>(props: ProTableProps<T, U>) => (
     <ConfigConsumer>
-        {({ getPrefixCls }: ConfigConsumerProps) => (
+        {({getPrefixCls}: ConfigConsumerProps) => (
             <ProTable defaultClassName={getPrefixCls('pro-table')} {...props} />
         )}
     </ConfigConsumer>

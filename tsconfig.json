@@ -29,6 +29,12 @@
     "acceptance-tests",
     "webpack",
     "jest",
-    "src/setupTests.ts"
+    "src/setupTests.ts",
+    "es",
+    "lib",
+    "examples",
+    "publish.js",
+    "gulpfile.js",
+    "webpack.config.js"
   ]
 }
