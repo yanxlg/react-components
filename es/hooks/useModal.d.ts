@@ -1,4 +1,4 @@
-declare function useModal<T = string>(): {
+declare function useModal<T = string | boolean>(): {
     visible: false | T;
     onClose: () => void;
     setVisibleProps: (visibleProps: T) => void;

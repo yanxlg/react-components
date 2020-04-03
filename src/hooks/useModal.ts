@@ -1,6 +1,6 @@
-import {useCallback, useState} from "react";
+import { useCallback, useState } from "react";
 
-function useModal<T = string>() {
+function useModal<T = string | boolean>() {
     const [visible, setVisible] = useState<T | false>(false);
 
     const onClose = useCallback(() => {
