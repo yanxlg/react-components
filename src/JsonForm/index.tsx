@@ -229,6 +229,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         itemCol,
         itemRow,
         form: proForm,
+        className = formStyles.formContainer,
         ..._props
     } = props;
 
@@ -415,7 +416,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         return (
             <RcResizeObserver onResize={onResize}>
                 <div>
-                    <Form layout="inline" {..._props} form={form}>
+                    <Form layout="inline" {..._props} form={form} className={className}>
                         {formContent}
                     </Form>
                 </div>

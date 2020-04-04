@@ -188,24 +188,26 @@ var JsonForm = function JsonForm(props, ref) {
       itemCol = props.itemCol,
       itemRow = props.itemRow,
       proForm = props.form,
-      _props = __rest(props, ["fieldList", "children", "labelClassName", "rowHeight", "defaultCollapse", "enableCollapse", "itemCol", "itemRow", "form"]);
+      _d = props.className,
+      className = _d === void 0 ? formStyles.formContainer : _d,
+      _props = __rest(props, ["fieldList", "children", "labelClassName", "rowHeight", "defaultCollapse", "enableCollapse", "itemCol", "itemRow", "form", "className"]);
 
-  var _d = useState(defaultCollapse),
-      collapse = _d[0],
-      setCollapse = _d[1];
+  var _e = useState(defaultCollapse),
+      collapse = _e[0],
+      setCollapse = _e[1];
 
-  var _e = useState(false),
-      collapseBtnVisible = _e[0],
-      setCollapseBtnVisible = _e[1];
+  var _f = useState(false),
+      collapseBtnVisible = _f[0],
+      setCollapseBtnVisible = _f[1];
 
   var form = _Form.useForm(proForm)[0];
 
   var wrapRef = useRef(null);
   var btnWrap = useRef(null);
 
-  var _f = useState(defaultCollapse ? rowHeight : undefined),
-      formHeight = _f[0],
-      setFormHeight = _f[1];
+  var _g = useState(defaultCollapse ? rowHeight : undefined),
+      formHeight = _g[0],
+      setFormHeight = _g[1];
 
   useImperativeHandle(ref, function () {
     return {
@@ -335,7 +337,8 @@ var JsonForm = function JsonForm(props, ref) {
     }, React.createElement("div", null, React.createElement(_Form, __assign({
       layout: "inline"
     }, _props, {
-      form: form
+      form: form,
+      className: className
     }), formContent)));
   }, [fieldList, collapseBtnVisible, collapse, children]);
   return useMemo(function () {
