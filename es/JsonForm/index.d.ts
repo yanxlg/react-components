@@ -44,7 +44,7 @@ interface JsonFormComponent<P> extends React.FC<P> {
     FormItem: typeof FormItem;
 }
 declare const JsonFormComponent: JsonFormComponent<JsonFormProps> & {
-    FormItem: typeof FormItem;
+    ref?: JsonFormRef;
 };
 export default JsonFormComponent;
 export * from "./utils";

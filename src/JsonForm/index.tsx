@@ -447,7 +447,7 @@ interface JsonFormComponent<P> extends React.FC<P> {
 }
 
 const JsonFormComponent: JsonFormComponent<JsonFormProps> & {
-    FormItem: typeof FormItem;
+    ref?: JsonFormRef;
 } = (forwardRef(JsonForm) as unknown) as JsonFormComponent<JsonFormProps>;
 
 JsonFormComponent.FormItem = FormItem;
