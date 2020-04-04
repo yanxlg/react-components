@@ -2,6 +2,7 @@ import React, {
     forwardRef,
     ForwardRefRenderFunction,
     ReactElement,
+    RefObject,
     useCallback,
     useImperativeHandle,
     useMemo,
@@ -446,9 +447,13 @@ interface JsonFormComponent<P> extends React.FC<P> {
     FormItem: typeof FormItem;
 }
 
-const JsonFormComponent: JsonFormComponent<JsonFormProps> & {
-    ref?: JsonFormRef;
-} = (forwardRef(JsonForm) as unknown) as JsonFormComponent<JsonFormProps>;
+const JsonFormComponent: JsonFormComponent<JsonFormProps & {
+    ref?: RefObject<JsonFormRef>;
+}> = (forwardRef(JsonForm) as unknown) as JsonFormComponent<
+    JsonFormProps & {
+        ref?: RefObject<JsonFormRef>;
+    }
+>;
 
 JsonFormComponent.FormItem = FormItem;
 

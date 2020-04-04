@@ -1,4 +1,4 @@
-import React from "react";
+import React, { RefObject } from "react";
 import { FormProps } from "antd/lib/form/Form";
 import { InputProps } from "./items/Input";
 import { SelectProps } from "./items/Select";
@@ -43,8 +43,8 @@ export declare const getFormItems: (fieldList: FormField<string>[], form: FormIn
 interface JsonFormComponent<P> extends React.FC<P> {
     FormItem: typeof FormItem;
 }
-declare const JsonFormComponent: JsonFormComponent<JsonFormProps> & {
-    ref?: JsonFormRef;
-};
+declare const JsonFormComponent: JsonFormComponent<JsonFormProps & {
+    ref?: RefObject<JsonFormRef>;
+}>;
 export default JsonFormComponent;
 export * from "./utils";
