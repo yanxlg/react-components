@@ -1,9 +1,9 @@
 /// <reference types="react" />
-import { CustomFormProps, FormItemName } from '../index';
-import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
-import { FormInstance, Rule } from 'antd/es/form';
-import { transNumber } from '../utils';
-export declare type InputRangeType = 'inputRange';
+import { CustomFormProps, FormItemName } from "../index";
+import { FormItemLabelProps } from "antd/es/form/FormItemLabel";
+import { FormInstance, Rule } from "antd/es/form";
+import { transNumber } from "../utils";
+export declare type InputRangeType = "inputRange";
 export declare type InputRangeProps<T = string> = FormItemLabelProps & CustomFormProps & {
     form: FormInstance;
     type: InputRangeType;

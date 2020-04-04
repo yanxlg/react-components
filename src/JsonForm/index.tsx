@@ -7,66 +7,52 @@ import React, {
     useMemo,
     useRef,
     useState,
-} from 'react';
-import {Button, Col, Form, Row} from 'antd';
-import {FormProps} from 'antd/lib/form/Form';
-import FormInput, {
-    InputType,
-    InputProps,
-    InputFormatter,
-} from './items/Input';
-import FormSelect, {
-    SelectType,
-    SelectProps,
-    SelectFormatter,
-} from './items/Select';
-import FormCheckbox, {CheckboxType, CheckboxProps} from './items/Checkbox';
+} from "react";
+import { Button, Col, Form, Row } from "antd";
+import { FormProps } from "antd/lib/form/Form";
+import FormInput, { InputType, InputProps, InputFormatter } from "./items/Input";
+import FormSelect, { SelectType, SelectProps, SelectFormatter } from "./items/Select";
+import FormCheckbox, { CheckboxType, CheckboxProps } from "./items/Checkbox";
 import FormDatePicker, {
     DatePickerProps,
     DatePickerType,
     DatePickerFormatter,
-} from './items/DatePicker';
+} from "./items/DatePicker";
 import FormDateRanger, {
     DateRangerType,
     DateRangerProps,
     DateRangerFormatter,
-} from './items/DateRanger';
-import FormInputRange, {
-    InputRangeType,
-    InputRangeProps,
-} from './items/InputRange';
-import {Store, ValidateFields} from 'rc-field-form/lib/interface';
-import {FormInstance} from 'antd/es/form';
-import RcResizeObserver from 'rc-resize-observer';
-import {UpOutlined, DownOutlined} from '@ant-design/icons';
-import {ColProps} from 'antd/lib/grid/col';
-import {RowProps} from 'antd/lib/grid/row';
-import FormCheckboxGroup, {
-    CheckboxGroupProps,
-    CheckboxGroupType,
-} from './items/CheckboxGroup';
-import FormRadioGroup, {RadioGroupProps, RadioGroupType} from './items/RadioGroup';
-import classNames from 'classnames';
+} from "./items/DateRanger";
+import FormInputRange, { InputRangeType, InputRangeProps } from "./items/InputRange";
+import { Store, ValidateFields } from "rc-field-form/lib/interface";
+import { FormInstance } from "antd/es/form";
+import RcResizeObserver from "rc-resize-observer";
+import { UpOutlined, DownOutlined } from "@ant-design/icons";
+import { ColProps } from "antd/lib/grid/col";
+import { RowProps } from "antd/lib/grid/row";
+import FormCheckboxGroup, { CheckboxGroupProps, CheckboxGroupType } from "./items/CheckboxGroup";
+import FormRadioGroup, { RadioGroupProps, RadioGroupType } from "./items/RadioGroup";
+import classNames from "classnames";
 
-import './index.less';
-import formStyles from './_form.less';
-import Layout, {LayoutType, LayoutProps} from "./layout";
+import "./index.less";
+import formStyles from "./_form.less";
+import Layout, { LayoutType, LayoutProps } from "./layout";
 
 export declare interface CustomFormProps {
     labelClassName?: string;
 }
 
 export type FormField<T = string> = (
-    | Omit<InputProps<T>, 'form'>
-    | Omit<SelectProps<T>, 'form'>
-    | Omit<CheckboxProps<T>, 'form'>
-    | Omit<DatePickerProps<T>, 'form'>
-    | Omit<DateRangerProps<T>, 'form'>
-    | Omit<CheckboxGroupProps<T>, 'form'>
-    | Omit<RadioGroupProps<T>, 'form'>
-    | Omit<InputRangeProps<T>, 'form'>
-    | Omit<LayoutProps<T>, 'form'>
-    ) & {
+    | Omit<InputProps<T>, "form">
+    | Omit<SelectProps<T>, "form">
+    | Omit<CheckboxProps<T>, "form">
+    | Omit<DatePickerProps<T>, "form">
+    | Omit<DateRangerProps<T>, "form">
+    | Omit<CheckboxGroupProps<T>, "form">
+    | Omit<RadioGroupProps<T>, "form">
+    | Omit<InputRangeProps<T>, "form">
+    | Omit<LayoutProps<T>, "form">
+) & {
     form?: FormInstance;
 };
 
@@ -99,8 +85,14 @@ export const getColChildren = (children: ReactElement, itemCol?: ColProps, times
     }
 };
 
-export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, labelClassName?: string, itemCol?: ColProps, itemRow?: RowProps) => {
-    const fields = fieldList.map(({type, ...field}, index) => {
+export const getFormItems = (
+    fieldList: Array<FormField>,
+    form: FormInstance,
+    labelClassName?: string,
+    itemCol?: ColProps,
+    itemRow?: RowProps,
+) => {
+    const fields = fieldList.map(({ type, ...field }, index) => {
         const name = field["name"];
         if (FormInput.typeList.includes(type)) {
             return getColChildren(
@@ -111,7 +103,7 @@ export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, la
                     labelClassName={labelClassName}
                     form={form}
                 />,
-                itemCol
+                itemCol,
             );
         }
         if (FormSelect.typeList.includes(type)) {
@@ -123,7 +115,7 @@ export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, la
                     labelClassName={labelClassName}
                     form={form}
                 />,
-                itemCol
+                itemCol,
             );
         }
         if (FormCheckbox.typeList.includes(type)) {
@@ -135,7 +127,7 @@ export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, la
                     labelClassName={labelClassName}
                     form={form}
                 />,
-                itemCol
+                itemCol,
             );
         }
         if (FormDatePicker.typeList.includes(type)) {
@@ -147,7 +139,7 @@ export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, la
                     labelClassName={labelClassName}
                     form={form}
                 />,
-                itemCol
+                itemCol,
             );
         }
         if (FormDateRanger.typeList.includes(type)) {
@@ -159,7 +151,7 @@ export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, la
                     labelClassName={labelClassName}
                     form={form}
                 />,
-                itemCol
+                itemCol,
             );
         }
 
@@ -172,7 +164,7 @@ export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, la
                     labelClassName={labelClassName}
                     form={form}
                 />,
-                itemCol
+                itemCol,
             );
         }
         if (FormRadioGroup.typeList.includes(type)) {
@@ -184,7 +176,7 @@ export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, la
                     labelClassName={labelClassName}
                     form={form}
                 />,
-                itemCol
+                itemCol,
             );
         }
         if (FormInputRange.typeList.includes(type)) {
@@ -199,19 +191,17 @@ export const getFormItems = (fieldList: Array<FormField>, form: FormInstance, la
             );
         }
         if (Layout.typeList.includes(type)) {
-            return (
-                getColChildren(
-                    <Layout
-                        key={String(index)}
-                        {...(field as LayoutProps)}
-                        type={type as LayoutType}
-                        labelClassName={labelClassName}
-                        form={form}
-                        itemRow={itemRow}
-                        itemCol={itemCol}
-                    />,
-                    itemCol
-                )
+            return getColChildren(
+                <Layout
+                    key={String(index)}
+                    {...(field as LayoutProps)}
+                    type={type as LayoutType}
+                    labelClassName={labelClassName}
+                    form={form}
+                    itemRow={itemRow}
+                    itemCol={itemCol}
+                />,
+                itemCol,
             );
         }
         return null;
@@ -233,7 +223,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         fieldList,
         children,
         labelClassName,
-        rowHeight = 56,
+        rowHeight = 56, // 32 + 24
         defaultCollapse = true,
         enableCollapse = true,
         itemCol,
@@ -267,56 +257,63 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                 },
                 setFieldsValue: (value: Store) => {
                     form.setFieldsValue(value);
-                }
+                },
             };
         },
         [],
     );
 
-    const getValues = useCallback((targetFieldList?: FormField[]) => {
-        let values: Store = {};
-        const target = targetFieldList || fieldList;
-        (target as any[]).map((field: any) => {
-            const {type} = field;
-            if (Layout.typeList.includes(type)) {
-                // layout 组件
-                values = {
-                    ...values,
-                    ...getValues((field as LayoutProps).fieldList)
-                };
-            } else {
-                const {formatter, name} = field as unknown as any;
-                if (FormInput.typeList.includes(type)) {
-                    values[name as string] = FormInput.formatter(formatter as InputFormatter)(
-                        form.getFieldValue(name),
-                    );
-                } else if (FormSelect.typeList.includes(type)) {
-                    values[name as string] = FormSelect.formatter(formatter as SelectFormatter)(
-                        form.getFieldValue(name),
-                    );
-                } else if (FormDateRanger.typeList.includes(type)) {
-                    const [name1, name2] = name;
-                    values[name1] = FormDateRanger.formatter(formatter?.[0] as DateRangerFormatter)(
-                        form.getFieldValue(name1),
-                    );
-                    values[name2] = FormDateRanger.formatter(formatter?.[1] as DateRangerFormatter)(
-                        form.getFieldValue(name2),
-                    );
-                } else if (FormDatePicker.typeList.includes(type)) {
-                    values[name as string] = FormDatePicker.formatter(formatter as DatePickerFormatter)(
-                        form.getFieldValue(name),
-                    );
-                } else if (FormInputRange.typeList.includes(type)) {
-                    const [name1, name2] = name;
-                    values[name1 as string] = FormInputRange.formatter()(form.getFieldValue(name1));
-                    values[name2 as string] = FormInputRange.formatter()(form.getFieldValue(name2));
+    const getValues = useCallback(
+        (targetFieldList?: FormField[]) => {
+            let values: Store = {};
+            const target = targetFieldList || fieldList;
+            (target as any[]).map((field: any) => {
+                const { type } = field;
+                if (Layout.typeList.includes(type)) {
+                    // layout 组件
+                    values = {
+                        ...values,
+                        ...getValues((field as LayoutProps).fieldList),
+                    };
                 } else {
-                    values[name] = form.getFieldValue(name);
+                    const { formatter, name } = (field as unknown) as any;
+                    if (FormInput.typeList.includes(type)) {
+                        values[name as string] = FormInput.formatter(formatter as InputFormatter)(
+                            form.getFieldValue(name),
+                        );
+                    } else if (FormSelect.typeList.includes(type)) {
+                        values[name as string] = FormSelect.formatter(formatter as SelectFormatter)(
+                            form.getFieldValue(name),
+                        );
+                    } else if (FormDateRanger.typeList.includes(type)) {
+                        const [name1, name2] = name;
+                        values[name1] = FormDateRanger.formatter(
+                            formatter?.[0] as DateRangerFormatter,
+                        )(form.getFieldValue(name1));
+                        values[name2] = FormDateRanger.formatter(
+                            formatter?.[1] as DateRangerFormatter,
+                        )(form.getFieldValue(name2));
+                    } else if (FormDatePicker.typeList.includes(type)) {
+                        values[name as string] = FormDatePicker.formatter(
+                            formatter as DatePickerFormatter,
+                        )(form.getFieldValue(name));
+                    } else if (FormInputRange.typeList.includes(type)) {
+                        const [name1, name2] = name;
+                        values[name1 as string] = FormInputRange.formatter()(
+                            form.getFieldValue(name1),
+                        );
+                        values[name2 as string] = FormInputRange.formatter()(
+                            form.getFieldValue(name2),
+                        );
+                    } else {
+                        values[name] = form.getFieldValue(name);
+                    }
                 }
-            }
-        });
-        return values;
-    }, [fieldList]);
+            });
+            return values;
+        },
+        [fieldList],
+    );
 
     const onCollapseChange = useCallback(() => {
         // 需要判断当前元素位置
@@ -327,7 +324,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         return Math.abs(value - size) <= 1;
     }, []);
 
-    const onResize = useCallback(({height, width}) => {
+    const onResize = useCallback(({ height, width }) => {
         if (enableCollapse) {
             const btnWrapOffsetLeft = btnWrap.current!.offsetLeft;
             if (btnWrapOffsetLeft === 0) {
@@ -354,27 +351,27 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                 <div
                     ref={btnWrap}
                     style={{
-                        display: 'flex',
+                        display: "flex",
                         flex: collapse ? 1 : 0,
-                        justifyContent: 'flex-end',
-                        visibility: collapseBtnVisible ? 'visible' : 'hidden',
+                        justifyContent: "flex-end",
+                        visibility: collapseBtnVisible ? "visible" : "hidden",
                     }}
                 >
                     <Button
                         type="link"
                         className={formStyles.formItem}
-                        style={{float: 'right'}}
+                        style={{ float: "right" }}
                         onClick={onCollapseChange}
                     >
                         {collapse ? (
                             <>
                                 收起至一行
-                                <UpOutlined/>
+                                <UpOutlined />
                             </>
                         ) : (
                             <>
                                 展开
-                                <DownOutlined/>
+                                <DownOutlined />
                             </>
                         )}
                     </Button>
@@ -403,7 +400,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                 <div className={classNames(formStyles.flex, formStyles.flex1)}>
                     <div
                         className={classNames(formStyles.flex1, formStyles.flexRow)}
-                        style={{flexWrap: 'wrap'}}
+                        style={{ flexWrap: "wrap" }}
                     >
                         {fromItemList}
                     </div>
@@ -430,13 +427,13 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         const style = enableCollapse
             ? collapse
                 ? {
-                    overflow: 'hidden',
-                    height: formHeight,
-                }
+                      overflow: "hidden",
+                      height: formHeight,
+                  }
                 : {
-                    overflow: 'hidden',
-                    height: rowHeight,
-                }
+                      overflow: "hidden",
+                      height: rowHeight,
+                  }
             : {};
 
         return (
@@ -449,4 +446,4 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
 
 export default forwardRef(JsonForm);
 
-export * from './utils';
+export * from "./utils";

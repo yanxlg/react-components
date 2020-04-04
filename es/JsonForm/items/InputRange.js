@@ -19,10 +19,10 @@ var __assign = this && this.__assign || function () {
   return __assign.apply(this, arguments);
 };
 
-import React, { useMemo } from 'react';
-import formStyles from '../_form.less';
-import { transNumber } from '../utils';
-var typeList = ['inputRange'];
+import React, { useMemo } from "react";
+import formStyles from "../_form.less";
+import { transNumber } from "../utils";
+var typeList = ["inputRange"];
 
 var FormInputRange = function FormInputRange(props) {
   var label = props.label,
@@ -33,7 +33,7 @@ var FormInputRange = function FormInputRange(props) {
       formItemClassName = props.formItemClassName,
       _onChange = props.onChange,
       _b = props.labelClassName,
-      labelClassName = _b === void 0 ? '' : _b,
+      labelClassName = _b === void 0 ? "" : _b,
       form = props.form,
       _c = props.precision,
       precision = _c === void 0 ? 0 : _c,
@@ -55,12 +55,12 @@ var FormInputRange = function FormInputRange(props) {
       validator: function validator(rule, value) {
         var value1 = getFieldValue(name1);
 
-        if (typeof value !== 'number' || typeof value1 !== 'number' || value >= value1) {
+        if (typeof value !== "number" || typeof value1 !== "number" || value >= value1) {
           // validateFields([name1]);
           return Promise.resolve();
         }
 
-        return Promise.reject('请检查范围区间!');
+        return Promise.reject("请检查范围区间!");
       }
     };
   }]] : _d;
@@ -79,7 +79,7 @@ var FormInputRange = function FormInputRange(props) {
     } : {};
   }, []);
   return useMemo(function () {
-    var itemClassName = [formStyles.formInline, formStyles.inlineBlock, formStyles.marginNone, formStyles.verticalMiddle].join(' ');
+    var itemClassName = [formStyles.inlineBlock, formStyles.marginNone, formStyles.verticalMiddle].join(" ");
     return React.createElement(_Form.Item, {
       label: React.createElement("span", {
         className: labelClassName
@@ -100,7 +100,7 @@ var FormInputRange = function FormInputRange(props) {
       precision: precision,
       className: className
     }, event1Props)))), React.createElement("span", {
-      className: [formStyles.formColon, formStyles.verticalMiddle].join(' ')
+      className: [formStyles.formColon, formStyles.verticalMiddle].join(" ")
     }, "-"), React.createElement(_Form.Item, {
       className: itemClassName,
       shouldUpdate: function shouldUpdate(prevValues, currentValues) {
