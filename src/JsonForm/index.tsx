@@ -37,6 +37,7 @@ import classNames from "classnames";
 import "./index.less";
 import formStyles from "./_form.less";
 import Layout, { LayoutType, LayoutProps } from "./layout";
+import FormItem from "./FormItem";
 
 export declare interface CustomFormProps {
     labelClassName?: string;
@@ -357,13 +358,9 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                         justifyContent: "flex-end",
                         visibility: collapseBtnVisible ? "visible" : "hidden",
                     }}
+                    className={formStyles.formItem}
                 >
-                    <Button
-                        type="link"
-                        className={formStyles.formItem}
-                        style={{ float: "right" }}
-                        onClick={onCollapseChange}
-                    >
+                    <Button type="link" style={{ float: "right" }} onClick={onCollapseChange}>
                         {collapse ? (
                             <>
                                 收起至一行
@@ -445,6 +442,16 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
     }, [formHeight, fieldList, collapseBtnVisible, collapse, children]);
 };
 
-export default forwardRef(JsonForm);
+interface JsonFormComponent<P> extends React.FC<P> {
+    FormItem: typeof FormItem;
+}
+
+const JsonFormComponent: JsonFormComponent<JsonFormProps> & {
+    FormItem: typeof FormItem;
+} = (forwardRef(JsonForm) as unknown) as JsonFormComponent<JsonFormProps>;
+
+JsonFormComponent.FormItem = FormItem;
+
+export default JsonFormComponent;
 
 export * from "./utils";

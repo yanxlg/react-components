@@ -51,6 +51,7 @@ import classNames from "classnames";
 import "./index.less";
 import formStyles from "./_form.less";
 import Layout from "./layout";
+import FormItem from "./FormItem";
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
@@ -301,10 +302,10 @@ var JsonForm = function JsonForm(props, ref) {
           flex: collapse ? 1 : 0,
           justifyContent: "flex-end",
           visibility: collapseBtnVisible ? "visible" : "hidden"
-        }
+        },
+        className: formStyles.formItem
       }, React.createElement(_Button, {
         type: "link",
-        className: formStyles.formItem,
         style: {
           "float": "right"
         },
@@ -356,5 +357,7 @@ var JsonForm = function JsonForm(props, ref) {
   }, [formHeight, fieldList, collapseBtnVisible, collapse, children]);
 };
 
-export default forwardRef(JsonForm);
+var JsonFormComponent = forwardRef(JsonForm);
+JsonFormComponent.FormItem = FormItem;
+export default JsonFormComponent;
 export * from "./utils";
