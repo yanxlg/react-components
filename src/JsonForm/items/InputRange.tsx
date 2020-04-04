@@ -28,7 +28,7 @@ const FormInputRange = (props: InputRangeProps) => {
         label,
         className,
         name: [name1, name2],
-        formItemClassName,
+        formItemClassName = formStyles.formItem,
         onChange,
         labelClassName = "",
         form,

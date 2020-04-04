@@ -31,10 +31,11 @@ var FormDateRanger = function FormDateRanger(props) {
       _a = props.name,
       name1 = _a[0],
       name2 = _a[1],
-      formItemClassName = props.formItemClassName,
+      _b = props.formItemClassName,
+      formItemClassName = _b === void 0 ? formStyles.formItem : _b,
       _onChange = props.onChange,
-      _b = props.labelClassName,
-      labelClassName = _b === void 0 ? "" : _b,
+      _c = props.labelClassName,
+      labelClassName = _c === void 0 ? "" : _c,
       form = props.form,
       rules = props.rules;
   var event1Props = useMemo(function () {

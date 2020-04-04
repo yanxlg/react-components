@@ -21,17 +21,18 @@ var __assign = this && this.__assign || function () {
   return __assign.apply(this, arguments);
 };
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { transNullValue, transNumber, transJoinStr } from '../utils';
-import formStyles from '../_form.less';
-var typeList = ['select'];
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { transNullValue, transNumber, transJoinStr } from "../utils";
+import formStyles from "../_form.less";
+var typeList = ["select"];
 
 var FormSelect = function FormSelect(props) {
   var name = props.name,
       label = props.label,
       _a = props.className,
       className = _a === void 0 ? formStyles.formItemDefault : _a,
-      formItemClassName = props.formItemClassName,
+      _b = props.formItemClassName,
+      formItemClassName = _b === void 0 ? formStyles.formItem : _b,
       syncDefaultOption = props.syncDefaultOption,
       optionListDependence = props.optionListDependence,
       _onChange = props.onChange,
@@ -42,15 +43,15 @@ var FormSelect = function FormSelect(props) {
       mode = props.mode,
       maxTagCount = props.maxTagCount,
       placeholder = props.placeholder,
-      _b = props.isShortcut,
-      isShortcut = _b === void 0 ? false : _b,
+      _c = props.isShortcut,
+      isShortcut = _c === void 0 ? false : _c,
       disabled = props.disabled;
 
-  var _c = useState(undefined),
-      options = _c[0],
-      setOptions = _c[1];
+  var _d = useState(undefined),
+      options = _d[0],
+      setOptions = _d[1];
 
-  var isFunction = typeof optionList === 'function';
+  var isFunction = typeof optionList === "function";
   useEffect(function () {
     if (isFunction) {
       optionList().then(function (optionList) {
@@ -67,7 +68,7 @@ var FormSelect = function FormSelect(props) {
       if (optionListDependence) {
         var name_1 = optionListDependence.name,
             dependenceKey = optionListDependence.key;
-        var dependenceNameList = typeof name_1 === 'string' ? [name_1] : name_1 || [];
+        var dependenceNameList = typeof name_1 === "string" ? [name_1] : name_1 || [];
         var parentItem = options;
 
         var _loop_1 = function _loop_1(i) {
@@ -186,7 +187,7 @@ var FormSelect = function FormSelect(props) {
         noStyle: true,
         shouldUpdate: function shouldUpdate(prevValues, currentValues) {
           var name = optionListDependence.name;
-          var dependenceNameList = typeof name === 'string' ? [name] : name || [];
+          var dependenceNameList = typeof name === "string" ? [name] : name || [];
           var updated = false;
           var i = 0;
           var length = dependenceNameList.length;
@@ -239,10 +240,10 @@ FormSelect.typeList = typeList;
 FormSelect.formatter = function (formatter) {
   // return formatter ? (formatter === 'number' ? transNumber : transNullValue) : transNullValue;
   switch (formatter) {
-    case 'number':
+    case "number":
       return transNumber;
 
-    case 'joinStr':
+    case "joinStr":
       return transJoinStr;
 
     default:

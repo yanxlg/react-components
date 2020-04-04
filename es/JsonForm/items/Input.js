@@ -30,11 +30,11 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-import React, { useMemo } from 'react';
-import { transNullValue, transNumber, transNumberStrArr, transStrArr } from '../utils';
-import RichInput from '../../RichInput';
-import formStyles from '../_form.less';
-var typeList = ['input', 'integer', 'number', 'positiveInteger'];
+import React, { useMemo } from "react";
+import { transNullValue, transNumber, transNumberStrArr, transStrArr } from "../utils";
+import RichInput from "../../RichInput";
+import formStyles from "../_form.less";
+var typeList = ["input", "integer", "number", "positiveInteger"];
 
 var FormInput = function FormInput(props) {
   var name = props.name,
@@ -42,7 +42,8 @@ var FormInput = function FormInput(props) {
       label = props.label,
       _a = props.className,
       className = _a === void 0 ? formStyles.formItemDefault : _a,
-      formItemClassName = props.formItemClassName,
+      _b = props.formItemClassName,
+      formItemClassName = _b === void 0 ? formStyles.formItem : _b,
       _onChange = props.onChange,
       labelClassName = props.labelClassName,
       form = props.form,
@@ -80,13 +81,13 @@ FormInput.formatter = function (formatter) {
   // return formatter ? (formatter === 'number' ? transNumber : transNullValue) : transNullValue;
   // return
   switch (formatter) {
-    case 'number':
+    case "number":
       return transNumber;
 
-    case 'strArr':
+    case "strArr":
       return transStrArr;
 
-    case 'numberStrArr':
+    case "numberStrArr":
       return transNumberStrArr;
 
     default:

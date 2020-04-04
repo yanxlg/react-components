@@ -30,15 +30,16 @@ var FormInputRange = function FormInputRange(props) {
       _a = props.name,
       name1 = _a[0],
       name2 = _a[1],
-      formItemClassName = props.formItemClassName,
+      _b = props.formItemClassName,
+      formItemClassName = _b === void 0 ? formStyles.formItem : _b,
       _onChange = props.onChange,
-      _b = props.labelClassName,
-      labelClassName = _b === void 0 ? "" : _b,
+      _c = props.labelClassName,
+      labelClassName = _c === void 0 ? "" : _c,
       form = props.form,
-      _c = props.precision,
-      precision = _c === void 0 ? 0 : _c,
-      _d = props.rules,
-      rules = _d === void 0 ? [[function (_a) {
+      _d = props.precision,
+      precision = _d === void 0 ? 0 : _d,
+      _e = props.rules,
+      rules = _e === void 0 ? [[function (_a) {
     var getFieldValue = _a.getFieldValue,
         validateFields = _a.validateFields;
     return {
@@ -63,7 +64,7 @@ var FormInputRange = function FormInputRange(props) {
         return Promise.reject("请检查范围区间!");
       }
     };
-  }]] : _d;
+  }]] : _e;
   var event1Props = useMemo(function () {
     return _onChange ? {
       onChange: function onChange() {

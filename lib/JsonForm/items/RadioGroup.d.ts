@@ -1,9 +1,9 @@
 /// <reference types="react" />
-import { CustomFormProps, FormItemName } from '../index';
-import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
-import { FormInstance, Rule } from 'antd/es/form';
-import { RadioGroupProps as AntdRadioGroupProps } from 'antd/lib/radio/interface';
-export declare type RadioGroupType = 'radioGroup';
+import { CustomFormProps, FormItemName } from "../index";
+import { FormItemLabelProps } from "antd/es/form/FormItemLabel";
+import { FormInstance, Rule } from "antd/es/form";
+import { RadioGroupProps as AntdRadioGroupProps } from "antd/lib/radio/interface";
+export declare type RadioGroupType = "radioGroup";
 export declare type RadioGroupProps<T = string> = FormItemLabelProps & CustomFormProps & {
     form: FormInstance;
     type: RadioGroupType;
