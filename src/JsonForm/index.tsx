@@ -230,6 +230,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         itemRow,
         form: proForm,
         className = formStyles.formContainer,
+        style,
         ..._props
     } = props;
 
@@ -239,7 +240,6 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
 
     const [form] = Form.useForm(proForm);
 
-    const wrapRef = useRef<HTMLDivElement>(null);
     const btnWrap = useRef<HTMLDivElement>(null);
 
     const [formHeight, setFormHeight] = useState<number | undefined>(
@@ -414,35 +414,34 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         }
     }, [fieldList, children, collapse, collapseBtnVisible]);
 
-    const formComponent = useMemo(() => {
+    return useMemo(() => {
         return (
             <RcResizeObserver onResize={onResize}>
-                <div>
-                    <Form layout="inline" {..._props} form={form} className={className}>
-                        {formContent}
-                    </Form>
-                </div>
+                <Form
+                    layout="inline"
+                    {..._props}
+                    form={form}
+                    className={className}
+                    style={{
+                        ...style,
+                        ...(enableCollapse
+                            ? collapse
+                                ? {
+                                      overflow: "hidden",
+                                      height: formHeight,
+                                      boxSizing: "content-box",
+                                  }
+                                : {
+                                      overflow: "hidden",
+                                      height: rowHeight,
+                                      boxSizing: "content-box",
+                                  }
+                            : {}),
+                    }}
+                >
+                    {formContent}
+                </Form>
             </RcResizeObserver>
-        );
-    }, [fieldList, collapseBtnVisible, collapse, children]);
-
-    return useMemo(() => {
-        const style = enableCollapse
-            ? collapse
-                ? {
-                      overflow: "hidden",
-                      height: formHeight,
-                  }
-                : {
-                      overflow: "hidden",
-                      height: rowHeight,
-                  }
-            : {};
-
-        return (
-            <div ref={wrapRef} style={style}>
-                {formComponent}
-            </div>
         );
     }, [formHeight, fieldList, collapseBtnVisible, collapse, children]);
 };

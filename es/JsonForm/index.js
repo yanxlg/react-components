@@ -190,7 +190,8 @@ var JsonForm = function JsonForm(props, ref) {
       proForm = props.form,
       _d = props.className,
       className = _d === void 0 ? formStyles.formContainer : _d,
-      _props = __rest(props, ["fieldList", "children", "labelClassName", "rowHeight", "defaultCollapse", "enableCollapse", "itemCol", "itemRow", "form", "className"]);
+      style = props.style,
+      _props = __rest(props, ["fieldList", "children", "labelClassName", "rowHeight", "defaultCollapse", "enableCollapse", "itemCol", "itemRow", "form", "className", "style"]);
 
   var _e = useState(defaultCollapse),
       collapse = _e[0],
@@ -202,7 +203,6 @@ var JsonForm = function JsonForm(props, ref) {
 
   var form = _Form.useForm(proForm)[0];
 
-  var wrapRef = useRef(null);
   var btnWrap = useRef(null);
 
   var _g = useState(defaultCollapse ? rowHeight : undefined),
@@ -338,28 +338,24 @@ var JsonForm = function JsonForm(props, ref) {
       }, fromItemList), wrapChildren, collapseBtn);
     }
   }, [fieldList, children, collapse, collapseBtnVisible]);
-  var formComponent = useMemo(function () {
+  return useMemo(function () {
     return React.createElement(RcResizeObserver, {
       onResize: onResize
-    }, React.createElement("div", null, React.createElement(_Form, __assign({
+    }, React.createElement(_Form, __assign({
       layout: "inline"
     }, _props, {
       form: form,
-      className: className
-    }), formContent)));
-  }, [fieldList, collapseBtnVisible, collapse, children]);
-  return useMemo(function () {
-    var style = enableCollapse ? collapse ? {
-      overflow: "hidden",
-      height: formHeight
-    } : {
-      overflow: "hidden",
-      height: rowHeight
-    } : {};
-    return React.createElement("div", {
-      ref: wrapRef,
-      style: style
-    }, formComponent);
+      className: className,
+      style: __assign(__assign({}, style), enableCollapse ? collapse ? {
+        overflow: "hidden",
+        height: formHeight,
+        boxSizing: "content-box"
+      } : {
+        overflow: "hidden",
+        height: rowHeight,
+        boxSizing: "content-box"
+      } : {})
+    }), formContent));
   }, [formHeight, fieldList, collapseBtnVisible, collapse, children]);
 };
 
