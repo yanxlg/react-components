@@ -188,10 +188,10 @@ var JsonForm = function JsonForm(props, ref) {
       itemCol = props.itemCol,
       itemRow = props.itemRow,
       proForm = props.form,
-      _d = props.className,
-      className = _d === void 0 ? formStyles.formContainer : _d,
-      style = props.style,
-      _props = __rest(props, ["fieldList", "children", "labelClassName", "rowHeight", "defaultCollapse", "enableCollapse", "itemCol", "itemRow", "form", "className", "style"]);
+      className = props.className,
+      _d = props.containerClassName,
+      containerClassName = _d === void 0 ? formStyles.formContainer : _d,
+      _props = __rest(props, ["fieldList", "children", "labelClassName", "rowHeight", "defaultCollapse", "enableCollapse", "itemCol", "itemRow", "form", "className", "containerClassName"]);
 
   var _e = useState(defaultCollapse),
       collapse = _e[0],
@@ -338,15 +338,19 @@ var JsonForm = function JsonForm(props, ref) {
       }, fromItemList), wrapChildren, collapseBtn);
     }
   }, [fieldList, children, collapse, collapseBtnVisible]);
-  return useMemo(function () {
+  var formComponent = useMemo(function () {
     return React.createElement(RcResizeObserver, {
       onResize: onResize
-    }, React.createElement(_Form, __assign({
+    }, React.createElement("div", null, React.createElement(_Form, __assign({
       layout: "inline"
     }, _props, {
       form: form,
-      className: className,
-      style: __assign(__assign({}, style), enableCollapse ? collapse ? {
+      className: className
+    }), formContent)));
+  }, [fieldList, collapseBtnVisible, collapse, children]);
+  return useMemo(function () {
+    return React.createElement("div", {
+      style: enableCollapse ? collapse ? {
         overflow: "hidden",
         height: formHeight,
         boxSizing: "content-box"
@@ -354,8 +358,9 @@ var JsonForm = function JsonForm(props, ref) {
         overflow: "hidden",
         height: rowHeight,
         boxSizing: "content-box"
-      } : {})
-    }), formContent));
+      } : {},
+      className: containerClassName
+    }, formComponent);
   }, [formHeight, fieldList, collapseBtnVisible, collapse, children]);
 };
 

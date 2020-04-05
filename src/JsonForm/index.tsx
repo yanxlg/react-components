@@ -63,6 +63,7 @@ declare interface JsonFormProps<T = any> extends FormProps, CustomFormProps {
     enableCollapse?: boolean; // 默认为true
     itemCol?: ColProps;
     itemRow?: RowProps;
+    containerClassName?: string;
 }
 
 export type FormItemName<T = string> = T;
@@ -229,8 +230,8 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         itemCol,
         itemRow,
         form: proForm,
-        className = formStyles.formContainer,
-        style,
+        className,
+        containerClassName = formStyles.formContainer,
         ..._props
     } = props;
 
@@ -414,34 +415,40 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         }
     }, [fieldList, children, collapse, collapseBtnVisible]);
 
-    return useMemo(() => {
+    const formComponent = useMemo(() => {
         return (
             <RcResizeObserver onResize={onResize}>
-                <Form
-                    layout="inline"
-                    {..._props}
-                    form={form}
-                    className={className}
-                    style={{
-                        ...style,
-                        ...(enableCollapse
-                            ? collapse
-                                ? {
-                                      overflow: "hidden",
-                                      height: formHeight,
-                                      boxSizing: "content-box",
-                                  }
-                                : {
-                                      overflow: "hidden",
-                                      height: rowHeight,
-                                      boxSizing: "content-box",
-                                  }
-                            : {}),
-                    }}
-                >
-                    {formContent}
-                </Form>
+                <div>
+                    <Form layout="inline" {..._props} form={form} className={className}>
+                        {formContent}
+                    </Form>
+                </div>
             </RcResizeObserver>
+        );
+    }, [fieldList, collapseBtnVisible, collapse, children]);
+
+    return useMemo(() => {
+        return (
+            <div
+                style={
+                    enableCollapse
+                        ? collapse
+                            ? {
+                                  overflow: "hidden",
+                                  height: formHeight,
+                                  boxSizing: "content-box",
+                              }
+                            : {
+                                  overflow: "hidden",
+                                  height: rowHeight,
+                                  boxSizing: "content-box",
+                              }
+                        : {}
+                }
+                className={containerClassName}
+            >
+                {formComponent}
+            </div>
         );
     }, [formHeight, fieldList, collapseBtnVisible, collapse, children]);
 };
