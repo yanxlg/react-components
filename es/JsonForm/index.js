@@ -51,7 +51,6 @@ import classNames from "classnames";
 import "./index.less";
 import formStyles from "./_form.less";
 import Layout from "./layout";
-import FormItem from "./FormItem";
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
@@ -364,7 +363,5 @@ var JsonForm = function JsonForm(props, ref) {
   }, [formHeight, fieldList, collapseBtnVisible, collapse, children]);
 };
 
-var JsonFormComponent = forwardRef(JsonForm);
-JsonFormComponent.FormItem = FormItem;
-export default JsonFormComponent;
+export default forwardRef(JsonForm);
 export * from "./utils";

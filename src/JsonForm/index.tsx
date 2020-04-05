@@ -2,7 +2,6 @@ import React, {
     forwardRef,
     ForwardRefRenderFunction,
     ReactElement,
-    RefObject,
     useCallback,
     useImperativeHandle,
     useMemo,
@@ -38,7 +37,6 @@ import classNames from "classnames";
 import "./index.less";
 import formStyles from "./_form.less";
 import Layout, { LayoutType, LayoutProps } from "./layout";
-import FormItem from "./FormItem";
 
 export declare interface CustomFormProps {
     labelClassName?: string;
@@ -449,20 +447,6 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
     }, [formHeight, fieldList, collapseBtnVisible, collapse, children]);
 };
 
-interface JsonFormComponent<P> extends React.FC<P> {
-    FormItem: typeof FormItem;
-}
-
-const JsonFormComponent: JsonFormComponent<JsonFormProps & {
-    ref?: RefObject<JsonFormRef>;
-}> = (forwardRef(JsonForm) as unknown) as JsonFormComponent<
-    JsonFormProps & {
-        ref?: RefObject<JsonFormRef>;
-    }
->;
-
-JsonFormComponent.FormItem = FormItem;
-
-export default JsonFormComponent;
+export default forwardRef(JsonForm);
 
 export * from "./utils";

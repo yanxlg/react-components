@@ -1,4 +1,4 @@
-import React, { RefObject } from "react";
+import React from "react";
 import { FormProps } from "antd/lib/form/Form";
 import { InputProps } from "./items/Input";
 import { SelectProps } from "./items/Select";
@@ -14,7 +14,6 @@ import { CheckboxGroupProps } from "./items/CheckboxGroup";
 import { RadioGroupProps } from "./items/RadioGroup";
 import "./index.less";
 import { LayoutProps } from "./layout";
-import FormItem from "./FormItem";
 export declare interface CustomFormProps {
     labelClassName?: string;
 }
@@ -40,11 +39,6 @@ export interface JsonFormRef {
 }
 export declare const getColChildren: (children: React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)>) | (new (props: any) => React.Component<any, any, any>)>, itemCol?: ColProps, times?: number) => JSX.Element;
 export declare const getFormItems: (fieldList: FormField<string>[], form: FormInstance, labelClassName?: string, itemCol?: ColProps, itemRow?: RowProps) => JSX.Element | JSX.Element[];
-interface JsonFormComponent<P> extends React.FC<P> {
-    FormItem: typeof FormItem;
-}
-declare const JsonFormComponent: JsonFormComponent<JsonFormProps & {
-    ref?: RefObject<JsonFormRef>;
-}>;
-export default JsonFormComponent;
+declare const _default: React.ForwardRefExoticComponent<JsonFormProps<any> & React.RefAttributes<JsonFormRef>>;
+export default _default;
 export * from "./utils";
