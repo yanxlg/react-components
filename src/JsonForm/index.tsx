@@ -385,12 +385,18 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         return getFormItems(fieldList, form, labelClassName, itemCol, itemRow);
     }, [fieldList]);
 
+    const wrapChildren = useMemo(() => {
+        return React.Children.map(children, child => {
+            return <span className={formStyles.formItem}>{child}</span>;
+        });
+    }, [children]);
+
     const formContent = useMemo(() => {
         if (collapse) {
             return (
                 <>
                     {fromItemList}
-                    {children}
+                    {wrapChildren}
                     {collapseBtn}
                 </>
             );
@@ -403,7 +409,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                     >
                         {fromItemList}
                     </div>
-                    {children}
+                    {wrapChildren}
                     {collapseBtn}
                 </div>
             );

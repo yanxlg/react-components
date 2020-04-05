@@ -318,9 +318,16 @@ var JsonForm = function JsonForm(props, ref) {
   var fromItemList = useMemo(function () {
     return getFormItems(fieldList, form, labelClassName, itemCol, itemRow);
   }, [fieldList]);
+  var wrapChildren = useMemo(function () {
+    return React.Children.map(children, function (child) {
+      return React.createElement("span", {
+        className: formStyles.formItem
+      }, child);
+    });
+  }, [children]);
   var formContent = useMemo(function () {
     if (collapse) {
-      return React.createElement(React.Fragment, null, fromItemList, children, collapseBtn);
+      return React.createElement(React.Fragment, null, fromItemList, wrapChildren, collapseBtn);
     } else {
       return React.createElement("div", {
         className: classNames(formStyles.flex, formStyles.flex1)
@@ -329,7 +336,7 @@ var JsonForm = function JsonForm(props, ref) {
         style: {
           flexWrap: "wrap"
         }
-      }, fromItemList), children, collapseBtn);
+      }, fromItemList), wrapChildren, collapseBtn);
     }
   }, [fieldList, children, collapse, collapseBtnVisible]);
   var formComponent = useMemo(function () {
