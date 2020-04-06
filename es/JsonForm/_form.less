@@ -140,3 +140,17 @@
 .margin-none {
   margin: 0 !important;
 }
+
+.form-horizon-always{
+  flex-direction: row !important;
+  :global .ant-form-item-label {
+    flex-basis: auto;
+    padding: 0;
+    label {
+      &:after {
+        //content: ":";
+        display: block;
+      }
+    }
+  }
+}
