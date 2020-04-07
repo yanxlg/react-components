@@ -1,16 +1,16 @@
-import { DatePicker, Form } from 'antd';
-import React, { useMemo } from 'react';
-import { CustomFormProps, FormItemName } from '../index';
-import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
-import { FormInstance, Rule } from 'antd/es/form';
-import { transNullValue, transEndDate, transStartDate } from '../utils';
-import formStyles from '../_form.less';
-import classNames from 'classnames';
+import { DatePicker, Form } from "antd";
+import React, { useMemo } from "react";
+import { CustomFormProps, FormItemName } from "../index";
+import { FormItemLabelProps } from "antd/es/form/FormItemLabel";
+import { FormInstance, Rule } from "antd/es/form";
+import { transNullValue, transEndDate, transStartDate } from "../utils";
+import formStyles from "../_form.less";
+import classNames from "classnames";
 
-export type DateRangerFormatter = 'start_date' | 'end_date';
+export type DateRangerFormatter = "start_date" | "end_date";
 
-export type DateRangerType = 'dateRanger';
-const typeList = ['dateRanger'];
+export type DateRangerType = "dateRanger";
+const typeList = ["dateRanger"];
 
 export type DateRangerProps<T = string> = FormItemLabelProps &
     CustomFormProps & {
@@ -32,7 +32,7 @@ const FormDateRanger = (props: DateRangerProps) => {
         name: [name1, name2],
         formItemClassName,
         onChange,
-        labelClassName = '',
+        labelClassName = "",
         form,
         rules,
     } = props;
@@ -98,7 +98,9 @@ const FormDateRanger = (props: DateRangerProps) => {
                         );
                     }}
                 </Form.Item>
-                <span className={[formStyles.formColon, formStyles.verticalMiddle].join(' ')}>-</span>
+                <span className={[formStyles.formColon, formStyles.verticalMiddle].join(" ")}>
+                    -
+                </span>
                 <Form.Item
                     className={itemClassName}
                     shouldUpdate={(prevValues, currentValues) =>
@@ -137,9 +139,9 @@ FormDateRanger.typeList = typeList;
 
 FormDateRanger.formatter = (formatter?: DateRangerFormatter) => {
     return formatter
-        ? formatter === 'start_date'
+        ? formatter === "start_date"
             ? transStartDate
-            : formatter === 'end_date'
+            : formatter === "end_date"
             ? transEndDate
             : transNullValue
         : transNullValue;

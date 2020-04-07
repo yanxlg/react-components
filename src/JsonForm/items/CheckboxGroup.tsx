@@ -1,12 +1,12 @@
-import React, { useMemo } from 'react';
-import { Checkbox, Form } from 'antd';
-import { CustomFormProps, FormItemName } from '../index';
-import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
-import { FormInstance, Rule } from 'antd/es/form';
-import { CheckboxGroupProps as AntdCheckboxGroupProps } from 'antd/lib/checkbox/Group';
+import React, { useMemo } from "react";
+import { Checkbox, Form } from "antd";
+import { CustomFormProps, FormItemName } from "../index";
+import { FormItemLabelProps } from "antd/es/form/FormItemLabel";
+import { FormInstance, Rule } from "antd/es/form";
+import { CheckboxGroupProps as AntdCheckboxGroupProps } from "antd/lib/checkbox/Group";
 
-export type CheckboxGroupType = 'checkboxGroup';
-const typeList = ['checkboxGroup'];
+export type CheckboxGroupType = "checkboxGroup";
+const typeList = ["checkboxGroup"];
 
 export type CheckboxGroupProps<T = string> = FormItemLabelProps &
     CustomFormProps & {
