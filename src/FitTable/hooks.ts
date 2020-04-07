@@ -1,8 +1,8 @@
-import {RefObject, useEffect, useMemo, useState} from "react";
-import {ProColumns} from "../ProTable";
-import {SimpleRowSelection} from "../ProTable/Table";
-import {debounce} from "lodash";
-import { TableProps as RcTableProps } from 'rc-table/lib/Table';
+import { RefObject, useEffect, useMemo, useState } from "react";
+import { ProColumns } from "../ProTable";
+import { SimpleRowSelection } from "../ProTable/Table";
+import { debounce } from "lodash";
+import { TableProps as RcTableProps } from "rc-table/lib/Table";
 
 function useScrollXY<T>(
     containerRef: RefObject<HTMLElement>,
@@ -11,14 +11,14 @@ function useScrollXY<T>(
     autoFitY: boolean,
     columns: ProColumns<T>[],
     rowSelection: SimpleRowSelection<T> | undefined,
-    scroll?: RcTableProps<T>['scroll'] & {
+    scroll?: RcTableProps<T>["scroll"] & {
         scrollToFirstRowOnChange?: boolean;
     },
 ) {
     const [y, setY] = useState<number | undefined | string>(scroll?.y);
 
     const scrollX = useMemo(() => {
-        if (scroll?.x === true || scroll?.x === 'max-content') {
+        if (scroll?.x === true || scroll?.x === "max-content") {
             let x: number = 0;
             if (rowSelection && rowSelection.columnWidth) {
                 x += parseInt(rowSelection.columnWidth as string) || 0;
@@ -45,10 +45,10 @@ function useScrollXY<T>(
 
         if (autoFitY) {
             resizeHeight();
-            window.addEventListener('resize', resizeHeight);
+            window.addEventListener("resize", resizeHeight);
         }
         return () => {
-            window.removeEventListener('resize', resizeHeight);
+            window.removeEventListener("resize", resizeHeight);
         };
     }, []);
 
@@ -59,7 +59,7 @@ function useScrollXY<T>(
             y: y,
             x: scrollX,
         };
-    }, [columns, rowSelection, scroll, y]);
+    }, [scrollX, scroll, y]);
 }
 
-export {useScrollXY};
+export { useScrollXY };
