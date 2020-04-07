@@ -1,5 +1,5 @@
-import React from 'react';
-import { ButtonProps } from 'antd/lib/button/button';
+import React from "react";
+import { ButtonProps } from "antd/lib/button/button";
 declare interface ILoadingButtonProps extends ButtonProps {
     onClick: (event: React.MouseEvent<HTMLButtonElement>) => Promise<any>;
 }

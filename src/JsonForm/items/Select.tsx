@@ -5,6 +5,7 @@ import { FormInstance, Rule } from "antd/es/form";
 import { FormItemLabelProps } from "antd/es/form/FormItemLabel";
 import { transNullValue, transNumber, transJoinStr } from "../utils";
 import formStyles from "../_form.less";
+import { SelectProps as AntdSelectProps } from "antd/es/select/index";
 
 export declare interface IOptionItem {
     name: string;
@@ -37,11 +38,8 @@ export type SelectProps<T = string> = FormItemLabelProps &
         name: FormItemName<T>;
         formatter?: SelectFormatter;
         rules?: Rule[];
-        mode?: "multiple" | "tags";
-        maxTagCount?: number;
         isShortcut?: boolean;
-        disabled?: boolean;
-    };
+    } & Omit<AntdSelectProps<string>, "loading" | "onChange" | "className" | "options">;
 
 const FormSelect = (props: SelectProps) => {
     const {
@@ -61,6 +59,7 @@ const FormSelect = (props: SelectProps) => {
         placeholder,
         isShortcut = false,
         disabled,
+        ...extraProps
     } = props;
     const [options, setOptions] = useState<IOptionItem[] | undefined>(undefined);
 
@@ -187,6 +186,7 @@ const FormSelect = (props: SelectProps) => {
                         {...eventProps}
                         placeholder={placeholder}
                         dropdownRender={dropdownRender}
+                        {...extraProps}
                     >
                         {syncDefaultOption ? (
                             <Select.Option value={syncDefaultOption.value}>
@@ -236,6 +236,7 @@ const FormSelect = (props: SelectProps) => {
                                     maxTagCount={maxTagCount}
                                     {...eventProps}
                                     dropdownRender={dropdownRender}
+                                    {...extraProps}
                                 >
                                     {syncDefaultOption ? (
                                         <Select.Option value={syncDefaultOption.value}>
