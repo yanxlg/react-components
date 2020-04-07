@@ -19,8 +19,8 @@ var __assign = this && this.__assign || function () {
   return __assign.apply(this, arguments);
 };
 
-import React, { useMemo } from 'react';
-var typeList = ['checkbox'];
+import React, { useMemo } from "react";
+var typeList = ["checkbox"];
 
 var FormCheckbox = function FormCheckbox(props) {
   var name = props.name,

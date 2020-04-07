@@ -32,8 +32,8 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-import React, { useMemo } from 'react';
-var typeList = ['radioGroup'];
+import React, { useMemo } from "react";
+var typeList = ["radioGroup"];
 
 var FormRadioGroup = function FormRadioGroup(props) {
   var name = props.name,

@@ -19,11 +19,11 @@ var __assign = this && this.__assign || function () {
   return __assign.apply(this, arguments);
 };
 
-import React, { useCallback, useMemo } from 'react';
-import moment from 'moment';
-import { transNullValue, transEndDate, transStartDate } from '../utils';
-import formStyles from '../_form.less';
-var typeList = ['datePicker'];
+import React, { useCallback, useMemo } from "react";
+import moment from "moment";
+import { transNullValue, transEndDate, transStartDate } from "../utils";
+import formStyles from "../_form.less";
+var typeList = ["datePicker"];
 
 var FormDatePicker = function FormDatePicker(props) {
   var name = props.name,
@@ -47,10 +47,10 @@ var FormDatePicker = function FormDatePicker(props) {
       var timeMax = undefined; // 取最小值=> endOf('d');
 
       dateBeginWith.map(function (dependence) {
-        var date = dependence === 'now' ? moment() : form.getFieldValue(dependence);
+        var date = dependence === "now" ? moment() : form.getFieldValue(dependence);
 
         if (date) {
-          var time = date.startOf('day').valueOf();
+          var time = date.startOf("day").valueOf();
 
           if (timeMax && time < timeMax || timeMax === void 0) {
             timeMax = time;
@@ -62,7 +62,7 @@ var FormDatePicker = function FormDatePicker(props) {
         return false;
       }
 
-      return startTime.startOf('day').valueOf() < timeMax;
+      return startTime.startOf("day").valueOf() < timeMax;
     };
   }, []);
   var disabledEndDate = useCallback(function (dateEndWith) {
@@ -74,10 +74,10 @@ var FormDatePicker = function FormDatePicker(props) {
       var timeMax = undefined; // 取最大值=> startOf('d');
 
       dateEndWith.map(function (dependence) {
-        var date = dependence === 'now' ? moment() : form.getFieldValue(dependence);
+        var date = dependence === "now" ? moment() : form.getFieldValue(dependence);
 
         if (date) {
-          var time = date.endOf('day').valueOf();
+          var time = date.endOf("day").valueOf();
 
           if (timeMax && time < timeMax || timeMax === void 0) {
             timeMax = time;
@@ -89,7 +89,7 @@ var FormDatePicker = function FormDatePicker(props) {
         return false;
       }
 
-      return timeMax < endTime.endOf('day').valueOf();
+      return timeMax < endTime.endOf("day").valueOf();
     };
   }, []);
   var disabledDate = useMemo(function () {
@@ -119,7 +119,7 @@ var FormDatePicker = function FormDatePicker(props) {
 FormDatePicker.typeList = typeList;
 
 FormDatePicker.formatter = function (formatter) {
-  return formatter ? formatter === 'start_date' ? transStartDate : formatter === 'end_date' ? transEndDate : transNullValue : transNullValue;
+  return formatter ? formatter === "start_date" ? transStartDate : formatter === "end_date" ? transEndDate : transNullValue : transNullValue;
 };
 
 export default FormDatePicker;

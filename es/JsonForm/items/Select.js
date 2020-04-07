@@ -21,10 +21,23 @@ var __assign = this && this.__assign || function () {
   return __assign.apply(this, arguments);
 };
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { transNullValue, transNumber, transJoinStr } from '../utils';
-import formStyles from '../_form.less';
-var typeList = ['select'];
+var __rest = this && this.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { transNullValue, transNumber, transJoinStr } from "../utils";
+import formStyles from "../_form.less";
+var typeList = ["select"];
 
 var FormSelect = function FormSelect(props) {
   var name = props.name,
@@ -44,13 +57,14 @@ var FormSelect = function FormSelect(props) {
       placeholder = props.placeholder,
       _b = props.isShortcut,
       isShortcut = _b === void 0 ? false : _b,
-      disabled = props.disabled;
+      disabled = props.disabled,
+      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "syncDefaultOption", "optionListDependence", "onChange", "labelClassName", "form", "optionList", "rules", "mode", "maxTagCount", "placeholder", "isShortcut", "disabled"]);
 
   var _c = useState(undefined),
       options = _c[0],
       setOptions = _c[1];
 
-  var isFunction = typeof optionList === 'function';
+  var isFunction = typeof optionList === "function";
   useEffect(function () {
     if (isFunction) {
       optionList().then(function (optionList) {
@@ -67,7 +81,7 @@ var FormSelect = function FormSelect(props) {
       if (optionListDependence) {
         var name_1 = optionListDependence.name,
             dependenceKey = optionListDependence.key;
-        var dependenceNameList = typeof name_1 === 'string' ? [name_1] : name_1 || [];
+        var dependenceNameList = typeof name_1 === "string" ? [name_1] : name_1 || [];
         var parentItem = options;
 
         var _loop_1 = function _loop_1(i) {
@@ -173,7 +187,7 @@ var FormSelect = function FormSelect(props) {
       }, eventProps, {
         placeholder: placeholder,
         dropdownRender: dropdownRender
-      }), syncDefaultOption ? React.createElement(_Select.Option, {
+      }, extraProps), syncDefaultOption ? React.createElement(_Select.Option, {
         value: syncDefaultOption.value
       }, syncDefaultOption.name) : null, list.map(function (item) {
         return React.createElement(_Select.Option, {
@@ -186,7 +200,7 @@ var FormSelect = function FormSelect(props) {
         noStyle: true,
         shouldUpdate: function shouldUpdate(prevValues, currentValues) {
           var name = optionListDependence.name;
-          var dependenceNameList = typeof name === 'string' ? [name] : name || [];
+          var dependenceNameList = typeof name === "string" ? [name] : name || [];
           var updated = false;
           var i = 0;
           var length = dependenceNameList.length;
@@ -221,7 +235,7 @@ var FormSelect = function FormSelect(props) {
           maxTagCount: maxTagCount
         }, eventProps, {
           dropdownRender: dropdownRender
-        }), syncDefaultOption ? React.createElement(_Select.Option, {
+        }, extraProps), syncDefaultOption ? React.createElement(_Select.Option, {
           value: syncDefaultOption.value
         }, syncDefaultOption.name) : null, list.map(function (item) {
           return React.createElement(_Select.Option, {
@@ -239,10 +253,10 @@ FormSelect.typeList = typeList;
 FormSelect.formatter = function (formatter) {
   // return formatter ? (formatter === 'number' ? transNumber : transNullValue) : transNullValue;
   switch (formatter) {
-    case 'number':
+    case "number":
       return transNumber;
 
-    case 'joinStr':
+    case "joinStr":
       return transJoinStr;
 
     default:

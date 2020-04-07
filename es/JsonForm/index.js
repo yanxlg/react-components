@@ -36,20 +36,20 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useRef, useState } from 'react';
-import FormInput from './items/Input';
-import FormSelect from './items/Select';
-import FormCheckbox from './items/Checkbox';
-import FormDatePicker from './items/DatePicker';
-import FormDateRanger from './items/DateRanger';
-import FormInputRange from './items/InputRange';
-import RcResizeObserver from 'rc-resize-observer';
-import { UpOutlined, DownOutlined } from '@ant-design/icons';
-import FormCheckboxGroup from './items/CheckboxGroup';
-import FormRadioGroup from './items/RadioGroup';
-import classNames from 'classnames';
-import './index.less';
-import formStyles from './_form.less';
+import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useRef, useState } from "react";
+import FormInput from "./items/Input";
+import FormSelect from "./items/Select";
+import FormCheckbox from "./items/Checkbox";
+import FormDatePicker from "./items/DatePicker";
+import FormDateRanger from "./items/DateRanger";
+import FormInputRange from "./items/InputRange";
+import RcResizeObserver from "rc-resize-observer";
+import { UpOutlined, DownOutlined } from "@ant-design/icons";
+import FormCheckboxGroup from "./items/CheckboxGroup";
+import FormRadioGroup from "./items/RadioGroup";
+import classNames from "classnames";
+import "./index.less";
+import formStyles from "./_form.less";
 import Layout from "./layout";
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
@@ -293,16 +293,16 @@ var JsonForm = function JsonForm(props, ref) {
       return React.createElement("div", {
         ref: btnWrap,
         style: {
-          display: 'flex',
+          display: "flex",
           flex: collapse ? 1 : 0,
-          justifyContent: 'flex-end',
-          visibility: collapseBtnVisible ? 'visible' : 'hidden'
+          justifyContent: "flex-end",
+          visibility: collapseBtnVisible ? "visible" : "hidden"
         }
       }, React.createElement(_Button, {
         type: "link",
         className: formStyles.formItem,
         style: {
-          "float": 'right'
+          "float": "right"
         },
         onClick: onCollapseChange
       }, collapse ? React.createElement(React.Fragment, null, "\u6536\u8D77\u81F3\u4E00\u884C", React.createElement(UpOutlined, null)) : React.createElement(React.Fragment, null, "\u5C55\u5F00", React.createElement(DownOutlined, null))));
@@ -322,7 +322,7 @@ var JsonForm = function JsonForm(props, ref) {
       }, React.createElement("div", {
         className: classNames(formStyles.flex1, formStyles.flexRow),
         style: {
-          flexWrap: 'wrap'
+          flexWrap: "wrap"
         }
       }, fromItemList), children, collapseBtn);
     }
@@ -338,10 +338,10 @@ var JsonForm = function JsonForm(props, ref) {
   }, [fieldList, collapseBtnVisible, collapse, children]);
   return useMemo(function () {
     var style = enableCollapse ? collapse ? {
-      overflow: 'hidden',
+      overflow: "hidden",
       height: formHeight
     } : {
-      overflow: 'hidden',
+      overflow: "hidden",
       height: rowHeight
     } : {};
     return React.createElement("div", {
@@ -352,4 +352,4 @@ var JsonForm = function JsonForm(props, ref) {
 };
 
 export default forwardRef(JsonForm);
-export * from './utils';
+export * from "./utils";

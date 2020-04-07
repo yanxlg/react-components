@@ -19,11 +19,11 @@ var __assign = this && this.__assign || function () {
   return __assign.apply(this, arguments);
 };
 
-import React, { useMemo } from 'react';
-import { transNullValue, transEndDate, transStartDate } from '../utils';
-import formStyles from '../_form.less';
-import classNames from 'classnames';
-var typeList = ['dateRanger'];
+import React, { useMemo } from "react";
+import { transNullValue, transEndDate, transStartDate } from "../utils";
+import formStyles from "../_form.less";
+import classNames from "classnames";
+var typeList = ["dateRanger"];
 
 var FormDateRanger = function FormDateRanger(props) {
   var label = props.label,
@@ -34,7 +34,7 @@ var FormDateRanger = function FormDateRanger(props) {
       formItemClassName = props.formItemClassName,
       _onChange = props.onChange,
       _b = props.labelClassName,
-      labelClassName = _b === void 0 ? '' : _b,
+      labelClassName = _b === void 0 ? "" : _b,
       form = props.form,
       rules = props.rules;
   var event1Props = useMemo(function () {
@@ -77,7 +77,7 @@ var FormDateRanger = function FormDateRanger(props) {
         className: className
       }, event1Props)));
     }), React.createElement("span", {
-      className: [formStyles.formColon, formStyles.verticalMiddle].join(' ')
+      className: [formStyles.formColon, formStyles.verticalMiddle].join(" ")
     }, "-"), React.createElement(_Form.Item, {
       className: itemClassName,
       shouldUpdate: function shouldUpdate(prevValues, currentValues) {
@@ -103,7 +103,7 @@ var FormDateRanger = function FormDateRanger(props) {
 FormDateRanger.typeList = typeList;
 
 FormDateRanger.formatter = function (formatter) {
-  return formatter ? formatter === 'start_date' ? transStartDate : formatter === 'end_date' ? transEndDate : transNullValue : transNullValue;
+  return formatter ? formatter === "start_date" ? transStartDate : formatter === "end_date" ? transEndDate : transNullValue : transNullValue;
 };
 
 export default FormDateRanger;
