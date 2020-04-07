@@ -1,5 +1,5 @@
-import React, { ReactElement } from 'react';
-import { LazyImageProps } from '../LazyImage';
+import React, { ReactElement } from "react";
+import { LazyImageProps } from "../LazyImage";
 declare type IAutoEnLargeImgProps = {
     className?: string;
     enLargeClassName?: string;

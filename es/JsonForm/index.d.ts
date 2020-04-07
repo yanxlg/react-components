@@ -17,7 +17,17 @@ import { LayoutProps } from "./layout";
 export declare interface CustomFormProps {
     labelClassName?: string;
 }
-export declare type FormField<T = string> = (Omit<InputProps<T>, "form"> | Omit<SelectProps<T>, "form"> | Omit<CheckboxProps<T>, "form"> | Omit<DatePickerProps<T>, "form"> | Omit<DateRangerProps<T>, "form"> | Omit<CheckboxGroupProps<T>, "form"> | Omit<RadioGroupProps<T>, "form"> | Omit<InputRangeProps<T>, "form"> | Omit<LayoutProps<T>, "form">) & {
+export declare type FormField<T = string> = (
+    | Omit<InputProps<T>, "form">
+    | Omit<SelectProps<T>, "form">
+    | Omit<CheckboxProps<T>, "form">
+    | Omit<DatePickerProps<T>, "form">
+    | Omit<DateRangerProps<T>, "form">
+    | Omit<CheckboxGroupProps<T>, "form">
+    | Omit<RadioGroupProps<T>, "form">
+    | Omit<InputRangeProps<T>, "form">
+    | Omit<LayoutProps<T>, "form">
+) & {
     form?: FormInstance;
 };
 declare interface JsonFormProps<T = any> extends FormProps, CustomFormProps {
@@ -37,8 +47,29 @@ export interface JsonFormRef {
     validateFields: ValidateFields;
     setFieldsValue: (value: Store) => void;
 }
-export declare const getColChildren: (children: React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)>) | (new (props: any) => React.Component<any, any, any>)>, itemCol?: ColProps, times?: number) => JSX.Element;
-export declare const getFormItems: (fieldList: FormField<string>[], form: FormInstance, labelClassName?: string, itemCol?: ColProps, itemRow?: RowProps) => JSX.Element | JSX.Element[];
-declare const _default: React.ForwardRefExoticComponent<JsonFormProps<any> & React.RefAttributes<JsonFormRef>>;
+export declare const getColChildren: (
+    children: React.ReactElement<
+        any,
+        | string
+        | ((
+              props: any,
+          ) => React.ReactElement<
+              any,
+              string | any | (new (props: any) => React.Component<any, any, any>)
+          >)
+        | (new (props: any) => React.Component<any, any, any>)
+    >,
+    itemCol?: ColProps,
+    times?: number,
+) => JSX.Element;
+export declare const getFormItems: (
+    fieldList: FormField<string>[],
+    form: FormInstance,
+    labelClassName?: string,
+    itemCol?: ColProps,
+    itemRow?: RowProps,
+) => JSX.Element | JSX.Element[];
+declare const _default: React.ForwardRefExoticComponent<JsonFormProps<any> &
+    React.RefAttributes<JsonFormRef>>;
 export default _default;
 export * from "./utils";
