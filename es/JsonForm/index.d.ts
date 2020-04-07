@@ -37,6 +37,7 @@ declare interface JsonFormProps<T = any> extends FormProps, CustomFormProps {
     enableCollapse?: boolean;
     itemCol?: ColProps;
     itemRow?: RowProps;
+    containerClassName?: string;
 }
 export declare type FormItemName<T = string> = T;
 export declare interface CustomFormProps {

@@ -4,130 +4,163 @@
 @inputSmallWidth: 87px;
 
 .form-item {
-    margin-top: @itemSpacing !important;
+  padding: @itemSpacing/2 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.form-item-clean{
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.form-btn{
+  margin-right: 10px;
+}
+
+.form-next-card {
+  margin-top: @itemSpacing!important;
 }
 
 .form-card {
-    :global {
-        .ant-card-body {
-            padding-top: 0 !important;
-            padding-bottom: @itemSpacing !important;
-        }
+  :global {
+    .ant-card-body {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
     }
+  }
 }
 
-.form-item-bottom {
-    margin-bottom: @itemSpacing;
-}
-
-.form-s-item {
-    margin-top: @itemSpacing / 2;
-}
-
-.form-inline {
-    margin-bottom: 0 !important;
+.form-container {
+  padding: @itemSpacing/2 0 !important;
 }
 
 .form-colon {
-    margin: 0 10px;
+  margin: 0 10px;
 }
 
 .form-help-absolute {
-    :global {
-        .ant-form-item-explain {
-            position: absolute !important;
-            white-space: nowrap;
-            top: 100%;
-        }
-        .ant-form-item-with-help {
-            margin-bottom: 0 !important;
-        }
+  :global {
+    .ant-form-item-explain {
+      position: absolute !important;
+      white-space: nowrap;
+      top: 100%;
     }
+
+    .ant-form-item-with-help {
+      margin-bottom: 0 !important;
+    }
+  }
 }
 
 .form-horizon {
-    display: inline-flex;
-    margin-right: 16px !important; // form
+  display: inline-flex;
+  margin-right: 16px !important; // form
 }
 
 .form-required-hide {
-    :global .ant-form-item-required {
-        &:before {
-            visibility: hidden;
-        }
+  :global .ant-form-item-required {
+    &:before {
+      visibility: hidden;
     }
+  }
 }
 
 .form-required-absolute {
-    :global {
-        .ant-form-item-label {
-            overflow: visible;
-        }
-
-        .ant-form-item-required {
-            &:before {
-                position: absolute;
-                transform: translateX(-100%);
-                left: -4px;
-            }
-        }
+  :global {
+    .ant-form-item-label {
+      overflow: visible;
     }
+
+    .ant-form-item-required {
+      &:before {
+        position: absolute;
+        transform: translateX(-100%);
+        left: -4px;
+      }
+    }
+  }
 }
 
 .form-row {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 .form-item-default {
-    width: @inputWidth !important;
+  width: @inputWidth !important;
 }
 
 .form-item-large {
-    width: @inputLargeWidth !important;
+  width: @inputLargeWidth !important;
 }
+
 .form-item-small {
-    width: @inputSmallWidth !important;
+  width: @inputSmallWidth !important;
 }
 
 .form-checkbox {
-    margin: 0 8px 8px 0 !important;
+  margin: 0 8px 8px 0 !important;
 }
 
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .flex-row {
-    &:extend(.flex);
-    flex-direction: row;
+  &:extend(.flex);
+  flex-direction: row;
 }
+
 .flex-column {
-    &:extend(.flex);
-    flex-direction: column;
+  &:extend(.flex);
+  flex-direction: column;
 }
+
 .flex-1 {
-    flex: 1;
+  flex: 1;
 }
+
 .flex-align {
-    align-items: center;
+  align-items: center;
 }
+
 .flex-inline {
-    display: inline-flex;
+  display: inline-flex;
 }
+
 .flex-wrap {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 
 .inline-block {
-    display: inline-block !important;
+  display: inline-block !important;
 }
 
 .vertical-middle {
-    vertical-align: middle !important;
+  vertical-align: middle !important;
 }
 
 .margin-none {
-    margin: 0 !important;
+  margin: 0 !important;
+}
+
+.form-horizon-always{
+  flex-direction: row !important;
+  :global .ant-form-item-label {
+    flex-basis: auto;
+    padding: 0;
+    label {
+      &:after {
+        //content: ":";
+        display: block;
+      }
+    }
+  }
+}
+
+.form-unit {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.65);
 }

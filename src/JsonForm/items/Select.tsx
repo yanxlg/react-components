@@ -46,7 +46,7 @@ const FormSelect = (props: SelectProps) => {
         name,
         label,
         className = formStyles.formItemDefault,
-        formItemClassName,
+        formItemClassName = formStyles.formItem,
         syncDefaultOption,
         optionListDependence,
         onChange,

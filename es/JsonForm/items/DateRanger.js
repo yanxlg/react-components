@@ -31,10 +31,16 @@ var FormDateRanger = function FormDateRanger(props) {
       _a = props.name,
       name1 = _a[0],
       name2 = _a[1],
-      formItemClassName = props.formItemClassName,
+      _b = props.formItemClassName,
+      formItemClassName = _b === void 0 ? formStyles.formItem : _b,
       _onChange = props.onChange,
+<<<<<<< HEAD
       _b = props.labelClassName,
       labelClassName = _b === void 0 ? "" : _b,
+=======
+      _c = props.labelClassName,
+      labelClassName = _c === void 0 ? "" : _c,
+>>>>>>> form_optimize
       form = props.form,
       rules = props.rules;
   var event1Props = useMemo(function () {
@@ -52,7 +58,7 @@ var FormDateRanger = function FormDateRanger(props) {
     } : {};
   }, []);
   return useMemo(function () {
-    var itemClassName = classNames(formStyles.formInline, formStyles.inlineBlock, formStyles.marginNone, formStyles.verticalMiddle);
+    var itemClassName = classNames(formStyles.inlineBlock, formStyles.marginNone, formStyles.verticalMiddle);
     return React.createElement(_Form.Item, {
       label: React.createElement("span", {
         className: labelClassName

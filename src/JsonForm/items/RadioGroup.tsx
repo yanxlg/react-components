@@ -4,6 +4,7 @@ import { CustomFormProps, FormItemName } from "../index";
 import { FormItemLabelProps } from "antd/es/form/FormItemLabel";
 import { FormInstance, Rule } from "antd/es/form";
 import { RadioGroupProps as AntdRadioGroupProps } from "antd/lib/radio/interface";
+import formStyles from "../_form.less";
 
 export type RadioGroupType = "radioGroup";
 const typeList = ["radioGroup"];
@@ -26,7 +27,7 @@ const FormRadioGroup = (props: RadioGroupProps) => {
         name,
         label,
         labelClassName,
-        formItemClassName,
+        formItemClassName = formStyles.formItem,
         className,
         onChange,
         form,

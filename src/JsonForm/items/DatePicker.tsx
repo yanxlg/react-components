@@ -34,7 +34,7 @@ const FormDatePicker = (props: DatePickerProps) => {
         placeholder,
         label,
         className = formStyles.formItemDefault,
-        formItemClassName,
+        formItemClassName = formStyles.formItem,
         dateBeginWith,
         dateEndWith,
         onChange,

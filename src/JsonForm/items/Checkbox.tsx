@@ -4,6 +4,7 @@ import { CustomFormProps, FormItemName } from "../index";
 import { FormItemLabelProps } from "antd/es/form/FormItemLabel";
 import { FormInstance, Rule } from "antd/es/form";
 import { CheckboxProps as AntdCheckboxProps } from "antd/es/checkbox/Checkbox";
+import formStyles from "../_form.less";
 
 export type CheckboxType = "checkbox";
 const typeList = ["checkbox"];
@@ -21,7 +22,15 @@ export type CheckboxProps<T = string> = FormItemLabelProps &
     } & Omit<AntdCheckboxProps, "onChange" | "name">;
 
 const FormCheckbox = (props: CheckboxProps) => {
-    const { name, label, formItemClassName, className, onChange, form, rules } = props;
+    const {
+        name,
+        label,
+        formItemClassName = formStyles.formItem,
+        className,
+        onChange,
+        form,
+        rules,
+    } = props;
     const eventProps = useMemo(() => {
         return onChange
             ? {

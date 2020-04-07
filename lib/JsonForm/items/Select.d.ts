@@ -3,7 +3,10 @@ import { CustomFormProps, FormItemName } from "../index";
 import { FormInstance, Rule } from "antd/es/form";
 import { FormItemLabelProps } from "antd/es/form/FormItemLabel";
 import { transNullValue } from "../utils";
+<<<<<<< HEAD
 import { SelectProps as AntdSelectProps } from "antd/es/select/index";
+=======
+>>>>>>> form_optimize
 export declare interface IOptionItem {
     name: string;
     value: string | number;
@@ -29,8 +32,16 @@ export declare type SelectProps<T = string> = FormItemLabelProps &
         name: FormItemName<T>;
         formatter?: SelectFormatter;
         rules?: Rule[];
+<<<<<<< HEAD
         isShortcut?: boolean;
     } & Omit<AntdSelectProps<string>, "loading" | "onChange" | "className" | "options">;
+=======
+        mode?: "multiple" | "tags";
+        maxTagCount?: number;
+        isShortcut?: boolean;
+        disabled?: boolean;
+    };
+>>>>>>> form_optimize
 declare const FormSelect: {
     (props: SelectProps<string>): JSX.Element;
     typeList: string[];

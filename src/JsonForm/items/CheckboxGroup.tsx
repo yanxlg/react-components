@@ -4,6 +4,7 @@ import { CustomFormProps, FormItemName } from "../index";
 import { FormItemLabelProps } from "antd/es/form/FormItemLabel";
 import { FormInstance, Rule } from "antd/es/form";
 import { CheckboxGroupProps as AntdCheckboxGroupProps } from "antd/lib/checkbox/Group";
+import formStyles from "../_form.less";
 
 export type CheckboxGroupType = "checkboxGroup";
 const typeList = ["checkboxGroup"];
@@ -25,7 +26,7 @@ const FormCheckboxGroup = (props: CheckboxGroupProps) => {
         name,
         label,
         labelClassName,
-        formItemClassName,
+        formItemClassName = formStyles.formItem,
         className,
         onChange,
         form,

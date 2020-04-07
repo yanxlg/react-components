@@ -30,7 +30,7 @@ const FormDateRanger = (props: DateRangerProps) => {
         label,
         className,
         name: [name1, name2],
-        formItemClassName,
+        formItemClassName = formStyles.formItem,
         onChange,
         labelClassName = "",
         form,
@@ -59,7 +59,6 @@ const FormDateRanger = (props: DateRangerProps) => {
 
     return useMemo(() => {
         const itemClassName = classNames(
-            formStyles.formInline,
             formStyles.inlineBlock,
             formStyles.marginNone,
             formStyles.verticalMiddle,

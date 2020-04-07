@@ -52,7 +52,7 @@ export type FormField<T = string> = (
     | Omit<RadioGroupProps<T>, "form">
     | Omit<InputRangeProps<T>, "form">
     | Omit<LayoutProps<T>, "form">
-) & {
+    ) & {
     form?: FormInstance;
 };
 
@@ -63,6 +63,7 @@ declare interface JsonFormProps<T = any> extends FormProps, CustomFormProps {
     enableCollapse?: boolean; // 默认为true
     itemCol?: ColProps;
     itemRow?: RowProps;
+    containerClassName?: string;
 }
 
 export type FormItemName<T = string> = T;
@@ -223,12 +224,14 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         fieldList,
         children,
         labelClassName,
-        rowHeight = 56,
+        rowHeight = 56, // 32 + 24
         defaultCollapse = true,
         enableCollapse = true,
         itemCol,
         itemRow,
         form: proForm,
+        className,
+        containerClassName = formStyles.formContainer,
         ..._props
     } = props;
 
@@ -238,7 +241,6 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
 
     const [form] = Form.useForm(proForm);
 
-    const wrapRef = useRef<HTMLDivElement>(null);
     const btnWrap = useRef<HTMLDivElement>(null);
 
     const [formHeight, setFormHeight] = useState<number | undefined>(
@@ -356,13 +358,9 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                         justifyContent: "flex-end",
                         visibility: collapseBtnVisible ? "visible" : "hidden",
                     }}
+                    className={formStyles.formItem}
                 >
-                    <Button
-                        type="link"
-                        className={formStyles.formItem}
-                        style={{ float: "right" }}
-                        onClick={onCollapseChange}
-                    >
+                    <Button type="link" style={{ float: "right" }} onClick={onCollapseChange}>
                         {collapse ? (
                             <>
                                 收起至一行
@@ -386,12 +384,18 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         return getFormItems(fieldList, form, labelClassName, itemCol, itemRow);
     }, [fieldList]);
 
+    const wrapChildren = useMemo(() => {
+        return React.Children.map(children, child => {
+            return <span className={formStyles.formItem}>{child}</span>;
+        });
+    }, [children]);
+
     const formContent = useMemo(() => {
         if (collapse) {
             return (
                 <>
                     {fromItemList}
-                    {children}
+                    {wrapChildren}
                     {collapseBtn}
                 </>
             );
@@ -404,7 +408,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                     >
                         {fromItemList}
                     </div>
-                    {children}
+                    {wrapChildren}
                     {collapseBtn}
                 </div>
             );
@@ -415,7 +419,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         return (
             <RcResizeObserver onResize={onResize}>
                 <div>
-                    <Form layout="inline" {..._props} form={form}>
+                    <Form layout="inline" {..._props} form={form} className={className}>
                         {formContent}
                     </Form>
                 </div>
@@ -424,20 +428,25 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
     }, [fieldList, collapseBtnVisible, collapse, children]);
 
     return useMemo(() => {
-        const style = enableCollapse
-            ? collapse
-                ? {
-                      overflow: "hidden",
-                      height: formHeight,
-                  }
-                : {
-                      overflow: "hidden",
-                      height: rowHeight,
-                  }
-            : {};
-
         return (
-            <div ref={wrapRef} style={style}>
+            <div
+                style={
+                    enableCollapse
+                        ? collapse
+                        ? {
+                            overflow: "hidden",
+                            height: formHeight,
+                            boxSizing: "content-box",
+                        }
+                        : {
+                            overflow: "hidden",
+                            height: rowHeight,
+                            boxSizing: "content-box",
+                        }
+                        : {}
+                }
+                className={containerClassName}
+            >
                 {formComponent}
             </div>
         );

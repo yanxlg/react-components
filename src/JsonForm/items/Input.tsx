@@ -32,7 +32,7 @@ const FormInput = (props: InputProps) => {
         placeholder,
         label,
         className = formStyles.formItemDefault,
-        formItemClassName,
+        formItemClassName = formStyles.formItem,
         onChange,
         labelClassName,
         form,

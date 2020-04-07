@@ -33,19 +33,24 @@ var __rest = this && this.__rest || function (s, e) {
 };
 
 import React, { useMemo } from "react";
+<<<<<<< HEAD
+=======
+import formStyles from "../_form.less";
+>>>>>>> form_optimize
 var typeList = ["radioGroup"];
 
 var FormRadioGroup = function FormRadioGroup(props) {
   var name = props.name,
       label = props.label,
       labelClassName = props.labelClassName,
-      formItemClassName = props.formItemClassName,
+      _a = props.formItemClassName,
+      formItemClassName = _a === void 0 ? formStyles.formItem : _a,
       className = props.className,
       _onChange = props.onChange,
       form = props.form,
       rules = props.rules,
-      _a = props.radioType,
-      radioType = _a === void 0 ? "radio" : _a,
+      _b = props.radioType,
+      radioType = _b === void 0 ? "radio" : _b,
       options = props.options,
       _props = __rest(props, ["name", "label", "labelClassName", "formItemClassName", "className", "onChange", "form", "rules", "radioType", "options"]);
 

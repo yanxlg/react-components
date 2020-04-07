@@ -33,13 +33,18 @@ var __rest = this && this.__rest || function (s, e) {
 };
 
 import React, { useMemo } from "react";
+<<<<<<< HEAD
+=======
+import formStyles from "../_form.less";
+>>>>>>> form_optimize
 var typeList = ["checkboxGroup"];
 
 var FormCheckboxGroup = function FormCheckboxGroup(props) {
   var name = props.name,
       label = props.label,
       labelClassName = props.labelClassName,
-      formItemClassName = props.formItemClassName,
+      _a = props.formItemClassName,
+      formItemClassName = _a === void 0 ? formStyles.formItem : _a,
       className = props.className,
       _onChange = props.onChange,
       form = props.form,

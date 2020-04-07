@@ -179,31 +179,35 @@ var JsonForm = function JsonForm(props, ref) {
       labelClassName = props.labelClassName,
       _a = props.rowHeight,
       rowHeight = _a === void 0 ? 56 : _a,
-      _b = props.defaultCollapse,
-      defaultCollapse = _b === void 0 ? true : _b,
+      // 32 + 24
+  _b = props.defaultCollapse,
+      // 32 + 24
+  defaultCollapse = _b === void 0 ? true : _b,
       _c = props.enableCollapse,
       enableCollapse = _c === void 0 ? true : _c,
       itemCol = props.itemCol,
       itemRow = props.itemRow,
       proForm = props.form,
-      _props = __rest(props, ["fieldList", "children", "labelClassName", "rowHeight", "defaultCollapse", "enableCollapse", "itemCol", "itemRow", "form"]);
+      className = props.className,
+      _d = props.containerClassName,
+      containerClassName = _d === void 0 ? formStyles.formContainer : _d,
+      _props = __rest(props, ["fieldList", "children", "labelClassName", "rowHeight", "defaultCollapse", "enableCollapse", "itemCol", "itemRow", "form", "className", "containerClassName"]);
 
-  var _d = useState(defaultCollapse),
-      collapse = _d[0],
-      setCollapse = _d[1];
+  var _e = useState(defaultCollapse),
+      collapse = _e[0],
+      setCollapse = _e[1];
 
-  var _e = useState(false),
-      collapseBtnVisible = _e[0],
-      setCollapseBtnVisible = _e[1];
+  var _f = useState(false),
+      collapseBtnVisible = _f[0],
+      setCollapseBtnVisible = _f[1];
 
   var form = _Form.useForm(proForm)[0];
 
-  var wrapRef = useRef(null);
   var btnWrap = useRef(null);
 
-  var _f = useState(defaultCollapse ? rowHeight : undefined),
-      formHeight = _f[0],
-      setFormHeight = _f[1];
+  var _g = useState(defaultCollapse ? rowHeight : undefined),
+      formHeight = _g[0],
+      setFormHeight = _g[1];
 
   useImperativeHandle(ref, function () {
     return {
@@ -297,10 +301,14 @@ var JsonForm = function JsonForm(props, ref) {
           flex: collapse ? 1 : 0,
           justifyContent: "flex-end",
           visibility: collapseBtnVisible ? "visible" : "hidden"
+<<<<<<< HEAD
         }
+=======
+        },
+        className: formStyles.formItem
+>>>>>>> form_optimize
       }, React.createElement(_Button, {
         type: "link",
-        className: formStyles.formItem,
         style: {
           "float": "right"
         },
@@ -313,9 +321,16 @@ var JsonForm = function JsonForm(props, ref) {
   var fromItemList = useMemo(function () {
     return getFormItems(fieldList, form, labelClassName, itemCol, itemRow);
   }, [fieldList]);
+  var wrapChildren = useMemo(function () {
+    return React.Children.map(children, function (child) {
+      return React.createElement("span", {
+        className: formStyles.formItem
+      }, child);
+    });
+  }, [children]);
   var formContent = useMemo(function () {
     if (collapse) {
-      return React.createElement(React.Fragment, null, fromItemList, children, collapseBtn);
+      return React.createElement(React.Fragment, null, fromItemList, wrapChildren, collapseBtn);
     } else {
       return React.createElement("div", {
         className: classNames(formStyles.flex, formStyles.flex1)
@@ -324,7 +339,7 @@ var JsonForm = function JsonForm(props, ref) {
         style: {
           flexWrap: "wrap"
         }
-      }, fromItemList), children, collapseBtn);
+      }, fromItemList), wrapChildren, collapseBtn);
     }
   }, [fieldList, children, collapse, collapseBtnVisible]);
   var formComponent = useMemo(function () {
@@ -333,10 +348,12 @@ var JsonForm = function JsonForm(props, ref) {
     }, React.createElement("div", null, React.createElement(_Form, __assign({
       layout: "inline"
     }, _props, {
-      form: form
+      form: form,
+      className: className
     }), formContent)));
   }, [fieldList, collapseBtnVisible, collapse, children]);
   return useMemo(function () {
+<<<<<<< HEAD
     var style = enableCollapse ? collapse ? {
       overflow: "hidden",
       height: formHeight
@@ -344,9 +361,19 @@ var JsonForm = function JsonForm(props, ref) {
       overflow: "hidden",
       height: rowHeight
     } : {};
+=======
+>>>>>>> form_optimize
     return React.createElement("div", {
-      ref: wrapRef,
-      style: style
+      style: enableCollapse ? collapse ? {
+        overflow: "hidden",
+        height: formHeight,
+        boxSizing: "content-box"
+      } : {
+        overflow: "hidden",
+        height: rowHeight,
+        boxSizing: "content-box"
+      } : {},
+      className: containerClassName
     }, formComponent);
   }, [formHeight, fieldList, collapseBtnVisible, collapse, children]);
 };
