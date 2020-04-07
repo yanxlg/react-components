@@ -262,7 +262,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                 },
             };
         },
-        [],
+        [fieldList],
     );
 
     const getValues = useCallback(

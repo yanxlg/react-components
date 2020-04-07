@@ -221,7 +221,7 @@ var JsonForm = function JsonForm(props, ref) {
         form.setFieldsValue(value);
       }
     };
-  }, []);
+  }, [fieldList]);
   var getValues = useCallback(function (targetFieldList) {
     var values = {};
     var target = targetFieldList || fieldList;
