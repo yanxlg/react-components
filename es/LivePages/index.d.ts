@@ -1,5 +1,5 @@
-import React from "react";
-import { RouteComponentProps } from "react-router";
+import React from 'react';
+import { RouteComponentProps } from 'react-router';
 declare interface IRouter {
     path: string;
     extract?: boolean;

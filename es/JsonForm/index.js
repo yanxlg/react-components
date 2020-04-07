@@ -301,12 +301,8 @@ var JsonForm = function JsonForm(props, ref) {
           flex: collapse ? 1 : 0,
           justifyContent: "flex-end",
           visibility: collapseBtnVisible ? "visible" : "hidden"
-<<<<<<< HEAD
-        }
-=======
         },
         className: formStyles.formItem
->>>>>>> form_optimize
       }, React.createElement(_Button, {
         type: "link",
         style: {
@@ -353,16 +349,6 @@ var JsonForm = function JsonForm(props, ref) {
     }), formContent)));
   }, [fieldList, collapseBtnVisible, collapse, children]);
   return useMemo(function () {
-<<<<<<< HEAD
-    var style = enableCollapse ? collapse ? {
-      overflow: "hidden",
-      height: formHeight
-    } : {
-      overflow: "hidden",
-      height: rowHeight
-    } : {};
-=======
->>>>>>> form_optimize
     return React.createElement("div", {
       style: enableCollapse ? collapse ? {
         overflow: "hidden",

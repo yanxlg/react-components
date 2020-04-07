@@ -23,7 +23,7 @@ function useScrollXY(containerRef, bottom, minHeight, autoFitY, columns, rowSele
       setY = _a[1];
 
   var scrollX = useMemo(function () {
-    if ((scroll === null || scroll === void 0 ? void 0 : scroll.x) === true || (scroll === null || scroll === void 0 ? void 0 : scroll.x) === 'max-content') {
+    if ((scroll === null || scroll === void 0 ? void 0 : scroll.x) === true || (scroll === null || scroll === void 0 ? void 0 : scroll.x) === "max-content") {
       var x_1 = 0;
 
       if (rowSelection && rowSelection.columnWidth) {
@@ -52,11 +52,11 @@ function useScrollXY(containerRef, bottom, minHeight, autoFitY, columns, rowSele
 
     if (autoFitY) {
       resizeHeight();
-      window.addEventListener('resize', resizeHeight);
+      window.addEventListener("resize", resizeHeight);
     }
 
     return function () {
-      window.removeEventListener('resize', resizeHeight);
+      window.removeEventListener("resize", resizeHeight);
     };
   }, []);
   return useMemo(function () {
@@ -66,7 +66,7 @@ function useScrollXY(containerRef, bottom, minHeight, autoFitY, columns, rowSele
       y: y,
       x: scrollX
     });
-  }, [columns, rowSelection, scroll, y]);
+  }, [scrollX, scroll, y]);
 }
 
 export { useScrollXY };

@@ -33,10 +33,7 @@ var __rest = this && this.__rest || function (s, e) {
 };
 
 import React, { useMemo } from "react";
-<<<<<<< HEAD
-=======
 import formStyles from "../_form.less";
->>>>>>> form_optimize
 var typeList = ["radioGroup"];
 
 var FormRadioGroup = function FormRadioGroup(props) {

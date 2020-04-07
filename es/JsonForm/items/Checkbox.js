@@ -20,10 +20,7 @@ var __assign = this && this.__assign || function () {
 };
 
 import React, { useMemo } from "react";
-<<<<<<< HEAD
-=======
 import formStyles from "../_form.less";
->>>>>>> form_optimize
 var typeList = ["checkbox"];
 
 var FormCheckbox = function FormCheckbox(props) {

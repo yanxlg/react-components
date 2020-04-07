@@ -21,7 +21,6 @@ var __assign = this && this.__assign || function () {
   return __assign.apply(this, arguments);
 };
 
-<<<<<<< HEAD
 var __rest = this && this.__rest || function (s, e) {
   var t = {};
 
@@ -35,8 +34,6 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-=======
->>>>>>> form_optimize
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { transNullValue, transNumber, transJoinStr } from "../utils";
 import formStyles from "../_form.less";
@@ -59,16 +56,10 @@ var FormSelect = function FormSelect(props) {
       mode = props.mode,
       maxTagCount = props.maxTagCount,
       placeholder = props.placeholder,
-<<<<<<< HEAD
-      _b = props.isShortcut,
-      isShortcut = _b === void 0 ? false : _b,
-      disabled = props.disabled,
-      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "syncDefaultOption", "optionListDependence", "onChange", "labelClassName", "form", "optionList", "rules", "mode", "maxTagCount", "placeholder", "isShortcut", "disabled"]);
-=======
       _c = props.isShortcut,
       isShortcut = _c === void 0 ? false : _c,
-      disabled = props.disabled;
->>>>>>> form_optimize
+      disabled = props.disabled,
+      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "syncDefaultOption", "optionListDependence", "onChange", "labelClassName", "form", "optionList", "rules", "mode", "maxTagCount", "placeholder", "isShortcut", "disabled"]);
 
   var _d = useState(undefined),
       options = _d[0],

@@ -33,13 +33,8 @@ var FormInputRange = function FormInputRange(props) {
       _b = props.formItemClassName,
       formItemClassName = _b === void 0 ? formStyles.formItem : _b,
       _onChange = props.onChange,
-<<<<<<< HEAD
-      _b = props.labelClassName,
-      labelClassName = _b === void 0 ? "" : _b,
-=======
       _c = props.labelClassName,
       labelClassName = _c === void 0 ? "" : _c,
->>>>>>> form_optimize
       form = props.form,
       _d = props.precision,
       precision = _d === void 0 ? 0 : _d,
@@ -85,11 +80,7 @@ var FormInputRange = function FormInputRange(props) {
     } : {};
   }, []);
   return useMemo(function () {
-<<<<<<< HEAD
-    var itemClassName = [formStyles.formInline, formStyles.inlineBlock, formStyles.marginNone, formStyles.verticalMiddle].join(" ");
-=======
     var itemClassName = [formStyles.inlineBlock, formStyles.marginNone, formStyles.verticalMiddle].join(" ");
->>>>>>> form_optimize
     return React.createElement(_Form.Item, {
       label: React.createElement("span", {
         className: labelClassName
