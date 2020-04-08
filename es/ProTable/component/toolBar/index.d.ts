@@ -1,7 +1,7 @@
-import React, { RefObject } from "react";
-import { ColumnSettingProps } from "../columnSetting";
-import "./index.less";
-import { DensitySize } from "./DensityIcon";
+import React, { RefObject } from 'react';
+import { ColumnSettingProps } from '../columnSetting';
+import './index.less';
+import { DensitySize } from './DensityIcon';
 export interface OptionConfig {
     density: {
         tableSize?: DensitySize;

@@ -38,16 +38,16 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-import './index.less';
-import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
-import classNames from 'classnames';
+import "./index.less";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
+import classNames from "classnames";
 import { ConfigConsumer } from "antd/es/config-provider";
-import Toolbar from './component/toolBar';
-import { checkUndefinedOrNull, genColumnKey, useDeepCompareEffect } from './component/util';
-import { useRowSelection } from './hooks';
-import TableAlert from './component/alert';
-import FitTable, { goButton, showTotal } from '../FitTable';
-import { defaultPageSizeOptions } from './config';
+import Toolbar from "./component/toolBar";
+import { checkUndefinedOrNull, genColumnKey, useDeepCompareEffect } from "./component/util";
+import { useRowSelection } from "./hooks";
+import TableAlert from "./component/alert";
+import FitTable, { goButton, showTotal } from "../FitTable";
+import { defaultPageSizeOptions } from "./config";
 import { isEmptyObject } from "../utils";
 /**
  * 生成 Ellipsis 的 tooltip
@@ -192,7 +192,7 @@ var ProTable = function ProTable(props) {
       _j = props.optimize,
       optimize = _j === void 0 ? true : _j,
       _k = props.rowKey,
-      rowKey = _k === void 0 ? '' : _k,
+      rowKey = _k === void 0 ? "" : _k,
       rest = __rest(props, ["className", "headerTitle", "pagination", "columns", "toolBarRender", "style", "tableStyle", "tableClassName", "onColumnsStateChange", "options", "rowSelection", "tableAlertRender", "defaultClassName", "size", "loading", "dataSource", "onSizeChange", "scroll", "bottom", "minHeight", "autoFitY", "optimize", "rowKey"]);
 
   var selectedRowKeys = propsRowSelection.selectedRowKeys,
@@ -211,7 +211,7 @@ var ProTable = function ProTable(props) {
       tableColumns = _o[0],
       setTableColumns = _o[1];
 
-  var _p = useState(proSize || 'large'),
+  var _p = useState(proSize || "large"),
       tableSize = _p[0],
       setTableSize = _p[1];
   /***********************密度设置**************************/
@@ -246,7 +246,7 @@ var ProTable = function ProTable(props) {
    */
 
   useDeepCompareEffect(function () {
-    var keys = sortKeyColumns.join(',');
+    var keys = sortKeyColumns.join(",");
     var tableColumn = genColumnList(proColumns, columnsMap);
 
     if (keys.length > 0) {
@@ -261,14 +261,14 @@ var ProTable = function ProTable(props) {
 
     tableColumn.sort(function (a, b) {
       // if (a.fixed === 'left' && b.fixed === 'left') return -1;
-      if (a.fixed === 'left' && b.fixed !== 'left') return -1;
-      if (a.fixed !== 'left' && b.fixed === 'left') return 1;
+      if (a.fixed === "left" && b.fixed !== "left") return -1;
+      if (a.fixed !== "left" && b.fixed === "left") return 1;
 
-      if (a.fixed === 'right' && b.fixed !== 'right') {
+      if (a.fixed === "right" && b.fixed !== "right") {
         return 1;
       }
 
-      if (a.fixed !== 'right' && b.fixed === 'right') {
+      if (a.fixed !== "right" && b.fixed === "right") {
         return -1;
       }
 
@@ -278,7 +278,7 @@ var ProTable = function ProTable(props) {
     if (tableColumn && tableColumn.length > 0) {
       setTableColumns(tableColumn);
     }
-  }, [columnsMap, sortKeyColumns.join('-')]);
+  }, [columnsMap, sortKeyColumns.join("-")]);
   /**
    * columns 过滤筛选  待优化
    */
@@ -324,7 +324,7 @@ var ProTable = function ProTable(props) {
 
   var fullScreenFn = function fullScreenFn() {
     if (proOptions) {
-      if (proOptions.fullScreen && typeof proOptions.fullScreen === 'function') {
+      if (proOptions.fullScreen && typeof proOptions.fullScreen === "function") {
         proOptions.fullScreen();
         return;
       }
@@ -437,13 +437,13 @@ var ProTable = function ProTable(props) {
       loading: loading,
       dataSource: dataSource,
       rowKey: rowKey,
-      pagination: __assign({
+      pagination: pagination ? __assign({
         pageSizeOptions: defaultPageSizeOptions,
         showQuickJumper: {
           goButton: goButton
         },
         showTotal: showTotal
-      }, pagination)
+      }, pagination) : false
     }));
   }, [columns, pagination, size, propsRowSelection, loading]);
 
@@ -463,7 +463,7 @@ var ProTable = function ProTable(props) {
   }, React.createElement(_Card, {
     bordered: true,
     style: {
-      height: '100%'
+      height: "100%"
     },
     bodyStyle: {
       padding: 0
@@ -481,7 +481,7 @@ var ProviderWarp = function ProviderWarp(props) {
   return React.createElement(ConfigConsumer, null, function (_a) {
     var getPrefixCls = _a.getPrefixCls;
     return React.createElement(ProTable, __assign({
-      defaultClassName: getPrefixCls('pro-table')
+      defaultClassName: getPrefixCls("pro-table")
     }, props));
   });
 };
