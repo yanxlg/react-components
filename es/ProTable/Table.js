@@ -183,37 +183,31 @@ var ProTable = function ProTable(props) {
       dataSource = _e === void 0 ? [] : _e,
       onSizeChange = props.onSizeChange,
       propsScroll = props.scroll,
-      _f = props.bottom,
-      bottom = _f === void 0 ? 0 : _f,
-      _g = props.minHeight,
-      minHeight = _g === void 0 ? 500 : _g,
-      _h = props.autoFitY,
-      autoFitY = _h === void 0 ? true : _h,
-      _j = props.optimize,
-      optimize = _j === void 0 ? true : _j,
-      _k = props.rowKey,
-      rowKey = _k === void 0 ? "" : _k,
-      rest = __rest(props, ["className", "headerTitle", "pagination", "columns", "toolBarRender", "style", "tableStyle", "tableClassName", "onColumnsStateChange", "options", "rowSelection", "tableAlertRender", "defaultClassName", "size", "loading", "dataSource", "onSizeChange", "scroll", "bottom", "minHeight", "autoFitY", "optimize", "rowKey"]);
+      _f = props.optimize,
+      optimize = _f === void 0 ? true : _f,
+      _g = props.rowKey,
+      rowKey = _g === void 0 ? "" : _g,
+      rest = __rest(props, ["className", "headerTitle", "pagination", "columns", "toolBarRender", "style", "tableStyle", "tableClassName", "onColumnsStateChange", "options", "rowSelection", "tableAlertRender", "defaultClassName", "size", "loading", "dataSource", "onSizeChange", "scroll", "optimize", "rowKey"]);
 
   var selectedRowKeys = propsRowSelection.selectedRowKeys,
       onChange = propsRowSelection.onChange;
   var rootRef = useRef(null);
 
-  var _l = useState([]),
-      sortKeyColumns = _l[0],
-      setSortKeyColumns = _l[1];
+  var _h = useState([]),
+      sortKeyColumns = _h[0],
+      setSortKeyColumns = _h[1];
 
-  var _m = useState({}),
-      columnsMap = _m[0],
-      setColumnsMap = _m[1];
+  var _j = useState({}),
+      columnsMap = _j[0],
+      setColumnsMap = _j[1];
 
-  var _o = useState(proColumns),
-      tableColumns = _o[0],
-      setTableColumns = _o[1];
+  var _k = useState(proColumns),
+      tableColumns = _k[0],
+      setTableColumns = _k[1];
 
-  var _p = useState(proSize || "large"),
-      tableSize = _p[0],
-      setTableSize = _p[1];
+  var _l = useState(proSize || "large"),
+      tableSize = _l[0],
+      setTableSize = _l[1];
   /***********************密度设置**************************/
 
 
@@ -290,10 +284,10 @@ var ProTable = function ProTable(props) {
     (_b = alertRef.current) === null || _b === void 0 ? void 0 : _b.updateSelectedState(selectedRowKeys);
   }, []);
 
-  var _q = useRowSelection(tableColumns, rowKey, dataSource, propsRowSelection, optimize, onSelectedRowKeysUpdate),
-      columns = _q.columns,
-      rowSelection = _q.rowSelection,
-      clearCheckedRows = _q.clearCheckedRows;
+  var _m = useRowSelection(tableColumns, rowKey, dataSource, propsRowSelection, optimize, onSelectedRowKeysUpdate),
+      columns = _m.columns,
+      rowSelection = _m.rowSelection,
+      clearCheckedRows = _m.clearCheckedRows;
 
   var filterColumns = useMemo(function () {
     return columns.filter(function (item) {

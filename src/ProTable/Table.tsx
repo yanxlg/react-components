@@ -247,9 +247,6 @@ const ProTable = <T extends {}, U extends object>(
         dataSource = [],
         onSizeChange,
         scroll: propsScroll,
-        bottom = 0,
-        minHeight = 500,
-        autoFitY = true,
         optimize = true,
         rowKey = "",
         ...rest
