@@ -10,7 +10,15 @@ export declare type IPaginationResponse<T, U = {}> = {
     total: number;
     list: T[];
 } & U;
-declare function useList<T, Q, E = {}>({ queryList, formRef, extraQuery, defaultState, autoQuery, pageNumberKey, pageSizeKey, }: {
+declare function useList<T, Q, E = {}>({
+    queryList,
+    formRef,
+    extraQuery,
+    defaultState,
+    autoQuery,
+    pageNumberKey,
+    pageSizeKey,
+}: {
     queryList: (query: Q) => Promise<IResponse<IPaginationResponse<T, E>>>;
     formRef?: RefObject<JsonFormRef>;
     extraQuery?: {
@@ -38,7 +46,11 @@ declare function useList<T, Q, E = {}>({ queryList, formRef, extraQuery, default
     onReload: () => Promise<void>;
     onSearch: () => Promise<void>;
     onChange: ({ current, pageSize }: PaginationConfig, filters: any, sorter: any) => Promise<void>;
-    getListData: ({ page, page_count, ...extra }?: {
+    getListData: ({
+        page,
+        page_count,
+        ...extra
+    }?: {
         [key: string]: any;
         page?: number;
         page_count?: number;

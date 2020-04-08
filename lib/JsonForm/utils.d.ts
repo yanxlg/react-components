@@ -1,4 +1,4 @@
-import { Moment } from 'moment';
+import { Moment } from "moment";
 export declare const isNull: (value: any) => boolean;
 export declare function transNullValue(value?: any): any;
 export declare function transJoinStr(value?: any): any;

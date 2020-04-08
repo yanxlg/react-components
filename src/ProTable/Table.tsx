@@ -1,33 +1,33 @@
-import './index.less';
+import "./index.less";
 
-import React, {useEffect, CSSProperties, useRef, useState, useCallback, useMemo} from 'react';
-import {ConfigProvider, Card, Typography, Empty, Tooltip} from 'antd';
-import classNames from 'classnames';
-import {ColumnsType, ColumnType} from 'antd/es/table';
-import {ConfigConsumer, ConfigConsumerProps} from 'antd/lib/config-provider';
+import React, { useEffect, CSSProperties, useRef, useState, useCallback, useMemo } from "react";
+import { ConfigProvider, Card, Typography, Empty, Tooltip } from "antd";
+import classNames from "classnames";
+import { ColumnsType, ColumnType } from "antd/es/table";
+import { ConfigConsumer, ConfigConsumerProps } from "antd/lib/config-provider";
 
-import Toolbar, {OptionConfig, ToolBarProps, ToolBarRef} from './component/toolBar';
+import Toolbar, { OptionConfig, ToolBarProps, ToolBarRef } from "./component/toolBar";
 
-import {RenderedCell} from 'rc-table/lib/interface';
-import {TableRowSelection} from 'antd/es/table/interface';
+import { RenderedCell } from "rc-table/lib/interface";
+import { TableRowSelection } from "antd/es/table/interface";
 
-import {checkUndefinedOrNull, genColumnKey, useDeepCompareEffect} from './component/util';
+import { checkUndefinedOrNull, genColumnKey, useDeepCompareEffect } from "./component/util";
 
-import {DensitySize} from './component/toolBar/DensityIcon';
-import {useRowSelection} from './hooks';
-import TableAlert, {TableAlertRef} from './component/alert';
-import {SizeType} from 'antd/es/config-provider/SizeContext';
-import {TableProps} from 'antd/lib/table';
-import FitTable, {goButton, showTotal} from '../FitTable';
-import {defaultPageSizeOptions} from './config';
-import {isEmptyObject} from "../utils";
+import { DensitySize } from "./component/toolBar/DensityIcon";
+import { useRowSelection } from "./hooks";
+import TableAlert, { TableAlertRef } from "./component/alert";
+import { SizeType } from "antd/es/config-provider/SizeContext";
+import { TableProps } from "antd/lib/table";
+import FitTable, { goButton, showTotal } from "../FitTable";
+import { defaultPageSizeOptions } from "./config";
+import { isEmptyObject } from "../utils";
 
 export interface ColumnsState {
     show?: boolean;
-    fixed?: 'right' | 'left' | undefined;
+    fixed?: "right" | "left" | undefined;
 }
 
-export interface ProColumnType<T = unknown> extends Omit<ColumnType<T>, 'render'> {
+export interface ProColumnType<T = unknown> extends Omit<ColumnType<T>, "render"> {
     /**
      * 扩展render,用于支持内部优化及封装
      */
@@ -53,19 +53,21 @@ export interface ProColumnGroupType<RecordType> extends ProColumnType<RecordType
 
 export type ProColumns<T> = ProColumnGroupType<T> | ProColumnType<T>;
 
-export type SimpleRowSelection<T> = Omit<TableRowSelection<T>,
-    | 'type'
-    | 'getCheckboxProps'
-    | 'onSelect'
-    | 'onSelectMultiple'
-    | 'onSelectAll'
-    | 'onSelectInvert'
-    | 'selections'
-    | 'hideDefaultSelections'
-    | 'columnTitle'>;
+export type SimpleRowSelection<T> = Omit<
+    TableRowSelection<T>,
+    | "type"
+    | "getCheckboxProps"
+    | "onSelect"
+    | "onSelectMultiple"
+    | "onSelectAll"
+    | "onSelectInvert"
+    | "selections"
+    | "hideDefaultSelections"
+    | "columnTitle"
+>;
 
 export interface ProTableProps<T, U extends { [key: string]: any }>
-    extends Omit<TableProps<T>, 'columns' | 'rowSelection'> {
+    extends Omit<TableProps<T>, "columns" | "rowSelection"> {
     columns?: ProColumns<T>[];
 
     onColumnsStateChange?: (map: { [key: string]: ColumnsState }) => void;
@@ -75,7 +77,7 @@ export interface ProTableProps<T, U extends { [key: string]: any }>
     /**
      * 渲染操作栏
      */
-    toolBarRender?: ToolBarProps['toolBarRender'] | false;
+    toolBarRender?: ToolBarProps["toolBarRender"] | false;
 
     /**
      * 给封装的 table 的 className
@@ -96,9 +98,9 @@ export interface ProTableProps<T, U extends { [key: string]: any }>
      * 默认的操作栏配置
      */
     options?:
-        | (Omit<OptionConfig, 'density'> & {
-        density: boolean;
-    })
+        | (Omit<OptionConfig, "density"> & {
+              density: boolean;
+          })
         | false;
 
     /**
@@ -110,9 +112,7 @@ export interface ProTableProps<T, U extends { [key: string]: any }>
      * 自定义 table 的 alert 的操作
      * 设置或者返回false 即可关闭
      */
-    tableAlertOptionRender?:
-        | ((props: { onCleanSelected?: () => void }) => React.ReactNode)
-        | false;
+    tableAlertOptionRender?: ((props: { onCleanSelected?: () => void }) => React.ReactNode) | false;
 
     rowSelection?: SimpleRowSelection<T>;
 
@@ -171,7 +171,7 @@ const genCopyable = (dom: React.ReactNode, item: ProColumns<any>) => {
  * 这个组件负责单元格的具体渲染
  * @param param0
  */
-const columRender = <T, U = any>({item, text, row, index}: ColumRenderInterface<T>): any => {
+const columRender = <T, U = any>({ item, text, row, index }: ColumRenderInterface<T>): any => {
     const dom: React.ReactNode = genEllipsis(genCopyable(text, item), item, text);
     if (item.render) {
         const renderDom = item.render(text, row, index, dom);
@@ -192,9 +192,9 @@ const genColumnList = <T, U = {}>(
     },
 ): (ColumnsType<T>[number] & { index?: number })[] => {
     return columns.map((item, columnsIndex) => {
-        const {key, dataIndex} = item;
+        const { key, dataIndex } = item;
         const columnKey = genColumnKey(key, dataIndex);
-        const config = columnKey ? map[columnKey] || {fixed: item.fixed} : {fixed: item.fixed};
+        const config = columnKey ? map[columnKey] || { fixed: item.fixed } : { fixed: item.fixed };
         const tempColumns = {
             ...item,
             ellipsis: false,
@@ -203,7 +203,7 @@ const genColumnList = <T, U = {}>(
             // @ts-ignore
             children: item.children ? genColumnList(item.children, map) : undefined,
             render: (text: any, row: T, index: number) =>
-                columRender<T>({item, text, row, index}),
+                columRender<T>({ item, text, row, index }),
         };
         if (!tempColumns.children || !tempColumns.children.length) {
             delete tempColumns.children;
@@ -251,10 +251,10 @@ const ProTable = <T extends {}, U extends object>(
         minHeight = 500,
         autoFitY = true,
         optimize = true,
-        rowKey = '',
+        rowKey = "",
         ...rest
     } = props;
-    const {selectedRowKeys, onChange} = propsRowSelection;
+    const { selectedRowKeys, onChange } = propsRowSelection;
     const rootRef = useRef<HTMLDivElement>(null);
     const [sortKeyColumns, setSortKeyColumns] = useState<(string | number)[]>([]);
 
@@ -264,7 +264,7 @@ const ProTable = <T extends {}, U extends object>(
 
     const [tableColumns, setTableColumns] = useState<ProColumns<T>[]>(proColumns);
 
-    const [tableSize, setTableSize] = useState<SizeType>(proSize || 'large');
+    const [tableSize, setTableSize] = useState<SizeType>(proSize || "large");
 
     /***********************密度设置**************************/
     const size = proSize === void 0 ? tableSize : proSize;
@@ -299,7 +299,7 @@ const ProTable = <T extends {}, U extends object>(
      * 这里主要是为了排序，为了保证更新及时，每次都重新计算
      */
     useDeepCompareEffect(() => {
-        const keys = sortKeyColumns.join(',');
+        const keys = sortKeyColumns.join(",");
         let tableColumn = genColumnList<T>(proColumns, columnsMap);
         if (keys.length > 0) {
             // 用于可视化的排序
@@ -316,12 +316,12 @@ const ProTable = <T extends {}, U extends object>(
         }
         tableColumn.sort((a: ProColumns<T>, b: ProColumns<T>) => {
             // if (a.fixed === 'left' && b.fixed === 'left') return -1;
-            if (a.fixed === 'left' && b.fixed !== 'left') return -1;
-            if (a.fixed !== 'left' && b.fixed === 'left') return 1;
-            if (a.fixed === 'right' && b.fixed !== 'right') {
+            if (a.fixed === "left" && b.fixed !== "left") return -1;
+            if (a.fixed !== "left" && b.fixed === "left") return 1;
+            if (a.fixed === "right" && b.fixed !== "right") {
                 return 1;
             }
-            if (a.fixed !== 'right' && b.fixed === 'right') {
+            if (a.fixed !== "right" && b.fixed === "right") {
                 return -1;
             }
             return 0;
@@ -329,7 +329,7 @@ const ProTable = <T extends {}, U extends object>(
         if (tableColumn && tableColumn.length > 0) {
             setTableColumns(tableColumn);
         }
-    }, [columnsMap, sortKeyColumns.join('-')]);
+    }, [columnsMap, sortKeyColumns.join("-")]);
 
     /**
      * columns 过滤筛选  待优化
@@ -339,7 +339,7 @@ const ProTable = <T extends {}, U extends object>(
         alertRef.current?.updateSelectedState(selectedRowKeys);
     }, []);
 
-    const {columns, rowSelection, clearCheckedRows} = useRowSelection(
+    const { columns, rowSelection, clearCheckedRows } = useRowSelection(
         tableColumns,
         rowKey,
         dataSource,
@@ -350,7 +350,7 @@ const ProTable = <T extends {}, U extends object>(
 
     const filterColumns = useMemo(() => {
         return columns.filter(item => {
-            const {key, dataIndex} = item;
+            const { key, dataIndex } = item;
             const columnKey = genColumnKey(key, dataIndex);
             if (!columnKey) {
                 return true;
@@ -360,7 +360,7 @@ const ProTable = <T extends {}, U extends object>(
                 return false;
             }
             return true;
-        })
+        });
     }, [columns, columnsMap]);
 
     /**
@@ -372,7 +372,7 @@ const ProTable = <T extends {}, U extends object>(
 
     const fullScreenFn = () => {
         if (proOptions) {
-            if (proOptions.fullScreen && typeof proOptions.fullScreen === 'function') {
+            if (proOptions.fullScreen && typeof proOptions.fullScreen === "function") {
                 proOptions.fullScreen();
                 return;
             }
@@ -397,21 +397,21 @@ const ProTable = <T extends {}, U extends object>(
         if (!proOptions) {
             return proOptions;
         }
-        const {density, fullScreen} = proOptions;
+        const { density, fullScreen } = proOptions;
         return {
             ...proOptions,
             ...(density
                 ? {
-                    density: {
-                        tableSize: size,
-                        setTableSize: updateTableSize,
-                    },
-                }
+                      density: {
+                          tableSize: size,
+                          setTableSize: updateTableSize,
+                      },
+                  }
                 : {}),
             ...(fullScreen
                 ? {
-                    fullScreen: fullScreenFn,
-                }
+                      fullScreen: fullScreenFn,
+                  }
                 : {}),
         };
     }, [proOptions, size]);
@@ -492,27 +492,35 @@ const ProTable = <T extends {}, U extends object>(
                 {...rest}
                 scroll={propsScroll}
                 size={size}
-                rowSelection={propsRowSelection === undefined || isEmptyObject(propsRowSelection) ? undefined : rowSelection}
+                rowSelection={
+                    propsRowSelection === undefined || isEmptyObject(propsRowSelection)
+                        ? undefined
+                        : rowSelection
+                }
                 className={tableClassName}
                 style={tableStyle}
                 columns={filterColumns as any}
                 loading={loading}
                 dataSource={dataSource}
                 rowKey={rowKey}
-                pagination={{
-                    pageSizeOptions: defaultPageSizeOptions,
-                    showQuickJumper: {
-                        goButton: goButton,
-                    },
-                    showTotal: showTotal,
-                    ...pagination,
-                }}
+                pagination={
+                    pagination
+                        ? {
+                              pageSizeOptions: defaultPageSizeOptions,
+                              showQuickJumper: {
+                                  goButton: goButton,
+                              },
+                              showTotal: showTotal,
+                              ...pagination,
+                          }
+                        : false
+                }
             />
         );
     }, [columns, pagination, size, propsRowSelection, loading]);
 
     if (proColumns.length < 1) {
-        return <Empty/>;
+        return <Empty />;
     }
 
     return (
@@ -523,7 +531,7 @@ const ProTable = <T extends {}, U extends object>(
                 <Card
                     bordered={true}
                     style={{
-                        height: '100%',
+                        height: "100%",
                     }}
                     bodyStyle={{
                         padding: 0,
@@ -545,8 +553,8 @@ const ProTable = <T extends {}, U extends object>(
  */
 const ProviderWarp = <T, U extends { [key: string]: any } = {}>(props: ProTableProps<T, U>) => (
     <ConfigConsumer>
-        {({getPrefixCls}: ConfigConsumerProps) => (
-            <ProTable defaultClassName={getPrefixCls('pro-table')} {...props} />
+        {({ getPrefixCls }: ConfigConsumerProps) => (
+            <ProTable defaultClassName={getPrefixCls("pro-table")} {...props} />
         )}
     </ConfigConsumer>
 );
