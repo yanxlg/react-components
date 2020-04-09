@@ -1,7 +1,7 @@
 import { RefObject, useEffect, useMemo, useState } from "react";
 import { ProColumns } from "../ProTable";
 import { SimpleRowSelection } from "../ProTable/Table";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 import { TableProps as RcTableProps } from "rc-table/lib/Table";
 
 function useScrollXY<T>(
