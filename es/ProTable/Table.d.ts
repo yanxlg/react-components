@@ -29,9 +29,7 @@ export interface ProColumnGroupType<RecordType> extends ProColumnType<RecordType
 }
 export declare type ProColumns<T> = ProColumnGroupType<T> | ProColumnType<T>;
 export declare type SimpleRowSelection<T> = Omit<TableRowSelection<T>, "type" | "getCheckboxProps" | "onSelect" | "onSelectMultiple" | "onSelectAll" | "onSelectInvert" | "selections" | "hideDefaultSelections" | "columnTitle">;
-export interface ProTableProps<T, U extends {
-    [key: string]: any;
-}> extends Omit<TableProps<T>, "columns" | "rowSelection"> {
+export interface ProTableProps<T> extends Omit<TableProps<T>, "columns" | "rowSelection"> {
     columns?: ProColumns<T>[];
     onColumnsStateChange?: (map: {
         [key: string]: ColumnsState;
@@ -83,7 +81,5 @@ export interface ProTableProps<T, U extends {
  * 更快 更好 更方便
  * @param props
  */
-declare const ProviderWarp: <T, U extends {
-    [key: string]: any;
-} = {}>(props: ProTableProps<T, U>) => JSX.Element;
+declare const ProviderWarp: <T>(props: ProTableProps<T>) => JSX.Element;
 export default ProviderWarp;

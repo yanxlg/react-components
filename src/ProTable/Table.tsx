@@ -66,7 +66,7 @@ export type SimpleRowSelection<T> = Omit<
     | "columnTitle"
 >;
 
-export interface ProTableProps<T, U extends { [key: string]: any }>
+export interface ProTableProps<T>
     extends Omit<TableProps<T>, "columns" | "rowSelection"> {
     columns?: ProColumns<T>[];
 
@@ -223,8 +223,8 @@ const genColumnList = <T, U = {}>(
  * 更快 更好 更方便
  * @param props
  */
-const ProTable = <T extends {}, U extends object>(
-    props: ProTableProps<T, U> & {
+const ProTable = <T extends {}>(
+    props: ProTableProps<T> & {
         defaultClassName: string;
     },
 ) => {
@@ -548,7 +548,7 @@ const ProTable = <T extends {}, U extends object>(
  * 更快 更好 更方便
  * @param props
  */
-const ProviderWarp = <T, U extends { [key: string]: any } = {}>(props: ProTableProps<T, U>) => (
+const ProviderWarp = <T,>(props: ProTableProps<T>) => (
     <ConfigConsumer>
         {({ getPrefixCls }: ConfigConsumerProps) => (
             <ProTable defaultClassName={getPrefixCls("pro-table")} {...props} />
