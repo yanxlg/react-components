@@ -37,6 +37,7 @@ import classNames from "classnames";
 import "./index.less";
 import formStyles from "./_form.less";
 import Layout, { LayoutType, LayoutProps } from "./layout";
+import DynamicItem, { DynamicItemProps, DynamicType } from "./items/DynamicItem";
 
 export declare interface CustomFormProps {
     labelClassName?: string;
@@ -51,8 +52,9 @@ export type FormField<T = string> = (
     | Omit<CheckboxGroupProps<T>, "form">
     | Omit<RadioGroupProps<T>, "form">
     | Omit<InputRangeProps<T>, "form">
-    | Omit<LayoutProps<T>, "form">
-    ) & {
+    | Omit<LayoutProps<T>, "form" | "labelClassName" | "itemCol" | "itemRow">
+    | Omit<DynamicItemProps, "form" | "labelClassName" | "itemCol" | "itemRow">
+) & {
     form?: FormInstance;
 };
 
@@ -86,6 +88,142 @@ export const getColChildren = (children: ReactElement, itemCol?: ColProps, times
     }
 };
 
+export const getFormItem = (
+    { type, ...field }: FormField,
+    form: FormInstance,
+    labelClassName?: string,
+    itemCol?: ColProps,
+    itemRow?: RowProps,
+    index?: number,
+) => {
+    const name = field["name"];
+    if (FormInput.typeList.includes(type)) {
+        return getColChildren(
+            <FormInput
+                key={String(name)}
+                {...(field as InputProps)}
+                type={type as InputType}
+                labelClassName={labelClassName}
+                form={form}
+            />,
+            itemCol,
+        );
+    }
+    if (FormSelect.typeList.includes(type)) {
+        return getColChildren(
+            <FormSelect
+                key={String(name)}
+                {...(field as SelectProps)}
+                type={type as SelectType}
+                labelClassName={labelClassName}
+                form={form}
+            />,
+            itemCol,
+        );
+    }
+    if (FormCheckbox.typeList.includes(type)) {
+        return getColChildren(
+            <FormCheckbox
+                key={String(name)}
+                {...(field as CheckboxProps)}
+                type={type as CheckboxType}
+                labelClassName={labelClassName}
+                form={form}
+            />,
+            itemCol,
+        );
+    }
+    if (FormDatePicker.typeList.includes(type)) {
+        return getColChildren(
+            <FormDatePicker
+                key={String(name)}
+                {...(field as DatePickerProps)}
+                type={type as DatePickerType}
+                labelClassName={labelClassName}
+                form={form}
+            />,
+            itemCol,
+        );
+    }
+    if (FormDateRanger.typeList.includes(type)) {
+        return getColChildren(
+            <FormDateRanger
+                key={String(name)}
+                {...(field as DateRangerProps)}
+                type={type as DateRangerType}
+                labelClassName={labelClassName}
+                form={form}
+            />,
+            itemCol,
+        );
+    }
+
+    if (FormCheckboxGroup.typeList.includes(type)) {
+        return getColChildren(
+            <FormCheckboxGroup
+                key={String(name)}
+                {...(field as CheckboxGroupProps)}
+                type={type as CheckboxGroupType}
+                labelClassName={labelClassName}
+                form={form}
+            />,
+            itemCol,
+        );
+    }
+    if (FormRadioGroup.typeList.includes(type)) {
+        return getColChildren(
+            <FormRadioGroup
+                key={String(name)}
+                {...(field as RadioGroupProps)}
+                type={type as RadioGroupType}
+                labelClassName={labelClassName}
+                form={form}
+            />,
+            itemCol,
+        );
+    }
+    if (FormInputRange.typeList.includes(type)) {
+        return (
+            <FormInputRange
+                key={String(name)}
+                {...(field as InputRangeProps)}
+                type={type as InputRangeType}
+                labelClassName={labelClassName}
+                form={form}
+            />
+        );
+    }
+    if (Layout.typeList.includes(type)) {
+        return getColChildren(
+            <Layout
+                key={String(index)}
+                {...(field as LayoutProps)}
+                type={type as LayoutType}
+                labelClassName={labelClassName}
+                form={form}
+                itemRow={itemRow}
+                itemCol={itemCol}
+            />,
+            itemCol,
+        );
+    }
+    if (DynamicItem.typeList.includes(type)) {
+        return getColChildren(
+            <DynamicItem
+                key={String(index)}
+                {...(field as DynamicItemProps)}
+                type={type as DynamicType}
+                labelClassName={labelClassName}
+                form={form}
+                itemRow={itemRow}
+                itemCol={itemCol}
+            />,
+            itemCol,
+        );
+    }
+    return null;
+};
+
 export const getFormItems = (
     fieldList: Array<FormField>,
     form: FormInstance,
@@ -93,119 +231,8 @@ export const getFormItems = (
     itemCol?: ColProps,
     itemRow?: RowProps,
 ) => {
-    const fields = fieldList.map(({ type, ...field }, index) => {
-        const name = field["name"];
-        if (FormInput.typeList.includes(type)) {
-            return getColChildren(
-                <FormInput
-                    key={String(name)}
-                    {...(field as InputProps)}
-                    type={type as InputType}
-                    labelClassName={labelClassName}
-                    form={form}
-                />,
-                itemCol,
-            );
-        }
-        if (FormSelect.typeList.includes(type)) {
-            return getColChildren(
-                <FormSelect
-                    key={String(name)}
-                    {...(field as SelectProps)}
-                    type={type as SelectType}
-                    labelClassName={labelClassName}
-                    form={form}
-                />,
-                itemCol,
-            );
-        }
-        if (FormCheckbox.typeList.includes(type)) {
-            return getColChildren(
-                <FormCheckbox
-                    key={String(name)}
-                    {...(field as CheckboxProps)}
-                    type={type as CheckboxType}
-                    labelClassName={labelClassName}
-                    form={form}
-                />,
-                itemCol,
-            );
-        }
-        if (FormDatePicker.typeList.includes(type)) {
-            return getColChildren(
-                <FormDatePicker
-                    key={String(name)}
-                    {...(field as DatePickerProps)}
-                    type={type as DatePickerType}
-                    labelClassName={labelClassName}
-                    form={form}
-                />,
-                itemCol,
-            );
-        }
-        if (FormDateRanger.typeList.includes(type)) {
-            return getColChildren(
-                <FormDateRanger
-                    key={String(name)}
-                    {...(field as DateRangerProps)}
-                    type={type as DateRangerType}
-                    labelClassName={labelClassName}
-                    form={form}
-                />,
-                itemCol,
-            );
-        }
-
-        if (FormCheckboxGroup.typeList.includes(type)) {
-            return getColChildren(
-                <FormCheckboxGroup
-                    key={String(name)}
-                    {...(field as CheckboxGroupProps)}
-                    type={type as CheckboxGroupType}
-                    labelClassName={labelClassName}
-                    form={form}
-                />,
-                itemCol,
-            );
-        }
-        if (FormRadioGroup.typeList.includes(type)) {
-            return getColChildren(
-                <FormRadioGroup
-                    key={String(name)}
-                    {...(field as RadioGroupProps)}
-                    type={type as RadioGroupType}
-                    labelClassName={labelClassName}
-                    form={form}
-                />,
-                itemCol,
-            );
-        }
-        if (FormInputRange.typeList.includes(type)) {
-            return (
-                <FormInputRange
-                    key={String(name)}
-                    {...(field as InputRangeProps)}
-                    type={type as InputRangeType}
-                    labelClassName={labelClassName}
-                    form={form}
-                />
-            );
-        }
-        if (Layout.typeList.includes(type)) {
-            return getColChildren(
-                <Layout
-                    key={String(index)}
-                    {...(field as LayoutProps)}
-                    type={type as LayoutType}
-                    labelClassName={labelClassName}
-                    form={form}
-                    itemRow={itemRow}
-                    itemCol={itemCol}
-                />,
-                itemCol,
-            );
-        }
-        return null;
+    const fields = fieldList.map((field, index) => {
+        return getFormItem(field, form, labelClassName, itemCol, itemRow, index);
     });
 
     if (itemCol) {
@@ -433,16 +460,16 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                 style={
                     enableCollapse
                         ? collapse
-                        ? {
-                            overflow: "hidden",
-                            height: formHeight,
-                            boxSizing: "content-box",
-                        }
-                        : {
-                            overflow: "hidden",
-                            height: rowHeight,
-                            boxSizing: "content-box",
-                        }
+                            ? {
+                                  overflow: "hidden",
+                                  height: formHeight,
+                                  boxSizing: "content-box",
+                              }
+                            : {
+                                  overflow: "hidden",
+                                  height: rowHeight,
+                                  boxSizing: "content-box",
+                              }
                         : {}
                 }
                 className={containerClassName}

@@ -51,6 +51,7 @@ import classNames from "classnames";
 import "./index.less";
 import formStyles from "./_form.less";
 import Layout from "./layout";
+import DynamicItem from "./items/DynamicItem";
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
@@ -62,106 +63,121 @@ export var getColChildren = function getColChildren(children, itemCol, times) {
     return children;
   }
 };
+export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol, itemRow, index) {
+  var type = _a.type,
+      field = __rest(_a, ["type"]);
+
+  var name = field["name"];
+
+  if (FormInput.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormInput, __assign({
+      key: String(name)
+    }, field, {
+      type: type,
+      labelClassName: labelClassName,
+      form: form
+    })), itemCol);
+  }
+
+  if (FormSelect.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormSelect, __assign({
+      key: String(name)
+    }, field, {
+      type: type,
+      labelClassName: labelClassName,
+      form: form
+    })), itemCol);
+  }
+
+  if (FormCheckbox.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormCheckbox, __assign({
+      key: String(name)
+    }, field, {
+      type: type,
+      labelClassName: labelClassName,
+      form: form
+    })), itemCol);
+  }
+
+  if (FormDatePicker.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormDatePicker, __assign({
+      key: String(name)
+    }, field, {
+      type: type,
+      labelClassName: labelClassName,
+      form: form
+    })), itemCol);
+  }
+
+  if (FormDateRanger.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormDateRanger, __assign({
+      key: String(name)
+    }, field, {
+      type: type,
+      labelClassName: labelClassName,
+      form: form
+    })), itemCol);
+  }
+
+  if (FormCheckboxGroup.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormCheckboxGroup, __assign({
+      key: String(name)
+    }, field, {
+      type: type,
+      labelClassName: labelClassName,
+      form: form
+    })), itemCol);
+  }
+
+  if (FormRadioGroup.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormRadioGroup, __assign({
+      key: String(name)
+    }, field, {
+      type: type,
+      labelClassName: labelClassName,
+      form: form
+    })), itemCol);
+  }
+
+  if (FormInputRange.typeList.includes(type)) {
+    return React.createElement(FormInputRange, __assign({
+      key: String(name)
+    }, field, {
+      type: type,
+      labelClassName: labelClassName,
+      form: form
+    }));
+  }
+
+  if (Layout.typeList.includes(type)) {
+    return getColChildren(React.createElement(Layout, __assign({
+      key: String(index)
+    }, field, {
+      type: type,
+      labelClassName: labelClassName,
+      form: form,
+      itemRow: itemRow,
+      itemCol: itemCol
+    })), itemCol);
+  }
+
+  if (DynamicItem.typeList.includes(type)) {
+    return getColChildren(React.createElement(DynamicItem, __assign({
+      key: String(index)
+    }, field, {
+      type: type,
+      labelClassName: labelClassName,
+      form: form,
+      itemRow: itemRow,
+      itemCol: itemCol
+    })), itemCol);
+  }
+
+  return null;
+};
 export var getFormItems = function getFormItems(fieldList, form, labelClassName, itemCol, itemRow) {
-  var fields = fieldList.map(function (_a, index) {
-    var type = _a.type,
-        field = __rest(_a, ["type"]);
-
-    var name = field["name"];
-
-    if (FormInput.typeList.includes(type)) {
-      return getColChildren(React.createElement(FormInput, __assign({
-        key: String(name)
-      }, field, {
-        type: type,
-        labelClassName: labelClassName,
-        form: form
-      })), itemCol);
-    }
-
-    if (FormSelect.typeList.includes(type)) {
-      return getColChildren(React.createElement(FormSelect, __assign({
-        key: String(name)
-      }, field, {
-        type: type,
-        labelClassName: labelClassName,
-        form: form
-      })), itemCol);
-    }
-
-    if (FormCheckbox.typeList.includes(type)) {
-      return getColChildren(React.createElement(FormCheckbox, __assign({
-        key: String(name)
-      }, field, {
-        type: type,
-        labelClassName: labelClassName,
-        form: form
-      })), itemCol);
-    }
-
-    if (FormDatePicker.typeList.includes(type)) {
-      return getColChildren(React.createElement(FormDatePicker, __assign({
-        key: String(name)
-      }, field, {
-        type: type,
-        labelClassName: labelClassName,
-        form: form
-      })), itemCol);
-    }
-
-    if (FormDateRanger.typeList.includes(type)) {
-      return getColChildren(React.createElement(FormDateRanger, __assign({
-        key: String(name)
-      }, field, {
-        type: type,
-        labelClassName: labelClassName,
-        form: form
-      })), itemCol);
-    }
-
-    if (FormCheckboxGroup.typeList.includes(type)) {
-      return getColChildren(React.createElement(FormCheckboxGroup, __assign({
-        key: String(name)
-      }, field, {
-        type: type,
-        labelClassName: labelClassName,
-        form: form
-      })), itemCol);
-    }
-
-    if (FormRadioGroup.typeList.includes(type)) {
-      return getColChildren(React.createElement(FormRadioGroup, __assign({
-        key: String(name)
-      }, field, {
-        type: type,
-        labelClassName: labelClassName,
-        form: form
-      })), itemCol);
-    }
-
-    if (FormInputRange.typeList.includes(type)) {
-      return React.createElement(FormInputRange, __assign({
-        key: String(name)
-      }, field, {
-        type: type,
-        labelClassName: labelClassName,
-        form: form
-      }));
-    }
-
-    if (Layout.typeList.includes(type)) {
-      return getColChildren(React.createElement(Layout, __assign({
-        key: String(index)
-      }, field, {
-        type: type,
-        labelClassName: labelClassName,
-        form: form,
-        itemRow: itemRow,
-        itemCol: itemCol
-      })), itemCol);
-    }
-
-    return null;
+  var fields = fieldList.map(function (field, index) {
+    return getFormItem(field, form, labelClassName, itemCol, itemRow, index);
   });
 
   if (itemCol) {
