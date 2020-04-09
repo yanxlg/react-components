@@ -15,7 +15,7 @@ var __assign = this && this.__assign || function () {
 };
 
 import { useEffect, useMemo, useState } from "react";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 
 function useScrollXY(containerRef, bottom, minHeight, autoFitY, columns, rowSelection, scroll) {
   var _a = useState(scroll === null || scroll === void 0 ? void 0 : scroll.y),

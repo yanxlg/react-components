@@ -30,9 +30,9 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-import React, { useCallback, useMemo, useState } from 'react';
-import btnStyles from '@/styles/_btn.less';
-import classNames from 'classnames';
+import React, { useCallback, useMemo, useState } from "react";
+import btnStyles from "./_btn.less";
+import classNames from "classnames";
 
 var LoadingButton = function LoadingButton(props) {
   var _a = useState(false),
@@ -54,7 +54,7 @@ var LoadingButton = function LoadingButton(props) {
   return useMemo(function () {
     return React.createElement(_Button, __assign({}, _props, {
       icon: icon,
-      className: classNames(className, icon ? btnStyles.btnWithoutAnim : ''),
+      className: classNames(className, icon ? btnStyles.btnWithoutAnim : ""),
       loading: currentLoading,
       onClick: onClick
     }));
