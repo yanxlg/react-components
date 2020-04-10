@@ -19,6 +19,19 @@ var __assign = this && this.__assign || function () {
   return __assign.apply(this, arguments);
 };
 
+var __rest = this && this.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
 import React, { useCallback, useMemo } from "react";
 import dayjs from "dayjs";
 import { transNullValue } from "../utils";
@@ -39,7 +52,10 @@ var FormDatePicker = function FormDatePicker(props) {
       _onChange = props.onChange,
       labelClassName = props.labelClassName,
       form = props.form,
-      rules = props.rules;
+      rules = props.rules,
+      picker = props.picker,
+      _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "dateBeginWith", "dateEndWith", "onChange", "labelClassName", "form", "rules", "picker"]);
+
   var disabledStartDate = useCallback(function (dateBeginWith) {
     if (!dateBeginWith || dateBeginWith.length === 0) {
       return undefined;
@@ -115,7 +131,7 @@ var FormDatePicker = function FormDatePicker(props) {
     className: className,
     placeholder: placeholder,
     disabledDate: disabledDate
-  }, eventProps)));
+  }, eventProps, _props)));
 };
 
 FormDatePicker.typeList = typeList;
