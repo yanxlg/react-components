@@ -114,7 +114,6 @@ var FormDatePicker = function FormDatePicker(props) {
   }, React.createElement(_DatePicker, __assign({
     className: className,
     placeholder: placeholder,
-    // @ts-ignore
     disabledDate: disabledDate
   }, eventProps)));
 };
