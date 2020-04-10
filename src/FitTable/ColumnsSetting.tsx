@@ -14,51 +14,55 @@ declare interface ColumnsSettingProps<T> {
 const ColumnsSetting = <T,>({ columns, filterColumns }: ColumnsSettingProps<T>) => {
     const { visible, setVisibleProps, onClose } = useModal();
 
-    const cacheColumnsHideList = useRef<string[]>([]);
-    const [columnsHideList, setColumnsHideList] = useState<string[]>([]); // 列
+    const cacheColumnsShowList = useRef<string[]>([]);
+    const [columnsShowList, setColumnsShowList] = useState<string[]>(
+        columns.map(column => column.dataIndex as string),
+    ); // 列
 
     // 重新初始化
     useEffect(() => {
-        cacheColumnsHideList.current = [];
-        setColumnsHideList([]);
+        const keys = columns.map(column => column.dataIndex as string);
+        cacheColumnsShowList.current = keys;
+        setColumnsShowList(keys);
     }, [columns]);
 
     // drop修改
     useEffect(() => {
         if (visible) {
-            setColumnsHideList(cacheColumnsHideList.current);
+            setColumnsShowList(cacheColumnsShowList.current);
         }
     }, [visible]);
 
     const onChange = useCallback((checkedValue: Array<CheckboxValueType>) => {
-        setColumnsHideList(checkedValue as string[]);
+        setColumnsShowList(checkedValue as string[]);
     }, []);
 
     const onSave = useCallback(() => {
-        cacheColumnsHideList.current = columnsHideList;
+        cacheColumnsShowList.current = columnsShowList;
         let list: { [key: string]: true } = {};
-        columnsHideList.map(value => {
+        columnsShowList.map(value => {
             list[value] = true;
         });
         filterColumns(
             columns.filter(column => {
-                return !list[column.dataIndex as string];
+                return list[column.dataIndex as string];
             }),
         );
         onClose();
-    }, [columnsHideList, columns]);
+    }, [columnsShowList, columns]);
 
     const modal = useMemo(() => {
         return (
             <Modal
                 title="自定义字段展示"
-                cancelText="还原默认"
+                cancelText="不保存"
                 okText="保存"
                 onOk={onSave}
                 onCancel={onClose}
                 visible={!!visible}
+                className={styles.settingModal}
             >
-                <Checkbox.Group onChange={onChange} value={columnsHideList}>
+                <Checkbox.Group onChange={onChange} value={columnsShowList}>
                     <Row>
                         {columns.map(column => {
                             return (
@@ -71,7 +75,7 @@ const ColumnsSetting = <T,>({ columns, filterColumns }: ColumnsSettingProps<T>) 
                 </Checkbox.Group>
             </Modal>
         );
-    }, [visible, columnsHideList]);
+    }, [visible, columnsShowList]);
 
     const showModal = useCallback(() => {
         setVisibleProps(true);
@@ -86,7 +90,7 @@ const ColumnsSetting = <T,>({ columns, filterColumns }: ColumnsSettingProps<T>) 
                 {modal}
             </>
         );
-    }, [visible, columnsHideList]);
+    }, [visible, columnsShowList]);
 };
 
 export default ColumnsSetting;

@@ -21,49 +21,55 @@ var ColumnsSetting = function ColumnsSetting(_a) {
       setVisibleProps = _b.setVisibleProps,
       onClose = _b.onClose;
 
-  var cacheColumnsHideList = useRef([]);
+  var cacheColumnsShowList = useRef([]);
 
-  var _c = useState([]),
-      columnsHideList = _c[0],
-      setColumnsHideList = _c[1]; // 列
+  var _c = useState(columns.map(function (column) {
+    return column.dataIndex;
+  })),
+      columnsShowList = _c[0],
+      setColumnsShowList = _c[1]; // 列
   // 重新初始化
 
 
   useEffect(function () {
-    cacheColumnsHideList.current = [];
-    setColumnsHideList([]);
+    var keys = columns.map(function (column) {
+      return column.dataIndex;
+    });
+    cacheColumnsShowList.current = keys;
+    setColumnsShowList(keys);
   }, [columns]); // drop修改
 
   useEffect(function () {
     if (visible) {
-      setColumnsHideList(cacheColumnsHideList.current);
+      setColumnsShowList(cacheColumnsShowList.current);
     }
   }, [visible]);
   var onChange = useCallback(function (checkedValue) {
-    setColumnsHideList(checkedValue);
+    setColumnsShowList(checkedValue);
   }, []);
   var onSave = useCallback(function () {
-    cacheColumnsHideList.current = columnsHideList;
+    cacheColumnsShowList.current = columnsShowList;
     var list = {};
-    columnsHideList.map(function (value) {
+    columnsShowList.map(function (value) {
       list[value] = true;
     });
     filterColumns(columns.filter(function (column) {
-      return !list[column.dataIndex];
+      return list[column.dataIndex];
     }));
     onClose();
-  }, [columnsHideList, columns]);
+  }, [columnsShowList, columns]);
   var modal = useMemo(function () {
     return React.createElement(_Modal, {
       title: "\u81EA\u5B9A\u4E49\u5B57\u6BB5\u5C55\u793A",
-      cancelText: "\u8FD8\u539F\u9ED8\u8BA4",
+      cancelText: "\u4E0D\u4FDD\u5B58",
       okText: "\u4FDD\u5B58",
       onOk: onSave,
       onCancel: onClose,
-      visible: !!visible
+      visible: !!visible,
+      className: styles.settingModal
     }, React.createElement(_Checkbox.Group, {
       onChange: onChange,
-      value: columnsHideList
+      value: columnsShowList
     }, React.createElement(_Row, null, columns.map(function (column) {
       return React.createElement(_Col, {
         span: 4,
@@ -72,7 +78,7 @@ var ColumnsSetting = function ColumnsSetting(_a) {
         value: column.dataIndex
       }, column.title));
     }))));
-  }, [visible, columnsHideList]);
+  }, [visible, columnsShowList]);
   var showModal = useCallback(function () {
     setVisibleProps(true);
   }, []);
@@ -82,7 +88,7 @@ var ColumnsSetting = function ColumnsSetting(_a) {
       size: "small",
       onClick: showModal
     }, "\u81EA\u5B9A\u4E49\u5C55\u793A\u5B57\u6BB5"), modal);
-  }, [visible, columnsHideList]);
+  }, [visible, columnsShowList]);
 };
 
 export default ColumnsSetting;
