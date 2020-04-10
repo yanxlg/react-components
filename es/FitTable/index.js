@@ -32,10 +32,10 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import { useScrollXY } from './hooks';
 import styles from './_index.less';
-import ColumnsSetting from './ColumnsSetting';
+import ColumnsSettingWrap from './ColumnsSettingWrap';
 export var showTotal = function showTotal(total) {
   return React.createElement("span", null, "\u5171\u6709", total, "\u6761");
 };
@@ -56,20 +56,10 @@ function FitTable(_a) {
       propsScroll = _a.scroll,
       onChange = _a.onChange,
       pagination = _a.pagination,
-      _f = _a.showColumnsSetting,
-      showColumnsSetting = _f === void 0 ? false : _f,
-      props = __rest(_a, ["bottom", "minHeight", "autoFitY", "columns", "rowSelection", "scroll", "onChange", "pagination", "showColumnsSetting"]);
+      props = __rest(_a, ["bottom", "minHeight", "autoFitY", "columns", "rowSelection", "scroll", "onChange", "pagination"]);
 
   var ref = useRef(null);
-
-  var _g = useState(columns),
-      filterColumns = _g[0],
-      setFilterColumns = _g[1];
-
-  var scroll = useScrollXY(ref, bottom, minHeight, autoFitY, showColumnsSetting ? filterColumns : columns, rowSelection, propsScroll);
-  useEffect(function () {
-    setFilterColumns(columns);
-  }, [columns]);
+  var scroll = useScrollXY(ref, bottom, minHeight, autoFitY, columns, rowSelection, propsScroll);
   var onPaginationChange = useCallback(function (page, filters, sorter, extra) {
     if (!pagination) {
       onChange && onChange(page, filters, sorter, extra);
@@ -93,35 +83,37 @@ function FitTable(_a) {
       onChange && onChange(page, filters, sorter, extra);
     }
   }, [pagination]);
-  var onFilterColumns = useCallback(function (columns) {
-    setFilterColumns(columns);
-  }, []);
-
-  var _columns = showColumnsSetting ? filterColumns : columns;
-
-  var setting = useMemo(function () {
-    return React.createElement(ColumnsSetting, {
-      columns: columns,
-      filterColumns: onFilterColumns
-    });
-  }, [_columns]);
   return useMemo(function () {
     return React.createElement("div", {
-      ref: ref,
-      className: styles.relative
-    }, showColumnsSetting ? setting : null, React.createElement(_Table, __assign({
+      ref: ref
+    }, React.createElement(_Table, __assign({
       scroll: scroll,
-      columns: _columns,
+      columns: columns,
       rowSelection: rowSelection
     }, props, {
       pagination: pagination,
       onChange: onChange ? onPaginationChange : undefined
     })));
-  }, [props, propsScroll, rowSelection, _columns, pagination, onChange]);
+  }, [props, propsScroll, rowSelection, columns, pagination, onChange]);
 }
 
-FitTable.showTotal = showTotal;
-FitTable.goButton = goButton;
-FitTable.useScrollXY = useScrollXY;
-export default FitTable;
+function FitTableWrap(_a) {
+  var columnsSettingRender = _a.columnsSettingRender,
+      props = __rest(_a, ["columnsSettingRender"]);
+
+  return useMemo(function () {
+    if (columnsSettingRender) {
+      return React.createElement(ColumnsSettingWrap, __assign({}, props, {
+        columnsSettingRender: columnsSettingRender
+      }));
+    } else {
+      return React.createElement(FitTable, __assign({}, props));
+    }
+  }, [props]);
+}
+
+FitTableWrap.showTotal = showTotal;
+FitTableWrap.goButton = goButton;
+FitTableWrap.useScrollXY = useScrollXY;
+export default FitTableWrap;
 export { useScrollXY };

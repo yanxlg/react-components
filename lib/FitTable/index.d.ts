@@ -1,19 +1,19 @@
 /// <reference types="react" />
 import { TableProps } from 'antd/lib/table';
 import { useScrollXY } from './hooks';
-declare interface IFitTableProps<T> extends TableProps<T> {
+import { ColumnsSettingProps } from './ColumnsSetting';
+export declare interface IFitTableProps<T> extends TableProps<T>, Partial<Pick<ColumnsSettingProps<T>, 'columnsSettingRender' | 'resetColumnsSetting'>> {
     bottom?: number;
     minHeight?: number;
     autoFitY?: boolean;
-    showColumnsSetting?: boolean;
 }
 export declare const showTotal: (total: number) => JSX.Element;
 export declare const goButton: JSX.Element;
-declare function FitTable<T extends object>({ bottom, minHeight, autoFitY, columns, rowSelection, scroll: propsScroll, onChange, pagination, showColumnsSetting, ...props }: IFitTableProps<T>): JSX.Element;
-declare namespace FitTable {
+declare function FitTableWrap<T extends object = any>({ columnsSettingRender, ...props }: IFitTableProps<T>): JSX.Element;
+declare namespace FitTableWrap {
     var showTotal: (total: number) => JSX.Element;
     var goButton: JSX.Element;
     var useScrollXY: typeof import("./hooks").useScrollXY;
 }
-export default FitTable;
+export default FitTableWrap;
 export { useScrollXY };

@@ -1,4 +1,4 @@
-import React, { Key, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { Key, useCallback, useMemo, useRef } from 'react';
 import { Table, Button } from 'antd';
 import { TableProps } from 'antd/lib/table';
 import { useScrollXY } from './hooks';
@@ -9,14 +9,15 @@ import {
     TableCurrentDataSource,
     TablePaginationConfig,
 } from 'antd/es/table/interface';
-import { ColumnType } from 'antd/lib/table/interface';
-import ColumnsSetting from './ColumnsSetting';
+import ColumnsSettingWrap from './ColumnsSettingWrap';
+import { ColumnsSettingProps } from './ColumnsSetting';
 
-declare interface IFitTableProps<T> extends TableProps<T> {
+export declare interface IFitTableProps<T>
+    extends TableProps<T>,
+        Partial<Pick<ColumnsSettingProps<T>, 'columnsSettingRender' | 'resetColumnsSetting'>> {
     bottom?: number;
     minHeight?: number;
     autoFitY?: boolean;
-    showColumnsSetting?: boolean;
 }
 
 export const showTotal = (total: number) => {
@@ -25,7 +26,7 @@ export const showTotal = (total: number) => {
 
 export const goButton = <Button className={styles.btnGo}>Go</Button>;
 
-function FitTable<T extends object>({
+function FitTable<T extends object = any>({
     bottom = 0,
     minHeight = 500,
     autoFitY = true,
@@ -34,26 +35,18 @@ function FitTable<T extends object>({
     scroll: propsScroll,
     onChange,
     pagination,
-    showColumnsSetting = false,
     ...props
 }: IFitTableProps<T>) {
     const ref = useRef<HTMLDivElement>(null);
-
-    const [filterColumns, setFilterColumns] = useState<Array<ColumnType<T>>>(columns);
-
     const scroll = useScrollXY(
         ref,
         bottom,
         minHeight,
         autoFitY,
-        showColumnsSetting ? filterColumns : columns,
+        columns,
         rowSelection,
         propsScroll,
     );
-
-    useEffect(() => {
-        setFilterColumns(columns);
-    }, [columns]);
 
     const onPaginationChange = useCallback(
         (
@@ -81,23 +74,12 @@ function FitTable<T extends object>({
         [pagination],
     );
 
-    const onFilterColumns = useCallback((columns: Array<ColumnType<T>>) => {
-        setFilterColumns(columns);
-    }, []);
-
-    const _columns = showColumnsSetting ? filterColumns : columns;
-
-    const setting = useMemo(() => {
-        return <ColumnsSetting columns={columns} filterColumns={onFilterColumns} />;
-    }, [_columns]);
-
     return useMemo(() => {
         return (
-            <div ref={ref} className={styles.relative}>
-                {showColumnsSetting ? setting : null}
+            <div ref={ref}>
                 <Table<T>
                     scroll={scroll}
-                    columns={_columns}
+                    columns={columns}
                     rowSelection={rowSelection}
                     {...props}
                     pagination={pagination}
@@ -105,13 +87,26 @@ function FitTable<T extends object>({
                 />
             </div>
         );
-    }, [props, propsScroll, rowSelection, _columns, pagination, onChange]);
+    }, [props, propsScroll, rowSelection, columns, pagination, onChange]);
 }
 
-FitTable.showTotal = showTotal;
-FitTable.goButton = goButton;
-FitTable.useScrollXY = useScrollXY;
+function FitTableWrap<T extends object = any>({
+    columnsSettingRender,
+    ...props
+}: IFitTableProps<T>) {
+    return useMemo(() => {
+        if (columnsSettingRender) {
+            return <ColumnsSettingWrap {...props} columnsSettingRender={columnsSettingRender} />;
+        } else {
+            return <FitTable {...props} />;
+        }
+    }, [props]);
+}
 
-export default FitTable;
+FitTableWrap.showTotal = showTotal;
+FitTableWrap.goButton = goButton;
+FitTableWrap.useScrollXY = useScrollXY;
+
+export default FitTableWrap;
 
 export { useScrollXY };

@@ -14,7 +14,9 @@ import styles from './_index.less';
 
 var ColumnsSetting = function ColumnsSetting(_a) {
   var columns = _a.columns,
-      filterColumns = _a.filterColumns;
+      ColumnsSettingRender = _a.columnsSettingRender,
+      resetColumnsSetting = _a.resetColumnsSetting,
+      onColumnsChange = _a.onColumnsChange;
 
   var _b = useModal(),
       visible = _b.visible,
@@ -24,7 +26,7 @@ var ColumnsSetting = function ColumnsSetting(_a) {
   var cacheColumnsShowList = useRef([]);
 
   var _c = useState(columns.map(function (column) {
-    return column.dataIndex;
+    return column['dataIndex'];
   })),
       columnsShowList = _c[0],
       setColumnsShowList = _c[1]; // 列
@@ -33,7 +35,7 @@ var ColumnsSetting = function ColumnsSetting(_a) {
 
   useEffect(function () {
     var keys = columns.map(function (column) {
-      return column.dataIndex;
+      return column['dataIndex'];
     });
     cacheColumnsShowList.current = keys;
     setColumnsShowList(keys);
@@ -53,31 +55,50 @@ var ColumnsSetting = function ColumnsSetting(_a) {
     columnsShowList.map(function (value) {
       list[value] = true;
     });
-    filterColumns(columns.filter(function (column) {
-      return list[column.dataIndex];
+    onColumnsChange(columns.filter(function (column) {
+      return list[column['dataIndex']];
     }));
     onClose();
   }, [columnsShowList, columns]);
+  var onCancel = useCallback(function () {
+    if (resetColumnsSetting) {
+      //重置
+      var keys = columns.map(function (column) {
+        return column['dataIndex'];
+      });
+      cacheColumnsShowList.current = keys;
+      setColumnsShowList(keys);
+      onColumnsChange(columns);
+      onClose();
+    } else {
+      onClose();
+    }
+  }, []);
   var modal = useMemo(function () {
     return React.createElement(_Modal, {
       title: "\u81EA\u5B9A\u4E49\u5B57\u6BB5\u5C55\u793A",
-      cancelText: "\u4E0D\u4FDD\u5B58",
+      cancelText: resetColumnsSetting ? '还原默认' : '不保存',
       okText: "\u4FDD\u5B58",
       onOk: onSave,
-      onCancel: onClose,
+      onCancel: onCancel,
       visible: !!visible,
       className: styles.settingModal
-    }, React.createElement(_Checkbox.Group, {
+    }, ColumnsSettingRender === true ? React.createElement(_Checkbox.Group, {
       onChange: onChange,
       value: columnsShowList
-    }, React.createElement(_Row, null, columns.map(function (column) {
+    }, React.createElement(_Row, {
+      gutter: [0, 5]
+    }, columns.map(function (column) {
+      var dataIndex = column['dataIndex'];
       return React.createElement(_Col, {
         span: 4,
-        key: column.dataIndex
+        key: dataIndex
       }, React.createElement(_Checkbox, {
-        value: column.dataIndex
+        value: dataIndex
       }, column.title));
-    }))));
+    }))) : React.createElement(ColumnsSettingRender, {
+      onChange: onChange
+    }));
   }, [visible, columnsShowList]);
   var showModal = useCallback(function () {
     setVisibleProps(true);
