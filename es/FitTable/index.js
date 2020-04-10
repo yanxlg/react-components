@@ -109,7 +109,7 @@ function FitTable(_a) {
     return React.createElement("div", {
       ref: ref,
       className: styles.relative
-    }, setting, React.createElement(_Table, __assign({
+    }, showColumnsSetting ? setting : null, React.createElement(_Table, __assign({
       scroll: scroll,
       columns: _columns,
       rowSelection: rowSelection

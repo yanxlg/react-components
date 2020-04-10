@@ -94,7 +94,7 @@ function FitTable<T extends object>({
     return useMemo(() => {
         return (
             <div ref={ref} className={styles.relative}>
-                {setting}
+                {showColumnsSetting ? setting : null}
                 <Table<T>
                     scroll={scroll}
                     columns={_columns}
