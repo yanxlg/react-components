@@ -2,9 +2,10 @@
 import { CustomFormProps, FormItemName } from "../index";
 import { FormItemLabelProps } from "antd/es/form/FormItemLabel";
 import { FormInstance, Rule } from "antd/es/form";
-import { Moment } from "moment";
-import { transNullValue, transStartDate } from "../utils";
+import { Dayjs } from "dayjs";
+import { transNullValue } from "../utils";
 import { PickerProps } from "antd/es/date-picker/generatePicker";
+import { startDateToUnix } from "../../utils/date";
 export declare type DatePickerFormatter = "start_date" | "end_date";
 export declare type DatePickerType = "datePicker";
 export declare type DatePickerProps<T = string> = FormItemLabelProps & CustomFormProps & {
@@ -19,10 +20,10 @@ export declare type DatePickerProps<T = string> = FormItemLabelProps & CustomFor
     dateEndWith?: Array<FormItemName<T> | "now">;
     formatter?: DatePickerFormatter;
     rules?: Rule[];
-} & Omit<PickerProps<Moment>, "onChange">;
+} & Omit<PickerProps<Dayjs>, "onChange">;
 declare const FormDatePicker: {
     (props: DatePickerProps<string>): JSX.Element;
     typeList: string[];
-    formatter(formatter?: DatePickerFormatter): typeof transNullValue | typeof transStartDate;
+    formatter(formatter?: DatePickerFormatter): typeof transNullValue | typeof startDateToUnix;
 };
 export default FormDatePicker;

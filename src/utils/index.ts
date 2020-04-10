@@ -4,3 +4,7 @@ export const isEmptyObject = (target: object) => {
 
 export const EmptyObject: { [key: string]: any } = {};
 export const EmptyArray: any[] = [];
+
+export function isNumber(value?: string | number) {
+    return /^\d+$/.test(String(value));
+}

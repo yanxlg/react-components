@@ -3,10 +3,11 @@ import React, { useCallback, useMemo } from "react";
 import { CustomFormProps, FormItemName } from "../index";
 import { FormItemLabelProps } from "antd/es/form/FormItemLabel";
 import { FormInstance, Rule } from "antd/es/form";
-import moment, { Moment } from "moment";
-import { transNullValue, transEndDate, transStartDate } from "../utils";
+import dayjs, { Dayjs } from "dayjs";
+import { transNullValue } from "../utils";
 import formStyles from "../_form.less";
 import { PickerProps } from "antd/es/date-picker/generatePicker";
+import { startDateToUnix, endDateToUnix } from "../../utils/date";
 
 export type DatePickerFormatter = "start_date" | "end_date";
 
@@ -26,7 +27,7 @@ export type DatePickerProps<T = string> = FormItemLabelProps &
         dateEndWith?: Array<FormItemName<T> | "now">;
         formatter?: DatePickerFormatter;
         rules?: Rule[];
-    } & Omit<PickerProps<Moment>, "onChange">;
+    } & Omit<PickerProps<Dayjs>, "onChange">;
 
 const FormDatePicker = (props: DatePickerProps) => {
     const {
@@ -47,11 +48,11 @@ const FormDatePicker = (props: DatePickerProps) => {
         if (!dateBeginWith || dateBeginWith.length === 0) {
             return undefined;
         }
-        return (startTime: Moment | null) => {
+        return (startTime: Dayjs | null) => {
             let timeMax: number | undefined = undefined;
             // 取最小值=> endOf('d');
             dateBeginWith.map(dependence => {
-                const date = dependence === "now" ? moment() : form.getFieldValue(dependence);
+                const date = dependence === "now" ? dayjs() : form.getFieldValue(dependence);
                 if (date) {
                     const time = date.startOf("day").valueOf();
                     if ((timeMax && time < timeMax) || timeMax === void 0) {
@@ -70,11 +71,11 @@ const FormDatePicker = (props: DatePickerProps) => {
         if (!dateEndWith || dateEndWith.length === 0) {
             return undefined;
         }
-        return (endTime: Moment | null) => {
+        return (endTime: Dayjs | null) => {
             let timeMax: number | undefined = undefined;
             // 取最大值=> startOf('d');
             dateEndWith.map(dependence => {
-                const date = dependence === "now" ? moment() : form.getFieldValue(dependence);
+                const date = dependence === "now" ? dayjs() : form.getFieldValue(dependence);
                 if (date) {
                     const time = date.endOf("day").valueOf();
                     if ((timeMax && time < timeMax) || timeMax === void 0) {
@@ -117,6 +118,7 @@ const FormDatePicker = (props: DatePickerProps) => {
             <DatePicker
                 className={className}
                 placeholder={placeholder}
+                // @ts-ignore
                 disabledDate={disabledDate}
                 {...eventProps}
             />
@@ -129,9 +131,9 @@ FormDatePicker.typeList = typeList;
 FormDatePicker.formatter = (formatter?: DatePickerFormatter) => {
     return formatter
         ? formatter === "start_date"
-            ? transStartDate
+            ? startDateToUnix
             : formatter === "end_date"
-            ? transEndDate
+            ? endDateToUnix
             : transNullValue
         : transNullValue;
 };

@@ -20,9 +20,10 @@ var __assign = this && this.__assign || function () {
 };
 
 import React, { useCallback, useMemo } from "react";
-import moment from "moment";
-import { transNullValue, transEndDate, transStartDate } from "../utils";
+import dayjs from "dayjs";
+import { transNullValue } from "../utils";
 import formStyles from "../_form.less";
+import { startDateToUnix, endDateToUnix } from "../../utils/date";
 var typeList = ["datePicker"];
 
 var FormDatePicker = function FormDatePicker(props) {
@@ -48,7 +49,7 @@ var FormDatePicker = function FormDatePicker(props) {
       var timeMax = undefined; // 取最小值=> endOf('d');
 
       dateBeginWith.map(function (dependence) {
-        var date = dependence === "now" ? moment() : form.getFieldValue(dependence);
+        var date = dependence === "now" ? dayjs() : form.getFieldValue(dependence);
 
         if (date) {
           var time = date.startOf("day").valueOf();
@@ -75,7 +76,7 @@ var FormDatePicker = function FormDatePicker(props) {
       var timeMax = undefined; // 取最大值=> startOf('d');
 
       dateEndWith.map(function (dependence) {
-        var date = dependence === "now" ? moment() : form.getFieldValue(dependence);
+        var date = dependence === "now" ? dayjs() : form.getFieldValue(dependence);
 
         if (date) {
           var time = date.endOf("day").valueOf();
@@ -113,6 +114,7 @@ var FormDatePicker = function FormDatePicker(props) {
   }, React.createElement(_DatePicker, __assign({
     className: className,
     placeholder: placeholder,
+    // @ts-ignore
     disabledDate: disabledDate
   }, eventProps)));
 };
@@ -120,7 +122,7 @@ var FormDatePicker = function FormDatePicker(props) {
 FormDatePicker.typeList = typeList;
 
 FormDatePicker.formatter = function (formatter) {
-  return formatter ? formatter === "start_date" ? transStartDate : formatter === "end_date" ? transEndDate : transNullValue : transNullValue;
+  return formatter ? formatter === "start_date" ? startDateToUnix : formatter === "end_date" ? endDateToUnix : transNullValue : transNullValue;
 };
 
 export default FormDatePicker;

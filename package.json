@@ -1,6 +1,6 @@
 {
   "name": "react-components",
-  "version": "0.0.4-alpha.24",
+  "version": "0.0.4-alpha.26",
   "description": "",
   "repository": {
     "type": "git",
@@ -29,13 +29,14 @@
     "dist"
   ],
   "dependencies": {
-    "antd": "^4.0.0",
+    "antd": "^4.1.1",
     "@ant-design/icons": "^4.0.2",
     "react-lazyload": "^2.6.6",
     "dnd-core": "^10.0.2",
     "react-dnd": "^10.0.2",
     "react-dnd-html5-backend": "^10.0.2",
-    "react-highlight-words": "^0.16.0"
+    "react-highlight-words": "^0.16.0",
+    "dayjs": "^1.8.23"
   },
   "devDependencies": {
     "@types/react-highlight-words": "^0.16.1",

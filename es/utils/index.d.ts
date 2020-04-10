@@ -3,3 +3,4 @@ export declare const EmptyObject: {
     [key: string]: any;
 };
 export declare const EmptyArray: any[];
+export declare function isNumber(value?: string | number): boolean;

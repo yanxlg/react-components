@@ -3,9 +3,10 @@ import React, { useMemo } from "react";
 import { CustomFormProps, FormItemName } from "../index";
 import { FormItemLabelProps } from "antd/es/form/FormItemLabel";
 import { FormInstance, Rule } from "antd/es/form";
-import { transNullValue, transEndDate, transStartDate } from "../utils";
+import { transNullValue } from "../utils";
 import formStyles from "../_form.less";
 import classNames from "classnames";
+import { startDateToUnix, endDateToUnix } from "../../utils/date";
 
 export type DateRangerFormatter = "start_date" | "end_date";
 
@@ -139,9 +140,9 @@ FormDateRanger.typeList = typeList;
 FormDateRanger.formatter = (formatter?: DateRangerFormatter) => {
     return formatter
         ? formatter === "start_date"
-            ? transStartDate
+            ? startDateToUnix
             : formatter === "end_date"
-            ? transEndDate
+            ? endDateToUnix
             : transNullValue
         : transNullValue;
 };

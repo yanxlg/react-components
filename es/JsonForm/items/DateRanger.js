@@ -20,9 +20,10 @@ var __assign = this && this.__assign || function () {
 };
 
 import React, { useMemo } from "react";
-import { transNullValue, transEndDate, transStartDate } from "../utils";
+import { transNullValue } from "../utils";
 import formStyles from "../_form.less";
 import classNames from "classnames";
+import { startDateToUnix, endDateToUnix } from "../../utils/date";
 var typeList = ["dateRanger"];
 
 var FormDateRanger = function FormDateRanger(props) {
@@ -104,7 +105,7 @@ var FormDateRanger = function FormDateRanger(props) {
 FormDateRanger.typeList = typeList;
 
 FormDateRanger.formatter = function (formatter) {
-  return formatter ? formatter === "start_date" ? transStartDate : formatter === "end_date" ? transEndDate : transNullValue : transNullValue;
+  return formatter ? formatter === "start_date" ? startDateToUnix : formatter === "end_date" ? endDateToUnix : transNullValue : transNullValue;
 };
 
 export default FormDateRanger;

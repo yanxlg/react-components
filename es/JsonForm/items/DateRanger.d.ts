@@ -2,7 +2,8 @@
 import { CustomFormProps, FormItemName } from "../index";
 import { FormItemLabelProps } from "antd/es/form/FormItemLabel";
 import { FormInstance, Rule } from "antd/es/form";
-import { transNullValue, transStartDate } from "../utils";
+import { transNullValue } from "../utils";
+import { startDateToUnix } from "../../utils/date";
 export declare type DateRangerFormatter = "start_date" | "end_date";
 export declare type DateRangerType = "dateRanger";
 export declare type DateRangerProps<T = string> = FormItemLabelProps & CustomFormProps & {
@@ -19,6 +20,6 @@ export declare type DateRangerProps<T = string> = FormItemLabelProps & CustomFor
 declare const FormDateRanger: {
     (props: DateRangerProps<string>): JSX.Element;
     typeList: string[];
-    formatter(formatter?: import("./DatePicker").DatePickerFormatter): typeof transNullValue | typeof transStartDate;
+    formatter(formatter?: import("./DatePicker").DatePickerFormatter): typeof transNullValue | typeof startDateToUnix;
 };
 export default FormDateRanger;

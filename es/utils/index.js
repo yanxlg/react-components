@@ -3,3 +3,6 @@ export var isEmptyObject = function isEmptyObject(target) {
 };
 export var EmptyObject = {};
 export var EmptyArray = [];
+export function isNumber(value) {
+  return /^\d+$/.test(String(value));
+}
