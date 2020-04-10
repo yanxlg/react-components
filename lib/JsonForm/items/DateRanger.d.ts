@@ -6,20 +6,23 @@ import { transNullValue } from "../utils";
 import { startDateToUnix } from "../../utils/date";
 export declare type DateRangerFormatter = "start_date" | "end_date";
 export declare type DateRangerType = "dateRanger";
-export declare type DateRangerProps<T = string> = FormItemLabelProps & CustomFormProps & {
-    form: FormInstance;
-    type: DateRangerType;
-    placeholder?: string;
-    className?: string;
-    formItemClassName?: string;
-    onChange?: (name: FormItemName<T>, form: FormInstance) => void;
-    name: [FormItemName<T>, FormItemName<T>];
-    formatter?: [DateRangerFormatter, DateRangerFormatter];
-    rules?: [Rule[], Rule[]];
-};
+export declare type DateRangerProps<T = string> = FormItemLabelProps &
+    CustomFormProps & {
+        form: FormInstance;
+        type: DateRangerType;
+        placeholder?: string;
+        className?: string;
+        formItemClassName?: string;
+        onChange?: (name: FormItemName<T>, form: FormInstance) => void;
+        name: [FormItemName<T>, FormItemName<T>];
+        formatter?: [DateRangerFormatter, DateRangerFormatter];
+        rules?: [Rule[], Rule[]];
+    };
 declare const FormDateRanger: {
     (props: DateRangerProps<string>): JSX.Element;
     typeList: string[];
-    formatter(formatter?: import("./DatePicker").DatePickerFormatter): typeof transNullValue | typeof startDateToUnix;
+    formatter(
+        formatter?: import("./DatePicker").DatePickerFormatter,
+    ): typeof transNullValue | typeof startDateToUnix;
 };
 export default FormDateRanger;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 export interface CardProps {
     id: any;
     index: number;

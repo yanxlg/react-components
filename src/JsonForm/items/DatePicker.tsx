@@ -118,7 +118,6 @@ const FormDatePicker = (props: DatePickerProps) => {
             <DatePicker
                 className={className}
                 placeholder={placeholder}
-                // @ts-ignore
                 disabledDate={disabledDate}
                 {...eventProps}
             />

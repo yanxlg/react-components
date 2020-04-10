@@ -1,5 +1,5 @@
-import React from 'react';
-import { InputNumberProps } from 'antd/lib/input-number';
+import React from "react";
+import { InputNumberProps } from "antd/lib/input-number";
 declare interface IIntegerInputProps extends InputNumberProps {
     positive?: boolean;
 }
