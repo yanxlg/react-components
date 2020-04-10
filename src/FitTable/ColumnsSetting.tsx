@@ -4,6 +4,7 @@ import { Button, Checkbox, Col, Modal, Row } from 'antd';
 import useModal from '../hooks/useModal';
 import { ColumnType } from 'antd/lib/table/interface';
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
+import styles from './_index.less';
 
 declare interface ColumnsSettingProps<T> {
     columns: Array<ColumnType<T>>;
@@ -55,12 +56,13 @@ const ColumnsSetting = <T,>({ columns, filterColumns }: ColumnsSettingProps<T>) 
                 okText="保存"
                 onOk={onSave}
                 onCancel={onClose}
+                visible={!!visible}
             >
                 <Checkbox.Group onChange={onChange} value={columnsHideList}>
                     <Row>
                         {columns.map(column => {
                             return (
-                                <Col span={4}>
+                                <Col span={4} key={column.dataIndex as string}>
                                     <Checkbox value={column.dataIndex}>{column.title}</Checkbox>
                                 </Col>
                             );
@@ -78,7 +80,9 @@ const ColumnsSetting = <T,>({ columns, filterColumns }: ColumnsSettingProps<T>) 
     return useMemo(() => {
         return (
             <>
-                <Button onClick={showModal}>自定义展示字段</Button>
+                <Button className={styles.settingBtn} size="small" onClick={showModal}>
+                    自定义展示字段
+                </Button>
                 {modal}
             </>
         );

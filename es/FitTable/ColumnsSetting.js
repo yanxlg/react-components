@@ -10,6 +10,7 @@ import "antd/es/modal/style/css";
 import _Modal from "antd/es/modal";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import useModal from '../hooks/useModal';
+import styles from './_index.less';
 
 var ColumnsSetting = function ColumnsSetting(_a) {
   var columns = _a.columns,
@@ -58,13 +59,15 @@ var ColumnsSetting = function ColumnsSetting(_a) {
       cancelText: "\u8FD8\u539F\u9ED8\u8BA4",
       okText: "\u4FDD\u5B58",
       onOk: onSave,
-      onCancel: onClose
+      onCancel: onClose,
+      visible: !!visible
     }, React.createElement(_Checkbox.Group, {
       onChange: onChange,
       value: columnsHideList
     }, React.createElement(_Row, null, columns.map(function (column) {
       return React.createElement(_Col, {
-        span: 4
+        span: 4,
+        key: column.dataIndex
       }, React.createElement(_Checkbox, {
         value: column.dataIndex
       }, column.title));
@@ -75,6 +78,8 @@ var ColumnsSetting = function ColumnsSetting(_a) {
   }, []);
   return useMemo(function () {
     return React.createElement(React.Fragment, null, React.createElement(_Button, {
+      className: styles.settingBtn,
+      size: "small",
       onClick: showModal
     }, "\u81EA\u5B9A\u4E49\u5C55\u793A\u5B57\u6BB5"), modal);
   }, [visible, columnsHideList]);
