@@ -4,6 +4,8 @@ import utc from "dayjs/plugin/utc";
 
 dayjs.extend(utc);
 
+export { dayjs };
+
 const dateFormat = "YYYY-MM-DD HH:mm:ss";
 
 export function unixToStartDate(unix: number) {
