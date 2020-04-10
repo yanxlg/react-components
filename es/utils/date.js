@@ -2,7 +2,6 @@ import dayjs from "dayjs";
 import { isNumber } from "./index";
 import utc from "dayjs/plugin/utc";
 dayjs.extend(utc);
-export { dayjs };
 var dateFormat = "YYYY-MM-DD HH:mm:ss";
 export function unixToStartDate(unix) {
   return !unix ? undefined : dayjs.unix(unix);

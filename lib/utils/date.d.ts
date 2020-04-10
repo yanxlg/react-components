@@ -1,5 +1,4 @@
 import dayjs, { Dayjs } from "dayjs";
-export { dayjs };
 export declare function unixToStartDate(unix: number): dayjs.Dayjs;
 export declare function unixToEndDate(unix: number): dayjs.Dayjs;
 export declare function startDateToUnix(moment?: Dayjs): number | undefined;
