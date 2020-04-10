@@ -61,12 +61,12 @@ function FitTable(_a) {
       props = __rest(_a, ["bottom", "minHeight", "autoFitY", "columns", "rowSelection", "scroll", "onChange", "pagination", "showColumnsSetting"]);
 
   var ref = useRef(null);
-  var scroll = useScrollXY(ref, bottom, minHeight, autoFitY, columns, rowSelection, propsScroll);
 
   var _g = useState(columns),
       filterColumns = _g[0],
       setFilterColumns = _g[1];
 
+  var scroll = useScrollXY(ref, bottom, minHeight, autoFitY, showColumnsSetting ? columns : filterColumns, rowSelection, propsScroll);
   useEffect(function () {
     setFilterColumns(columns);
   }, [columns]);
@@ -95,7 +95,7 @@ function FitTable(_a) {
   }, [pagination]);
   var onFilterColumns = useCallback(function (columns) {
     setFilterColumns(columns);
-  }, [columns]);
+  }, []);
 
   var _columns = showColumnsSetting ? filterColumns : columns;
 

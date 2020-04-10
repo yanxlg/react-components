@@ -38,17 +38,18 @@ function FitTable<T extends object>({
     ...props
 }: IFitTableProps<T>) {
     const ref = useRef<HTMLDivElement>(null);
+
+    const [filterColumns, setFilterColumns] = useState<Array<ColumnType<T>>>(columns);
+
     const scroll = useScrollXY(
         ref,
         bottom,
         minHeight,
         autoFitY,
-        columns,
+        showColumnsSetting ? columns : filterColumns,
         rowSelection,
         propsScroll,
     );
-
-    const [filterColumns, setFilterColumns] = useState<Array<ColumnType<T>>>(columns);
 
     useEffect(() => {
         setFilterColumns(columns);
@@ -80,12 +81,9 @@ function FitTable<T extends object>({
         [pagination],
     );
 
-    const onFilterColumns = useCallback(
-        (columns: Array<ColumnType<T>>) => {
-            setFilterColumns(columns);
-        },
-        [columns],
-    );
+    const onFilterColumns = useCallback((columns: Array<ColumnType<T>>) => {
+        setFilterColumns(columns);
+    }, []);
 
     const _columns = showColumnsSetting ? filterColumns : columns;
 
