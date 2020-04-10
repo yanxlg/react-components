@@ -66,7 +66,7 @@ function FitTable(_a) {
       filterColumns = _g[0],
       setFilterColumns = _g[1];
 
-  var scroll = useScrollXY(ref, bottom, minHeight, autoFitY, showColumnsSetting ? columns : filterColumns, rowSelection, propsScroll);
+  var scroll = useScrollXY(ref, bottom, minHeight, autoFitY, showColumnsSetting ? filterColumns : columns, rowSelection, propsScroll);
   useEffect(function () {
     setFilterColumns(columns);
   }, [columns]);

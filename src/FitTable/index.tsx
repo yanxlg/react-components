@@ -46,7 +46,7 @@ function FitTable<T extends object>({
         bottom,
         minHeight,
         autoFitY,
-        showColumnsSetting ? columns : filterColumns,
+        showColumnsSetting ? filterColumns : columns,
         rowSelection,
         propsScroll,
     );
