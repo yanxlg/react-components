@@ -20,11 +20,18 @@
     font-size: 12px;
     opacity: 0;
     transition: opacity 240ms ease-in-out;
+    pointer-events: none;
+    top: -8px;
+    &:hover{
+        opacity: 1;
+        pointer-events: all;
+    }
 }
 
 :global [data-show-setting]{
     & > :local(.setting-btn){
         opacity: 1;
+        pointer-events: all;
     }
 }
 
