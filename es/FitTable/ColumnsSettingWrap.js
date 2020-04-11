@@ -39,7 +39,9 @@ var ColumnsSettingWrap = function ColumnsSettingWrap(_a) {
       props = __rest(_a, ["columns", "columnsSettingRender", "resetColumnsSetting"]);
 
   var filterColumns = useRef(columns);
-  filterColumns.current = columns;
+  useMemo(function () {
+    filterColumns.current = columns; // 强制覆盖仅当columns变化时
+  }, [columns]);
 
   var _b = useState(false),
       reload = _b[0],

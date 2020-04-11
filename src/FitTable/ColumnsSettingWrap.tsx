@@ -11,7 +11,11 @@ const ColumnsSettingWrap = <T extends object = any>({
     ...props
 }: IFitTableProps<T>) => {
     const filterColumns = useRef<TableProps<T>['columns']>(columns);
-    filterColumns.current = columns;
+
+    useMemo(() => {
+        filterColumns.current = columns; // 强制覆盖仅当columns变化时
+    }, [columns]);
+
     const [reload, setReload] = useState(false);
 
     const setFilterColumns = useCallback(
