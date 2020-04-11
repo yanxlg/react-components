@@ -9,6 +9,7 @@ import ColumnsSettingWrap from './ColumnsSettingWrap';
 import { ColumnsSettingProps } from './ColumnsSetting';
 import { EmptyArray, EmptyObject } from '../utils';
 import { defaultPageSizeOptions } from '../ProTable/config';
+import formStyles from '../JsonForm/_form.less';
 
 export declare interface IFitTableProps<T>
     extends TableProps<T>,
@@ -111,7 +112,7 @@ function FitTable<T extends object = any>({
     const paginationTopContainer = useMemo(() => {
         const top = pagination && pagination.position && pagination.position.includes('topRight'); // 需要有top配置，默认不显示
         return top ? (
-            <Row>
+            <Row className={formStyles.formItem}>
                 <Col flex={1} />
                 <Col>{paginationComponent}</Col>
             </Row>
@@ -123,7 +124,7 @@ function FitTable<T extends object = any>({
             ? pagination.position === void 0 || pagination.position.includes('bottomRight')
             : false;
         return bottom ? (
-            <Row>
+            <Row className={formStyles.formItem}>
                 <Col flex={1} />
                 <Col>{paginationComponent}</Col>
             </Row>

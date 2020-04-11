@@ -44,6 +44,7 @@ import styles from './_index.less';
 import ColumnsSettingWrap from './ColumnsSettingWrap';
 import { EmptyArray, EmptyObject } from '../utils';
 import { defaultPageSizeOptions } from '../ProTable/config';
+import formStyles from '../JsonForm/_form.less';
 export var showTotal = function showTotal(total) {
   return React.createElement("span", null, "\u5171\u6709", total, "\u6761");
 };
@@ -115,13 +116,17 @@ function FitTable(_a) {
   var paginationTopContainer = useMemo(function () {
     var top = pagination && pagination.position && pagination.position.includes('topRight'); // 需要有top配置，默认不显示
 
-    return top ? React.createElement(_Row, null, React.createElement(_Col, {
+    return top ? React.createElement(_Row, {
+      className: formStyles.formItem
+    }, React.createElement(_Col, {
       flex: 1
     }), React.createElement(_Col, null, paginationComponent)) : null;
   }, [pagination]);
   var paginationBottomContainer = useMemo(function () {
     var bottom = pagination ? pagination.position === void 0 || pagination.position.includes('bottomRight') : false;
-    return bottom ? React.createElement(_Row, null, React.createElement(_Col, {
+    return bottom ? React.createElement(_Row, {
+      className: formStyles.formItem
+    }, React.createElement(_Col, {
       flex: 1
     }), React.createElement(_Col, null, paginationComponent)) : null;
   }, [pagination]);
