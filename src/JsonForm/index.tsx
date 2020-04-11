@@ -7,53 +7,53 @@ import React, {
     useMemo,
     useRef,
     useState,
-} from "react";
-import { Button, Col, Form, Row } from "antd";
-import { FormProps } from "antd/lib/form/Form";
-import FormInput, { InputType, InputProps, InputFormatter } from "./items/Input";
-import FormSelect, { SelectType, SelectProps, SelectFormatter } from "./items/Select";
-import FormCheckbox, { CheckboxType, CheckboxProps } from "./items/Checkbox";
+} from 'react';
+import { Button, Col, Form, Row } from 'antd';
+import { FormProps } from 'antd/lib/form/Form';
+import FormInput, { InputType, InputProps, InputFormatter } from './items/Input';
+import FormSelect, { SelectType, SelectProps, SelectFormatter } from './items/Select';
+import FormCheckbox, { CheckboxType, CheckboxProps } from './items/Checkbox';
 import FormDatePicker, {
     DatePickerProps,
     DatePickerType,
     DatePickerFormatter,
-} from "./items/DatePicker";
+} from './items/DatePicker';
 import FormDateRanger, {
     DateRangerType,
     DateRangerProps,
     DateRangerFormatter,
-} from "./items/DateRanger";
-import FormInputRange, { InputRangeType, InputRangeProps } from "./items/InputRange";
-import { Store, ValidateFields } from "rc-field-form/lib/interface";
-import { FormInstance } from "antd/es/form";
-import RcResizeObserver from "rc-resize-observer";
-import { UpOutlined, DownOutlined } from "@ant-design/icons";
-import { ColProps } from "antd/lib/grid/col";
-import { RowProps } from "antd/lib/grid/row";
-import FormCheckboxGroup, { CheckboxGroupProps, CheckboxGroupType } from "./items/CheckboxGroup";
-import FormRadioGroup, { RadioGroupProps, RadioGroupType } from "./items/RadioGroup";
-import classNames from "classnames";
+} from './items/DateRanger';
+import FormInputRange, { InputRangeType, InputRangeProps } from './items/InputRange';
+import { Store, ValidateFields } from 'rc-field-form/lib/interface';
+import { FormInstance } from 'antd/es/form';
+import RcResizeObserver from 'rc-resize-observer';
+import { UpOutlined, DownOutlined } from '@ant-design/icons';
+import { ColProps } from 'antd/lib/grid/col';
+import { RowProps } from 'antd/lib/grid/row';
+import FormCheckboxGroup, { CheckboxGroupProps, CheckboxGroupType } from './items/CheckboxGroup';
+import FormRadioGroup, { RadioGroupProps, RadioGroupType } from './items/RadioGroup';
+import classNames from 'classnames';
 
-import "./index.less";
-import formStyles from "./_form.less";
-import Layout, { LayoutType, LayoutProps } from "./layout";
-import DynamicItem, { DynamicItemProps, DynamicType } from "./items/DynamicItem";
+import './index.less';
+import formStyles from './_form.less';
+import Layout, { LayoutType, LayoutProps } from './layout';
+import DynamicItem, { DynamicItemProps, DynamicType } from './items/DynamicItem';
 
 export declare interface CustomFormProps {
     labelClassName?: string;
 }
 
 export type FormField<T = string> = (
-    | Omit<InputProps<T>, "form">
-    | Omit<SelectProps<T>, "form">
-    | Omit<CheckboxProps<T>, "form">
-    | Omit<DatePickerProps<T>, "form">
-    | Omit<DateRangerProps<T>, "form">
-    | Omit<CheckboxGroupProps<T>, "form">
-    | Omit<RadioGroupProps<T>, "form">
-    | Omit<InputRangeProps<T>, "form">
-    | Omit<LayoutProps<T>, "form" | "labelClassName" | "itemCol" | "itemRow">
-    | Omit<DynamicItemProps, "form" | "labelClassName" | "itemCol" | "itemRow">
+    | Omit<InputProps<T>, 'form'>
+    | Omit<SelectProps<T>, 'form'>
+    | Omit<CheckboxProps<T>, 'form'>
+    | Omit<DatePickerProps<T>, 'form'>
+    | Omit<DateRangerProps<T>, 'form'>
+    | Omit<CheckboxGroupProps<T>, 'form'>
+    | Omit<RadioGroupProps<T>, 'form'>
+    | Omit<InputRangeProps<T>, 'form'>
+    | Omit<LayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>
+    | Omit<DynamicItemProps, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>
 ) & {
     form?: FormInstance;
 };
@@ -96,7 +96,7 @@ export const getFormItem = (
     itemRow?: RowProps,
     index?: number,
 ) => {
-    const name = field["name"];
+    const name = field['name'];
     if (FormInput.typeList.includes(type)) {
         return getColChildren(
             <FormInput
@@ -380,14 +380,14 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                 <div
                     ref={btnWrap}
                     style={{
-                        display: "flex",
+                        display: 'flex',
                         flex: collapse ? 1 : 0,
-                        justifyContent: "flex-end",
-                        visibility: collapseBtnVisible ? "visible" : "hidden",
+                        justifyContent: 'flex-end',
+                        visibility: collapseBtnVisible ? 'visible' : 'hidden',
                     }}
                     className={formStyles.formItem}
                 >
-                    <Button type="link" style={{ float: "right" }} onClick={onCollapseChange}>
+                    <Button type="link" style={{ float: 'right' }} onClick={onCollapseChange}>
                         {collapse ? (
                             <>
                                 收起至一行
@@ -431,7 +431,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                 <div className={classNames(formStyles.flex, formStyles.flex1)}>
                     <div
                         className={classNames(formStyles.flex1, formStyles.flexRow)}
-                        style={{ flexWrap: "wrap" }}
+                        style={{ flexWrap: 'wrap' }}
                     >
                         {fromItemList}
                     </div>
@@ -461,14 +461,14 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                     enableCollapse
                         ? collapse
                             ? {
-                                  overflow: "hidden",
+                                  overflow: 'hidden',
                                   height: formHeight,
-                                  boxSizing: "content-box",
+                                  boxSizing: 'content-box',
                               }
                             : {
-                                  overflow: "hidden",
+                                  overflow: 'hidden',
                                   height: rowHeight,
-                                  boxSizing: "content-box",
+                                  boxSizing: 'content-box',
                               }
                         : {}
                 }
@@ -482,4 +482,4 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
 
 export default forwardRef(JsonForm);
 
-export * from "./utils";
+export * from './utils';

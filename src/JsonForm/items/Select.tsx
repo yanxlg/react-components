@@ -1,11 +1,11 @@
-import { Form, Select, Radio } from "antd";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { CustomFormProps, FormItemName } from "../index";
-import { FormInstance, Rule } from "antd/es/form";
-import { FormItemLabelProps } from "antd/es/form/FormItemLabel";
-import { transNullValue, transNumber, transJoinStr } from "../utils";
-import formStyles from "../_form.less";
-import { SelectProps as AntdSelectProps } from "antd/es/select/index";
+import { Form, Select, Radio } from 'antd';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { CustomFormProps, FormItemName } from '../index';
+import { FormInstance, Rule } from 'antd/es/form';
+import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
+import { transNullValue, transNumber, transJoinStr } from '../utils';
+import formStyles from '../_form.less';
+import { SelectProps as AntdSelectProps } from 'antd/es/select/index';
 
 export declare interface IOptionItem {
     name: string;
@@ -14,12 +14,12 @@ export declare interface IOptionItem {
     [key: string]: any; // 子节点key
 }
 
-export type SelectFormatter = "number" | "joinStr";
+export type SelectFormatter = 'number' | 'joinStr';
 
 type OptionsPromise = () => Promise<IOptionItem[]>;
 
-export type SelectType = "select";
-const typeList = ["select"];
+export type SelectType = 'select';
+const typeList = ['select'];
 
 export type SelectProps<T = string> = FormItemLabelProps &
     CustomFormProps & {
@@ -39,7 +39,7 @@ export type SelectProps<T = string> = FormItemLabelProps &
         formatter?: SelectFormatter;
         rules?: Rule[];
         isShortcut?: boolean;
-    } & Omit<AntdSelectProps<string>, "loading" | "onChange" | "className" | "options">;
+    } & Omit<AntdSelectProps<string>, 'loading' | 'onChange' | 'className' | 'options'>;
 
 const FormSelect = (props: SelectProps) => {
     const {
@@ -63,7 +63,7 @@ const FormSelect = (props: SelectProps) => {
     } = props;
     const [options, setOptions] = useState<IOptionItem[] | undefined>(undefined);
 
-    const isFunction = typeof optionList === "function";
+    const isFunction = typeof optionList === 'function';
 
     useEffect(() => {
         if (isFunction) {
@@ -84,7 +84,7 @@ const FormSelect = (props: SelectProps) => {
         if (isFunction) {
             if (optionListDependence) {
                 const { name, key: dependenceKey } = optionListDependence;
-                const dependenceNameList = typeof name === "string" ? [name] : name || [];
+                const dependenceNameList = typeof name === 'string' ? [name] : name || [];
                 let parentItem = options;
                 for (let i = 0; i < dependenceNameList.length; i++) {
                     const dependenceName = dependenceNameList[i];
@@ -134,10 +134,10 @@ const FormSelect = (props: SelectProps) => {
                 return (
                     <div>
                         {/* value={size} onChange={this.handleSizeChange} */}
-                        <Radio.Group style={{ display: "flex", padding: "5px 0" }} value="">
+                        <Radio.Group style={{ display: 'flex', padding: '5px 0' }} value="">
                             <Radio.Button
                                 value="1"
-                                style={{ flex: 1, textAlign: "center" }}
+                                style={{ flex: 1, textAlign: 'center' }}
                                 onClick={() => {
                                     form!.setFieldsValue({
                                         [name]: list!.map(item => item.value),
@@ -148,7 +148,7 @@ const FormSelect = (props: SelectProps) => {
                             </Radio.Button>
                             <Radio.Button
                                 value="0"
-                                style={{ flex: 1, textAlign: "center" }}
+                                style={{ flex: 1, textAlign: 'center' }}
                                 onClick={() => {
                                     form!.setFieldsValue({
                                         [name]: [],
@@ -207,7 +207,7 @@ const FormSelect = (props: SelectProps) => {
                     noStyle={true}
                     shouldUpdate={(prevValues, currentValues) => {
                         const { name } = optionListDependence;
-                        const dependenceNameList = typeof name === "string" ? [name] : name || [];
+                        const dependenceNameList = typeof name === 'string' ? [name] : name || [];
                         let updated = false;
                         let i = 0;
                         let length = dependenceNameList.length;
@@ -263,9 +263,9 @@ FormSelect.typeList = typeList;
 FormSelect.formatter = (formatter?: SelectFormatter) => {
     // return formatter ? (formatter === 'number' ? transNumber : transNullValue) : transNullValue;
     switch (formatter) {
-        case "number":
+        case 'number':
             return transNumber;
-        case "joinStr":
+        case 'joinStr':
             return transJoinStr;
         default:
             return transNullValue;

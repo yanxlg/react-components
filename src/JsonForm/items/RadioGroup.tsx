@@ -1,13 +1,13 @@
-import React, { useMemo } from "react";
-import { Form, Radio } from "antd";
-import { CustomFormProps, FormItemName } from "../index";
-import { FormItemLabelProps } from "antd/es/form/FormItemLabel";
-import { FormInstance, Rule } from "antd/es/form";
-import { RadioGroupProps as AntdRadioGroupProps } from "antd/lib/radio/interface";
-import formStyles from "../_form.less";
+import React, { useMemo } from 'react';
+import { Form, Radio } from 'antd';
+import { CustomFormProps, FormItemName } from '../index';
+import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
+import { FormInstance, Rule } from 'antd/es/form';
+import { RadioGroupProps as AntdRadioGroupProps } from 'antd/lib/radio/interface';
+import formStyles from '../_form.less';
 
-export type RadioGroupType = "radioGroup";
-const typeList = ["radioGroup"];
+export type RadioGroupType = 'radioGroup';
+const typeList = ['radioGroup'];
 
 export type RadioGroupProps<T = string> = FormItemLabelProps &
     CustomFormProps & {
@@ -19,8 +19,8 @@ export type RadioGroupProps<T = string> = FormItemLabelProps &
         name: FormItemName<T>;
         formatter?: undefined;
         rules?: Rule[];
-        radioType?: "button" | "radio";
-    } & Omit<AntdRadioGroupProps, "onChange">;
+        radioType?: 'button' | 'radio';
+    } & Omit<AntdRadioGroupProps, 'onChange'>;
 
 const FormRadioGroup = (props: RadioGroupProps) => {
     const {
@@ -32,7 +32,7 @@ const FormRadioGroup = (props: RadioGroupProps) => {
         onChange,
         form,
         rules,
-        radioType = "radio",
+        radioType = 'radio',
         options,
         ..._props
     } = props;
@@ -57,8 +57,8 @@ const FormRadioGroup = (props: RadioGroupProps) => {
             <Radio.Group className={className} {...eventProps} {..._props}>
                 {options.map(option => {
                     const { label, value } =
-                        typeof option === "string" ? { label: option, value: option } : option;
-                    if (radioType === "radio") {
+                        typeof option === 'string' ? { label: option, value: option } : option;
+                    if (radioType === 'radio') {
                         return (
                             <Radio key={String(value)} value={value}>
                                 {label}

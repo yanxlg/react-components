@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 function useDataSet<T>() {
     const [dataSet, setDataSet] = useState<T[]>([]);

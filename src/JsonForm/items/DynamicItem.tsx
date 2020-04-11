@@ -1,16 +1,16 @@
 /**
  * 动态FormItem
  */
-import React from "react";
-import { Form } from "antd";
-import { FormField, getFormItem } from "../index";
-import { FormInstance } from "antd/es/form";
-import { ShouldUpdate } from "rc-field-form/es/Field";
-import { ColProps } from "antd/lib/grid/col";
-import { RowProps } from "antd/lib/grid/row";
+import React from 'react';
+import { Form } from 'antd';
+import { FormField, getFormItem } from '../index';
+import { FormInstance } from 'antd/es/form';
+import { ShouldUpdate } from 'rc-field-form/es/Field';
+import { ColProps } from 'antd/lib/grid/col';
+import { RowProps } from 'antd/lib/grid/row';
 
-export type DynamicType = "dynamic";
-const typeList = ["dynamic"];
+export type DynamicType = 'dynamic';
+const typeList = ['dynamic'];
 
 export declare interface DynamicItemProps {
     type: DynamicType;

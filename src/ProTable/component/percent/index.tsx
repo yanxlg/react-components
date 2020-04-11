@@ -1,7 +1,7 @@
-import React, { Fragment, ReactNode, useMemo } from "react";
-import toNumber from "lodash/toNumber";
+import React, { Fragment, ReactNode, useMemo } from 'react';
+import toNumber from 'lodash/toNumber';
 
-import { getColorByRealValue, getSymbolByRealValue, getRealTextWithPrecision } from "./util";
+import { getColorByRealValue, getSymbolByRealValue, getRealTextWithPrecision } from './util';
 
 export interface PercentPropInt {
     prefix?: ReactNode;
@@ -17,13 +17,13 @@ const Percent: React.SFC<PercentPropInt> = ({
     prefix,
     precision,
     showSymbol,
-    suffix = "%",
+    suffix = '%',
     showColor = false,
 }) => {
     const realValue = useMemo(
         () =>
-            typeof value === "string" && value.includes("%")
-                ? toNumber(value.replace("%", ""))
+            typeof value === 'string' && value.includes('%')
+                ? toNumber(value.replace('%', ''))
                 : toNumber(value),
         [value],
     );

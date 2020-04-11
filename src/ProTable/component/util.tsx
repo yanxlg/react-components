@@ -1,7 +1,7 @@
-import React, { ReactNode, useEffect, useRef, ReactText } from "react";
-import isEqual from "lodash/isEqual";
-import { DataIndex } from "rc-table/lib/interface";
-import TableStatus, { StatusType } from "./status";
+import React, { ReactNode, useEffect, useRef, ReactText } from 'react';
+import isEqual from 'lodash/isEqual';
+import { DataIndex } from 'rc-table/lib/interface';
+import TableStatus, { StatusType } from './status';
 
 /**
  * 转化 text 和 valueEnum
@@ -38,7 +38,7 @@ export const parsingText = (
             return domText.text;
         }
         const { status } = domText;
-        const Status = TableStatus[status || "Init"];
+        const Status = TableStatus[status || 'Init'];
         return <Status>{domText.text}</Status>;
     }
     return domText.text || domText;
@@ -65,13 +65,13 @@ export const parsingValueEnumToArray = (
         const value =
             (valueEnum[key] as {
                 text: string;
-            }) || "";
+            }) || '';
         return {
             text: (((value as {
                 text: string;
             }).text ||
                 value ||
-                "") as unknown) as string,
+                '') as unknown) as string,
             value: key,
         };
     });
@@ -102,22 +102,22 @@ export function useDeepCompareEffect(effect: React.EffectCallback, dependencies?
     useEffect(effect, useDeepCompareMemoize(dependencies));
 }
 
-export function getProgressStatus(text: number): "success" | "exception" | "normal" | "active" {
-    if (typeof text !== "number") {
-        return "exception";
+export function getProgressStatus(text: number): 'success' | 'exception' | 'normal' | 'active' {
+    if (typeof text !== 'number') {
+        return 'exception';
     }
     if (text === 100) {
-        return "success";
+        return 'success';
     }
     if (text < 100) {
-        return "active";
+        return 'active';
     }
 
     // magic
     if (text < 0) {
-        return "exception";
+        return 'exception';
     }
-    return "normal";
+    return 'normal';
 }
 
 /**
@@ -131,7 +131,7 @@ export const genColumnKey = (key?: React.ReactText | undefined, dataIndex?: Data
     }
     if (!key && dataIndex) {
         if (Array.isArray(dataIndex)) {
-            return dataIndex.join("-");
+            return dataIndex.join('-');
         }
         return dataIndex;
     }
@@ -139,10 +139,10 @@ export const genColumnKey = (key?: React.ReactText | undefined, dataIndex?: Data
 };
 
 export default function get(entity: any, path: ReactText | ReactText[]) {
-    let tempPath: ReactText[] = [""];
-    if (typeof path === "string") {
-        if (path.includes(".")) {
-            tempPath = path.split(".");
+    let tempPath: ReactText[] = [''];
+    if (typeof path === 'string') {
+        if (path.includes('.')) {
+            tempPath = path.split('.');
         } else {
             tempPath = [path];
         }

@@ -1,13 +1,13 @@
-import React, { useMemo } from "react";
-import { Checkbox, Form } from "antd";
-import { CustomFormProps, FormItemName } from "../index";
-import { FormItemLabelProps } from "antd/es/form/FormItemLabel";
-import { FormInstance, Rule } from "antd/es/form";
-import { CheckboxProps as AntdCheckboxProps } from "antd/es/checkbox/Checkbox";
-import formStyles from "../_form.less";
+import React, { useMemo } from 'react';
+import { Checkbox, Form } from 'antd';
+import { CustomFormProps, FormItemName } from '../index';
+import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
+import { FormInstance, Rule } from 'antd/es/form';
+import { CheckboxProps as AntdCheckboxProps } from 'antd/es/checkbox/Checkbox';
+import formStyles from '../_form.less';
 
-export type CheckboxType = "checkbox";
-const typeList = ["checkbox"];
+export type CheckboxType = 'checkbox';
+const typeList = ['checkbox'];
 
 export type CheckboxProps<T = string> = FormItemLabelProps &
     CustomFormProps & {
@@ -19,7 +19,7 @@ export type CheckboxProps<T = string> = FormItemLabelProps &
         name: FormItemName<T>;
         formatter?: undefined;
         rules?: Rule[];
-    } & Omit<AntdCheckboxProps, "onChange" | "name">;
+    } & Omit<AntdCheckboxProps, 'onChange' | 'name'>;
 
 const FormCheckbox = (props: CheckboxProps) => {
     const {

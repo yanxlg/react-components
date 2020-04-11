@@ -1,13 +1,13 @@
-import React, { useMemo } from "react";
-import { Form, InputNumber } from "antd";
-import { CustomFormProps, FormItemName } from "../index";
-import { FormItemLabelProps } from "antd/es/form/FormItemLabel";
-import { FormInstance, Rule } from "antd/es/form";
-import formStyles from "../_form.less";
-import { transNumber } from "../utils";
+import React, { useMemo } from 'react';
+import { Form, InputNumber } from 'antd';
+import { CustomFormProps, FormItemName } from '../index';
+import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
+import { FormInstance, Rule } from 'antd/es/form';
+import formStyles from '../_form.less';
+import { transNumber } from '../utils';
 
-export type InputRangeType = "inputRange";
-const typeList = ["inputRange"];
+export type InputRangeType = 'inputRange';
+const typeList = ['inputRange'];
 
 export type InputRangeProps<T = string> = FormItemLabelProps &
     CustomFormProps & {
@@ -30,7 +30,7 @@ const FormInputRange = (props: InputRangeProps) => {
         name: [name1, name2],
         formItemClassName = formStyles.formItem,
         onChange,
-        labelClassName = "",
+        labelClassName = '',
         form,
         precision = 0,
         rules = [
@@ -48,14 +48,14 @@ const FormInputRange = (props: InputRangeProps) => {
                     validator(rule, value) {
                         const value1 = getFieldValue(name1);
                         if (
-                            typeof value !== "number" ||
-                            typeof value1 !== "number" ||
+                            typeof value !== 'number' ||
+                            typeof value1 !== 'number' ||
                             value >= value1
                         ) {
                             // validateFields([name1]);
                             return Promise.resolve();
                         }
-                        return Promise.reject("请检查范围区间!");
+                        return Promise.reject('请检查范围区间!');
                     },
                 }),
             ] as Rule[],
@@ -87,7 +87,7 @@ const FormInputRange = (props: InputRangeProps) => {
             formStyles.inlineBlock,
             formStyles.marginNone,
             formStyles.verticalMiddle,
-        ].join(" ");
+        ].join(' ');
         return (
             <Form.Item
                 label={<span className={labelClassName}>{label}</span>}
@@ -113,7 +113,7 @@ const FormInputRange = (props: InputRangeProps) => {
                         />
                     </Form.Item>
                 </Form.Item>
-                <span className={[formStyles.formColon, formStyles.verticalMiddle].join(" ")}>
+                <span className={[formStyles.formColon, formStyles.verticalMiddle].join(' ')}>
                     -
                 </span>
                 <Form.Item
