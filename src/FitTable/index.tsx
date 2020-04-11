@@ -102,7 +102,7 @@ function FitTable<T extends object = any>({
                 columns={columns}
                 rowSelection={rowSelection}
                 {...props}
-                pagination={pagination}
+                pagination={false}
                 onChange={onChange ? onTableChange : undefined}
             />
         );
