@@ -1,24 +1,35 @@
-import React from "react";
-import { FormProps } from "antd/lib/form/Form";
-import { InputProps } from "./items/Input";
-import { SelectProps } from "./items/Select";
-import { CheckboxProps } from "./items/Checkbox";
-import { DatePickerProps } from "./items/DatePicker";
-import { DateRangerProps } from "./items/DateRanger";
-import { InputRangeProps } from "./items/InputRange";
-import { Store, ValidateFields } from "rc-field-form/lib/interface";
-import { FormInstance } from "antd/es/form";
-import { ColProps } from "antd/lib/grid/col";
-import { RowProps } from "antd/lib/grid/row";
-import { CheckboxGroupProps } from "./items/CheckboxGroup";
-import { RadioGroupProps } from "./items/RadioGroup";
-import "./index.less";
-import { LayoutProps } from "./layout";
-import { DynamicItemProps } from "./items/DynamicItem";
+import React from 'react';
+import { FormProps } from 'antd/lib/form/Form';
+import { InputProps } from './items/Input';
+import { SelectProps } from './items/Select';
+import { CheckboxProps } from './items/Checkbox';
+import { DatePickerProps } from './items/DatePicker';
+import { DateRangerProps } from './items/DateRanger';
+import { InputRangeProps } from './items/InputRange';
+import { Store, ValidateFields } from 'rc-field-form/lib/interface';
+import { FormInstance } from 'antd/es/form';
+import { ColProps } from 'antd/lib/grid/col';
+import { RowProps } from 'antd/lib/grid/row';
+import { CheckboxGroupProps } from './items/CheckboxGroup';
+import { RadioGroupProps } from './items/RadioGroup';
+import './index.less';
+import { LayoutProps } from './layout';
+import { DynamicItemProps } from './items/DynamicItem';
 export declare interface CustomFormProps {
     labelClassName?: string;
 }
-export declare type FormField<T = string> = (Omit<InputProps<T>, "form"> | Omit<SelectProps<T>, "form"> | Omit<CheckboxProps<T>, "form"> | Omit<DatePickerProps<T>, "form"> | Omit<DateRangerProps<T>, "form"> | Omit<CheckboxGroupProps<T>, "form"> | Omit<RadioGroupProps<T>, "form"> | Omit<InputRangeProps<T>, "form"> | Omit<LayoutProps<T>, "form" | "labelClassName" | "itemCol" | "itemRow"> | Omit<DynamicItemProps, "form" | "labelClassName" | "itemCol" | "itemRow">) & {
+export declare type FormField<T = string> = (
+    | Omit<InputProps<T>, 'form'>
+    | Omit<SelectProps<T>, 'form'>
+    | Omit<CheckboxProps<T>, 'form'>
+    | Omit<DatePickerProps<T>, 'form'>
+    | Omit<DateRangerProps<T>, 'form'>
+    | Omit<CheckboxGroupProps<T>, 'form'>
+    | Omit<RadioGroupProps<T>, 'form'>
+    | Omit<InputRangeProps<T>, 'form'>
+    | Omit<LayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>
+    | Omit<DynamicItemProps, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>
+) & {
     form?: FormInstance;
 };
 declare interface JsonFormProps<T = any> extends FormProps, CustomFormProps {
@@ -39,9 +50,37 @@ export interface JsonFormRef {
     validateFields: ValidateFields;
     setFieldsValue: (value: Store) => void;
 }
-export declare const getColChildren: (children: React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)>) | (new (props: any) => React.Component<any, any, any>)>, itemCol?: ColProps, times?: number) => JSX.Element;
-export declare const getFormItem: ({ type, ...field }: FormField<string>, form: FormInstance, labelClassName?: string, itemCol?: ColProps, itemRow?: RowProps, index?: number) => JSX.Element;
-export declare const getFormItems: (fieldList: FormField<string>[], form: FormInstance, labelClassName?: string, itemCol?: ColProps, itemRow?: RowProps) => JSX.Element | JSX.Element[];
-declare const _default: React.ForwardRefExoticComponent<JsonFormProps<any> & React.RefAttributes<JsonFormRef>>;
+export declare const getColChildren: (
+    children: React.ReactElement<
+        any,
+        | string
+        | ((
+              props: any,
+          ) => React.ReactElement<
+              any,
+              string | any | (new (props: any) => React.Component<any, any, any>)
+          >)
+        | (new (props: any) => React.Component<any, any, any>)
+    >,
+    itemCol?: ColProps,
+    times?: number,
+) => JSX.Element;
+export declare const getFormItem: (
+    { type, ...field }: FormField<string>,
+    form: FormInstance,
+    labelClassName?: string,
+    itemCol?: ColProps,
+    itemRow?: RowProps,
+    index?: number,
+) => JSX.Element;
+export declare const getFormItems: (
+    fieldList: FormField<string>[],
+    form: FormInstance,
+    labelClassName?: string,
+    itemCol?: ColProps,
+    itemRow?: RowProps,
+) => JSX.Element | JSX.Element[];
+declare const _default: React.ForwardRefExoticComponent<JsonFormProps<any> &
+    React.RefAttributes<JsonFormRef>>;
 export default _default;
-export * from "./utils";
+export * from './utils';
