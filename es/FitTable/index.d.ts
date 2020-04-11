@@ -6,7 +6,7 @@ export declare interface IFitTableProps<T> extends TableProps<T>, Partial<Pick<C
     bottom?: number;
     minHeight?: number;
     autoFitY?: boolean;
-    toolbarRender?: () => React.ReactNode[];
+    toolBarRender?: () => React.ReactNode[];
 }
 export declare const showTotal: (total: number) => JSX.Element;
 export declare const goButton: JSX.Element;

@@ -17,7 +17,7 @@ export declare interface IFitTableProps<T>
     bottom?: number;
     minHeight?: number;
     autoFitY?: boolean;
-    toolbarRender?: () => React.ReactNode[];
+    toolBarRender?: () => React.ReactNode[];
 }
 
 export const showTotal = (total: number) => {
@@ -35,7 +35,7 @@ function FitTable<T extends object = any>({
     scroll: propsScroll,
     onChange,
     pagination,
-    toolbarRender = () => null,
+    toolBarRender = () => null,
     ...props
 }: IFitTableProps<T>) {
     const ref = useRef<HTMLDivElement>(null);
@@ -115,11 +115,11 @@ function FitTable<T extends object = any>({
         const top = pagination && pagination.position && pagination.position.includes('topRight'); // 需要有top配置，默认不显示
         return top ? (
             <Row className={formStyles.formItem}>
-                <Col flex={1}>{toolbarRender()}</Col>
+                <Col flex={1}>{toolBarRender()}</Col>
                 <Col>{paginationComponent}</Col>
             </Row>
         ) : null;
-    }, [pagination, toolbarRender]);
+    }, [pagination, toolBarRender]);
 
     const paginationBottomContainer = useMemo(() => {
         const bottom = pagination
