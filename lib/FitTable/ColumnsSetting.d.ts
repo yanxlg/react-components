@@ -6,8 +6,10 @@ export declare interface ColumnsSettingProps<T> {
     onColumnsChange: (columns: TableProps<T>['columns']) => void;
     resetColumnsSetting?: boolean;
     columnsSettingRender: true | React.ComponentClass<{
+        value: Array<CheckboxValueType>;
         onChange: (checkedValue: Array<CheckboxValueType>) => void;
     }> | React.FC<{
+        value: Array<CheckboxValueType>;
         onChange: (checkedValue: Array<CheckboxValueType>) => void;
     }>;
 }

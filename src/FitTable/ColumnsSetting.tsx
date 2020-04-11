@@ -12,8 +12,14 @@ export declare interface ColumnsSettingProps<T> {
     resetColumnsSetting?: boolean;
     columnsSettingRender:
         | true
-        | React.ComponentClass<{ onChange: (checkedValue: Array<CheckboxValueType>) => void }>
-        | React.FC<{ onChange: (checkedValue: Array<CheckboxValueType>) => void }>;
+        | React.ComponentClass<{
+              value: Array<CheckboxValueType>;
+              onChange: (checkedValue: Array<CheckboxValueType>) => void;
+          }>
+        | React.FC<{
+              value: Array<CheckboxValueType>;
+              onChange: (checkedValue: Array<CheckboxValueType>) => void;
+          }>;
 }
 
 const ColumnsSetting = <T,>({
@@ -100,7 +106,7 @@ const ColumnsSetting = <T,>({
                         </Row>
                     </Checkbox.Group>
                 ) : (
-                    <ColumnsSettingRender onChange={onChange} />
+                    <ColumnsSettingRender value={columnsShowList} onChange={onChange} />
                 )}
             </Modal>
         );

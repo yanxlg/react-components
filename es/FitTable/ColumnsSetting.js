@@ -97,6 +97,7 @@ var ColumnsSetting = function ColumnsSetting(_a) {
         value: dataIndex
       }, column.title));
     }))) : React.createElement(ColumnsSettingRender, {
+      value: columnsShowList,
       onChange: onChange
     }));
   }, [visible, columnsShowList]);

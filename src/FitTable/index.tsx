@@ -1,16 +1,14 @@
 import React, { Key, useCallback, useMemo, useRef } from 'react';
-import { Table, Button } from 'antd';
+import { Table, Button, Pagination, Row, Col } from 'antd';
 import { TableProps } from 'antd/lib/table';
 import { useScrollXY } from './hooks';
 import styles from './_index.less';
 import { PaginationConfig } from 'antd/es/pagination';
-import {
-    SorterResult,
-    TableCurrentDataSource,
-    TablePaginationConfig,
-} from 'antd/es/table/interface';
+import { SorterResult, TableCurrentDataSource } from 'antd/es/table/interface';
 import ColumnsSettingWrap from './ColumnsSettingWrap';
 import { ColumnsSettingProps } from './ColumnsSetting';
+import { EmptyArray, EmptyObject } from '../utils';
+import { defaultPageSizeOptions } from '../ProTable/config';
 
 export declare interface IFitTableProps<T>
     extends TableProps<T>,
@@ -48,43 +46,96 @@ function FitTable<T extends object = any>({
         propsScroll,
     );
 
-    const onPaginationChange = useCallback(
+    const filtersRef = useRef<Record<string, Key[] | null>>(EmptyObject);
+    const sorterRef = useRef<SorterResult<T> | SorterResult<T>[]>(EmptyObject);
+    const extraRef = useRef<TableCurrentDataSource<T>>({ currentDataSource: EmptyArray });
+
+    const onTableChange = useCallback(
         (
             page: PaginationConfig,
             filters: Record<string, Key[] | null>,
             sorter: SorterResult<T> | SorterResult<T>[],
             extra: TableCurrentDataSource<T>,
         ) => {
-            if (!pagination) {
-                onChange && onChange(page, filters, sorter, extra);
-                return;
-            }
-
-            const { total, current, pageSize } = pagination as TablePaginationConfig;
-            if (page.pageSize !== pageSize) {
-                // pageSize发生变化，保留原油current
-                // 计算如果不能够满足当前的pageNumber则重置为1
-                const maxPageNumber = Math.ceil(Number(total) / page.pageSize);
-                const pageNumber = current <= maxPageNumber ? current : 1;
-                onChange && onChange({ ...page, current: pageNumber }, filters, sorter, extra);
-            } else {
-                onChange && onChange(page, filters, sorter, extra);
+            filtersRef.current = filters;
+            sorterRef.current = sorter;
+            extraRef.current = extra;
+            if (onChange) {
+                onChange(pagination || {}, filters, sorter, extra);
             }
         },
         [pagination],
     );
 
+    const onPageChange = useCallback((page: number, pageSize: number) => {
+        if (onChange) {
+            onChange(
+                { ...pagination, current: page, pageSize: pageSize },
+                filtersRef.current,
+                sorterRef.current,
+                extraRef.current,
+            );
+        }
+    }, []);
+
+    const paginationComponent = useMemo(() => {
+        return pagination ? (
+            <Pagination
+                {...{
+                    pageSizeOptions: defaultPageSizeOptions,
+                    showQuickJumper: {
+                        goButton: goButton,
+                    },
+                    showTotal: showTotal,
+                    ...pagination,
+                }}
+                onChange={onPageChange}
+                onShowSizeChange={onPageChange}
+            />
+        ) : null;
+    }, [pagination]);
+
+    const tableContent = useMemo(() => {
+        return (
+            <Table<T>
+                scroll={scroll}
+                columns={columns}
+                rowSelection={rowSelection}
+                {...props}
+                pagination={pagination}
+                onChange={onChange ? onTableChange : undefined}
+            />
+        );
+    }, [props, propsScroll, rowSelection, columns, onChange]);
+
+    const paginationTopContainer = useMemo(() => {
+        const top = pagination && pagination.position.includes('topRight'); // 需要有top配置，默认不显示
+        return top ? (
+            <Row>
+                <Col flex={1} />
+                <Col>{paginationComponent}</Col>
+            </Row>
+        ) : null;
+    }, [pagination]);
+
+    const paginationBottomContainer = useMemo(() => {
+        const bottom = pagination
+            ? pagination.position === void 0 || pagination.position.includes('bottomRight')
+            : false;
+        return bottom ? (
+            <Row>
+                <Col flex={1} />
+                <Col>{paginationComponent}</Col>
+            </Row>
+        ) : null;
+    }, [pagination]);
+
     return useMemo(() => {
         return (
             <div ref={ref}>
-                <Table<T>
-                    scroll={scroll}
-                    columns={columns}
-                    rowSelection={rowSelection}
-                    {...props}
-                    pagination={pagination}
-                    onChange={onChange ? onPaginationChange : undefined}
-                />
+                {paginationTopContainer}
+                {tableContent}
+                {paginationBottomContainer}
             </div>
         );
     }, [props, propsScroll, rowSelection, columns, pagination, onChange]);

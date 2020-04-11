@@ -1,5 +1,11 @@
+import "antd/es/col/style/css";
+import _Col from "antd/es/col";
+import "antd/es/row/style/css";
+import _Row from "antd/es/row";
 import "antd/es/table/style/css";
 import _Table from "antd/es/table";
+import "antd/es/pagination/style/css";
+import _Pagination from "antd/es/pagination";
 import "antd/es/button/style/css";
 import _Button from "antd/es/button";
 
@@ -36,6 +42,8 @@ import React, { useCallback, useMemo, useRef } from 'react';
 import { useScrollXY } from './hooks';
 import styles from './_index.less';
 import ColumnsSettingWrap from './ColumnsSettingWrap';
+import { EmptyArray, EmptyObject } from '../utils';
+import { defaultPageSizeOptions } from '../ProTable/config';
 export var showTotal = function showTotal(total) {
   return React.createElement("span", null, "\u5171\u6709", total, "\u6761");
 };
@@ -60,40 +68,67 @@ function FitTable(_a) {
 
   var ref = useRef(null);
   var scroll = useScrollXY(ref, bottom, minHeight, autoFitY, columns, rowSelection, propsScroll);
-  var onPaginationChange = useCallback(function (page, filters, sorter, extra) {
-    if (!pagination) {
-      onChange && onChange(page, filters, sorter, extra);
-      return;
-    }
+  var filtersRef = useRef(EmptyObject);
+  var sorterRef = useRef(EmptyObject);
+  var extraRef = useRef({
+    currentDataSource: EmptyArray
+  });
+  var onTableChange = useCallback(function (page, filters, sorter, extra) {
+    filtersRef.current = filters;
+    sorterRef.current = sorter;
+    extraRef.current = extra;
 
-    var _a = pagination,
-        total = _a.total,
-        current = _a.current,
-        pageSize = _a.pageSize;
-
-    if (page.pageSize !== pageSize) {
-      // pageSize发生变化，保留原油current
-      // 计算如果不能够满足当前的pageNumber则重置为1
-      var maxPageNumber = Math.ceil(Number(total) / page.pageSize);
-      var pageNumber = current <= maxPageNumber ? current : 1;
-      onChange && onChange(__assign(__assign({}, page), {
-        current: pageNumber
-      }), filters, sorter, extra);
-    } else {
-      onChange && onChange(page, filters, sorter, extra);
+    if (onChange) {
+      onChange(pagination || {}, filters, sorter, extra);
     }
   }, [pagination]);
-  return useMemo(function () {
-    return React.createElement("div", {
-      ref: ref
-    }, React.createElement(_Table, __assign({
+  var onPageChange = useCallback(function (page, pageSize) {
+    if (onChange) {
+      onChange(__assign(__assign({}, pagination), {
+        current: page,
+        pageSize: pageSize
+      }), filtersRef.current, sorterRef.current, extraRef.current);
+    }
+  }, []);
+  var paginationComponent = useMemo(function () {
+    return pagination ? React.createElement(_Pagination, __assign({}, __assign({
+      pageSizeOptions: defaultPageSizeOptions,
+      showQuickJumper: {
+        goButton: goButton
+      },
+      showTotal: showTotal
+    }, pagination), {
+      onChange: onPageChange,
+      onShowSizeChange: onPageChange
+    })) : null;
+  }, [pagination]);
+  var tableContent = useMemo(function () {
+    return React.createElement(_Table, __assign({
       scroll: scroll,
       columns: columns,
       rowSelection: rowSelection
     }, props, {
       pagination: pagination,
-      onChange: onChange ? onPaginationChange : undefined
-    })));
+      onChange: onChange ? onTableChange : undefined
+    }));
+  }, [props, propsScroll, rowSelection, columns, onChange]);
+  var paginationTopContainer = useMemo(function () {
+    var top = pagination && pagination.position.includes('topRight'); // 需要有top配置，默认不显示
+
+    return top ? React.createElement(_Row, null, React.createElement(_Col, {
+      flex: 1
+    }), React.createElement(_Col, null, paginationComponent)) : null;
+  }, [pagination]);
+  var paginationBottomContainer = useMemo(function () {
+    var bottom = pagination ? pagination.position === void 0 || pagination.position.includes('bottomRight') : false;
+    return bottom ? React.createElement(_Row, null, React.createElement(_Col, {
+      flex: 1
+    }), React.createElement(_Col, null, paginationComponent)) : null;
+  }, [pagination]);
+  return useMemo(function () {
+    return React.createElement("div", {
+      ref: ref
+    }, paginationTopContainer, tableContent, paginationBottomContainer);
   }, [props, propsScroll, rowSelection, columns, pagination, onChange]);
 }
 
