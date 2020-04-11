@@ -57,13 +57,15 @@ var ColumnsSettingWrap = function ColumnsSettingWrap(_a) {
   return useMemo(function () {
     return React.createElement("div", {
       className: styles.relative
-    }, React.createElement(ColumnsSetting, {
-      columnsSettingRender: columnsSettingRender,
-      columns: columns,
-      onColumnsChange: setFilterColumns,
-      resetColumnsSetting: resetColumnsSetting
-    }), React.createElement(FitTable, __assign({}, props, {
-      columns: filterColumns.current
+    }, React.createElement(FitTable, __assign({}, props, {
+      columns: filterColumns.current,
+      // @ts-ignore
+      settingComponent: React.createElement(ColumnsSetting, {
+        columnsSettingRender: columnsSettingRender,
+        columns: columns,
+        onColumnsChange: setFilterColumns,
+        resetColumnsSetting: resetColumnsSetting
+      })
     })));
   }, [reload, props, filterColumns.current]);
 };

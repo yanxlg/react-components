@@ -38,7 +38,7 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-import React, { useCallback, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useScrollXY } from './hooks';
 import styles from './_index.less';
 import ColumnsSettingWrap from './ColumnsSettingWrap';
@@ -69,7 +69,10 @@ function FitTable(_a) {
       toolBarRender = _f === void 0 ? function () {
     return null;
   } : _f,
-      props = __rest(_a, ["bottom", "minHeight", "autoFitY", "columns", "rowSelection", "scroll", "onChange", "pagination", "toolBarRender"]);
+      onHeaderRow = _a.onHeaderRow,
+      // @ts-ignore
+  settingComponent = _a.settingComponent,
+      props = __rest(_a, ["bottom", "minHeight", "autoFitY", "columns", "rowSelection", "scroll", "onChange", "pagination", "toolBarRender", "onHeaderRow", "settingComponent"]);
 
   var ref = useRef(null);
   var scroll = useScrollXY(ref, bottom, minHeight, autoFitY, columns, rowSelection, propsScroll);
@@ -107,6 +110,41 @@ function FitTable(_a) {
       onShowSizeChange: onPageChange
     })) : null;
   }, [pagination]);
+  var onHeaderRowEnter = useCallback(function (event) {
+    ref.current.setAttribute('data-show-setting', 'true');
+  }, []);
+  var onHeaderRowLeave = useCallback(function (event) {
+    ref.current.removeAttribute('data-show-setting');
+  }, []);
+  useEffect(function () {
+    return function () {
+      ref.current.removeAttribute('data-show-setting');
+    };
+  }, []);
+  var onHeaderRowFn = useCallback(function (column, index) {
+    if (onHeaderRow) {
+      var _a = onHeaderRow(column, index),
+          onMouseEnter_1 = _a.onMouseEnter,
+          onMouseLeave_1 = _a.onMouseLeave,
+          extra = __rest(_a, ["onMouseEnter", "onMouseLeave"]);
+
+      return __assign(__assign({}, extra), {
+        onMouseEnter: function onMouseEnter(event) {
+          onHeaderRowEnter(event);
+          onMouseEnter_1 && onMouseEnter_1(event);
+        },
+        onMouseLeave: function onMouseLeave(event) {
+          onHeaderRowLeave(event);
+          onMouseLeave_1 && onMouseLeave_1(event);
+        }
+      });
+    } else {
+      return {
+        onMouseEnter: onHeaderRowEnter,
+        onMouseLeave: onHeaderRowLeave
+      };
+    }
+  }, [onHeaderRow]);
   var tableContent = useMemo(function () {
     return React.createElement(_Table, __assign({
       scroll: scroll,
@@ -114,14 +152,15 @@ function FitTable(_a) {
       rowSelection: rowSelection
     }, props, {
       pagination: false,
-      onChange: onChange ? onTableChange : undefined
+      onChange: onChange ? onTableChange : undefined,
+      onHeaderRow: onHeaderRowFn
     }));
   }, [props, propsScroll, rowSelection, columns, onChange]);
   var paginationTopContainer = useMemo(function () {
     var top = pagination && pagination.position && pagination.position.includes('topRight'); // 需要有top配置，默认不显示
 
     return top ? React.createElement(_Row, {
-      className: formStyles.formItem
+      className: formStyles.formItemBottom
     }, React.createElement(_Col, {
       flex: 1
     }, toolBarRender()), React.createElement(_Col, null, paginationComponent)) : null;
@@ -135,9 +174,10 @@ function FitTable(_a) {
     }), React.createElement(_Col, null, paginationComponent)) : null;
   }, [pagination]);
   return useMemo(function () {
-    return React.createElement("div", {
-      ref: ref
-    }, paginationTopContainer, tableContent, paginationBottomContainer);
+    return React.createElement("div", null, paginationTopContainer, React.createElement("div", {
+      ref: ref,
+      className: styles.relative
+    }, settingComponent, tableContent), paginationBottomContainer);
   }, [props, propsScroll, rowSelection, columns, pagination, onChange]);
 }
 

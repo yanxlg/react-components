@@ -17,6 +17,15 @@
 .setting-btn{
     position: absolute;
     z-index: 100;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 240ms ease-in-out;
+}
+
+:global [data-show-setting]{
+    & > :local(.setting-btn){
+        opacity: 1;
+    }
 }
 
 .setting-modal{

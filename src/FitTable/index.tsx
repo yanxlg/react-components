@@ -1,6 +1,6 @@
-import React, { Key, useCallback, useMemo, useRef } from 'react';
+import React, { Key, useCallback, useEffect, useMemo, useRef } from 'react';
 import { Table, Button, Pagination, Row, Col } from 'antd';
-import { TableProps } from 'antd/lib/table';
+import { ColumnType, TableProps } from 'antd/lib/table';
 import { useScrollXY } from './hooks';
 import styles from './_index.less';
 import { PaginationConfig } from 'antd/es/pagination';
@@ -36,6 +36,9 @@ function FitTable<T extends object = any>({
     onChange,
     pagination,
     toolBarRender = () => null,
+    onHeaderRow,
+    // @ts-ignore
+    settingComponent,
     ...props
 }: IFitTableProps<T>) {
     const ref = useRef<HTMLDivElement>(null);
@@ -98,6 +101,44 @@ function FitTable<T extends object = any>({
         ) : null;
     }, [pagination]);
 
+    const onHeaderRowEnter = useCallback(event => {
+        ref.current.setAttribute('data-show-setting', 'true');
+    }, []);
+    const onHeaderRowLeave = useCallback(event => {
+        ref.current.removeAttribute('data-show-setting');
+    }, []);
+
+    useEffect(() => {
+        return () => {
+            ref.current.removeAttribute('data-show-setting');
+        };
+    }, []);
+
+    const onHeaderRowFn = useCallback(
+        (column: ColumnType<T>[], index: number) => {
+            if (onHeaderRow) {
+                const { onMouseEnter, onMouseLeave, ...extra } = onHeaderRow(column, index);
+                return {
+                    ...extra,
+                    onMouseEnter: (event: any) => {
+                        onHeaderRowEnter(event);
+                        onMouseEnter && onMouseEnter(event);
+                    },
+                    onMouseLeave: (event: any) => {
+                        onHeaderRowLeave(event);
+                        onMouseLeave && onMouseLeave(event);
+                    },
+                };
+            } else {
+                return {
+                    onMouseEnter: onHeaderRowEnter,
+                    onMouseLeave: onHeaderRowLeave,
+                };
+            }
+        },
+        [onHeaderRow],
+    );
+
     const tableContent = useMemo(() => {
         return (
             <Table<T>
@@ -107,6 +148,7 @@ function FitTable<T extends object = any>({
                 {...props}
                 pagination={false}
                 onChange={onChange ? onTableChange : undefined}
+                onHeaderRow={onHeaderRowFn}
             />
         );
     }, [props, propsScroll, rowSelection, columns, onChange]);
@@ -114,7 +156,7 @@ function FitTable<T extends object = any>({
     const paginationTopContainer = useMemo(() => {
         const top = pagination && pagination.position && pagination.position.includes('topRight'); // 需要有top配置，默认不显示
         return top ? (
-            <Row className={formStyles.formItem}>
+            <Row className={formStyles.formItemBottom}>
                 <Col flex={1}>{toolBarRender()}</Col>
                 <Col>{paginationComponent}</Col>
             </Row>
@@ -135,9 +177,12 @@ function FitTable<T extends object = any>({
 
     return useMemo(() => {
         return (
-            <div ref={ref}>
+            <div>
                 {paginationTopContainer}
-                {tableContent}
+                <div ref={ref} className={styles.relative}>
+                    {settingComponent}
+                    {tableContent}
+                </div>
                 {paginationBottomContainer}
             </div>
         );

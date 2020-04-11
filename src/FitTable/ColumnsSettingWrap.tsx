@@ -33,13 +33,19 @@ const ColumnsSettingWrap = <T extends object = any>({
     return useMemo(() => {
         return (
             <div className={styles.relative}>
-                <ColumnsSetting
-                    columnsSettingRender={columnsSettingRender}
-                    columns={columns}
-                    onColumnsChange={setFilterColumns}
-                    resetColumnsSetting={resetColumnsSetting}
+                <FitTable<T>
+                    {...props}
+                    columns={filterColumns.current!}
+                    // @ts-ignore
+                    settingComponent={
+                        <ColumnsSetting
+                            columnsSettingRender={columnsSettingRender}
+                            columns={columns}
+                            onColumnsChange={setFilterColumns}
+                            resetColumnsSetting={resetColumnsSetting}
+                        />
+                    }
                 />
-                <FitTable<T> {...props} columns={filterColumns.current!} />
             </div>
         );
     }, [reload, props, filterColumns.current]);
