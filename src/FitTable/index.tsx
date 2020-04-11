@@ -109,7 +109,7 @@ function FitTable<T extends object = any>({
     }, [props, propsScroll, rowSelection, columns, onChange]);
 
     const paginationTopContainer = useMemo(() => {
-        const top = pagination && pagination.position.includes('topRight'); // 需要有top配置，默认不显示
+        const top = pagination && pagination.position && pagination.position.includes('topRight'); // 需要有top配置，默认不显示
         return top ? (
             <Row>
                 <Col flex={1} />

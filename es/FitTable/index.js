@@ -113,7 +113,7 @@ function FitTable(_a) {
     }));
   }, [props, propsScroll, rowSelection, columns, onChange]);
   var paginationTopContainer = useMemo(function () {
-    var top = pagination && pagination.position.includes('topRight'); // 需要有top配置，默认不显示
+    var top = pagination && pagination.position && pagination.position.includes('topRight'); // 需要有top配置，默认不显示
 
     return top ? React.createElement(_Row, null, React.createElement(_Col, {
       flex: 1
