@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { TableProps } from 'antd/lib/table';
 import { useScrollXY } from './hooks';
 import { ColumnsSettingProps } from './ColumnsSetting';
@@ -6,6 +6,7 @@ export declare interface IFitTableProps<T> extends TableProps<T>, Partial<Pick<C
     bottom?: number;
     minHeight?: number;
     autoFitY?: boolean;
+    toolbarRender?: () => React.ReactNode[];
 }
 export declare const showTotal: (total: number) => JSX.Element;
 export declare const goButton: JSX.Element;

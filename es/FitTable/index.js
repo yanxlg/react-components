@@ -65,7 +65,11 @@ function FitTable(_a) {
       propsScroll = _a.scroll,
       onChange = _a.onChange,
       pagination = _a.pagination,
-      props = __rest(_a, ["bottom", "minHeight", "autoFitY", "columns", "rowSelection", "scroll", "onChange", "pagination"]);
+      _f = _a.toolbarRender,
+      toolbarRender = _f === void 0 ? function () {
+    return null;
+  } : _f,
+      props = __rest(_a, ["bottom", "minHeight", "autoFitY", "columns", "rowSelection", "scroll", "onChange", "pagination", "toolbarRender"]);
 
   var ref = useRef(null);
   var scroll = useScrollXY(ref, bottom, minHeight, autoFitY, columns, rowSelection, propsScroll);
@@ -120,8 +124,8 @@ function FitTable(_a) {
       className: formStyles.formItem
     }, React.createElement(_Col, {
       flex: 1
-    }), React.createElement(_Col, null, paginationComponent)) : null;
-  }, [pagination]);
+    }, toolbarRender()), React.createElement(_Col, null, paginationComponent)) : null;
+  }, [pagination, toolbarRender]);
   var paginationBottomContainer = useMemo(function () {
     var bottom = pagination ? pagination.position === void 0 || pagination.position.includes('bottomRight') : false;
     return bottom ? React.createElement(_Row, {
