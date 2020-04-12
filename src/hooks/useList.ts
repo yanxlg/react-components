@@ -60,7 +60,11 @@ function useList<T, Q, E = {}>({
                 .then(() => {
                     if (formRef) {
                         if (Array.isArray(formRef)) {
-                            return Promise.all(formRef.map(form => form.current!.validateFields()));
+                            return Promise.all(
+                                formRef.map(form => form.current!.validateFields()),
+                            ).then(valueArray => {
+                                return Object.assign({}, ...valueArray);
+                            });
                         } else {
                             return formRef.current!.validateFields();
                         }
