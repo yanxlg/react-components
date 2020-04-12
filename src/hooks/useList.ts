@@ -25,7 +25,7 @@ function useList<T, Q, E = {}>({
     pageSizeKey = config.defaultPageSizeKey,
 }: {
     queryList: (query: Q) => Promise<IResponse<IPaginationResponse<T, E>>>;
-    formRef?: RefObject<JsonFormRef>;
+    formRef?: RefObject<JsonFormRef> | Array<RefObject<JsonFormRef>>;
     extraQuery?: { [key: string]: any };
     defaultState?: { pageNumber?: number; pageSize?: number };
     autoQuery?: boolean;
@@ -58,7 +58,15 @@ function useList<T, Q, E = {}>({
         }: { page?: number; page_count?: number; [key: string]: any } = {}) => {
             return Promise.resolve()
                 .then(() => {
-                    return formRef ? formRef.current!.validateFields() : undefined;
+                    if (formRef) {
+                        if (Array.isArray(formRef)) {
+                            return Promise.all(formRef.map(form => form.current!.validateFields()));
+                        } else {
+                            return formRef.current!.validateFields();
+                        }
+                    } else {
+                        return undefined;
+                    }
                 })
                 .then(formValues => {
                     setLoading(true);

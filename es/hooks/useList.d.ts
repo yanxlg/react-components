@@ -12,7 +12,7 @@ export declare type IPaginationResponse<T, U = {}> = {
 } & U;
 declare function useList<T, Q, E = {}>({ queryList, formRef, extraQuery, defaultState, autoQuery, pageNumberKey, pageSizeKey, }: {
     queryList: (query: Q) => Promise<IResponse<IPaginationResponse<T, E>>>;
-    formRef?: RefObject<JsonFormRef>;
+    formRef?: RefObject<JsonFormRef> | Array<RefObject<JsonFormRef>>;
     extraQuery?: {
         [key: string]: any;
     };
