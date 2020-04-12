@@ -1,8 +1,8 @@
-import { RefObject, useRef, useState, useCallback, useEffect } from "react";
-import { JsonFormRef } from "../JsonForm";
-import { config } from "../Config";
-import { EmptyArray, EmptyObject } from "../utils";
-import { PaginationConfig } from "antd/es/pagination";
+import { RefObject, useRef, useState, useCallback, useEffect } from 'react';
+import { JsonFormRef } from '../JsonForm';
+import { config } from '../Config';
+import { EmptyArray, EmptyObject } from '../utils';
+import { PaginationConfig } from 'antd/es/pagination';
 
 export interface IResponse<T> {
     code: number;
@@ -68,10 +68,10 @@ function useList<T, Q, E = {}>({
                         ...extra,
                         ...formValues,
                     };
-                    setQuery(query);
                     setSelectedRowKeys(EmptyArray);
                     return queryList(query as Q)
                         .then(({ data: { total = 0, list = [], ...extraData } = EmptyObject }) => {
+                            setQuery(query);
                             pageNumber.current = page;
                             pageSize.current = page_count;
                             setDataSource(list);

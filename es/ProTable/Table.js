@@ -38,17 +38,17 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-import "./index.less";
-import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
-import classNames from "classnames";
+import './index.less';
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import classNames from 'classnames';
 import { ConfigConsumer } from "antd/es/config-provider";
-import Toolbar from "./component/toolBar";
-import { checkUndefinedOrNull, genColumnKey, useDeepCompareEffect } from "./component/util";
-import { useRowSelection } from "./hooks";
-import TableAlert from "./component/alert";
-import FitTable, { goButton, showTotal } from "../FitTable";
-import { defaultPageSizeOptions } from "./config";
-import { isEmptyObject } from "../utils";
+import Toolbar from './component/toolBar';
+import { checkUndefinedOrNull, genColumnKey, useDeepCompareEffect } from './component/util';
+import { useRowSelection } from './hooks';
+import TableAlert from './component/alert';
+import FitTable, { goButton, showTotal } from '../FitTable';
+import { defaultPageSizeOptions } from './config';
+import { isEmptyObject } from '../utils';
 /**
  * 生成 Ellipsis 的 tooltip
  * @param dom
@@ -186,7 +186,7 @@ var ProTable = function ProTable(props) {
       _f = props.optimize,
       optimize = _f === void 0 ? true : _f,
       _g = props.rowKey,
-      rowKey = _g === void 0 ? "" : _g,
+      rowKey = _g === void 0 ? '' : _g,
       rest = __rest(props, ["className", "headerTitle", "pagination", "columns", "toolBarRender", "style", "tableStyle", "tableClassName", "onColumnsStateChange", "options", "rowSelection", "tableAlertRender", "defaultClassName", "size", "loading", "dataSource", "onSizeChange", "scroll", "optimize", "rowKey"]);
 
   var selectedRowKeys = propsRowSelection.selectedRowKeys,
@@ -205,7 +205,7 @@ var ProTable = function ProTable(props) {
       tableColumns = _k[0],
       setTableColumns = _k[1];
 
-  var _l = useState(proSize || "large"),
+  var _l = useState(proSize || 'large'),
       tableSize = _l[0],
       setTableSize = _l[1];
   /***********************密度设置**************************/
@@ -240,7 +240,7 @@ var ProTable = function ProTable(props) {
    */
 
   useDeepCompareEffect(function () {
-    var keys = sortKeyColumns.join(",");
+    var keys = sortKeyColumns.join(',');
     var tableColumn = genColumnList(proColumns, columnsMap);
 
     if (keys.length > 0) {
@@ -255,14 +255,14 @@ var ProTable = function ProTable(props) {
 
     tableColumn.sort(function (a, b) {
       // if (a.fixed === 'left' && b.fixed === 'left') return -1;
-      if (a.fixed === "left" && b.fixed !== "left") return -1;
-      if (a.fixed !== "left" && b.fixed === "left") return 1;
+      if (a.fixed === 'left' && b.fixed !== 'left') return -1;
+      if (a.fixed !== 'left' && b.fixed === 'left') return 1;
 
-      if (a.fixed === "right" && b.fixed !== "right") {
+      if (a.fixed === 'right' && b.fixed !== 'right') {
         return 1;
       }
 
-      if (a.fixed !== "right" && b.fixed === "right") {
+      if (a.fixed !== 'right' && b.fixed === 'right') {
         return -1;
       }
 
@@ -272,7 +272,7 @@ var ProTable = function ProTable(props) {
     if (tableColumn && tableColumn.length > 0) {
       setTableColumns(tableColumn);
     }
-  }, [columnsMap, sortKeyColumns.join("-")]);
+  }, [columnsMap, sortKeyColumns.join('-')]);
   /**
    * columns 过滤筛选  待优化
    */
@@ -318,7 +318,7 @@ var ProTable = function ProTable(props) {
 
   var fullScreenFn = function fullScreenFn() {
     if (proOptions) {
-      if (proOptions.fullScreen && typeof proOptions.fullScreen === "function") {
+      if (proOptions.fullScreen && typeof proOptions.fullScreen === 'function') {
         proOptions.fullScreen();
         return;
       }
@@ -457,7 +457,7 @@ var ProTable = function ProTable(props) {
   }, React.createElement(_Card, {
     bordered: true,
     style: {
-      height: "100%"
+      height: '100%'
     },
     bodyStyle: {
       padding: 0
@@ -475,7 +475,7 @@ var ProviderWarp = function ProviderWarp(props) {
   return React.createElement(ConfigConsumer, null, function (_a) {
     var getPrefixCls = _a.getPrefixCls;
     return React.createElement(ProTable, __assign({
-      defaultClassName: getPrefixCls("pro-table")
+      defaultClassName: getPrefixCls('pro-table')
     }, props));
   });
 };

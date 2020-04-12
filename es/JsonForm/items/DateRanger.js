@@ -19,12 +19,12 @@ var __assign = this && this.__assign || function () {
   return __assign.apply(this, arguments);
 };
 
-import React, { useMemo } from "react";
-import { transNullValue } from "../utils";
-import formStyles from "../_form.less";
-import classNames from "classnames";
-import { startDateToUnix, endDateToUnix } from "../../utils/date";
-var typeList = ["dateRanger"];
+import React, { useMemo } from 'react';
+import { transNullValue } from '../utils';
+import formStyles from '../_form.less';
+import classNames from 'classnames';
+import { startDateToUnix, endDateToUnix } from '../../utils/date';
+var typeList = ['dateRanger'];
 
 var FormDateRanger = function FormDateRanger(props) {
   var label = props.label,
@@ -36,7 +36,7 @@ var FormDateRanger = function FormDateRanger(props) {
       formItemClassName = _b === void 0 ? formStyles.formItem : _b,
       _onChange = props.onChange,
       _c = props.labelClassName,
-      labelClassName = _c === void 0 ? "" : _c,
+      labelClassName = _c === void 0 ? '' : _c,
       form = props.form,
       rules = props.rules;
   var event1Props = useMemo(function () {
@@ -79,7 +79,7 @@ var FormDateRanger = function FormDateRanger(props) {
         className: className
       }, event1Props)));
     }), React.createElement("span", {
-      className: [formStyles.formColon, formStyles.verticalMiddle].join(" ")
+      className: [formStyles.formColon, formStyles.verticalMiddle].join(' ')
     }, "-"), React.createElement(_Form.Item, {
       className: itemClassName,
       shouldUpdate: function shouldUpdate(prevValues, currentValues) {
@@ -105,7 +105,7 @@ var FormDateRanger = function FormDateRanger(props) {
 FormDateRanger.typeList = typeList;
 
 FormDateRanger.formatter = function (formatter) {
-  return formatter ? formatter === "start_date" ? startDateToUnix : formatter === "end_date" ? endDateToUnix : transNullValue : transNullValue;
+  return formatter ? formatter === 'start_date' ? startDateToUnix : formatter === 'end_date' ? endDateToUnix : transNullValue : transNullValue;
 };
 
 export default FormDateRanger;

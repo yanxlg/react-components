@@ -4,9 +4,9 @@ import _Form from "antd/es/form";
 /**
  * 动态FormItem
  */
-import React from "react";
-import { getFormItem } from "../index";
-var typeList = ["dynamic"];
+import React from 'react';
+import { getFormItem } from '../index';
+var typeList = ['dynamic'];
 
 var DynamicItem = function DynamicItem(_a) {
   var form = _a.form,

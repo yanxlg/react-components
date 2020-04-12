@@ -32,9 +32,9 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-import React, { useMemo } from "react";
-import formStyles from "../_form.less";
-var typeList = ["checkboxGroup"];
+import React, { useMemo } from 'react';
+import formStyles from '../_form.less';
+var typeList = ['checkboxGroup'];
 
 var FormCheckboxGroup = function FormCheckboxGroup(props) {
   var name = props.name,

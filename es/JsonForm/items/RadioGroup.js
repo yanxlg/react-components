@@ -32,9 +32,9 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-import React, { useMemo } from "react";
-import formStyles from "../_form.less";
-var typeList = ["radioGroup"];
+import React, { useMemo } from 'react';
+import formStyles from '../_form.less';
+var typeList = ['radioGroup'];
 
 var FormRadioGroup = function FormRadioGroup(props) {
   var name = props.name,
@@ -47,7 +47,7 @@ var FormRadioGroup = function FormRadioGroup(props) {
       form = props.form,
       rules = props.rules,
       _b = props.radioType,
-      radioType = _b === void 0 ? "radio" : _b,
+      radioType = _b === void 0 ? 'radio' : _b,
       options = props.options,
       _props = __rest(props, ["name", "label", "labelClassName", "formItemClassName", "className", "onChange", "form", "rules", "radioType", "options"]);
 
@@ -68,14 +68,14 @@ var FormRadioGroup = function FormRadioGroup(props) {
   }, React.createElement(_Radio.Group, __assign({
     className: className
   }, eventProps, _props), options.map(function (option) {
-    var _a = typeof option === "string" ? {
+    var _a = typeof option === 'string' ? {
       label: option,
       value: option
     } : option,
         label = _a.label,
         value = _a.value;
 
-    if (radioType === "radio") {
+    if (radioType === 'radio') {
       return React.createElement(_Radio, {
         key: String(value),
         value: value

@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
-import isEqual from "lodash/isEqual";
-import TableStatus from "./status";
+import React, { useEffect, useRef } from 'react';
+import isEqual from 'lodash/isEqual';
+import TableStatus from './status';
 /**
  * 转化 text 和 valueEnum
  * 通过 type 来添加 Status
@@ -26,7 +26,7 @@ export var parsingText = function parsingText(text, valueEnum, pure) {
     }
 
     var status_1 = domText.status;
-    var Status = TableStatus[status_1 || "Init"];
+    var Status = TableStatus[status_1 || 'Init'];
     return React.createElement(Status, null, domText.text);
   }
 
@@ -43,9 +43,9 @@ export var parsingValueEnumToArray = function parsingValueEnumToArray(valueEnum)
   }
 
   return Object.keys(valueEnum).map(function (key) {
-    var value = valueEnum[key] || "";
+    var value = valueEnum[key] || '';
     return {
-      text: value.text || value || "",
+      text: value.text || value || '',
       value: key
     };
   });
@@ -79,24 +79,24 @@ export function useDeepCompareEffect(effect, dependencies) {
   useEffect(effect, useDeepCompareMemoize(dependencies));
 }
 export function getProgressStatus(text) {
-  if (typeof text !== "number") {
-    return "exception";
+  if (typeof text !== 'number') {
+    return 'exception';
   }
 
   if (text === 100) {
-    return "success";
+    return 'success';
   }
 
   if (text < 100) {
-    return "active";
+    return 'active';
   } // magic
 
 
   if (text < 0) {
-    return "exception";
+    return 'exception';
   }
 
-  return "normal";
+  return 'normal';
 }
 /**
  *  根据 key 和 dataIndex 生成唯一 id
@@ -111,7 +111,7 @@ export var genColumnKey = function genColumnKey(key, dataIndex) {
 
   if (!key && dataIndex) {
     if (Array.isArray(dataIndex)) {
-      return dataIndex.join("-");
+      return dataIndex.join('-');
     }
 
     return dataIndex;
@@ -120,11 +120,11 @@ export var genColumnKey = function genColumnKey(key, dataIndex) {
   return undefined;
 };
 export default function get(entity, path) {
-  var tempPath = [""];
+  var tempPath = [''];
 
-  if (typeof path === "string") {
-    if (path.includes(".")) {
-      tempPath = path.split(".");
+  if (typeof path === 'string') {
+    if (path.includes('.')) {
+      tempPath = path.split('.');
     } else {
       tempPath = [path];
     }

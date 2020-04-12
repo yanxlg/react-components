@@ -27,9 +27,9 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-import { useRef, useState, useCallback, useEffect } from "react";
-import { config } from "../Config";
-import { EmptyArray, EmptyObject } from "../utils";
+import { useRef, useState, useCallback, useEffect } from 'react';
+import { config } from '../Config';
+import { EmptyArray, EmptyObject } from '../utils';
 
 function useList(_a) {
   var queryList = _a.queryList,
@@ -95,7 +95,6 @@ function useList(_a) {
 
       var query = __assign(__assign((_a = {}, _a[pageNumberKey] = page, _a[pageSizeKey] = page_count, _a), extra), formValues);
 
-      setQuery(query);
       setSelectedRowKeys(EmptyArray);
       return queryList(query).then(function (_a) {
         var _b = _a.data,
@@ -106,6 +105,7 @@ function useList(_a) {
             list = _e === void 0 ? [] : _e,
             extraData = __rest(_c, ["total", "list"]);
 
+        setQuery(query);
         pageNumber.current = page;
         pageSize.current = page_count;
         setDataSource(list);

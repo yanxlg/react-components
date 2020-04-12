@@ -1,23 +1,23 @@
-import dayjs from "dayjs";
-import { isNumber } from "./index";
-import utc from "dayjs/plugin/utc";
+import dayjs from 'dayjs';
+import { isNumber } from './index';
+import utc from 'dayjs/plugin/utc';
 dayjs.extend(utc);
-var dateFormat = "YYYY-MM-DD HH:mm:ss";
+var dateFormat = 'YYYY-MM-DD HH:mm:ss';
 export function unixToStartDate(unix) {
   return !unix ? undefined : dayjs.unix(unix);
 }
 export function unixToEndDate(unix) {
-  return !unix ? undefined : dayjs.unix(unix).add(-1, "d");
+  return !unix ? undefined : dayjs.unix(unix).add(-1, 'd');
 }
 export function startDateToUnix(moment) {
   return moment ? moment.clone().hour(0).minute(0).second(0).unix() : undefined;
 }
 export function endDateToUnix(moment) {
-  return moment ? moment.clone().add(1, "d").hour(0).minute(0).second(0).unix() : undefined;
+  return moment ? moment.clone().add(1, 'd').hour(0).minute(0).second(0).unix() : undefined;
 }
 export function utcToLocal(dateString, placeholder) {
   if (placeholder === void 0) {
-    placeholder = "--";
+    placeholder = '--';
   }
 
   var dateValue = isNumber(dateString) ? dateString * 1000 : dateString;
@@ -25,5 +25,5 @@ export function utcToLocal(dateString, placeholder) {
 }
 export function localToUtc() {}
 export function dateToUnix(date) {
-  return typeof date === "number" ? date : date === null || date === void 0 ? void 0 : date.unix();
+  return typeof date === 'number' ? date : date === null || date === void 0 ? void 0 : date.unix();
 }

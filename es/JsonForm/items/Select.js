@@ -34,10 +34,10 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { transNullValue, transNumber, transJoinStr } from "../utils";
-import formStyles from "../_form.less";
-var typeList = ["select"];
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { transNullValue, transNumber, transJoinStr } from '../utils';
+import formStyles from '../_form.less';
+var typeList = ['select'];
 
 var FormSelect = function FormSelect(props) {
   var name = props.name,
@@ -65,7 +65,7 @@ var FormSelect = function FormSelect(props) {
       options = _d[0],
       setOptions = _d[1];
 
-  var isFunction = typeof optionList === "function";
+  var isFunction = typeof optionList === 'function';
   useEffect(function () {
     if (isFunction) {
       optionList().then(function (optionList) {
@@ -82,7 +82,7 @@ var FormSelect = function FormSelect(props) {
       if (optionListDependence) {
         var name_1 = optionListDependence.name,
             dependenceKey = optionListDependence.key;
-        var dependenceNameList = typeof name_1 === "string" ? [name_1] : name_1 || [];
+        var dependenceNameList = typeof name_1 === 'string' ? [name_1] : name_1 || [];
         var parentItem = options;
 
         var _loop_1 = function _loop_1(i) {
@@ -133,15 +133,15 @@ var FormSelect = function FormSelect(props) {
     if (isShortcut) {
       return React.createElement("div", null, React.createElement(_Radio.Group, {
         style: {
-          display: "flex",
-          padding: "5px 0"
+          display: 'flex',
+          padding: '5px 0'
         },
         value: ""
       }, React.createElement(_Radio.Button, {
         value: "1",
         style: {
           flex: 1,
-          textAlign: "center"
+          textAlign: 'center'
         },
         onClick: function onClick() {
           var _a;
@@ -154,7 +154,7 @@ var FormSelect = function FormSelect(props) {
         value: "0",
         style: {
           flex: 1,
-          textAlign: "center"
+          textAlign: 'center'
         },
         onClick: function onClick() {
           var _a;
@@ -201,7 +201,7 @@ var FormSelect = function FormSelect(props) {
         noStyle: true,
         shouldUpdate: function shouldUpdate(prevValues, currentValues) {
           var name = optionListDependence.name;
-          var dependenceNameList = typeof name === "string" ? [name] : name || [];
+          var dependenceNameList = typeof name === 'string' ? [name] : name || [];
           var updated = false;
           var i = 0;
           var length = dependenceNameList.length;
@@ -254,10 +254,10 @@ FormSelect.typeList = typeList;
 FormSelect.formatter = function (formatter) {
   // return formatter ? (formatter === 'number' ? transNumber : transNullValue) : transNullValue;
   switch (formatter) {
-    case "number":
+    case 'number':
       return transNumber;
 
-    case "joinStr":
+    case 'joinStr':
       return transJoinStr;
 
     default:
