@@ -59,7 +59,8 @@ var FormSelect = function FormSelect(props) {
       _c = props.isShortcut,
       isShortcut = _c === void 0 ? false : _c,
       disabled = props.disabled,
-      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "syncDefaultOption", "optionListDependence", "onChange", "labelClassName", "form", "optionList", "rules", "mode", "maxTagCount", "placeholder", "isShortcut", "disabled"]);
+      formatter = props.formatter,
+      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "syncDefaultOption", "optionListDependence", "onChange", "labelClassName", "form", "optionList", "rules", "mode", "maxTagCount", "placeholder", "isShortcut", "disabled", "formatter"]);
 
   var _d = useState(undefined),
       options = _d[0],
@@ -178,7 +179,8 @@ var FormSelect = function FormSelect(props) {
         label: React.createElement("span", {
           className: labelClassName
         }, label),
-        rules: rules
+        rules: rules,
+        normalize: FormSelect.formatter(formatter)
       }, React.createElement(_Select, __assign({
         disabled: disabled,
         className: className,
@@ -227,7 +229,8 @@ var FormSelect = function FormSelect(props) {
           label: React.createElement("span", {
             className: labelClassName
           }, label),
-          rules: rules
+          rules: rules,
+          normalize: FormSelect.formatter(formatter)
         }, React.createElement(_Select, __assign({
           disabled: disabled,
           className: className,
@@ -252,7 +255,6 @@ var FormSelect = function FormSelect(props) {
 FormSelect.typeList = typeList;
 
 FormSelect.formatter = function (formatter) {
-  // return formatter ? (formatter === 'number' ? transNumber : transNullValue) : transNullValue;
   switch (formatter) {
     case 'number':
       return transNumber;

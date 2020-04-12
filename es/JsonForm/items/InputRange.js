@@ -95,7 +95,8 @@ var FormInputRange = function FormInputRange(props) {
       name: name1,
       className: formStyles.marginNone,
       validateTrigger: "onBlur",
-      rules: rules === null || rules === void 0 ? void 0 : rules[0]
+      rules: rules === null || rules === void 0 ? void 0 : rules[0],
+      normalize: transNumber
     }, React.createElement(_InputNumber, __assign({
       min: 0,
       precision: precision,
@@ -111,7 +112,8 @@ var FormInputRange = function FormInputRange(props) {
       name: name2,
       className: formStyles.marginNone,
       validateTrigger: "onBlur",
-      rules: rules === null || rules === void 0 ? void 0 : rules[1]
+      rules: rules === null || rules === void 0 ? void 0 : rules[1],
+      normalize: transNumber
     }, React.createElement(_InputNumber, __assign({
       min: 0,
       precision: precision,
@@ -121,9 +123,4 @@ var FormInputRange = function FormInputRange(props) {
 };
 
 FormInputRange.typeList = typeList;
-
-FormInputRange.formatter = function () {
-  return transNumber;
-};
-
 export default FormInputRange;

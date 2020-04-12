@@ -54,7 +54,8 @@ var FormDatePicker = function FormDatePicker(props) {
       form = props.form,
       rules = props.rules,
       picker = props.picker,
-      _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "dateBeginWith", "dateEndWith", "onChange", "labelClassName", "form", "rules", "picker"]);
+      formatter = props.formatter,
+      _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "dateBeginWith", "dateEndWith", "onChange", "labelClassName", "form", "rules", "picker", "formatter"]);
 
   var disabledStartDate = useCallback(function (dateBeginWith) {
     if (!dateBeginWith || dateBeginWith.length === 0) {
@@ -126,7 +127,8 @@ var FormDatePicker = function FormDatePicker(props) {
     label: React.createElement("span", {
       className: labelClassName
     }, label),
-    rules: rules
+    rules: rules,
+    normalize: formatter ? formatter === 'start_date' ? startDateToUnix : formatter === 'end_date' ? endDateToUnix : transNullValue : transNullValue
   }, React.createElement(_DatePicker, __assign({
     className: className,
     placeholder: placeholder,
@@ -135,9 +137,4 @@ var FormDatePicker = function FormDatePicker(props) {
 };
 
 FormDatePicker.typeList = typeList;
-
-FormDatePicker.formatter = function (formatter) {
-  return formatter ? formatter === 'start_date' ? startDateToUnix : formatter === 'end_date' ? endDateToUnix : transNullValue : transNullValue;
-};
-
 export default FormDatePicker;

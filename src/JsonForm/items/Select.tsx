@@ -59,6 +59,7 @@ const FormSelect = (props: SelectProps) => {
         placeholder,
         isShortcut = false,
         disabled,
+        formatter,
         ...extraProps
     } = props;
     const [options, setOptions] = useState<IOptionItem[] | undefined>(undefined);
@@ -176,6 +177,7 @@ const FormSelect = (props: SelectProps) => {
                     className={formItemClassName}
                     label={<span className={labelClassName}>{label}</span>}
                     rules={rules}
+                    normalize={FormSelect.formatter(formatter)}
                 >
                     <Select
                         disabled={disabled}
@@ -227,6 +229,7 @@ const FormSelect = (props: SelectProps) => {
                                 className={formItemClassName}
                                 label={<span className={labelClassName}>{label}</span>}
                                 rules={rules}
+                                normalize={FormSelect.formatter(formatter)}
                             >
                                 <Select
                                     disabled={disabled}
@@ -261,7 +264,6 @@ const FormSelect = (props: SelectProps) => {
 FormSelect.typeList = typeList;
 
 FormSelect.formatter = (formatter?: SelectFormatter) => {
-    // return formatter ? (formatter === 'number' ? transNumber : transNullValue) : transNullValue;
     switch (formatter) {
         case 'number':
             return transNumber;

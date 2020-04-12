@@ -49,7 +49,8 @@ var FormInput = function FormInput(props) {
       form = props.form,
       type = props.type,
       rules = props.rules,
-      _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules"]);
+      formatter = props.formatter,
+      _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "formatter"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -65,7 +66,8 @@ var FormInput = function FormInput(props) {
       label: React.createElement("span", {
         className: labelClassName
       }, label),
-      rules: rules
+      rules: rules,
+      normalize: formatter ? formatter === 'number' ? transNumber : formatter === 'strArr' ? transStrArr : formatter === 'numberStrArr' ? transNumberStrArr : transNullValue : transNullValue
     }, React.createElement(RichInput, __assign({
       placeholder: placeholder,
       className: className
@@ -76,23 +78,4 @@ var FormInput = function FormInput(props) {
 };
 
 FormInput.typeList = typeList;
-
-FormInput.formatter = function (formatter) {
-  // return formatter ? (formatter === 'number' ? transNumber : transNullValue) : transNullValue;
-  // return
-  switch (formatter) {
-    case 'number':
-      return transNumber;
-
-    case 'strArr':
-      return transStrArr;
-
-    case 'numberStrArr':
-      return transNumberStrArr;
-
-    default:
-      return transNullValue;
-  }
-};
-
 export default FormInput;

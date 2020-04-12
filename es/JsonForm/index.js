@@ -237,58 +237,82 @@ var JsonForm = function JsonForm(props, ref) {
 
   useImperativeHandle(ref, function () {
     return {
+      /**
+       * @deprecated form next version,please use form prop instance of ref
+       **/
       getFieldsValue: getValues,
+
+      /**
+       * @deprecated form next version,please use form prop instance of ref
+       **/
       validateFields: function validateFields() {
         return form.validateFields().then(function () {
           return getValues();
         });
       },
+
+      /**
+       * @deprecated form next version,please use form prop instance of ref
+       **/
       setFieldsValue: function setFieldsValue(value) {
         form.setFieldsValue(value);
       }
     };
-  }, [fieldList]); // TODO 取值，后期使用normalize代替
-
+  }, [fieldList]);
   var getValues = useCallback(function (targetFieldList) {
-    var values = {};
-    var target = targetFieldList || fieldList;
-    target.map(function (field) {
-      var type = field.type;
-
-      if (Layout.typeList.includes(type)) {
-        // layout 组件
-        values = __assign(__assign({}, values), getValues(field.fieldList));
-      } else if (DynamicItem.typeList.includes(type)) {
-        var _value = getValues([field.dynamic(form)]);
-
-        values = __assign(__assign({}, values), _value);
-      } else {
-        var _a = field,
-            formatter = _a.formatter,
-            name_1 = _a.name;
-
-        if (FormInput.typeList.includes(type)) {
-          values[name_1] = FormInput.formatter(formatter)(form.getFieldValue(name_1));
-        } else if (FormSelect.typeList.includes(type)) {
-          values[name_1] = FormSelect.formatter(formatter)(form.getFieldValue(name_1));
-        } else if (FormDateRanger.typeList.includes(type)) {
-          var name1 = name_1[0],
-              name2 = name_1[1];
-          values[name1] = FormDateRanger.formatter(formatter === null || formatter === void 0 ? void 0 : formatter[0])(form.getFieldValue(name1));
-          values[name2] = FormDateRanger.formatter(formatter === null || formatter === void 0 ? void 0 : formatter[1])(form.getFieldValue(name2));
-        } else if (FormDatePicker.typeList.includes(type)) {
-          values[name_1] = FormDatePicker.formatter(formatter)(form.getFieldValue(name_1));
-        } else if (FormInputRange.typeList.includes(type)) {
-          var name1 = name_1[0],
-              name2 = name_1[1];
-          values[name1] = FormInputRange.formatter()(form.getFieldValue(name1));
-          values[name2] = FormInputRange.formatter()(form.getFieldValue(name2));
+    return form.getFieldsValue();
+    /*let values: Store = {};
+    const target = targetFieldList || fieldList;
+    (target as any[]).map((field: any) => {
+        const { type } = field;
+        if (Layout.typeList.includes(type)) {
+            // layout 组件
+            values = {
+                ...values,
+                ...getValues((field as LayoutProps).fieldList),
+            };
+        } else if (DynamicItem.typeList.includes(type)) {
+            const _value = getValues([(field as DynamicItemProps).dynamic(form)]);
+            values = {
+                ...values,
+                ..._value,
+            };
         } else {
-          values[name_1] = form.getFieldValue(name_1);
+            const { formatter, name } = (field as unknown) as any;
+            if (FormInput.typeList.includes(type)) {
+                values[name as string] = FormInput.formatter(formatter as InputFormatter)(
+                    form.getFieldValue(name),
+                );
+            } else if (FormSelect.typeList.includes(type)) {
+                values[name as string] = FormSelect.formatter(formatter as SelectFormatter)(
+                    form.getFieldValue(name),
+                );
+            } else if (FormDateRanger.typeList.includes(type)) {
+                const [name1, name2] = name;
+                values[name1] = FormDateRanger.formatter(
+                    formatter?.[0] as DateRangerFormatter,
+                )(form.getFieldValue(name1));
+                values[name2] = FormDateRanger.formatter(
+                    formatter?.[1] as DateRangerFormatter,
+                )(form.getFieldValue(name2));
+            } else if (FormDatePicker.typeList.includes(type)) {
+                values[name as string] = FormDatePicker.formatter(
+                    formatter as DatePickerFormatter,
+                )(form.getFieldValue(name));
+            } else if (FormInputRange.typeList.includes(type)) {
+                const [name1, name2] = name;
+                values[name1 as string] = FormInputRange.formatter()(
+                    form.getFieldValue(name1),
+                );
+                values[name2 as string] = FormInputRange.formatter()(
+                    form.getFieldValue(name2),
+                );
+            } else {
+                values[name] = form.getFieldValue(name);
+            }
         }
-      }
     });
-    return values;
+    return values;*/
   }, [fieldList]);
   var onCollapseChange = useCallback(function () {
     // 需要判断当前元素位置

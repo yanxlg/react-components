@@ -18,7 +18,6 @@ export type InputRangeProps<T = string> = FormItemLabelProps &
         formItemClassName?: string;
         onChange?: (name: FormItemName<T>, form: FormInstance) => void; // change监听，支持外部执行表单操作，可以实现关联筛选，重置等操作
         name: [FormItemName<T>, FormItemName];
-        formatter?: any;
         precision?: number;
         rules?: [Rule[], Rule[]];
     };
@@ -104,6 +103,7 @@ const FormInputRange = (props: InputRangeProps) => {
                         className={formStyles.marginNone}
                         validateTrigger="onBlur"
                         rules={rules?.[0]}
+                        normalize={transNumber}
                     >
                         <InputNumber
                             min={0}
@@ -127,6 +127,7 @@ const FormInputRange = (props: InputRangeProps) => {
                         className={formStyles.marginNone}
                         validateTrigger="onBlur"
                         rules={rules?.[1]}
+                        normalize={transNumber}
                     >
                         <InputNumber
                             min={0}
@@ -142,9 +143,5 @@ const FormInputRange = (props: InputRangeProps) => {
 };
 
 FormInputRange.typeList = typeList;
-
-FormInputRange.formatter = () => {
-    return transNumber;
-};
 
 export default FormInputRange;

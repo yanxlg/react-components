@@ -43,6 +43,7 @@ const FormDatePicker = (props: DatePickerProps) => {
         form,
         rules,
         picker,
+        formatter,
         ..._props
     } = props;
 
@@ -116,6 +117,15 @@ const FormDatePicker = (props: DatePickerProps) => {
             className={formItemClassName}
             label={<span className={labelClassName}>{label}</span>}
             rules={rules}
+            normalize={
+                formatter
+                    ? formatter === 'start_date'
+                        ? startDateToUnix
+                        : formatter === 'end_date'
+                        ? endDateToUnix
+                        : transNullValue
+                    : transNullValue
+            }
         >
             <DatePicker
                 className={className}
@@ -129,15 +139,5 @@ const FormDatePicker = (props: DatePickerProps) => {
 };
 
 FormDatePicker.typeList = typeList;
-
-FormDatePicker.formatter = (formatter?: DatePickerFormatter) => {
-    return formatter
-        ? formatter === 'start_date'
-            ? startDateToUnix
-            : formatter === 'end_date'
-            ? endDateToUnix
-            : transNullValue
-        : transNullValue;
-};
 
 export default FormDatePicker;

@@ -36,6 +36,7 @@ const FormDateRanger = (props: DateRangerProps) => {
         labelClassName = '',
         form,
         rules,
+        formatter: [formatter1, formatter2] = [],
     } = props;
 
     const event1Props = useMemo(() => {
@@ -82,6 +83,15 @@ const FormDateRanger = (props: DateRangerProps) => {
                                 name={name1}
                                 className={formStyles.marginNone}
                                 rules={rules?.[0]}
+                                normalize={
+                                    formatter1
+                                        ? formatter1 === 'start_date'
+                                            ? startDateToUnix
+                                            : formatter1 === 'end_date'
+                                            ? endDateToUnix
+                                            : transNullValue
+                                        : transNullValue
+                                }
                             >
                                 <DatePicker
                                     disabledDate={currentDate =>
@@ -114,6 +124,15 @@ const FormDateRanger = (props: DateRangerProps) => {
                                 name={name2}
                                 className={formStyles.marginNone}
                                 rules={rules?.[1]}
+                                normalize={
+                                    formatter2
+                                        ? formatter2 === 'start_date'
+                                            ? startDateToUnix
+                                            : formatter2 === 'end_date'
+                                            ? endDateToUnix
+                                            : transNullValue
+                                        : transNullValue
+                                }
                             >
                                 <DatePicker
                                     disabledDate={currentDate =>
@@ -137,13 +156,4 @@ const FormDateRanger = (props: DateRangerProps) => {
 
 FormDateRanger.typeList = typeList;
 
-FormDateRanger.formatter = (formatter?: DateRangerFormatter) => {
-    return formatter
-        ? formatter === 'start_date'
-            ? startDateToUnix
-            : formatter === 'end_date'
-            ? endDateToUnix
-            : transNullValue
-        : transNullValue;
-};
 export default FormDateRanger;

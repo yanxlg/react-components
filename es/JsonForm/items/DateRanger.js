@@ -38,7 +38,12 @@ var FormDateRanger = function FormDateRanger(props) {
       _c = props.labelClassName,
       labelClassName = _c === void 0 ? '' : _c,
       form = props.form,
-      rules = props.rules;
+      rules = props.rules,
+      _d = props.formatter,
+      _e = _d === void 0 ? [] : _d,
+      formatter1 = _e[0],
+      formatter2 = _e[1];
+
   var event1Props = useMemo(function () {
     return _onChange ? {
       onChange: function onChange() {
@@ -71,7 +76,8 @@ var FormDateRanger = function FormDateRanger(props) {
       return React.createElement(_Form.Item, {
         name: name1,
         className: formStyles.marginNone,
-        rules: rules === null || rules === void 0 ? void 0 : rules[0]
+        rules: rules === null || rules === void 0 ? void 0 : rules[0],
+        normalize: formatter1 ? formatter1 === 'start_date' ? startDateToUnix : formatter1 === 'end_date' ? endDateToUnix : transNullValue : transNullValue
       }, React.createElement(_DatePicker, __assign({
         disabledDate: function disabledDate(currentDate) {
           return currentDate ? endTime ? currentDate.isAfter(endTime) : false : false;
@@ -91,7 +97,8 @@ var FormDateRanger = function FormDateRanger(props) {
       return React.createElement(_Form.Item, {
         name: name2,
         className: formStyles.marginNone,
-        rules: rules === null || rules === void 0 ? void 0 : rules[1]
+        rules: rules === null || rules === void 0 ? void 0 : rules[1],
+        normalize: formatter2 ? formatter2 === 'start_date' ? startDateToUnix : formatter2 === 'end_date' ? endDateToUnix : transNullValue : transNullValue
       }, React.createElement(_DatePicker, __assign({
         disabledDate: function disabledDate(currentDate) {
           return currentDate ? startTime ? currentDate.isBefore(startTime) : false : false;
@@ -103,9 +110,4 @@ var FormDateRanger = function FormDateRanger(props) {
 };
 
 FormDateRanger.typeList = typeList;
-
-FormDateRanger.formatter = function (formatter) {
-  return formatter ? formatter === 'start_date' ? startDateToUnix : formatter === 'end_date' ? endDateToUnix : transNullValue : transNullValue;
-};
-
 export default FormDateRanger;

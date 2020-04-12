@@ -10,19 +10,11 @@ import React, {
 } from 'react';
 import { Button, Col, Form, Row } from 'antd';
 import { FormProps } from 'antd/lib/form/Form';
-import FormInput, { InputType, InputProps, InputFormatter } from './items/Input';
-import FormSelect, { SelectType, SelectProps, SelectFormatter } from './items/Select';
+import FormInput, { InputType, InputProps } from './items/Input';
+import FormSelect, { SelectType, SelectProps } from './items/Select';
 import FormCheckbox, { CheckboxType, CheckboxProps } from './items/Checkbox';
-import FormDatePicker, {
-    DatePickerProps,
-    DatePickerType,
-    DatePickerFormatter,
-} from './items/DatePicker';
-import FormDateRanger, {
-    DateRangerType,
-    DateRangerProps,
-    DateRangerFormatter,
-} from './items/DateRanger';
+import FormDatePicker, { DatePickerProps, DatePickerType } from './items/DatePicker';
+import FormDateRanger, { DateRangerType, DateRangerProps } from './items/DateRanger';
 import FormInputRange, { InputRangeType, InputRangeProps } from './items/InputRange';
 import { Store, ValidateFields } from 'rc-field-form/lib/interface';
 import { FormInstance } from 'antd/es/form';
@@ -40,7 +32,6 @@ import Layout, { LayoutType, LayoutProps } from './layout';
 import DynamicItem, { DynamicItemProps, DynamicType } from './items/DynamicItem';
 import HideItem, { HideItemProps, HideType } from './items/HideItem';
 
-// normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
     labelClassName?: string;
 }
@@ -291,12 +282,21 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         ref,
         () => {
             return {
+                /**
+                 * @deprecated form next version,please use form prop instance of ref
+                 **/
                 getFieldsValue: getValues,
+                /**
+                 * @deprecated form next version,please use form prop instance of ref
+                 **/
                 validateFields: () => {
                     return form.validateFields().then(() => {
                         return getValues();
                     });
                 },
+                /**
+                 * @deprecated form next version,please use form prop instance of ref
+                 **/
                 setFieldsValue: (value: Store) => {
                     form.setFieldsValue(value);
                 },
@@ -305,10 +305,10 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         [fieldList],
     );
 
-    // TODO 取值，后期使用normalize代替
     const getValues = useCallback(
         (targetFieldList?: FormField[]) => {
-            let values: Store = {};
+            return form.getFieldsValue();
+            /*let values: Store = {};
             const target = targetFieldList || fieldList;
             (target as any[]).map((field: any) => {
                 const { type } = field;
@@ -359,7 +359,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                     }
                 }
             });
-            return values;
+            return values;*/
         },
         [fieldList],
     );

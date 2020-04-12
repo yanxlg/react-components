@@ -38,6 +38,7 @@ const FormInput = (props: InputProps) => {
         form,
         type,
         rules,
+        formatter,
         ..._props
     } = props;
     const eventProps = useMemo(() => {
@@ -57,6 +58,17 @@ const FormInput = (props: InputProps) => {
                 name={name}
                 label={<span className={labelClassName}>{label}</span>}
                 rules={rules}
+                normalize={
+                    formatter
+                        ? formatter === 'number'
+                            ? transNumber
+                            : formatter === 'strArr'
+                            ? transStrArr
+                            : formatter === 'numberStrArr'
+                            ? transNumberStrArr
+                            : transNullValue
+                        : transNullValue
+                }
             >
                 <RichInput
                     placeholder={placeholder}
@@ -71,20 +83,5 @@ const FormInput = (props: InputProps) => {
 };
 
 FormInput.typeList = typeList;
-
-FormInput.formatter = (formatter?: InputFormatter) => {
-    // return formatter ? (formatter === 'number' ? transNumber : transNullValue) : transNullValue;
-    // return
-    switch (formatter) {
-        case 'number':
-            return transNumber;
-        case 'strArr':
-            return transStrArr;
-        case 'numberStrArr':
-            return transNumberStrArr;
-        default:
-            return transNullValue;
-    }
-};
 
 export default FormInput;
