@@ -247,7 +247,8 @@ var JsonForm = function JsonForm(props, ref) {
         form.setFieldsValue(value);
       }
     };
-  }, [fieldList]);
+  }, [fieldList]); // TODO 取值，后期使用normalize代替
+
   var getValues = useCallback(function (targetFieldList) {
     var values = {};
     var target = targetFieldList || fieldList;
@@ -257,6 +258,10 @@ var JsonForm = function JsonForm(props, ref) {
       if (Layout.typeList.includes(type)) {
         // layout 组件
         values = __assign(__assign({}, values), getValues(field.fieldList));
+      } else if (DynamicItem.typeList.includes(type)) {
+        var _value = getValues([field.dynamic(form)]);
+
+        values = __assign(__assign({}, values), _value);
       } else {
         var _a = field,
             formatter = _a.formatter,

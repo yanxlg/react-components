@@ -31,8 +31,8 @@ const DynamicItem = ({
     itemRow,
 }: DynamicItemProps) => {
     return (
-        <Form.Item shouldUpdate={shouldUpdate}>
-            {({ getFieldValue }) => {
+        <Form.Item shouldUpdate={shouldUpdate} noStyle={true}>
+            {() => {
                 const formField = dynamic(form);
                 return getFormItem(formField, form, labelClassName, itemCol, itemRow);
             }}

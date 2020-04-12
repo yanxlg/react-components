@@ -305,6 +305,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         [fieldList],
     );
 
+    // TODO 取值，后期使用normalize代替
     const getValues = useCallback(
         (targetFieldList?: FormField[]) => {
             let values: Store = {};
@@ -316,6 +317,12 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                     values = {
                         ...values,
                         ...getValues((field as LayoutProps).fieldList),
+                    };
+                } else if (DynamicItem.typeList.includes(type)) {
+                    const _value = getValues([(field as DynamicItemProps).dynamic(form)]);
+                    values = {
+                        ...values,
+                        ..._value,
                     };
                 } else {
                     const { formatter, name } = (field as unknown) as any;

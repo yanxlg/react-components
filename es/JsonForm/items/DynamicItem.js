@@ -16,9 +16,9 @@ var DynamicItem = function DynamicItem(_a) {
       itemCol = _a.itemCol,
       itemRow = _a.itemRow;
   return React.createElement(_Form.Item, {
-    shouldUpdate: shouldUpdate
-  }, function (_a) {
-    var getFieldValue = _a.getFieldValue;
+    shouldUpdate: shouldUpdate,
+    noStyle: true
+  }, function () {
     var formField = dynamic(form);
     return getFormItem(formField, form, labelClassName, itemCol, itemRow);
   });
