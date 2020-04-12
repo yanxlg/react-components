@@ -15,10 +15,11 @@ import { RadioGroupProps } from './items/RadioGroup';
 import './index.less';
 import { LayoutProps } from './layout';
 import { DynamicItemProps } from './items/DynamicItem';
+import { HideItemProps } from './items/HideItem';
 export declare interface CustomFormProps {
     labelClassName?: string;
 }
-export declare type FormField<T = string> = (Omit<InputProps<T>, 'form'> | Omit<SelectProps<T>, 'form'> | Omit<CheckboxProps<T>, 'form'> | Omit<DatePickerProps<T>, 'form'> | Omit<DateRangerProps<T>, 'form'> | Omit<CheckboxGroupProps<T>, 'form'> | Omit<RadioGroupProps<T>, 'form'> | Omit<InputRangeProps<T>, 'form'> | Omit<LayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'> | Omit<DynamicItemProps, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>) & {
+export declare type FormField<T = string> = (Omit<InputProps<T>, 'form'> | Omit<SelectProps<T>, 'form'> | Omit<CheckboxProps<T>, 'form'> | Omit<DatePickerProps<T>, 'form'> | Omit<DateRangerProps<T>, 'form'> | Omit<CheckboxGroupProps<T>, 'form'> | Omit<RadioGroupProps<T>, 'form'> | Omit<InputRangeProps<T>, 'form'> | Omit<LayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'> | Omit<DynamicItemProps, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'> | Omit<HideItemProps, 'form'>) & {
     form?: FormInstance;
 };
 declare interface JsonFormProps<T = any> extends FormProps, CustomFormProps {

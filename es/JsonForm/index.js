@@ -52,6 +52,7 @@ import './index.less';
 import formStyles from './_form.less';
 import Layout from './layout';
 import DynamicItem from './items/DynamicItem';
+import HideItem from './items/HideItem';
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
@@ -171,6 +172,15 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       itemRow: itemRow,
       itemCol: itemCol
     })), itemCol);
+  }
+
+  if (HideItem.typeList.includes(type)) {
+    return React.createElement(HideItem, __assign({
+      key: String(index)
+    }, field, {
+      type: type,
+      form: form
+    }));
   }
 
   return null;

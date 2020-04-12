@@ -38,7 +38,9 @@ import './index.less';
 import formStyles from './_form.less';
 import Layout, { LayoutType, LayoutProps } from './layout';
 import DynamicItem, { DynamicItemProps, DynamicType } from './items/DynamicItem';
+import HideItem, { HideItemProps, HideType } from './items/HideItem';
 
+// normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
     labelClassName?: string;
 }
@@ -54,6 +56,7 @@ export type FormField<T = string> = (
     | Omit<InputRangeProps<T>, 'form'>
     | Omit<LayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>
     | Omit<DynamicItemProps, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>
+    | Omit<HideItemProps, 'form'>
 ) & {
     form?: FormInstance;
 };
@@ -219,6 +222,16 @@ export const getFormItem = (
                 itemCol={itemCol}
             />,
             itemCol,
+        );
+    }
+    if (HideItem.typeList.includes(type)) {
+        return (
+            <HideItem
+                key={String(index)}
+                {...(field as HideItemProps)}
+                type={type as HideType}
+                form={form}
+            />
         );
     }
     return null;
