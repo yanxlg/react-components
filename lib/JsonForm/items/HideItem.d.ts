@@ -12,7 +12,7 @@ export declare type HideItemProps<T = string> = {
  * @constructor
  */
 declare const HideItem: {
-    <T>({ form, type, name }: HideItemProps<string>): JSX.Element;
+    ({ form, type, name }: HideItemProps<string>): JSX.Element;
     typeList: string[];
 };
 export default HideItem;

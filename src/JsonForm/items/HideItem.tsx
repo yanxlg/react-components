@@ -20,7 +20,7 @@ export type HideItemProps<T = string> = {
  * 隐藏元素，通常用于保存数据
  * @constructor
  */
-const HideItem = <T,>({ form, type, name }: HideItemProps) => {
+const HideItem = ({ form, type, name }: HideItemProps) => {
     return (
         <Form.Item noStyle={true} name={name}>
             <DateItem />
