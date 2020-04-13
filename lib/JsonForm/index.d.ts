@@ -36,8 +36,17 @@ export declare interface CustomFormProps {
     labelClassName?: string;
 }
 export interface JsonFormRef {
+    /**
+     * @deprecated form next version,please use form prop instance of ref
+     **/
     getFieldsValue: () => Store;
+    /**
+     * @deprecated form next version,please use form prop instance of ref
+     **/
     validateFields: ValidateFields;
+    /**
+     * @deprecated form next version,please use form prop instance of ref
+     **/
     setFieldsValue: (value: Store) => void;
 }
 export declare const getColChildren: (children: React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)>) | (new (props: any) => React.Component<any, any, any>)>, itemCol?: ColProps, times?: number) => JSX.Element;
