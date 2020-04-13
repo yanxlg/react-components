@@ -182,24 +182,9 @@ function useList(_a) {
     /**
      * @deprecated
      **/
-    get query() {
-      return query.current;
-    },
-
-    /**
-     * @deprecated
-     **/
-    get pageNumber() {
-      return pageNumber.current;
-    },
-
-    /**
-     * @deprecated
-     **/
-    get pageSize() {
-      return pageSize.current;
-    },
-
+    query: query.current,
+    pageNumber: pageNumber.current,
+    pageSize: pageSize.current,
     loading: loading,
     dataSource: dataSource,
     extraData: extraData,

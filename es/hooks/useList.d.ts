@@ -30,15 +30,9 @@ declare function useList<T, Q, E = {}>({ queryList, formRef, extraQuery, default
     /**
      * @deprecated
      **/
-    readonly query: object;
-    /**
-     * @deprecated
-     **/
-    readonly pageNumber: number;
-    /**
-     * @deprecated
-     **/
-    readonly pageSize: number;
+    query: object;
+    pageNumber: number;
+    pageSize: number;
     loading: boolean;
     dataSource: T[];
     extraData: E;
