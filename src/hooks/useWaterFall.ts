@@ -1,6 +1,7 @@
 import { RefObject, useRef, useState, useCallback, useEffect } from 'react';
 import { JsonFormRef } from '../JsonForm';
 import { EmptyObject } from '../utils';
+import { config } from '../Config';
 
 export interface IResponse<T> {
     code: number;
@@ -19,12 +20,14 @@ function useWaterFall<T, Q, E = {}>({
     extraQuery,
     autoQuery = true,
     dependenceKey = 'id',
+    size = config.defaultWaterFallSize,
 }: {
     queryPromise: (query: Q) => Promise<IResponse<IPaginationResponse<T, E>>>;
     formRef?: RefObject<JsonFormRef> | Array<RefObject<JsonFormRef>>;
     extraQuery?: { [key: string]: any };
     autoQuery?: boolean;
     dependenceKey?: string;
+    size?: number;
 }) {
     const [loading, setLoading] = useState(autoQuery);
 
@@ -40,12 +43,14 @@ function useWaterFall<T, Q, E = {}>({
 
     dataSourceRef.current = dataSource; // 直接读取
 
+    const hasMoreRef = useRef(true);
+
     const setQuery = useCallback((nextQuery: object) => {
         query.current = nextQuery;
     }, []);
 
     const getListData = useCallback(
-        ({ id, ...extra }: { id?: string; [key: string]: any } = {}) => {
+        ({ id, ...extra }: { id?: string; size?: number; [key: string]: any } = {}) => {
             return Promise.resolve()
                 .then(() => {
                     if (formRef) {
@@ -65,6 +70,7 @@ function useWaterFall<T, Q, E = {}>({
                 .then(formValues => {
                     setLoading(true);
                     const query = {
+                        size,
                         ...extra,
                         ...formValues,
                     };
@@ -73,6 +79,7 @@ function useWaterFall<T, Q, E = {}>({
                             setQuery(query);
                             setTotal(total);
                             setDataSource([].concat(dataSourceRef.current).concat(list));
+                            hasMoreRef.current = list.length >= size;
                         })
                         .finally(() => {
                             setLoading(false);
@@ -82,21 +89,24 @@ function useWaterFall<T, Q, E = {}>({
         [],
     );
 
-    const onSearch = useCallback(
-        () =>
-            getListData({
-                ...extraQueryRef.current,
-            }),
-        [],
-    );
-
-    const onNext = useCallback(() => {
-        const item = dataSourceRef.current[dataSourceRef.current.length - 1];
-        const id = item?.[dependenceKey];
+    const onSearch = useCallback(() => {
+        hasMoreRef.current = true;
         return getListData({
-            id,
             ...extraQueryRef.current,
         });
+    }, []);
+
+    const onNext = useCallback(() => {
+        if (hasMoreRef.current) {
+            const item = dataSourceRef.current[dataSourceRef.current.length - 1];
+            const id = item?.[dependenceKey];
+            return getListData({
+                id,
+                ...extraQueryRef.current,
+            });
+        } else {
+            return void 0;
+        }
     }, []);
 
     useEffect(() => {
@@ -105,6 +115,7 @@ function useWaterFall<T, Q, E = {}>({
 
     return {
         queryRef: query,
+        hasMoreRef: hasMoreRef,
         loading,
         dataSource,
         total,

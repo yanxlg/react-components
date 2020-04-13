@@ -9,7 +9,7 @@ export declare type IPaginationResponse<T, U = {}> = {
     total: number;
     list: T[];
 } & U;
-declare function useWaterFall<T, Q, E = {}>({ queryPromise, formRef, extraQuery, autoQuery, dependenceKey, }: {
+declare function useWaterFall<T, Q, E = {}>({ queryPromise, formRef, extraQuery, autoQuery, dependenceKey, size, }: {
     queryPromise: (query: Q) => Promise<IResponse<IPaginationResponse<T, E>>>;
     formRef?: RefObject<JsonFormRef> | Array<RefObject<JsonFormRef>>;
     extraQuery?: {
@@ -17,8 +17,10 @@ declare function useWaterFall<T, Q, E = {}>({ queryPromise, formRef, extraQuery,
     };
     autoQuery?: boolean;
     dependenceKey?: string;
+    size?: number;
 }): {
     queryRef: import("react").MutableRefObject<object>;
+    hasMoreRef: import("react").MutableRefObject<boolean>;
     loading: boolean;
     dataSource: T[];
     total: number;
@@ -30,6 +32,7 @@ declare function useWaterFall<T, Q, E = {}>({ queryPromise, formRef, extraQuery,
     getListData: ({ id, ...extra }?: {
         [key: string]: any;
         id?: string;
+        size?: number;
     }) => Promise<void>;
 };
 export default useWaterFall;

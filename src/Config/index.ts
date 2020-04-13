@@ -1,6 +1,7 @@
 let config = {
     defaultPageNumber: 1,
     defaultPageSize: 50,
+    defaultWaterFallSize: 20,
     defaultPageNumberKey: 'page',
     defaultPageSizeKey: 'page_count',
 };

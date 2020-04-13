@@ -43,6 +43,7 @@ var __spreadArrays = this && this.__spreadArrays || function () {
 
 import { useRef, useState, useCallback, useEffect } from 'react';
 import { EmptyObject } from '../utils';
+import { config } from '../Config';
 
 function useWaterFall(_a) {
   var queryPromise = _a.queryPromise,
@@ -51,27 +52,30 @@ function useWaterFall(_a) {
       _b = _a.autoQuery,
       autoQuery = _b === void 0 ? true : _b,
       _c = _a.dependenceKey,
-      dependenceKey = _c === void 0 ? 'id' : _c;
+      dependenceKey = _c === void 0 ? 'id' : _c,
+      _d = _a.size,
+      size = _d === void 0 ? config.defaultWaterFallSize : _d;
 
-  var _d = useState(autoQuery),
-      loading = _d[0],
-      setLoading = _d[1];
+  var _e = useState(autoQuery),
+      loading = _e[0],
+      setLoading = _e[1];
 
   var extraQueryRef = useRef(undefined);
   extraQueryRef.current = extraQuery; // extraQuery支持外部更新，每次覆盖
 
-  var _e = useState([]),
-      dataSource = _e[0],
-      setDataSource = _e[1];
+  var _f = useState([]),
+      dataSource = _f[0],
+      setDataSource = _f[1];
 
-  var _f = useState(0),
-      total = _f[0],
-      setTotal = _f[1];
+  var _g = useState(0),
+      total = _g[0],
+      setTotal = _g[1];
 
   var query = useRef({});
   var dataSourceRef = useRef(dataSource);
   dataSourceRef.current = dataSource; // 直接读取
 
+  var hasMoreRef = useRef(true);
   var setQuery = useCallback(function (nextQuery) {
     query.current = nextQuery;
   }, []);
@@ -102,7 +106,9 @@ function useWaterFall(_a) {
 
       setLoading(true);
 
-      var query = __assign(__assign({}, extra), formValues);
+      var query = __assign(__assign({
+        size: size
+      }, extra), formValues);
 
       return queryPromise(__assign(__assign({}, query), (_a = {}, _a[dependenceKey] = id, _a))).then(function (_a) {
         var _b = _a.data,
@@ -115,26 +121,33 @@ function useWaterFall(_a) {
         setQuery(query);
         setTotal(total);
         setDataSource([].concat(dataSourceRef.current).concat(list));
+        hasMoreRef.current = list.length >= size;
       })["finally"](function () {
         setLoading(false);
       });
     });
   }, []);
   var onSearch = useCallback(function () {
+    hasMoreRef.current = true;
     return getListData(__assign({}, extraQueryRef.current));
   }, []);
   var onNext = useCallback(function () {
-    var item = dataSourceRef.current[dataSourceRef.current.length - 1];
-    var id = item === null || item === void 0 ? void 0 : item[dependenceKey];
-    return getListData(__assign({
-      id: id
-    }, extraQueryRef.current));
+    if (hasMoreRef.current) {
+      var item = dataSourceRef.current[dataSourceRef.current.length - 1];
+      var id = item === null || item === void 0 ? void 0 : item[dependenceKey];
+      return getListData(__assign({
+        id: id
+      }, extraQueryRef.current));
+    } else {
+      return void 0;
+    }
   }, []);
   useEffect(function () {
     autoQuery && onSearch();
   }, []);
   return {
     queryRef: query,
+    hasMoreRef: hasMoreRef,
     loading: loading,
     dataSource: dataSource,
     total: total,
