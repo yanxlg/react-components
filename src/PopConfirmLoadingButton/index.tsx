@@ -28,7 +28,9 @@ const PopConfirmLoadingButton: React.FC<IPopConfirmLoadingButtonProps> = ({
     return useMemo(() => {
         return (
             <Popconfirm {...popConfirmProps} onConfirm={onConfirm}>
-                <Button {...buttonProps} loading={loading} />
+                <span>
+                    <Button {...buttonProps} loading={loading} />
+                </span>
             </Popconfirm>
         );
     }, [popConfirmProps, buttonProps, loading]);

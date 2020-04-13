@@ -38,9 +38,9 @@ var PopConfirmLoadingButton = function PopConfirmLoadingButton(_a) {
   return useMemo(function () {
     return React.createElement(_Popconfirm, __assign({}, popConfirmProps, {
       onConfirm: onConfirm
-    }), React.createElement(_Button, __assign({}, buttonProps, {
+    }), React.createElement("span", null, React.createElement(_Button, __assign({}, buttonProps, {
       loading: loading
-    })));
+    }))));
   }, [popConfirmProps, buttonProps, loading]);
 };
 
