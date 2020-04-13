@@ -40,6 +40,9 @@
 
 .form-container {
     padding: @itemSpacing/2 0 !important;
+    ~ .form-container{
+        margin-top: -@itemSpacing!important;
+    }
 }
 
 .form-colon {
