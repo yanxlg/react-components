@@ -227,57 +227,7 @@ var JsonForm = function JsonForm(props, ref) {
       collapseBtnVisible = _f[0],
       setCollapseBtnVisible = _f[1];
 
-  var form = _Form.useForm(proForm)[0]; /// api 重定义
-
-
-  var getFieldsValue = useCallback(function (nameList, filterFunc) {
-    if (nameList === void 0) {
-      nameList = true;
-    }
-
-    var values = getValues();
-    var result = {};
-
-    for (var key in values) {
-      if ((nameList === true || nameList.indexOf(key) > -1) && (!filterFunc || filterFunc({
-        touched: false,
-        validating: false,
-        errors: [],
-        name: [key]
-      }))) {
-        result[key] = values[key];
-      }
-    }
-
-    return result;
-  }, [fieldList]);
-  var getFieldValue = useCallback(function (name) {
-    var values = getValues();
-
-    if (Array.isArray(name)) {
-      var result = {};
-
-      for (var key in values) {
-        if (name.indexOf(key) > -1) {
-          result[key] = values[key];
-        }
-      }
-
-      return result;
-    } else {
-      return values[name];
-    }
-  }, [fieldList]);
-  var validateFields = useCallback(function () {
-    return form.validateFields().then(function () {
-      return getValues();
-    });
-  }, [fieldList]);
-  useMemo(function () {
-    form.getFieldsValue = getFieldsValue;
-    form.getFieldValue = getFieldValue;
-    form.validateFields = validateFields;
-  }, [fieldList]); /// api 重定义
+  var form = _Form.useForm(proForm)[0];
 
   var btnWrap = useRef(null);
 

@@ -24,7 +24,7 @@ import FormDateRanger, {
     DateRangerFormatter,
 } from './items/DateRanger';
 import FormInputRange, { InputRangeType, InputRangeProps } from './items/InputRange';
-import { Store, ValidateFields, NamePath, Meta } from 'rc-field-form/lib/interface';
+import { Store, ValidateFields } from 'rc-field-form/lib/interface';
 import { FormInstance } from 'antd/es/form';
 import RcResizeObserver from 'rc-resize-observer';
 import { UpOutlined, DownOutlined } from '@ant-design/icons';
@@ -280,56 +280,6 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
     const [collapseBtnVisible, setCollapseBtnVisible] = useState(false);
 
     const [form] = Form.useForm(proForm);
-
-    /// api 重定义
-    const getFieldsValue = useCallback(
-        (nameList: true | NamePath[] = true, filterFunc?: (meta: Meta) => boolean) => {
-            const values = getValues();
-            let result = {} as Store;
-            for (let key in values) {
-                if (
-                    (nameList === true || nameList.indexOf(key) > -1) &&
-                    (!filterFunc ||
-                        filterFunc({ touched: false, validating: false, errors: [], name: [key] }))
-                ) {
-                    result[key] = values[key];
-                }
-            }
-            return result;
-        },
-        [fieldList],
-    );
-
-    const getFieldValue = useCallback(
-        (name: NamePath) => {
-            const values = getValues();
-            if (Array.isArray(name)) {
-                let result = {} as Store;
-                for (let key in values) {
-                    if (name.indexOf(key) > -1) {
-                        result[key] = values[key];
-                    }
-                }
-                return result;
-            } else {
-                return values[name];
-            }
-        },
-        [fieldList],
-    );
-
-    const validateFields = useCallback(() => {
-        return form.validateFields().then(() => {
-            return getValues();
-        });
-    }, [fieldList]);
-
-    useMemo(() => {
-        form.getFieldsValue = getFieldsValue;
-        form.getFieldValue = getFieldValue;
-        form.validateFields = validateFields;
-    }, [fieldList]);
-    /// api 重定义
 
     const btnWrap = useRef<HTMLDivElement>(null);
 
