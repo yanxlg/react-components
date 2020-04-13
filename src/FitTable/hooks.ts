@@ -24,7 +24,14 @@ function useScrollXY<T>(
                 x += parseInt(rowSelection.columnWidth as string) || 0;
             }
             columns?.forEach(column => {
-                x += parseInt(column.width as string) || 0;
+                // 支持表头分组
+                if (column['children']) {
+                    column['children'].map((item: any) => {
+                        x += parseInt(item.width as string) || 0;
+                    });
+                } else {
+                    x += parseInt(column.width as string) || 0;
+                }
             });
             return x;
         } else {

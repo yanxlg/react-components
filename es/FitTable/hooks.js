@@ -31,7 +31,14 @@ function useScrollXY(containerRef, bottom, minHeight, autoFitY, columns, rowSele
       }
 
       columns === null || columns === void 0 ? void 0 : columns.forEach(function (column) {
-        x_1 += parseInt(column.width) || 0;
+        // 支持表头分组
+        if (column['children']) {
+          column['children'].map(function (item) {
+            x_1 += parseInt(item.width) || 0;
+          });
+        } else {
+          x_1 += parseInt(column.width) || 0;
+        }
       });
       return x_1;
     } else {
