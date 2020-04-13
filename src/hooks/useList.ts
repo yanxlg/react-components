@@ -145,12 +145,24 @@ function useList<T, Q, E = {}>({
     }, []);
 
     return {
+        queryRef: query,
+        pageNumberRef: pageNumber,
+        pageSizeRef: pageSize,
+        /**
+         * @deprecated
+         **/
         get query() {
             return query.current;
         },
+        /**
+         * @deprecated
+         **/
         get pageNumber() {
             return pageNumber.current;
         },
+        /**
+         * @deprecated
+         **/
         get pageSize() {
             return pageSize.current;
         },

@@ -24,8 +24,20 @@ declare function useList<T, Q, E = {}>({ queryList, formRef, extraQuery, default
     pageNumberKey?: string;
     pageSizeKey?: string;
 }): {
+    queryRef: import("react").MutableRefObject<object>;
+    pageNumberRef: import("react").MutableRefObject<number>;
+    pageSizeRef: import("react").MutableRefObject<number>;
+    /**
+     * @deprecated
+     **/
     readonly query: object;
+    /**
+     * @deprecated
+     **/
     readonly pageNumber: number;
+    /**
+     * @deprecated
+     **/
     readonly pageSize: number;
     loading: boolean;
     dataSource: T[];
