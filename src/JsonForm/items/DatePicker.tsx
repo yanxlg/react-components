@@ -6,7 +6,7 @@ import { FormInstance, Rule } from 'antd/es/form';
 import dayjs, { Dayjs } from 'dayjs';
 import { transNullValue } from '../utils';
 import formStyles from '../_form.less';
-import { PickerDateProps } from 'antd/es/date-picker/generatePicker';
+import { PickerProps } from 'antd/es/date-picker/generatePicker';
 import { startDateToUnix, endDateToUnix } from '../../utils/date';
 
 export type DatePickerFormatter = 'start_date' | 'end_date';
@@ -27,7 +27,7 @@ export type DatePickerProps<T = string> = FormItemLabelProps &
         dateEndWith?: Array<FormItemName<T> | 'now'>;
         formatter?: DatePickerFormatter;
         rules?: Rule[];
-    } & Omit<PickerDateProps<Dayjs>, 'onChange'>;
+    } & Omit<PickerProps<Dayjs>, 'onChange'>;
 
 const FormDatePicker = (props: DatePickerProps) => {
     const {
@@ -121,6 +121,7 @@ const FormDatePicker = (props: DatePickerProps) => {
                 className={className}
                 placeholder={placeholder}
                 disabledDate={disabledDate}
+                picker={picker}
                 {...eventProps}
                 {..._props}
             />
