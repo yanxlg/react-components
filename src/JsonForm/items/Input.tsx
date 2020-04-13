@@ -73,8 +73,6 @@ const FormInput = (props: InputProps) => {
 FormInput.typeList = typeList;
 
 FormInput.formatter = (formatter?: InputFormatter) => {
-    // return formatter ? (formatter === 'number' ? transNumber : transNullValue) : transNullValue;
-    // return
     switch (formatter) {
         case 'number':
             return transNumber;
