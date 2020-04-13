@@ -36,6 +36,7 @@ function useWaterFall<T, Q, E = {}>({
 
     const [dataSource, setDataSource] = useState<T[]>([]);
     const [total, setTotal] = useState(0);
+    const [increment, setIncrement] = useState<T[]>([]);
 
     const query = useRef<object>({});
 
@@ -78,6 +79,7 @@ function useWaterFall<T, Q, E = {}>({
                         .then(({ data: { total = 0, list = [] } = EmptyObject }) => {
                             setQuery(query);
                             setTotal(total);
+                            setIncrement(list);
                             setDataSource([].concat(dataSourceRef.current).concat(list));
                             hasMoreRef.current = list.length >= size;
                         })
@@ -105,7 +107,7 @@ function useWaterFall<T, Q, E = {}>({
                 ...extraQueryRef.current,
             });
         } else {
-            return void 0;
+            return Promise.resolve();
         }
     }, []);
 
@@ -118,6 +120,7 @@ function useWaterFall<T, Q, E = {}>({
         hasMoreRef: hasMoreRef,
         loading,
         dataSource,
+        increment, // for optimize render
         total,
         setLoading,
         setDataSource,

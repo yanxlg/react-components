@@ -71,6 +71,10 @@ function useWaterFall(_a) {
       total = _g[0],
       setTotal = _g[1];
 
+  var _h = useState([]),
+      increment = _h[0],
+      setIncrement = _h[1];
+
   var query = useRef({});
   var dataSourceRef = useRef(dataSource);
   dataSourceRef.current = dataSource; // 直接读取
@@ -120,6 +124,7 @@ function useWaterFall(_a) {
 
         setQuery(query);
         setTotal(total);
+        setIncrement(list);
         setDataSource([].concat(dataSourceRef.current).concat(list));
         hasMoreRef.current = list.length >= size;
       })["finally"](function () {
@@ -139,7 +144,7 @@ function useWaterFall(_a) {
         id: id
       }, extraQueryRef.current));
     } else {
-      return void 0;
+      return Promise.resolve();
     }
   }, []);
   useEffect(function () {
@@ -150,6 +155,7 @@ function useWaterFall(_a) {
     hasMoreRef: hasMoreRef,
     loading: loading,
     dataSource: dataSource,
+    increment: increment,
     total: total,
     setLoading: setLoading,
     setDataSource: setDataSource,
