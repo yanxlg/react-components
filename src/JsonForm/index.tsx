@@ -78,17 +78,8 @@ export declare interface CustomFormProps {
 }
 
 export interface JsonFormRef {
-    /**
-     * @deprecated form next version,please use form prop instance of ref
-     **/
     getFieldsValue: () => Store;
-    /**
-     * @deprecated form next version,please use form prop instance of ref
-     **/
     validateFields: ValidateFields;
-    /**
-     * @deprecated form next version,please use form prop instance of ref
-     **/
     setFieldsValue: (value: Store) => void;
 }
 
