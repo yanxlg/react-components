@@ -33,6 +33,7 @@ var __rest = this && this.__rest || function (s, e) {
 };
 
 import React, { useMemo } from 'react';
+import { transNumber } from '../index';
 import formStyles from '../_form.less';
 var typeList = ['radioGroup'];
 
@@ -49,7 +50,8 @@ var FormRadioGroup = function FormRadioGroup(props) {
       _b = props.radioType,
       radioType = _b === void 0 ? 'radio' : _b,
       options = props.options,
-      _props = __rest(props, ["name", "label", "labelClassName", "formItemClassName", "className", "onChange", "form", "rules", "radioType", "options"]);
+      formatter = props.formatter,
+      _props = __rest(props, ["name", "label", "labelClassName", "formItemClassName", "className", "onChange", "form", "rules", "radioType", "options", "formatter"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -64,7 +66,8 @@ var FormRadioGroup = function FormRadioGroup(props) {
       className: labelClassName
     }, label) : undefined,
     className: formItemClassName,
-    rules: rules
+    rules: rules,
+    normalize: formatter === 'number' ? transNumber : undefined
   }, React.createElement(_Radio.Group, __assign({
     className: className
   }, eventProps, _props), options.map(function (option) {

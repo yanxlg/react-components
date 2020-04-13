@@ -2,7 +2,6 @@
 import { CustomFormProps, FormItemName } from '../index';
 import { FormInstance, Rule } from 'antd/es/form';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
-import { transNullValue } from '../utils';
 import { SelectProps as AntdSelectProps } from 'antd/es/select/index';
 export declare interface IOptionItem {
     name: string;
@@ -33,6 +32,5 @@ export declare type SelectProps<T = string> = FormItemLabelProps & CustomFormPro
 declare const FormSelect: {
     (props: SelectProps<string>): JSX.Element;
     typeList: string[];
-    formatter(formatter?: SelectFormatter): typeof transNullValue;
 };
 export default FormSelect;

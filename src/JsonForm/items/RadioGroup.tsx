@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Form, Radio } from 'antd';
-import { CustomFormProps, FormItemName } from '../index';
+import { CustomFormProps, FormItemName, transNumber } from '../index';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
 import { FormInstance, Rule } from 'antd/es/form';
 import { RadioGroupProps as AntdRadioGroupProps } from 'antd/lib/radio/interface';
@@ -8,6 +8,7 @@ import formStyles from '../_form.less';
 
 export type RadioGroupType = 'radioGroup';
 const typeList = ['radioGroup'];
+export type RadioGroupFormatter = 'number';
 
 export type RadioGroupProps<T = string> = FormItemLabelProps &
     CustomFormProps & {
@@ -17,7 +18,7 @@ export type RadioGroupProps<T = string> = FormItemLabelProps &
         formItemClassName?: string;
         onChange?: (name: FormItemName<T>, form: FormInstance) => void; // change监听，支持外部执行表单操作，可以实现关联筛选，重置等操作
         name: FormItemName<T>;
-        formatter?: undefined;
+        formatter?: RadioGroupFormatter;
         rules?: Rule[];
         radioType?: 'button' | 'radio';
     } & Omit<AntdRadioGroupProps, 'onChange'>;
@@ -34,6 +35,7 @@ const FormRadioGroup = (props: RadioGroupProps) => {
         rules,
         radioType = 'radio',
         options,
+        formatter,
         ..._props
     } = props;
 
@@ -53,6 +55,7 @@ const FormRadioGroup = (props: RadioGroupProps) => {
             label={label ? <span className={labelClassName}>{label}</span> : undefined}
             className={formItemClassName}
             rules={rules}
+            normalize={formatter === 'number' ? transNumber : undefined}
         >
             <Radio.Group className={className} {...eventProps} {..._props}>
                 {options.map(option => {

@@ -4,6 +4,7 @@ import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
 import { FormInstance, Rule } from 'antd/es/form';
 import { RadioGroupProps as AntdRadioGroupProps } from 'antd/lib/radio/interface';
 export declare type RadioGroupType = 'radioGroup';
+export declare type RadioGroupFormatter = 'number';
 export declare type RadioGroupProps<T = string> = FormItemLabelProps & CustomFormProps & {
     form: FormInstance;
     type: RadioGroupType;
@@ -11,7 +12,7 @@ export declare type RadioGroupProps<T = string> = FormItemLabelProps & CustomFor
     formItemClassName?: string;
     onChange?: (name: FormItemName<T>, form: FormInstance) => void;
     name: FormItemName<T>;
-    formatter?: undefined;
+    formatter?: RadioGroupFormatter;
     rules?: Rule[];
     radioType?: 'button' | 'radio';
 } & Omit<AntdRadioGroupProps, 'onChange'>;

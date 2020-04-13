@@ -11,7 +11,6 @@ export declare type CheckboxProps<T = string> = FormItemLabelProps & CustomFormP
     formItemClassName?: string;
     onChange?: (name: FormItemName<T>, form: FormInstance) => void;
     name: FormItemName<T>;
-    formatter?: undefined;
     rules?: Rule[];
 } & Omit<AntdCheckboxProps, 'onChange' | 'name'>;
 declare const FormCheckbox: {

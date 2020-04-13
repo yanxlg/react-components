@@ -41,6 +41,17 @@ export type SelectProps<T = string> = FormItemLabelProps &
         isShortcut?: boolean;
     } & Omit<AntdSelectProps<string>, 'loading' | 'onChange' | 'className' | 'options'>;
 
+const formatterFnc = (formatter?: SelectFormatter) => {
+    switch (formatter) {
+        case 'number':
+            return transNumber;
+        case 'joinStr':
+            return transJoinStr;
+        default:
+            return transNullValue;
+    }
+};
+
 const FormSelect = (props: SelectProps) => {
     const {
         name,
@@ -177,7 +188,7 @@ const FormSelect = (props: SelectProps) => {
                     className={formItemClassName}
                     label={<span className={labelClassName}>{label}</span>}
                     rules={rules}
-                    normalize={FormSelect.formatter(formatter)}
+                    normalize={formatterFnc(formatter)}
                 >
                     <Select
                         disabled={disabled}
@@ -229,7 +240,7 @@ const FormSelect = (props: SelectProps) => {
                                 className={formItemClassName}
                                 label={<span className={labelClassName}>{label}</span>}
                                 rules={rules}
-                                normalize={FormSelect.formatter(formatter)}
+                                normalize={formatterFnc(formatter)}
                             >
                                 <Select
                                     disabled={disabled}
@@ -262,16 +273,5 @@ const FormSelect = (props: SelectProps) => {
 };
 
 FormSelect.typeList = typeList;
-
-FormSelect.formatter = (formatter?: SelectFormatter) => {
-    switch (formatter) {
-        case 'number':
-            return transNumber;
-        case 'joinStr':
-            return transJoinStr;
-        default:
-            return transNullValue;
-    }
-};
 
 export default FormSelect;

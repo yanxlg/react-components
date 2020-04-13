@@ -39,6 +39,19 @@ import { transNullValue, transNumber, transJoinStr } from '../utils';
 import formStyles from '../_form.less';
 var typeList = ['select'];
 
+var formatterFnc = function formatterFnc(formatter) {
+  switch (formatter) {
+    case 'number':
+      return transNumber;
+
+    case 'joinStr':
+      return transJoinStr;
+
+    default:
+      return transNullValue;
+  }
+};
+
 var FormSelect = function FormSelect(props) {
   var name = props.name,
       label = props.label,
@@ -180,7 +193,7 @@ var FormSelect = function FormSelect(props) {
           className: labelClassName
         }, label),
         rules: rules,
-        normalize: FormSelect.formatter(formatter)
+        normalize: formatterFnc(formatter)
       }, React.createElement(_Select, __assign({
         disabled: disabled,
         className: className,
@@ -230,7 +243,7 @@ var FormSelect = function FormSelect(props) {
             className: labelClassName
           }, label),
           rules: rules,
-          normalize: FormSelect.formatter(formatter)
+          normalize: formatterFnc(formatter)
         }, React.createElement(_Select, __assign({
           disabled: disabled,
           className: className,
@@ -253,18 +266,4 @@ var FormSelect = function FormSelect(props) {
 };
 
 FormSelect.typeList = typeList;
-
-FormSelect.formatter = function (formatter) {
-  switch (formatter) {
-    case 'number':
-      return transNumber;
-
-    case 'joinStr':
-      return transJoinStr;
-
-    default:
-      return transNullValue;
-  }
-};
-
 export default FormSelect;

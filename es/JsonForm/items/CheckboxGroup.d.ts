@@ -11,7 +11,6 @@ export declare type CheckboxGroupProps<T = string> = FormItemLabelProps & Custom
     formItemClassName?: string;
     onChange?: (name: FormItemName<T>, form: FormInstance) => void;
     name: FormItemName<T>;
-    formatter?: undefined;
     rules?: Rule[];
 } & Omit<AntdCheckboxGroupProps, 'onChange'>;
 declare const FormCheckboxGroup: {
