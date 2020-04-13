@@ -26,7 +26,7 @@ export type SelectProps<T = string> = FormItemLabelProps &
         type: SelectType;
         form: FormInstance;
         placeholder?: string;
-        optionList?: IOptionItem[] | OptionsPromise; // 支持异步获取
+        optionList?: IOptionItem[] | OptionsPromise; // 支持异步获取， 支持配置api地址及response path进行配置
         syncDefaultOption?: IOptionItem; // 异步获取options是默认选项，通常用于胚子'全部'
         optionListDependence?: {
             name: FormItemName | FormItemName[]; // 依赖名成
@@ -133,7 +133,6 @@ const FormSelect = (props: SelectProps) => {
             if (isShortcut) {
                 return (
                     <div>
-                        {/* value={size} onChange={this.handleSizeChange} */}
                         <Radio.Group style={{ display: 'flex', padding: '5px 0' }} value="">
                             <Radio.Button
                                 value="1"

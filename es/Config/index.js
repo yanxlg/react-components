@@ -3,8 +3,8 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 var config = {
   defaultPageNumber: 1,
   defaultPageSize: 50,
-  defaultPageNumberKey: "page",
-  defaultPageSizeKey: "page_count"
+  defaultPageNumberKey: 'page',
+  defaultPageSizeKey: 'page_count'
 };
 
 var Config = function Config(conf) {
