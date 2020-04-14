@@ -44,6 +44,15 @@ var __spreadArrays = this && this.__spreadArrays || function () {
 import { useRef, useState, useCallback, useEffect } from 'react';
 import { EmptyObject } from '../utils';
 import { config } from '../Config';
+/**
+ *
+ * @param queryPromise api service
+ * @param formRef form表单实例
+ * @param extraQuery 额外的api参数
+ * @param autoQuery 是否立即执行api
+ * @param dependenceKey 瀑布流依赖字段key
+ * @param size 瀑布流获取长度
+ */
 
 function useWaterFall(_a) {
   var queryPromise = _a.queryPromise,
