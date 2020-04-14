@@ -253,12 +253,14 @@ export const getFormItems = (
 };
 
 const getFormatterFunc = (formatterName: FormatterType, defaultFormatter?: any) => {
-    return typeof formatterName === 'string'
-        ? formatter[formatterName] || defaultFormatter || ((value: any) => value)
-        : formatterName;
+    const _default = (value: any) => value;
+    return (
+        (typeof formatterName === 'string' || formatterName === void 0
+            ? formatter[formatterName as string] || defaultFormatter || _default
+            : formatterName) || _default
+    );
 };
 
-// TODO formatter 支持自定义函数，及支持以addOn形式添加到内部，并使用函数名直接进行转换
 const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, ref) => {
     const {
         fieldList,

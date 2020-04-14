@@ -201,11 +201,12 @@ export var getFormItems = function getFormItems(fieldList, form, labelClassName,
 };
 
 var getFormatterFunc = function getFormatterFunc(formatterName, defaultFormatter) {
-  return typeof formatterName === 'string' ? formatter[formatterName] || defaultFormatter || function (value) {
+  var _default = function _default(value) {
     return value;
-  } : formatterName;
-}; // TODO formatter 支持自定义函数，及支持以addOn形式添加到内部，并使用函数名直接进行转换
+  };
 
+  return (typeof formatterName === 'string' || formatterName === void 0 ? formatter[formatterName] || defaultFormatter || _default : formatterName) || _default;
+};
 
 var JsonForm = function JsonForm(props, ref) {
   var fieldList = props.fieldList,
