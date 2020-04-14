@@ -12,9 +12,9 @@ function useInterval() {
     const start = useCallback(
         /**
          *
-         * @param handler 定时处理逻辑，不可变，如果实例根据状态变化需要调用stop后重新start
-         * @param timeout 定时时长
-         * @param execute 是否立即执行
+         * @param handler {Function} 定时处理逻辑，不可变，如果实例根据状态变化需要调用stop后重新start
+         * @param timeout {Number} 定时时长
+         * @param execute {Boolean} 是否立即执行
          */
         (handler: () => void, timeout: number, execute: boolean = true) => {
             stop();
@@ -25,6 +25,9 @@ function useInterval() {
     );
 
     return {
+        /**
+         *
+         */
         start,
         stop,
     };

@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useCallback, useMemo, useState } from 'react';
 import { InputProps } from 'antd/es/input';
 import { Input } from 'antd';
-import {intFormatter, numberFormatter, positiveIntFormatter} from "./utils";
+import { intFormatter, numberFormatter, positiveIntFormatter } from './utils';
 
 export type RichType = 'input' | 'integer' | 'number' | 'positiveInteger';
 
@@ -9,6 +9,7 @@ declare interface RichInputProps extends InputProps {
     richType?: RichType;
 }
 
+// TODO 支持数字及逗号分隔限制
 const RichInput: React.FC<RichInputProps> = ({ richType, value, onChange, ...props }) => {
     const [innerValue, setInnerValue] = useState('');
 

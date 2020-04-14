@@ -3,12 +3,9 @@ import React, { useMemo } from 'react';
 import { CustomFormProps, FormItemName } from '../index';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
 import { FormInstance, Rule } from 'antd/es/form';
-import { transNullValue } from '../utils';
 import formStyles from '../_form.less';
 import classNames from 'classnames';
-import { startDateToUnix, endDateToUnix } from '../../utils/date';
-
-export type DateRangerFormatter = 'start_date' | 'end_date';
+import { FormatterType } from '../../utils/formatter';
 
 export type DateRangerType = 'dateRanger';
 const typeList = ['dateRanger'];
@@ -22,7 +19,7 @@ export type DateRangerProps<T = string> = FormItemLabelProps &
         formItemClassName?: string;
         onChange?: (name: FormItemName<T>, form: FormInstance) => void; // change监听，支持外部执行表单操作，可以实现关联筛选，重置等操作
         name: [FormItemName<T>, FormItemName<T>];
-        formatter?: [DateRangerFormatter, DateRangerFormatter];
+        formatter?: [FormatterType, FormatterType];
         rules?: [Rule[], Rule[]];
     };
 
@@ -137,13 +134,4 @@ const FormDateRanger = (props: DateRangerProps) => {
 
 FormDateRanger.typeList = typeList;
 
-FormDateRanger.formatter = (formatter?: DateRangerFormatter) => {
-    return formatter
-        ? formatter === 'start_date'
-            ? startDateToUnix
-            : formatter === 'end_date'
-            ? endDateToUnix
-            : transNullValue
-        : transNullValue;
-};
 export default FormDateRanger;

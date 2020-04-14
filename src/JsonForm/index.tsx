@@ -10,19 +10,11 @@ import React, {
 } from 'react';
 import { Button, Col, Form, Row } from 'antd';
 import { FormProps } from 'antd/lib/form/Form';
-import FormInput, { InputType, InputProps, InputFormatter } from './items/Input';
-import FormSelect, { SelectType, SelectProps, SelectFormatter } from './items/Select';
+import FormInput, { InputType, InputProps } from './items/Input';
+import FormSelect, { SelectType, SelectProps } from './items/Select';
 import FormCheckbox, { CheckboxType, CheckboxProps } from './items/Checkbox';
-import FormDatePicker, {
-    DatePickerProps,
-    DatePickerType,
-    DatePickerFormatter,
-} from './items/DatePicker';
-import FormDateRanger, {
-    DateRangerType,
-    DateRangerProps,
-    DateRangerFormatter,
-} from './items/DateRanger';
+import FormDatePicker, { DatePickerProps, DatePickerType } from './items/DatePicker';
+import FormDateRanger, { DateRangerType, DateRangerProps } from './items/DateRanger';
 import FormInputRange, { InputRangeType, InputRangeProps } from './items/InputRange';
 import { Store, ValidateFields } from 'rc-field-form/lib/interface';
 import { FormInstance } from 'antd/es/form';
@@ -39,6 +31,7 @@ import formStyles from './_form.less';
 import Layout, { LayoutType, LayoutProps } from './layout';
 import DynamicItem, { DynamicItemProps, DynamicType } from './items/DynamicItem';
 import HideItem, { HideItemProps, HideType } from './items/HideItem';
+import formatter, { FormatterType } from '../utils/formatter';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -259,6 +252,13 @@ export const getFormItems = (
     }
 };
 
+const getFormatterFunc = (formatterName: FormatterType, defaultFormatter?: any) => {
+    return typeof formatterName === 'string'
+        ? formatter[formatterName] || defaultFormatter || ((value: any) => value)
+        : formatterName;
+};
+
+// TODO formatter 支持自定义函数，及支持以addOn形式添加到内部，并使用函数名直接进行转换
 const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, ref) => {
     const {
         fieldList,
@@ -324,37 +324,47 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                         ..._value,
                     };
                 } else {
-                    const { formatter, name } = (field as unknown) as any;
+                    const { formatter: formatterName, name } = (field as unknown) as any;
                     if (FormInput.typeList.includes(type)) {
-                        values[name as string] = FormInput.formatter(formatter as InputFormatter)(
-                            form.getFieldValue(name),
-                        );
+                        values[name as string] = getFormatterFunc(
+                            formatterName,
+                            formatter.null,
+                        )(form.getFieldValue(name));
                     } else if (FormSelect.typeList.includes(type)) {
-                        values[name as string] = FormSelect.formatter(formatter as SelectFormatter)(
-                            form.getFieldValue(name),
-                        );
+                        values[name as string] = getFormatterFunc(
+                            formatterName,
+                            formatter.null,
+                        )(form.getFieldValue(name));
                     } else if (FormDateRanger.typeList.includes(type)) {
                         const [name1, name2] = name;
-                        values[name1] = FormDateRanger.formatter(
-                            formatter?.[0] as DateRangerFormatter,
+                        values[name1] = getFormatterFunc(
+                            formatterName?.[0],
+                            formatter.null,
                         )(form.getFieldValue(name1));
-                        values[name2] = FormDateRanger.formatter(
-                            formatter?.[1] as DateRangerFormatter,
+                        values[name2] = getFormatterFunc(
+                            formatterName?.[1],
+                            formatter.null,
                         )(form.getFieldValue(name2));
                     } else if (FormDatePicker.typeList.includes(type)) {
-                        values[name as string] = FormDatePicker.formatter(
-                            formatter as DatePickerFormatter,
+                        values[name as string] = getFormatterFunc(
+                            formatterName,
+                            formatter.null,
                         )(form.getFieldValue(name));
                     } else if (FormInputRange.typeList.includes(type)) {
                         const [name1, name2] = name;
-                        values[name1 as string] = FormInputRange.formatter()(
-                            form.getFieldValue(name1),
-                        );
-                        values[name2 as string] = FormInputRange.formatter()(
-                            form.getFieldValue(name2),
-                        );
+                        values[name1 as string] = getFormatterFunc(
+                            formatterName?.[0],
+                            formatter.number,
+                        )(form.getFieldValue(name1));
+                        values[name2 as string] = getFormatterFunc(
+                            formatterName?.[1],
+                            formatter.number,
+                        )(form.getFieldValue(name2));
                     } else {
-                        values[name] = form.getFieldValue(name);
+                        values[name] = getFormatterFunc(
+                            formatterName,
+                            formatter.null,
+                        )(form.getFieldValue(name));
                     }
                 }
             });
@@ -500,5 +510,3 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
 };
 
 export default forwardRef(JsonForm);
-
-export * from './utils';

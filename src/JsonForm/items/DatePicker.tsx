@@ -4,10 +4,9 @@ import { CustomFormProps, FormItemName } from '../index';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
 import { FormInstance, Rule } from 'antd/es/form';
 import dayjs, { Dayjs } from 'dayjs';
-import { transNullValue } from '../utils';
 import formStyles from '../_form.less';
 import { PickerProps } from 'antd/es/date-picker/generatePicker';
-import { startDateToUnix, endDateToUnix } from '../../utils/date';
+import { FormatterType } from 'src/utils/formatter';
 
 export type DatePickerFormatter = 'start_date' | 'end_date';
 
@@ -25,7 +24,7 @@ export type DatePickerProps<T = string> = FormItemLabelProps &
         onChange?: (name: FormItemName<T>, form: FormInstance) => void; // change监听，支持外部执行表单操作，可以实现关联筛选，重置等操作
         dateBeginWith?: Array<FormItemName<T> | 'now'>;
         dateEndWith?: Array<FormItemName<T> | 'now'>;
-        formatter?: DatePickerFormatter;
+        formatter?: FormatterType;
         rules?: Rule[];
     } & Omit<PickerProps<Dayjs>, 'onChange'>;
 
@@ -130,15 +129,5 @@ const FormDatePicker = (props: DatePickerProps) => {
 };
 
 FormDatePicker.typeList = typeList;
-
-FormDatePicker.formatter = (formatter?: DatePickerFormatter) => {
-    return formatter
-        ? formatter === 'start_date'
-            ? startDateToUnix
-            : formatter === 'end_date'
-            ? endDateToUnix
-            : transNullValue
-        : transNullValue;
-};
 
 export default FormDatePicker;

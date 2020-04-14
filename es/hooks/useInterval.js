@@ -8,14 +8,7 @@ function useInterval() {
       timer.current = undefined;
     }
   }, []);
-  var start = useCallback(
-  /**
-   *
-   * @param handler 定时处理逻辑，不可变，如果实例根据状态变化需要调用stop后重新start
-   * @param timeout 定时时长
-   * @param execute 是否立即执行
-   */
-  function (handler, timeout, execute) {
+  var start = useCallback(function (handler, timeout, execute) {
     if (execute === void 0) {
       execute = true;
     }
@@ -25,6 +18,12 @@ function useInterval() {
     timer.current = window.setInterval(handler, timeout);
   }, []);
   return {
+    /**
+     *
+     * @param handler 定时处理逻辑，不可变，如果实例根据状态变化需要调用stop后重新start
+     * @param timeout 定时时长
+     * @param execute 是否立即执行
+     */
     start: start,
     stop: stop
   };

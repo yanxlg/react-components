@@ -10,7 +10,15 @@ export declare type IPaginationResponse<T, U = {}> = {
     total: number;
     list: T[];
 } & U;
-declare function useList<T, Q, E = {}>({ queryList, formRef, extraQuery, defaultState, autoQuery, pageNumberKey, pageSizeKey, }: {
+declare function useList<T, Q, E = {}>({
+    queryList,
+    formRef,
+    extraQuery,
+    defaultState,
+    autoQuery,
+    pageNumberKey,
+    pageSizeKey,
+}: {
     queryList: (query: Q) => Promise<IResponse<IPaginationResponse<T, E>>>;
     formRef?: RefObject<JsonFormRef> | Array<RefObject<JsonFormRef>>;
     extraQuery?: {
@@ -24,9 +32,9 @@ declare function useList<T, Q, E = {}>({ queryList, formRef, extraQuery, default
     pageNumberKey?: string;
     pageSizeKey?: string;
 }): {
-    queryRef: import("react").MutableRefObject<object>;
-    pageNumberRef: import("react").MutableRefObject<number>;
-    pageSizeRef: import("react").MutableRefObject<number>;
+    queryRef: import('react').MutableRefObject<object>;
+    pageNumberRef: import('react').MutableRefObject<number>;
+    pageSizeRef: import('react').MutableRefObject<number>;
     /**
      * @deprecated
      **/
@@ -37,19 +45,23 @@ declare function useList<T, Q, E = {}>({ queryList, formRef, extraQuery, default
     dataSource: T[];
     extraData: E;
     total: number;
-    setLoading: import("react").Dispatch<import("react").SetStateAction<boolean>>;
-    setDataSource: import("react").Dispatch<import("react").SetStateAction<T[]>>;
+    setLoading: import('react').Dispatch<import('react').SetStateAction<boolean>>;
+    setDataSource: import('react').Dispatch<import('react').SetStateAction<T[]>>;
     selectedRowKeys: string[];
-    setTotal: import("react").Dispatch<import("react").SetStateAction<number>>;
+    setTotal: import('react').Dispatch<import('react').SetStateAction<number>>;
     onReload: () => Promise<void>;
     onSearch: () => Promise<void>;
     onChange: ({ current, pageSize }: PaginationConfig, filters: any, sorter: any) => Promise<void>;
-    getListData: ({ page, page_count, ...extra }?: {
+    getListData: ({
+        page,
+        page_count,
+        ...extra
+    }?: {
         [key: string]: any;
         page?: number;
         page_count?: number;
     }) => Promise<void>;
-    setSelectedRowKeys: import("react").Dispatch<import("react").SetStateAction<string[]>>;
+    setSelectedRowKeys: import('react').Dispatch<import('react').SetStateAction<string[]>>;
     setPageSize: (size: number) => void;
     setPageNumber: (current: number) => void;
 };

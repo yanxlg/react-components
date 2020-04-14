@@ -3,9 +3,9 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { CustomFormProps, FormItemName } from '../index';
 import { FormInstance, Rule } from 'antd/es/form';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
-import { transNullValue, transNumber, transJoinStr } from '../utils';
 import formStyles from '../_form.less';
 import { SelectProps as AntdSelectProps } from 'antd/es/select/index';
+import { FormatterType } from '../../utils/formatter';
 
 export declare interface IOptionItem {
     name: string;
@@ -13,8 +13,6 @@ export declare interface IOptionItem {
 
     [key: string]: any; // 子节点key
 }
-
-export type SelectFormatter = 'number' | 'joinStr';
 
 type OptionsPromise = () => Promise<IOptionItem[]>;
 
@@ -36,7 +34,7 @@ export type SelectProps<T = string> = FormItemLabelProps &
         formItemClassName?: string;
         onChange?: (name: FormItemName<T>, form: FormInstance) => void; // change监听，支持外部执行表单操作，可以实现关联筛选，重置等操作
         name: FormItemName<T>;
-        formatter?: SelectFormatter;
+        formatter?: FormatterType;
         rules?: Rule[];
         isShortcut?: boolean;
     } & Omit<AntdSelectProps<string>, 'loading' | 'onChange' | 'className' | 'options'>;
@@ -258,17 +256,5 @@ const FormSelect = (props: SelectProps) => {
 };
 
 FormSelect.typeList = typeList;
-
-FormSelect.formatter = (formatter?: SelectFormatter) => {
-    // return formatter ? (formatter === 'number' ? transNumber : transNullValue) : transNullValue;
-    switch (formatter) {
-        case 'number':
-            return transNumber;
-        case 'joinStr':
-            return transJoinStr;
-        default:
-            return transNullValue;
-    }
-};
 
 export default FormSelect;

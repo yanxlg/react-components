@@ -20,9 +20,11 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+      "useDefineForClassFields": true,
+      "noStrictGenericChecks": true
   },
-  "exclude": [
+    "exclude": [
     "node_modules",
     "build",
     "scripts",

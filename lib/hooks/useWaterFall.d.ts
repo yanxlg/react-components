@@ -18,7 +18,14 @@ export declare type IPaginationResponse<T, U = {}> = {
  * @param dependenceKey 瀑布流依赖字段key
  * @param size 瀑布流获取长度
  */
-declare function useWaterFall<T = any, Q = any, E = {}>({ queryPromise, formRef, extraQuery, autoQuery, dependenceKey, size, }: {
+declare function useWaterFall<T = any, Q = any, E = {}>({
+    queryPromise,
+    formRef,
+    extraQuery,
+    autoQuery,
+    dependenceKey,
+    size,
+}: {
     queryPromise: (query: Q) => Promise<IResponse<IPaginationResponse<T, E>>>;
     formRef?: RefObject<JsonFormRef> | Array<RefObject<JsonFormRef>>;
     extraQuery?: {
@@ -28,18 +35,21 @@ declare function useWaterFall<T = any, Q = any, E = {}>({ queryPromise, formRef,
     dependenceKey?: string;
     size?: number;
 }): {
-    queryRef: import("react").MutableRefObject<object>;
-    hasMoreRef: import("react").MutableRefObject<boolean>;
+    queryRef: import('react').MutableRefObject<object>;
+    hasMoreRef: import('react').MutableRefObject<boolean>;
     loading: boolean;
     dataSource: T[];
     increment: T[];
     total: number;
-    setLoading: import("react").Dispatch<import("react").SetStateAction<boolean>>;
-    setDataSource: import("react").Dispatch<import("react").SetStateAction<T[]>>;
-    setTotal: import("react").Dispatch<import("react").SetStateAction<number>>;
+    setLoading: import('react').Dispatch<import('react').SetStateAction<boolean>>;
+    setDataSource: import('react').Dispatch<import('react').SetStateAction<T[]>>;
+    setTotal: import('react').Dispatch<import('react').SetStateAction<number>>;
     onNext: () => Promise<void>;
     onSearch: () => Promise<void>;
-    getListData: ({ id, ...extra }?: {
+    getListData: ({
+        id,
+        ...extra
+    }?: {
         [key: string]: any;
         id?: string;
         size?: number;

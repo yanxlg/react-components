@@ -4,7 +4,7 @@ import { CustomFormProps, FormItemName } from '../index';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
 import { FormInstance, Rule } from 'antd/es/form';
 import formStyles from '../_form.less';
-import { transNumber } from '../utils';
+import { FormatterType } from '../../utils/formatter';
 
 export type InputRangeType = 'inputRange';
 const typeList = ['inputRange'];
@@ -18,7 +18,7 @@ export type InputRangeProps<T = string> = FormItemLabelProps &
         formItemClassName?: string;
         onChange?: (name: FormItemName<T>, form: FormInstance) => void; // change监听，支持外部执行表单操作，可以实现关联筛选，重置等操作
         name: [FormItemName<T>, FormItemName];
-        formatter?: any;
+        formatter?: FormatterType;
         precision?: number;
         rules?: [Rule[], Rule[]];
     };
@@ -142,9 +142,5 @@ const FormInputRange = (props: InputRangeProps) => {
 };
 
 FormInputRange.typeList = typeList;
-
-FormInputRange.formatter = () => {
-    return transNumber;
-};
 
 export default FormInputRange;
