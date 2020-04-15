@@ -52,7 +52,9 @@ var ColumnsSettingWrap = function ColumnsSettingWrap(_a) {
     setReload(!reload);
   }, [reload]);
   useEffect(function () {
-    setFilterColumns(columns);
+    setFilterColumns(columns === null || columns === void 0 ? void 0 : columns.filter(function (item) {
+      return !item.defaultHide;
+    }));
   }, [columns]);
   return useMemo(function () {
     return React.createElement("div", {

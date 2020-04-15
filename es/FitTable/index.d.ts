@@ -2,6 +2,18 @@ import React from 'react';
 import { TableProps } from 'antd/lib/table';
 import { useScrollXY } from './hooks';
 import { ColumnsSettingProps } from './ColumnsSetting';
+declare module 'antd/es/table/interface' {
+    interface ColumnType<RecordType> {
+        defaultHide?: boolean;
+        hideInSetting?: boolean;
+    }
+}
+declare module 'antd/lib/table/interface' {
+    interface ColumnType<RecordType> {
+        defaultHide?: boolean;
+        hideInSetting?: boolean;
+    }
+}
 export declare interface IFitTableProps<T> extends TableProps<T>, Partial<Pick<ColumnsSettingProps<T>, 'columnsSettingRender' | 'resetColumnsSetting'>> {
     bottom?: number;
     minHeight?: number;

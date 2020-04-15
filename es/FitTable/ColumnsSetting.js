@@ -8,6 +8,21 @@ import "antd/es/checkbox/style/css";
 import _Checkbox from "antd/es/checkbox";
 import "antd/es/modal/style/css";
 import _Modal from "antd/es/modal";
+
+var __spreadArrays = this && this.__spreadArrays || function () {
+  for (var s = 0, i = 0, il = arguments.length; i < il; i++) {
+    s += arguments[i].length;
+  }
+
+  for (var r = Array(s), k = 0, i = 0; i < il; i++) {
+    for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) {
+      r[k] = a[j];
+    }
+  }
+
+  return r;
+};
+
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import useModal from '../hooks/useModal';
 import styles from './_index.less';
@@ -25,29 +40,43 @@ var ColumnsSetting = function ColumnsSetting(_a) {
 
   var cacheColumnsShowList = useRef([]);
 
-  var _c = useState(columns.map(function (column) {
+  var _c = useState(columns.filter(function (column) {
+    return !column.defaultHide;
+  }).map(function (column) {
     return column['dataIndex'];
   })),
       columnsShowList = _c[0],
       setColumnsShowList = _c[1]; // 列
-  // 重新初始化
+
+
+  var _setColumnsShowList = useCallback(function (keys) {
+    // console.log(1111, keys)
+    setColumnsShowList(__spreadArrays([columns === null || columns === void 0 ? void 0 : columns.filter(function (item) {
+      return item.hideInSetting;
+    }).map(function (item) {
+      return item['dataIndex'];
+    })], keys));
+  }, [columns]); // 重新初始化
 
 
   useEffect(function () {
-    var keys = columns.map(function (column) {
+    var keys = columns.filter(function (column) {
+      return !column.defaultHide;
+    }).map(function (column) {
       return column['dataIndex'];
     });
     cacheColumnsShowList.current = keys;
-    setColumnsShowList(keys);
+
+    _setColumnsShowList(keys);
   }, [columns]); // drop修改
 
   useEffect(function () {
     if (visible) {
-      setColumnsShowList(cacheColumnsShowList.current);
+      _setColumnsShowList(cacheColumnsShowList.current);
     }
   }, [visible]);
   var onChange = useCallback(function (checkedValue) {
-    setColumnsShowList(checkedValue);
+    _setColumnsShowList(checkedValue);
   }, []);
   var onSave = useCallback(function () {
     cacheColumnsShowList.current = columnsShowList;
@@ -67,7 +96,9 @@ var ColumnsSetting = function ColumnsSetting(_a) {
         return column['dataIndex'];
       });
       cacheColumnsShowList.current = keys;
-      setColumnsShowList(keys);
+
+      _setColumnsShowList(keys);
+
       onColumnsChange(columns);
       onClose();
     } else {
@@ -89,6 +120,10 @@ var ColumnsSetting = function ColumnsSetting(_a) {
     }, React.createElement(_Row, {
       gutter: [0, 5]
     }, columns.map(function (column) {
+      if (column.hideInSetting) {
+        return null;
+      }
+
       var dataIndex = column['dataIndex'];
       return React.createElement(_Col, {
         span: 4,
