@@ -7,7 +7,7 @@ import { DataIndex } from 'rc-table/lib/interface';
  * @param valueEnum
  * @param prue 纯净模式，不增加 status
  */
-export declare const parsingText: (text: string | number, valueEnum?: {
+export declare const parsingText: (text: React.ReactText, valueEnum?: {
     [key: string]: string | number | boolean | {} | React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)>) | (new (props: any) => React.Component<any, any, any>)> | React.ReactNodeArray | React.ReactPortal | {
         text: React.ReactNode;
         type: "Success" | "Error" | "Processing" | "Default" | "Warning";
@@ -39,5 +39,5 @@ export declare function getProgressStatus(text: number): 'success' | 'exception'
  * @param key
  * @param dataIndex
  */
-export declare const genColumnKey: (key?: string | number, dataIndex?: DataIndex) => string | number;
+export declare const genColumnKey: (key?: React.ReactText, dataIndex?: DataIndex) => React.ReactText;
 export default function get(entity: any, path: ReactText | ReactText[]): any;

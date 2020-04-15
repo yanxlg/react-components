@@ -54,6 +54,7 @@ export function transNumberArray(value: string | undefined): number[] | undefine
     return value as undefined;
 }
 
+// 覆盖初始接口定义，如果外部使用extend扩展，需要添加定义，否则ts检查会报错
 declare module 'react-components' {
     interface Formatters {
         number: typeof transNumber;

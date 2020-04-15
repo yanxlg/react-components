@@ -1,6 +1,6 @@
 import React from 'react';
 import { InputProps } from 'antd/es/input';
-export declare type RichType = 'input' | 'integer' | 'number' | 'positiveInteger';
+export declare type RichType = 'input' | 'integer' | 'number' | 'positiveInteger' | 'numberSplit';
 declare interface RichInputProps extends InputProps {
     richType?: RichType;
 }

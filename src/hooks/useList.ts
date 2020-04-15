@@ -3,6 +3,8 @@ import { JsonFormRef } from '../JsonForm';
 import { config } from '../Config';
 import { EmptyArray, EmptyObject } from '../utils';
 import { PaginationConfig } from 'antd/es/pagination';
+import { ApiService, generateApi, JsonApi } from '../api';
+import Request from 'umi-request';
 
 export interface IResponse<T> {
     code: number;
@@ -15,7 +17,17 @@ export type IPaginationResponse<T, U = {}> = {
     list: T[];
 } & U;
 
-function useList<T, Q, E = {}>({
+/**
+ * 通用列表业务hook
+ * @param queryList
+ * @param formRef
+ * @param extraQuery
+ * @param defaultState
+ * @param autoQuery
+ * @param pageNumberKey
+ * @param pageSizeKey
+ */
+function useList<T, Q = any, E = {}>({
     queryList,
     formRef,
     extraQuery,
@@ -24,7 +36,7 @@ function useList<T, Q, E = {}>({
     pageNumberKey = config.defaultPageNumberKey,
     pageSizeKey = config.defaultPageSizeKey,
 }: {
-    queryList: (query: Q) => Promise<IResponse<IPaginationResponse<T, E>>>;
+    queryList: JsonApi | ((query: Q) => ApiService<Promise<IResponse<IPaginationResponse<T, E>>>>);
     formRef?: RefObject<JsonFormRef> | Array<RefObject<JsonFormRef>>;
     extraQuery?: { [key: string]: any };
     defaultState?: { pageNumber?: number; pageSize?: number };
@@ -33,7 +45,6 @@ function useList<T, Q, E = {}>({
     pageSizeKey?: string;
 }) {
     const [loading, setLoading] = useState(autoQuery);
-
     const extraQueryRef = useRef<{ [key: string]: any } | undefined>(undefined);
     extraQueryRef.current = extraQuery; // extraQuery支持外部更新，每次覆盖
 
@@ -44,6 +55,8 @@ function useList<T, Q, E = {}>({
     const [total, setTotal] = useState(0);
     const [extraData, setExtraData] = useState<E | undefined>(undefined);
     const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>(EmptyArray);
+
+    const req = useRef<ApiService>();
 
     const query = useRef<object>({});
     const setQuery = useCallback((nextQuery: object) => {
@@ -56,6 +69,14 @@ function useList<T, Q, E = {}>({
             page_count = pageSize.current,
             ...extra
         }: { page?: number; page_count?: number; [key: string]: any } = {}) => {
+            // 这边终止请求？？
+
+            if (req.current) {
+                req.current.cancel();
+                req.current = undefined;
+            }
+            setLoading(false);
+
             return Promise.resolve()
                 .then(() => {
                     if (formRef) {
@@ -81,7 +102,15 @@ function useList<T, Q, E = {}>({
                         ...formValues,
                     };
                     setSelectedRowKeys(EmptyArray);
-                    return queryList(query as Q)
+                    req.current =
+                        typeof queryList === 'object'
+                            ? generateApi(queryList)
+                            : queryList(query as Q);
+                    const request =
+                        typeof queryList === 'object'
+                            ? req.current.request((query as unknown) as object)
+                            : req.current.request();
+                    return request
                         .then(({ data: { total = 0, list = [], ...extraData } = EmptyObject }) => {
                             setQuery(query);
                             pageNumber.current = page;
@@ -90,9 +119,20 @@ function useList<T, Q, E = {}>({
                             setTotal(total);
                             setExtraData(extraData as E);
                         })
-                        .finally(() => {
-                            setLoading(false);
-                        });
+                        .then(
+                            result => {
+                                setLoading(false);
+                                return result;
+                            },
+                            err => {
+                                if (Request.isCancel(err)) {
+                                    throw err;
+                                } else {
+                                    setLoading(false);
+                                    throw err;
+                                }
+                            },
+                        );
                 });
         },
         [],
@@ -134,6 +174,12 @@ function useList<T, Q, E = {}>({
 
     useEffect(() => {
         autoQuery && onSearch();
+        return () => {
+            if (req.current) {
+                req.current.cancel();
+                req.current = undefined;
+            }
+        };
     }, []);
 
     const setPageSize = useCallback((size: number) => {

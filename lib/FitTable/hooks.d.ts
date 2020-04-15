@@ -5,8 +5,8 @@ import { TableProps as RcTableProps } from 'rc-table/lib/Table';
 declare function useScrollXY<T>(containerRef: RefObject<HTMLElement>, bottom: number, minHeight: number, autoFitY: boolean, columns: ProColumns<T>[], rowSelection: SimpleRowSelection<T> | undefined, scroll?: RcTableProps<T>['scroll'] & {
     scrollToFirstRowOnChange?: boolean;
 }): {
-    y: string | number;
-    x: string | number;
+    y: import("react").ReactText;
+    x: import("react").ReactText;
     scrollToFirstRowOnChange: boolean;
 };
 export { useScrollXY };

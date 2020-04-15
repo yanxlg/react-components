@@ -2,6 +2,8 @@ import { RefObject, useRef, useState, useCallback, useEffect } from 'react';
 import { JsonFormRef } from '../JsonForm';
 import { EmptyObject } from '../utils';
 import { config } from '../Config';
+import { ApiService, generateApi, JsonApi } from '../api';
+import Request from 'umi-request';
 
 export interface IResponse<T> {
     code: number;
@@ -31,7 +33,9 @@ function useWaterFall<T = any, Q = any, E = {}>({
     dependenceKey = 'id',
     size = config.defaultWaterFallSize,
 }: {
-    queryPromise: (query: Q) => Promise<IResponse<IPaginationResponse<T, E>>>;
+    queryPromise:
+        | JsonApi
+        | ((query: Q) => ApiService<Promise<IResponse<IPaginationResponse<T, E>>>>);
     formRef?: RefObject<JsonFormRef> | Array<RefObject<JsonFormRef>>;
     extraQuery?: { [key: string]: any };
     autoQuery?: boolean;
@@ -59,8 +63,17 @@ function useWaterFall<T = any, Q = any, E = {}>({
         query.current = nextQuery;
     }, []);
 
+    const req = useRef<ApiService>();
+
     const getListData = useCallback(
         ({ id, ...extra }: { id?: string; size?: number; [key: string]: any } = {}) => {
+            // 这边终止请求？？
+            if (req.current) {
+                req.current.cancel();
+                req.current = undefined;
+            }
+            setLoading(false);
+
             return Promise.resolve()
                 .then(() => {
                     if (formRef) {
@@ -84,7 +97,16 @@ function useWaterFall<T = any, Q = any, E = {}>({
                         ...extra,
                         ...formValues,
                     };
-                    return queryPromise({ ...query, [dependenceKey]: id } as Q)
+                    req.current =
+                        typeof queryPromise === 'object'
+                            ? generateApi(queryPromise)
+                            : queryPromise(query as Q);
+                    const request =
+                        typeof queryPromise === 'object'
+                            ? req.current.request((query as unknown) as object)
+                            : req.current.request();
+
+                    return request
                         .then(({ data: { total = 0, list = [] } = EmptyObject }) => {
                             setQuery(query);
                             setTotal(total);
@@ -92,9 +114,20 @@ function useWaterFall<T = any, Q = any, E = {}>({
                             setDataSource([].concat(dataSourceRef.current).concat(list));
                             hasMoreRef.current = list.length >= size;
                         })
-                        .finally(() => {
-                            setLoading(false);
-                        });
+                        .then(
+                            result => {
+                                setLoading(false);
+                                return result;
+                            },
+                            err => {
+                                if (Request.isCancel(err)) {
+                                    throw err;
+                                } else {
+                                    setLoading(false);
+                                    throw err;
+                                }
+                            },
+                        );
                 });
         },
         [],
@@ -122,6 +155,12 @@ function useWaterFall<T = any, Q = any, E = {}>({
 
     useEffect(() => {
         autoQuery && onSearch();
+        return () => {
+            if (req.current) {
+                req.current.cancel();
+                req.current = undefined;
+            }
+        };
     }, []);
 
     return {

@@ -5,3 +5,4 @@ export { default as useDataSet } from './useDataSet';
 export { FilterColumns } from './useFilterColumns';
 export { default as useWaterFall } from './useWaterFall';
 export { default as useInterval } from './useInterval';
+export { default as useLoading } from './useLoading';

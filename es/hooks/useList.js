@@ -44,6 +44,18 @@ var __spreadArrays = this && this.__spreadArrays || function () {
 import { useRef, useState, useCallback, useEffect } from 'react';
 import { config } from '../Config';
 import { EmptyArray, EmptyObject } from '../utils';
+import { generateApi } from '../api';
+import Request from 'umi-request';
+/**
+ * 通用列表业务hook
+ * @param queryList
+ * @param formRef
+ * @param extraQuery
+ * @param defaultState
+ * @param autoQuery
+ * @param pageNumberKey
+ * @param pageSizeKey
+ */
 
 function useList(_a) {
   var queryList = _a.queryList,
@@ -85,11 +97,13 @@ function useList(_a) {
       selectedRowKeys = _l[0],
       setSelectedRowKeys = _l[1];
 
+  var req = useRef();
   var query = useRef({});
   var setQuery = useCallback(function (nextQuery) {
     query.current = nextQuery;
   }, []);
   var getListData = useCallback(function (_a) {
+    // 这边终止请求？？
     if (_a === void 0) {
       _a = {};
     }
@@ -100,6 +114,12 @@ function useList(_a) {
         page_count = _c === void 0 ? pageSize.current : _c,
         extra = __rest(_a, ["page", "page_count"]);
 
+    if (req.current) {
+      req.current.cancel();
+      req.current = undefined;
+    }
+
+    setLoading(false);
     return Promise.resolve().then(function () {
       if (formRef) {
         if (Array.isArray(formRef)) {
@@ -122,7 +142,9 @@ function useList(_a) {
       var query = __assign(__assign((_a = {}, _a[pageNumberKey] = page, _a[pageSizeKey] = page_count, _a), extra), formValues);
 
       setSelectedRowKeys(EmptyArray);
-      return queryList(query).then(function (_a) {
+      req.current = typeof queryList === 'object' ? generateApi(queryList) : queryList(query);
+      var request = typeof queryList === 'object' ? req.current.request(query) : req.current.request();
+      return request.then(function (_a) {
         var _b = _a.data,
             _c = _b === void 0 ? EmptyObject : _b,
             _d = _c.total,
@@ -137,8 +159,16 @@ function useList(_a) {
         setDataSource(list);
         setTotal(total);
         setExtraData(extraData);
-      })["finally"](function () {
+      }).then(function (result) {
         setLoading(false);
+        return result;
+      }, function (err) {
+        if (Request.isCancel(err)) {
+          throw err;
+        } else {
+          setLoading(false);
+          throw err;
+        }
       });
     });
   }, []);
@@ -167,6 +197,12 @@ function useList(_a) {
   }, []);
   useEffect(function () {
     autoQuery && onSearch();
+    return function () {
+      if (req.current) {
+        req.current.cancel();
+        req.current = undefined;
+      }
+    };
   }, []);
   var setPageSize = useCallback(function (size) {
     pageSize.current = size;

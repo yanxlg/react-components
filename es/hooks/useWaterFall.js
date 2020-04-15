@@ -44,6 +44,8 @@ var __spreadArrays = this && this.__spreadArrays || function () {
 import { useRef, useState, useCallback, useEffect } from 'react';
 import { EmptyObject } from '../utils';
 import { config } from '../Config';
+import { generateApi } from '../api';
+import Request from 'umi-request';
 /**
  *
  * @param queryPromise api service
@@ -92,14 +94,22 @@ function useWaterFall(_a) {
   var setQuery = useCallback(function (nextQuery) {
     query.current = nextQuery;
   }, []);
+  var req = useRef();
   var getListData = useCallback(function (_a) {
     if (_a === void 0) {
       _a = {};
     }
 
     var id = _a.id,
-        extra = __rest(_a, ["id"]);
+        extra = __rest(_a, ["id"]); // 这边终止请求？？
 
+
+    if (req.current) {
+      req.current.cancel();
+      req.current = undefined;
+    }
+
+    setLoading(false);
     return Promise.resolve().then(function () {
       if (formRef) {
         if (Array.isArray(formRef)) {
@@ -115,15 +125,15 @@ function useWaterFall(_a) {
         return undefined;
       }
     }).then(function (formValues) {
-      var _a;
-
       setLoading(true);
 
       var query = __assign(__assign({
         size: size
       }, extra), formValues);
 
-      return queryPromise(__assign(__assign({}, query), (_a = {}, _a[dependenceKey] = id, _a))).then(function (_a) {
+      req.current = typeof queryPromise === 'object' ? generateApi(queryPromise) : queryPromise(query);
+      var request = typeof queryPromise === 'object' ? req.current.request(query) : req.current.request();
+      return request.then(function (_a) {
         var _b = _a.data,
             _c = _b === void 0 ? EmptyObject : _b,
             _d = _c.total,
@@ -136,8 +146,16 @@ function useWaterFall(_a) {
         setIncrement(list);
         setDataSource([].concat(dataSourceRef.current).concat(list));
         hasMoreRef.current = list.length >= size;
-      })["finally"](function () {
+      }).then(function (result) {
         setLoading(false);
+        return result;
+      }, function (err) {
+        if (Request.isCancel(err)) {
+          throw err;
+        } else {
+          setLoading(false);
+          throw err;
+        }
       });
     });
   }, []);
@@ -158,6 +176,12 @@ function useWaterFall(_a) {
   }, []);
   useEffect(function () {
     autoQuery && onSearch();
+    return function () {
+      if (req.current) {
+        req.current.cancel();
+        req.current = undefined;
+      }
+    };
   }, []);
   return {
     queryRef: query,

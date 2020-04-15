@@ -1,6 +1,7 @@
 import { RefObject } from 'react';
 import { JsonFormRef } from '../JsonForm';
 import { PaginationConfig } from 'antd/es/pagination';
+import { ApiService, JsonApi } from '../api';
 export interface IResponse<T> {
     code: number;
     message: string;
@@ -10,8 +11,18 @@ export declare type IPaginationResponse<T, U = {}> = {
     total: number;
     list: T[];
 } & U;
-declare function useList<T, Q, E = {}>({ queryList, formRef, extraQuery, defaultState, autoQuery, pageNumberKey, pageSizeKey, }: {
-    queryList: (query: Q) => Promise<IResponse<IPaginationResponse<T, E>>>;
+/**
+ * 通用列表业务hook
+ * @param queryList
+ * @param formRef
+ * @param extraQuery
+ * @param defaultState
+ * @param autoQuery
+ * @param pageNumberKey
+ * @param pageSizeKey
+ */
+declare function useList<T, Q = any, E = {}>({ queryList, formRef, extraQuery, defaultState, autoQuery, pageNumberKey, pageSizeKey, }: {
+    queryList: JsonApi | ((query: Q) => ApiService<Promise<IResponse<IPaginationResponse<T, E>>>>);
     formRef?: RefObject<JsonFormRef> | Array<RefObject<JsonFormRef>>;
     extraQuery?: {
         [key: string]: any;

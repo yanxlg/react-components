@@ -18,6 +18,8 @@ gulp.task(
     })
 );
 
+// 先获取当前分支，然后提交当前分支，合并到develop分支，合并到master分支
+
 gulp.task(
     'pub',
     gulp.series('compile', done => {
