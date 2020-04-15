@@ -11,6 +11,20 @@ import { EmptyArray, EmptyObject } from '../utils';
 import { defaultPageSizeOptions } from '../ProTable/config';
 import formStyles from '../JsonForm/_form.less';
 
+declare module 'antd/es/table/interface' {
+    interface ColumnType<RecordType> {
+        defaultHide?: boolean;
+        hideInSetting?: boolean;
+    }
+}
+
+declare module 'antd/lib/table/interface' {
+    interface ColumnType<RecordType> {
+        defaultHide?: boolean;
+        hideInSetting?: boolean;
+    }
+}
+
 export declare interface IFitTableProps<T>
     extends TableProps<T>,
         Partial<Pick<ColumnsSettingProps<T>, 'columnsSettingRender' | 'resetColumnsSetting'>> {

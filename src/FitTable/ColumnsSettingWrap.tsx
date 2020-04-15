@@ -27,7 +27,7 @@ const ColumnsSettingWrap = <T extends object = any>({
     );
 
     useEffect(() => {
-        setFilterColumns(columns);
+        setFilterColumns(columns?.filter(item => !item.defaultHide));
     }, [columns]);
 
     return useMemo(() => {
