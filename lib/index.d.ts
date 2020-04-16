@@ -12,6 +12,7 @@ export { default as PopConfirmLoadingButton } from './PopConfirmLoadingButton';
 export { default as Config } from './Config';
 export { default as request } from './request';
 export { default as message } from './message';
+export { default as api } from './api';
 export { default as useFilterColumns } from './hooks/useFilterColumns';
 export { default as useList } from './hooks/useList';
 export { default as useModal } from './hooks/useModal';
