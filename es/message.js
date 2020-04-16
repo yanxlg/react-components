@@ -10,7 +10,7 @@ var generateMessage = function generateMessage(type, content, duration, onClose)
   }
 
   var newInstance = _message[type](content, duration, function () {
-    onClose();
+    onClose && onClose();
     delete cache[content];
   });
 

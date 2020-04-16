@@ -15,7 +15,7 @@ const generateMessage = (
         instance(); // 关闭之前的，重新显示新的message
     }
     let newInstance = AntdMessage[type](content, duration, () => {
-        onClose();
+        onClose && onClose();
         delete cache[content as any];
     });
     cache[content as any] = newInstance;
