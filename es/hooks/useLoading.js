@@ -6,7 +6,7 @@ function useLoading(_a) {
   var apiService = _a.apiService,
       initData = _a.initData;
 
-  var _b = useLoadingState(false),
+  var _b = useLoadingState(),
       loading = _b[0],
       setLoading = _b[1];
 

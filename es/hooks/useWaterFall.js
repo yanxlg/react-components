@@ -67,7 +67,7 @@ function useWaterFall(_a) {
       _d = _a.size,
       size = _d === void 0 ? config.defaultWaterFallSize : _d;
 
-  var _e = useLoadingState(autoQuery),
+  var _e = useLoadingState(),
       loading = _e[0],
       setLoading = _e[1];
 

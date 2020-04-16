@@ -42,7 +42,7 @@ function useWaterFall<T = any, Q = any, E = {}>({
     dependenceKey?: string;
     size?: number;
 }) {
-    const [loading, setLoading] = useLoadingState(autoQuery);
+    const [loading, setLoading] = useLoadingState();
 
     const extraQueryRef = useRef<{ [key: string]: any } | undefined>(undefined);
     extraQueryRef.current = extraQuery; // extraQuery支持外部更新，每次覆盖

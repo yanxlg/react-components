@@ -10,7 +10,7 @@ function useLoading<T = any>({
     apiService: JsonApi | (() => ApiService<Promise<IResponse<T>>>);
     initData?: T;
 }) {
-    const [loading, setLoading] = useLoadingState(false);
+    const [loading, setLoading] = useLoadingState();
     const [data, setData] = useState<T>(initData);
 
     const api = useRef(typeof apiService === 'object' ? generateApi(apiService) : apiService());

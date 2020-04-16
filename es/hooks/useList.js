@@ -71,7 +71,7 @@ function useList(_a) {
 
   var _e, _f;
 
-  var _g = useLoadingState(autoQuery),
+  var _g = useLoadingState(),
       loading = _g[0],
       setLoading = _g[1];
 
