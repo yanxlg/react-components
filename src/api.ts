@@ -21,10 +21,12 @@ export interface ApiService<T = any> {
     ): ApiService<T>;
 }
 
-const generateApi = <T>({ method = 'get', path, options }: JsonApi): ApiService<T> => {
+const noloop = (value: any) => value;
+
+const generateApi = <T = any>({ method = 'get', path, options }: JsonApi): ApiService<T> => {
     const { token, cancel } = CancelToken.source();
-    let _onfulfilled = (value: any) => value,
-        _onrejected = (value: any) => value;
+    let _onfulfilled = noloop,
+        _onrejected = noloop;
     const service = {
         request: (data?: object) => {
             let _options: any;
@@ -51,8 +53,8 @@ const generateApi = <T>({ method = 'get', path, options }: JsonApi): ApiService<
             onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
             onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null,
         ) => {
-            _onfulfilled = onfulfilled;
-            _onrejected = onrejected;
+            _onfulfilled = onfulfilled || noloop;
+            _onrejected = onrejected || noloop;
             return service;
         },
     };
@@ -60,57 +62,57 @@ const generateApi = <T>({ method = 'get', path, options }: JsonApi): ApiService<
 };
 
 const api = {
-    get: (path: string, options?: RequestOptionsInit) => {
-        return generateApi({
+    get: <T = any>(path: string, options?: RequestOptionsInit) => {
+        return generateApi<T>({
             method: 'get',
             path,
             options,
         });
     },
-    post: (path: string, options?: RequestOptionsInit) => {
-        return generateApi({
+    post: <T = any>(path: string, options?: RequestOptionsInit) => {
+        return generateApi<T>({
             method: 'post',
             path,
             options,
         });
     },
-    delete: (path: string, options?: RequestOptionsInit) => {
-        return generateApi({
+    delete: <T = any>(path: string, options?: RequestOptionsInit) => {
+        return generateApi<T>({
             method: 'delete',
             path,
             options,
         });
     },
-    put: (path: string, options?: RequestOptionsInit) => {
-        return generateApi({
+    put: <T = any>(path: string, options?: RequestOptionsInit) => {
+        return generateApi<T>({
             method: 'put',
             path,
             options,
         });
     },
-    patch: (path: string, options?: RequestOptionsInit) => {
-        return generateApi({
+    patch: <T = any>(path: string, options?: RequestOptionsInit) => {
+        return generateApi<T>({
             method: 'patch',
             path,
             options,
         });
     },
-    head: (path: string, options?: RequestOptionsInit) => {
-        return generateApi({
+    head: <T = any>(path: string, options?: RequestOptionsInit) => {
+        return generateApi<T>({
             method: 'head',
             path,
             options,
         });
     },
-    options: (path: string, options?: RequestOptionsInit) => {
-        return generateApi({
+    options: <T = any>(path: string, options?: RequestOptionsInit) => {
+        return generateApi<T>({
             method: 'options',
             path,
             options,
         });
     },
-    rpc: (path: string, options?: RequestOptionsInit) => {
-        return generateApi({
+    rpc: <T = any>(path: string, options?: RequestOptionsInit) => {
+        return generateApi<T>({
             method: 'rpc',
             path,
             options,

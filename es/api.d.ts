@@ -12,16 +12,16 @@ export interface ApiService<T = any> {
     cancel: () => void;
     then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): ApiService<T>;
 }
-declare const generateApi: <T>({ method, path, options }: JsonApi) => ApiService<T>;
+declare const generateApi: <T = any>({ method, path, options }: JsonApi) => ApiService<T>;
 declare const api: {
-    get: (path: string, options?: RequestOptionsInit) => ApiService<unknown>;
-    post: (path: string, options?: RequestOptionsInit) => ApiService<unknown>;
-    delete: (path: string, options?: RequestOptionsInit) => ApiService<unknown>;
-    put: (path: string, options?: RequestOptionsInit) => ApiService<unknown>;
-    patch: (path: string, options?: RequestOptionsInit) => ApiService<unknown>;
-    head: (path: string, options?: RequestOptionsInit) => ApiService<unknown>;
-    options: (path: string, options?: RequestOptionsInit) => ApiService<unknown>;
-    rpc: (path: string, options?: RequestOptionsInit) => ApiService<unknown>;
+    get: <T = any>(path: string, options?: RequestOptionsInit) => ApiService<T>;
+    post: <T_1 = any>(path: string, options?: RequestOptionsInit) => ApiService<T_1>;
+    delete: <T_2 = any>(path: string, options?: RequestOptionsInit) => ApiService<T_2>;
+    put: <T_3 = any>(path: string, options?: RequestOptionsInit) => ApiService<T_3>;
+    patch: <T_4 = any>(path: string, options?: RequestOptionsInit) => ApiService<T_4>;
+    head: <T_5 = any>(path: string, options?: RequestOptionsInit) => ApiService<T_5>;
+    options: <T_6 = any>(path: string, options?: RequestOptionsInit) => ApiService<T_6>;
+    rpc: <T_7 = any>(path: string, options?: RequestOptionsInit) => ApiService<T_7>;
 };
 export default api;
 export { generateApi };

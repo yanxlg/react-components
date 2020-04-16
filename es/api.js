@@ -24,6 +24,10 @@ import Request from 'umi-request';
 import _request from './request';
 var CancelToken = Request.CancelToken;
 
+var noloop = function noloop(value) {
+  return value;
+};
+
 var generateApi = function generateApi(_a) {
   var _b = _a.method,
       method = _b === void 0 ? 'get' : _b,
@@ -34,13 +38,8 @@ var generateApi = function generateApi(_a) {
       token = _c.token,
       _cancel = _c.cancel;
 
-  var _onfulfilled = function _onfulfilled(value) {
-    return value;
-  },
-      _onrejected = function _onrejected(value) {
-    return value;
-  };
-
+  var _onfulfilled = noloop,
+      _onrejected = noloop;
   var service = {
     request: function request(data) {
       var _a;
@@ -61,8 +60,8 @@ var generateApi = function generateApi(_a) {
       _cancel('by code');
     },
     then: function then(onfulfilled, onrejected) {
-      _onfulfilled = onfulfilled;
-      _onrejected = onrejected;
+      _onfulfilled = onfulfilled || noloop;
+      _onrejected = onrejected || noloop;
       return service;
     }
   };
