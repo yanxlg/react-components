@@ -1,6 +1,6 @@
 {
     "name": "react-components",
-    "version": "0.0.5-alpha.36",
+    "version": "0.0.5-alpha.37",
     "description": "",
     "repository": {
         "type": "git",
@@ -37,7 +37,8 @@
         "react-dnd-html5-backend": "^10.0.2",
         "react-highlight-words": "^0.16.0",
         "dayjs": "^1.8.23",
-        "umi-request": "^1.2.19"
+        "umi-request": "^1.2.19",
+        "abort-controller": "^3.0.0"
     },
     "devDependencies": {
         "@types/react-highlight-words": "^0.16.1",

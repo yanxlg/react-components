@@ -17,16 +17,14 @@ export interface ApiService<T = any> {
     cancel: () => void;
     then<TResult1 = T, TResult2 = never>(
         onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
-        onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null,
     ): ApiService<T>;
 }
 
 const noloop = (value: any) => value;
 
 const generateApi = <T = any>({ method = 'get', path, options }: JsonApi): ApiService<T> => {
-    const { token, cancel } = CancelToken.source();
-    let _onfulfilled = noloop,
-        _onrejected = noloop;
+    const { token, cancel } = CancelToken.source(); // umi-request abort
+    let _onfulfilled: any;
     const service = {
         request: (data?: object) => {
             let _options: any;
@@ -39,22 +37,29 @@ const generateApi = <T = any>({ method = 'get', path, options }: JsonApi): ApiSe
                     },
                 };
             }
-            return request[method]<T>(
-                path,
-                Object.assign({}, options, _options, {
-                    cancelToken: token,
-                }),
-            ).then(_onfulfilled, _onrejected);
+            if (_onfulfilled) {
+                return request[method]<T>(
+                    path,
+                    Object.assign({}, options, _options, {
+                        cancelToken: token,
+                    }),
+                ).then(_onfulfilled);
+            } else {
+                return request[method]<T>(
+                    path,
+                    Object.assign({}, options, _options, {
+                        cancelToken: token,
+                    }),
+                );
+            }
         },
         cancel: () => {
             cancel('by code');
         },
         then: <TResult1 = T, TResult2 = never>(
             onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
-            onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null,
         ) => {
             _onfulfilled = onfulfilled || noloop;
-            _onrejected = onrejected || noloop;
             return service;
         },
     };

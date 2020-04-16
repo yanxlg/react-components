@@ -3,9 +3,10 @@
  * request 需要支持cancel，并提供hooks 实现unmount 自动cancel；默认使用request，支持传入自定义request
  * 更详细的 api 文档: https://github.com/umijs/umi-request
  */
-import { default as defaultRequest, RequestMethod, RequestOptionsInit } from 'umi-request';
+import { default as Request, extend, RequestMethod, RequestOptionsInit } from 'umi-request';
 import message from './message';
 import { clearEmptyVal } from './utils';
+import AbortController from 'abort-controller';
 
 declare module 'umi-request' {
     interface RequestMethod {
@@ -48,8 +49,7 @@ function addDefaultInterceptors(req: RequestMethod) {
             return response;
         }
         const { status } = response;
-        //TODO 特殊情况需要外部处理，不进行默认提示
-        if (status >= 200 && status < 300) {
+        if (status < 200 || status >= 300) {
             // 错误码
             const msg = codeMessage[status];
             msg && message.error(`${status}：${msg}`);
@@ -89,9 +89,38 @@ function addDefaultInterceptors(req: RequestMethod) {
             },
         };
     });
+    // 处理abort 逻辑
+    req.interceptors.request.use((url: string, options: RequestOptionsInit) => {
+        if (options?.cancelToken) {
+            const controller = new AbortController(); // fetch abort
+            const signal = controller.signal;
+            options.cancelToken.promise.then(() => {
+                controller.abort();
+            });
+            return {
+                url,
+                options: {
+                    ...options,
+                    signal,
+                },
+            };
+        } else {
+            return {
+                url,
+                options,
+            };
+        }
+    });
 }
 
-let request = defaultRequest;
+let request = extend({
+    errorHandler: err => {
+        if (request.isCancel(err) || (typeof err === 'object' && /abort/.test(err.message))) {
+            throw new Request.Cancel(err.message); // abort统一抛出异常，不进行处理
+        }
+    },
+});
+
 addDefaultInterceptors(request);
 
 const replace = function(customReq: RequestMethod, useDefaultInterceptors = true) {

@@ -10,7 +10,7 @@ export interface JsonApi {
 export interface ApiService<T = any> {
     request: (data?: object) => Promise<T>;
     cancel: () => void;
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): ApiService<T>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null): ApiService<T>;
 }
 declare const generateApi: <T = any>({ method, path, options }: JsonApi) => ApiService<T>;
 declare const api: {

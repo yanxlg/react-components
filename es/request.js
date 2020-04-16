@@ -178,9 +178,10 @@ var __rest = this && this.__rest || function (s, e) {
  */
 
 
-import { default as defaultRequest } from 'umi-request';
+import { default as Request, extend } from 'umi-request';
 import message from './message';
-import { clearEmptyVal } from './utils'; // 添加默认行为
+import { clearEmptyVal } from './utils';
+import AbortController from 'abort-controller'; // 添加默认行为
 
 var codeMessage = {
   400: '发出的请求有错误，服务器没有进行新建或修改数据的操作。',
@@ -225,9 +226,9 @@ function addDefaultInterceptors(req) {
               , response];
             }
 
-            status = response.status; //TODO 特殊情况需要外部处理，不进行默认提示
+            status = response.status;
 
-            if (status >= 200 && status < 300) {
+            if (status < 200 || status >= 300) {
               msg = codeMessage[status];
               msg && message.error(status + "\uFF1A" + msg);
               return [2
@@ -293,10 +294,38 @@ function addDefaultInterceptors(req) {
         data: data ? clearEmptyVal(data) : undefined
       })
     };
+  }); // 处理abort 逻辑
+
+  req.interceptors.request.use(function (url, options) {
+    if (options === null || options === void 0 ? void 0 : options.cancelToken) {
+      var controller_1 = new AbortController(); // fetch abort
+
+      var signal = controller_1.signal;
+      options.cancelToken.promise.then(function () {
+        controller_1.abort();
+      });
+      return {
+        url: url,
+        options: __assign(__assign({}, options), {
+          signal: signal
+        })
+      };
+    } else {
+      return {
+        url: url,
+        options: options
+      };
+    }
   });
 }
 
-var request = defaultRequest;
+var request = extend({
+  errorHandler: function errorHandler(err) {
+    if (request.isCancel(err) || typeof err === 'object' && /abort/.test(err.message)) {
+      throw new Request.Cancel(err.message); // abort统一抛出异常，不进行处理
+    }
+  }
+});
 addDefaultInterceptors(request);
 
 var replace = function replace(customReq, useDefaultInterceptors) {

@@ -36,10 +36,11 @@ var generateApi = function generateApi(_a) {
 
   var _c = CancelToken.source(),
       token = _c.token,
-      _cancel = _c.cancel;
+      _cancel = _c.cancel; // umi-request abort
 
-  var _onfulfilled = noloop,
-      _onrejected = noloop;
+
+  var _onfulfilled;
+
   var service = {
     request: function request(data) {
       var _a;
@@ -52,16 +53,21 @@ var generateApi = function generateApi(_a) {
         _options = (_a = {}, _a[key] = __assign(__assign({}, options[key]), data), _a);
       }
 
-      return _request[method](path, _extends({}, options, _options, {
-        cancelToken: token
-      })).then(_onfulfilled, _onrejected);
+      if (_onfulfilled) {
+        return _request[method](path, _extends({}, options, _options, {
+          cancelToken: token
+        })).then(_onfulfilled);
+      } else {
+        return _request[method](path, _extends({}, options, _options, {
+          cancelToken: token
+        }));
+      }
     },
     cancel: function cancel() {
       _cancel('by code');
     },
-    then: function then(onfulfilled, onrejected) {
+    then: function then(onfulfilled) {
       _onfulfilled = onfulfilled || noloop;
-      _onrejected = onrejected || noloop;
       return service;
     }
   };
