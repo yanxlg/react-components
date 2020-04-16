@@ -324,6 +324,8 @@ var request = extend({
     if (request.isCancel(err) || typeof err === 'object' && /abort/.test(err.message)) {
       throw new Request.Cancel(err.message); // abort统一抛出异常，不进行处理
     }
+
+    throw err;
   }
 });
 addDefaultInterceptors(request);
