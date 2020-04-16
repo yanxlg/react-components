@@ -127,7 +127,8 @@ function useWaterFall(_a) {
       setLoading(true);
 
       var query = __assign(__assign({
-        size: size
+        size: size,
+        id: id
       }, extra), formValues);
 
       req.current = typeof queryPromise === 'object' ? generateApi(queryPromise) : queryPromise(query);

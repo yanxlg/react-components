@@ -92,6 +92,7 @@ function useWaterFall<T = any, Q = any, E = {}>({
                     setLoading(true);
                     const query = {
                         size,
+                        id,
                         ...extra,
                         ...formValues,
                     };
