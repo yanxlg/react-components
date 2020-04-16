@@ -11,6 +11,9 @@ declare module 'umi-request' {
     interface RequestMethod {
         replace: (request: RequestMethod) => void;
     }
+    interface RequestOptionsInit {
+        skipResponseInterceptors?: boolean; // 是否跳过内部错误判断
+    }
 }
 
 // 添加默认行为
@@ -36,6 +39,10 @@ const successReg = /^200|success$/;
 
 function addDefaultInterceptors(req: RequestMethod) {
     req.interceptors.response.use(async (response, options) => {
+        if (options.skipResponseInterceptors) {
+            // 直接跳过
+            return response;
+        }
         if (!response) {
             message.error('服务异常，无结果返回！');
             return response;

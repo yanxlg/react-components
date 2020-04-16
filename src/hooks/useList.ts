@@ -4,7 +4,7 @@ import { config } from '../Config';
 import { EmptyArray, EmptyObject } from '../utils';
 import { PaginationConfig } from 'antd/es/pagination';
 import { ApiService, generateApi, JsonApi } from '../api';
-import Request from 'umi-request';
+import useLoadingState from './useLoadingState';
 
 export interface IResponse<T> {
     code: number;
@@ -44,7 +44,7 @@ function useList<T, Q = any, E = {}>({
     pageNumberKey?: string;
     pageSizeKey?: string;
 }) {
-    const [loading, setLoading] = useState(autoQuery);
+    const [loading, setLoading] = useLoadingState(autoQuery);
     const extraQueryRef = useRef<{ [key: string]: any } | undefined>(undefined);
     extraQueryRef.current = extraQuery; // extraQuery支持外部更新，每次覆盖
 
@@ -70,12 +70,10 @@ function useList<T, Q = any, E = {}>({
             ...extra
         }: { page?: number; page_count?: number; [key: string]: any } = {}) => {
             // 这边终止请求？？
-
             if (req.current) {
                 req.current.cancel();
                 req.current = undefined;
             }
-            setLoading(false);
 
             return Promise.resolve()
                 .then(() => {
@@ -119,20 +117,9 @@ function useList<T, Q = any, E = {}>({
                             setTotal(total);
                             setExtraData(extraData as E);
                         })
-                        .then(
-                            result => {
-                                setLoading(false);
-                                return result;
-                            },
-                            err => {
-                                if (Request.isCancel(err)) {
-                                    throw err;
-                                } else {
-                                    setLoading(false);
-                                    throw err;
-                                }
-                            },
-                        );
+                        .finally(() => {
+                            setLoading(false);
+                        });
                 });
         },
         [],

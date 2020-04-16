@@ -35,7 +35,7 @@ declare function useWaterFall<T = any, Q = any, E = {}>({ queryPromise, formRef,
     dataSource: T[];
     increment: T[];
     total: number;
-    setLoading: import("react").Dispatch<import("react").SetStateAction<boolean>>;
+    setLoading: (loading: boolean) => void;
     setDataSource: import("react").Dispatch<import("react").SetStateAction<T[]>>;
     setTotal: import("react").Dispatch<import("react").SetStateAction<number>>;
     onNext: () => Promise<void>;

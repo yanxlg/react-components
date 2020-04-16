@@ -45,7 +45,7 @@ import { useRef, useState, useCallback, useEffect } from 'react';
 import { config } from '../Config';
 import { EmptyArray, EmptyObject } from '../utils';
 import { generateApi } from '../api';
-import Request from 'umi-request';
+import useLoadingState from './useLoadingState';
 /**
  * 通用列表业务hook
  * @param queryList
@@ -71,7 +71,7 @@ function useList(_a) {
 
   var _e, _f;
 
-  var _g = useState(autoQuery),
+  var _g = useLoadingState(autoQuery),
       loading = _g[0],
       setLoading = _g[1];
 
@@ -103,7 +103,6 @@ function useList(_a) {
     query.current = nextQuery;
   }, []);
   var getListData = useCallback(function (_a) {
-    // 这边终止请求？？
     if (_a === void 0) {
       _a = {};
     }
@@ -112,14 +111,14 @@ function useList(_a) {
         page = _b === void 0 ? pageNumber.current : _b,
         _c = _a.page_count,
         page_count = _c === void 0 ? pageSize.current : _c,
-        extra = __rest(_a, ["page", "page_count"]);
+        extra = __rest(_a, ["page", "page_count"]); // 这边终止请求？？
+
 
     if (req.current) {
       req.current.cancel();
       req.current = undefined;
     }
 
-    setLoading(false);
     return Promise.resolve().then(function () {
       if (formRef) {
         if (Array.isArray(formRef)) {
@@ -159,16 +158,8 @@ function useList(_a) {
         setDataSource(list);
         setTotal(total);
         setExtraData(extraData);
-      }).then(function (result) {
+      })["finally"](function () {
         setLoading(false);
-        return result;
-      }, function (err) {
-        if (Request.isCancel(err)) {
-          throw err;
-        } else {
-          setLoading(false);
-          throw err;
-        }
       });
     });
   }, []);

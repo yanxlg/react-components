@@ -8,6 +8,9 @@ declare module 'umi-request' {
     interface RequestMethod {
         replace: (request: RequestMethod) => void;
     }
+    interface RequestOptionsInit {
+        skipResponseInterceptors?: boolean;
+    }
 }
 declare let request: RequestMethod<false>;
 export default request;

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ApiService, generateApi, JsonApi } from '../api';
-import Request from 'umi-request';
 import { IResponse } from './useList';
+import useLoadingState from './useLoadingState';
 
 function useLoading<T = any>({
     apiService,
@@ -10,7 +10,7 @@ function useLoading<T = any>({
     apiService: JsonApi | (() => ApiService<Promise<IResponse<T>>>);
     initData?: T;
 }) {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useLoadingState(false);
     const [data, setData] = useState<T>(initData);
 
     const api = useRef(typeof apiService === 'object' ? generateApi(apiService) : apiService());
@@ -18,21 +18,15 @@ function useLoading<T = any>({
     const service = useCallback((data?: any) => {
         api.current.cancel();
         setLoading(true);
-        return api.current.request(data).then(
-            (result: any) => {
+        return api.current
+            .request(data)
+            .then((result: any) => {
                 setData(result?.data);
-                setLoading(false);
                 return result;
-            },
-            err => {
-                if (Request.isCancel(err)) {
-                    throw err;
-                } else {
-                    setLoading(false);
-                    throw err;
-                }
-            },
-        );
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }, []);
 
     useEffect(() => {

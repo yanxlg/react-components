@@ -45,7 +45,7 @@ import { useRef, useState, useCallback, useEffect } from 'react';
 import { EmptyObject } from '../utils';
 import { config } from '../Config';
 import { generateApi } from '../api';
-import Request from 'umi-request';
+import useLoadingState from './useLoadingState';
 /**
  *
  * @param queryPromise api service
@@ -67,7 +67,7 @@ function useWaterFall(_a) {
       _d = _a.size,
       size = _d === void 0 ? config.defaultWaterFallSize : _d;
 
-  var _e = useState(autoQuery),
+  var _e = useLoadingState(autoQuery),
       loading = _e[0],
       setLoading = _e[1];
 
@@ -109,7 +109,6 @@ function useWaterFall(_a) {
       req.current = undefined;
     }
 
-    setLoading(false);
     return Promise.resolve().then(function () {
       if (formRef) {
         if (Array.isArray(formRef)) {
@@ -146,16 +145,8 @@ function useWaterFall(_a) {
         setIncrement(list);
         setDataSource([].concat(dataSourceRef.current).concat(list));
         hasMoreRef.current = list.length >= size;
-      }).then(function (result) {
+      })["finally"](function () {
         setLoading(false);
-        return result;
-      }, function (err) {
-        if (Request.isCancel(err)) {
-          throw err;
-        } else {
-          setLoading(false);
-          throw err;
-        }
       });
     });
   }, []);

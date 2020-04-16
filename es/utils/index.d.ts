@@ -4,4 +4,5 @@ export declare const EmptyObject: {
 };
 export declare const EmptyArray: any[];
 export declare function isNumber(value?: string | number): boolean;
+export declare const isEmptyString: (value: any) => boolean;
 export declare const clearEmptyVal: (data: any) => any;

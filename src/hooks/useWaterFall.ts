@@ -3,7 +3,7 @@ import { JsonFormRef } from '../JsonForm';
 import { EmptyObject } from '../utils';
 import { config } from '../Config';
 import { ApiService, generateApi, JsonApi } from '../api';
-import Request from 'umi-request';
+import useLoadingState from './useLoadingState';
 
 export interface IResponse<T> {
     code: number;
@@ -42,7 +42,7 @@ function useWaterFall<T = any, Q = any, E = {}>({
     dependenceKey?: string;
     size?: number;
 }) {
-    const [loading, setLoading] = useState(autoQuery);
+    const [loading, setLoading] = useLoadingState(autoQuery);
 
     const extraQueryRef = useRef<{ [key: string]: any } | undefined>(undefined);
     extraQueryRef.current = extraQuery; // extraQuery支持外部更新，每次覆盖
@@ -72,8 +72,6 @@ function useWaterFall<T = any, Q = any, E = {}>({
                 req.current.cancel();
                 req.current = undefined;
             }
-            setLoading(false);
-
             return Promise.resolve()
                 .then(() => {
                     if (formRef) {
@@ -114,20 +112,9 @@ function useWaterFall<T = any, Q = any, E = {}>({
                             setDataSource([].concat(dataSourceRef.current).concat(list));
                             hasMoreRef.current = list.length >= size;
                         })
-                        .then(
-                            result => {
-                                setLoading(false);
-                                return result;
-                            },
-                            err => {
-                                if (Request.isCancel(err)) {
-                                    throw err;
-                                } else {
-                                    setLoading(false);
-                                    throw err;
-                                }
-                            },
-                        );
+                        .finally(() => {
+                            setLoading(false);
+                        });
                 });
         },
         [],

@@ -48,7 +48,7 @@ declare function useList<T, Q = any, E = {}>({ queryList, formRef, extraQuery, d
     dataSource: T[];
     extraData: E;
     total: number;
-    setLoading: import("react").Dispatch<import("react").SetStateAction<boolean>>;
+    setLoading: (loading: boolean) => void;
     setDataSource: import("react").Dispatch<import("react").SetStateAction<T[]>>;
     selectedRowKeys: string[];
     setTotal: import("react").Dispatch<import("react").SetStateAction<number>>;

@@ -211,6 +211,13 @@ function addDefaultInterceptors(req) {
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
+            if (options.skipResponseInterceptors) {
+              // 直接跳过
+              return [2
+              /*return*/
+              , response];
+            }
+
             if (!response) {
               message.error('服务异常，无结果返回！');
               return [2

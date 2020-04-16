@@ -6,6 +6,9 @@ export var EmptyArray = [];
 export function isNumber(value) {
   return /^\d+$/.test(String(value));
 }
+export var isEmptyString = function isEmptyString(value) {
+  return typeof value === 'string' && value.trim() === '';
+};
 export var clearEmptyVal = function clearEmptyVal(data) {
   if (typeof data !== 'object') {
     return data;
@@ -13,7 +16,7 @@ export var clearEmptyVal = function clearEmptyVal(data) {
 
   if (Array.isArray(data)) {
     return data.filter(function (item) {
-      return item !== '' && item !== undefined && item !== null;
+      return !isEmptyString(item) && item !== undefined && item !== null;
     }).map(function (item) {
       return clearEmptyVal(item);
     });
@@ -24,7 +27,7 @@ export var clearEmptyVal = function clearEmptyVal(data) {
       if (data.hasOwnProperty(key)) {
         var val = data[key];
 
-        if (val !== '' && val !== undefined && val !== null) {
+        if (!isEmptyString(val) && val !== undefined && val !== null) {
           result[key] = clearEmptyVal(val);
         }
       }

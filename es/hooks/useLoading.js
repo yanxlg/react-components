@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { generateApi } from '../api';
-import Request from 'umi-request';
+import useLoadingState from './useLoadingState';
 
 function useLoading(_a) {
   var apiService = _a.apiService,
       initData = _a.initData;
 
-  var _b = useState(false),
+  var _b = useLoadingState(false),
       loading = _b[0],
       setLoading = _b[1];
 
@@ -20,15 +20,9 @@ function useLoading(_a) {
     setLoading(true);
     return api.current.request(data).then(function (result) {
       setData(result === null || result === void 0 ? void 0 : result.data);
-      setLoading(false);
       return result;
-    }, function (err) {
-      if (Request.isCancel(err)) {
-        throw err;
-      } else {
-        setLoading(false);
-        throw err;
-      }
+    })["finally"](function () {
+      setLoading(false);
     });
   }, []);
   useEffect(function () {
