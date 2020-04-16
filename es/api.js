@@ -34,7 +34,14 @@ var generateApi = function generateApi(_a) {
       token = _c.token,
       _cancel = _c.cancel;
 
-  return {
+  var _onfulfilled = function _onfulfilled(value) {
+    return value;
+  },
+      _onrejected = function _onrejected(value) {
+    return value;
+  };
+
+  var service = {
     request: function request(data) {
       var _a;
 
@@ -48,12 +55,18 @@ var generateApi = function generateApi(_a) {
 
       return _request[method](path, _extends({}, options, _options, {
         cancelToken: token
-      }));
+      })).then(_onfulfilled, _onrejected);
     },
     cancel: function cancel() {
       _cancel('by code');
+    },
+    then: function then(onfulfilled, onrejected) {
+      _onfulfilled = onfulfilled;
+      _onrejected = onrejected;
+      return service;
     }
   };
+  return service;
 };
 
 var api = {
