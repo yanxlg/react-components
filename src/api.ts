@@ -28,11 +28,11 @@ const generateApi = <T = any>({ method = 'get', path, options }: JsonApi): ApiSe
     const service = {
         request: (data?: object) => {
             let _options: any;
-            const key = method === 'get' ? 'params' : 'data';
-            if ((options && options[key]) || data) {
+            const key = method.toLowerCase() === 'get' ? 'params' : 'data';
+            if (options?.[key] || data) {
                 _options = {
                     [key]: {
-                        ...options[key],
+                        ...options?.[key],
                         ...data,
                     },
                 };
