@@ -208,19 +208,14 @@ function addDefaultInterceptors(req) {
 
   req.interceptors.response.use(function (response, options) {
     return __awaiter(_this, void 0, void 0, function () {
-      var status, msg, responseType, data, state, msg, error_1;
+      var skipResponseInterceptors, status, msg, responseType, data, state, msg, error_1;
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
-            if (options.skipResponseInterceptors) {
-              // 直接跳过
-              return [2
-              /*return*/
-              , response];
-            }
+            skipResponseInterceptors = options === null || options === void 0 ? void 0 : options.skipResponseInterceptors;
 
             if (!response) {
-              message.error('服务异常，无结果返回！');
+              !skipResponseInterceptors && message.error('服务异常，无结果返回！');
               return [2
               /*return*/
               , response];
@@ -230,7 +225,7 @@ function addDefaultInterceptors(req) {
 
             if (status < 200 || status >= 300) {
               msg = codeMessage[status];
-              msg && message.error(status + "\uFF1A" + msg);
+              !skipResponseInterceptors && msg && message.error(status + "\uFF1A" + msg);
               return [2
               /*return*/
               , response];
@@ -255,7 +250,8 @@ function addDefaultInterceptors(req) {
             msg = data.msg || data.message || data.error;
 
             if (!successReg.test(String(state))) {
-              message.error(msg);
+              !skipResponseInterceptors && message.error(msg);
+              throw data;
             }
 
             return [2
@@ -265,10 +261,8 @@ function addDefaultInterceptors(req) {
           case 3:
             error_1 = _a.sent(); // 结果存在问题，类似no response 进行处理
 
-            message.error('服务异常，返回结果无法解析！');
-            return [2
-            /*return*/
-            , response];
+            !skipResponseInterceptors && message.error('服务异常，返回结果无法解析！');
+            throw response;
 
           case 4:
             return [2

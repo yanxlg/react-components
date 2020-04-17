@@ -40,19 +40,16 @@ const successReg = /^200|success$/;
 
 function addDefaultInterceptors(req: RequestMethod) {
     req.interceptors.response.use(async (response, options) => {
-        if (options.skipResponseInterceptors) {
-            // 直接跳过
-            return response;
-        }
+        const skipResponseInterceptors = options?.skipResponseInterceptors;
         if (!response) {
-            message.error('服务异常，无结果返回！');
+            !skipResponseInterceptors && message.error('服务异常，无结果返回！');
             return response;
         }
         const { status } = response;
         if (status < 200 || status >= 300) {
             // 错误码
             const msg = codeMessage[status];
-            msg && message.error(`${status}：${msg}`);
+            !skipResponseInterceptors && msg && message.error(`${status}：${msg}`);
             return response;
         }
 
@@ -64,13 +61,14 @@ function addDefaultInterceptors(req: RequestMethod) {
                 const state = data.code || data.status || data.state; // 支持code和status及state三个字段进行校验
                 const msg = data.msg || data.message || data.error; // 错误信息
                 if (!successReg.test(String(state))) {
-                    message.error(msg);
+                    !skipResponseInterceptors && message.error(msg);
+                    throw data;
                 }
                 return response;
             } catch (error) {
                 // 结果存在问题，类似no response 进行处理
-                message.error('服务异常，返回结果无法解析！');
-                return response;
+                !skipResponseInterceptors && message.error('服务异常，返回结果无法解析！');
+                throw response;
             }
         }
         return response;
