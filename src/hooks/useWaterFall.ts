@@ -156,6 +156,7 @@ function useWaterFall<T = any, Q = any, E = {}>({
         hasMoreRef: hasMoreRef,
         loading,
         dataSource,
+        dataSourceRef,
         increment, // for optimize render
         total,
         setLoading,

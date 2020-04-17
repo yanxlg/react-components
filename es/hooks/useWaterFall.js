@@ -180,6 +180,7 @@ function useWaterFall(_a) {
     hasMoreRef: hasMoreRef,
     loading: loading,
     dataSource: dataSource,
+    dataSourceRef: dataSourceRef,
     increment: increment,
     total: total,
     setLoading: setLoading,

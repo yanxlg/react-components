@@ -33,6 +33,7 @@ declare function useWaterFall<T = any, Q = any, E = {}>({ queryPromise, formRef,
     hasMoreRef: import("react").MutableRefObject<boolean>;
     loading: boolean;
     dataSource: T[];
+    dataSourceRef: import("react").MutableRefObject<T[]>;
     increment: T[];
     total: number;
     setLoading: (loading: boolean) => void;
