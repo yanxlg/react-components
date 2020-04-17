@@ -33,25 +33,36 @@ const ColumnsSetting = <T,>({
     const cacheColumnsShowList = useRef<string[]>([]);
 
     const [columnsShowList, setColumnsShowList] = useState<string[]>(
-        columns.map(column => column['dataIndex'] as string),
+        columns.filter(column => !column.defaultHide).map(column => column['dataIndex'] as string),
     ); // 列
+
+    const _setColumnsShowList = useCallback(
+        (keys) => {
+            // console.log(1111, keys)
+            setColumnsShowList([
+                columns?.filter(item => item.hideInSetting).map(item => item.dataIndex),
+                ...keys
+            ])
+        },
+        [columns]
+    )
 
     // 重新初始化
     useEffect(() => {
-        const keys = columns.map(column => column['dataIndex'] as string);
+        const keys = columns.filter(column => !column.defaultHide).map(column => column['dataIndex'] as string);
         cacheColumnsShowList.current = keys;
-        setColumnsShowList(keys);
+        _setColumnsShowList(keys);
     }, [columns]);
 
     // drop修改
     useEffect(() => {
         if (visible) {
-            setColumnsShowList(cacheColumnsShowList.current);
+            _setColumnsShowList(cacheColumnsShowList.current);
         }
     }, [visible]);
 
     const onChange = useCallback((checkedValue: Array<CheckboxValueType>) => {
-        setColumnsShowList(checkedValue as string[]);
+        _setColumnsShowList(checkedValue as string[]);
     }, []);
 
     const onSave = useCallback(() => {
@@ -73,7 +84,7 @@ const ColumnsSetting = <T,>({
             //重置
             const keys = columns.map(column => column['dataIndex'] as string);
             cacheColumnsShowList.current = keys;
-            setColumnsShowList(keys);
+            _setColumnsShowList(keys);
             onColumnsChange(columns);
             onClose();
         } else {
@@ -96,6 +107,9 @@ const ColumnsSetting = <T,>({
                     <Checkbox.Group onChange={onChange} value={columnsShowList}>
                         <Row gutter={[0, 5]}>
                             {columns.map(column => {
+                                if (column.hideInSetting) {
+                                    return null;
+                                }
                                 const dataIndex = column['dataIndex'] as string;
                                 return (
                                     <Col span={4} key={dataIndex}>
