@@ -112,11 +112,11 @@ function useWaterFall<T = any, Q = any, E = {}>({
                     return request
                         .then(({ data: { total = 0, list = [] } = EmptyObject }) => {
                             const _list = list || [];
+                            hasMoreRef.current = _list.length >= size;
                             setQuery(query);
                             setTotal(total);
                             setIncrement(_list);
                             setDataSource([].concat(dataSourceRef.current).concat(_list));
-                            hasMoreRef.current = _list.length >= size;
                         })
                         .finally(() => {
                             setLoading(false);
