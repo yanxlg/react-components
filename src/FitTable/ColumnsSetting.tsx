@@ -40,7 +40,7 @@ const ColumnsSetting = <T,>({
         (keys) => {
             // console.log(1111, keys)
             setColumnsShowList([
-                columns?.filter(item => item.hideInSetting).map(item => item.dataIndex),
+                columns?.filter(item => item.hideInSetting).map(item => item['dataIndex']),
                 ...keys
             ])
         },
