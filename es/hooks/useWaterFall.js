@@ -71,6 +71,7 @@ function useWaterFall(_a) {
       loading = _e[0],
       setLoading = _e[1];
 
+  var loadingMoreRef = useRef(false);
   var extraQueryRef = useRef(undefined);
   extraQueryRef.current = extraQuery; // extraQuery支持外部更新，每次覆盖
 
@@ -157,12 +158,15 @@ function useWaterFall(_a) {
     return getListData(__assign({}, extraQueryRef.current));
   }, []);
   var onNext = useCallback(function () {
-    if (hasMoreRef.current) {
+    if (hasMoreRef.current && !loadingMoreRef.current) {
+      loadingMoreRef.current = true;
       var item = dataSourceRef.current[dataSourceRef.current.length - 1];
       var id = item === null || item === void 0 ? void 0 : item[dependenceKey];
       return getListData(__assign({
         id: id
-      }, extraQueryRef.current));
+      }, extraQueryRef.current))["finally"](function () {
+        loadingMoreRef.current = false;
+      });
     } else {
       return Promise.resolve();
     }

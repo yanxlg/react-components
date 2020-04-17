@@ -44,6 +44,8 @@ function useWaterFall<T = any, Q = any, E = {}>({
 }) {
     const [loading, setLoading] = useLoadingState();
 
+    const loadingMoreRef = useRef(false);
+
     const extraQueryRef = useRef<{ [key: string]: any } | undefined>(undefined);
     extraQueryRef.current = extraQuery; // extraQuery支持外部更新，每次覆盖
 
@@ -131,12 +133,15 @@ function useWaterFall<T = any, Q = any, E = {}>({
     }, []);
 
     const onNext = useCallback(() => {
-        if (hasMoreRef.current) {
+        if (hasMoreRef.current && !loadingMoreRef.current) {
+            loadingMoreRef.current = true;
             const item = dataSourceRef.current[dataSourceRef.current.length - 1];
             const id = item?.[dependenceKey];
             return getListData({
                 id,
                 ...extraQueryRef.current,
+            }).finally(() => {
+                loadingMoreRef.current = false;
             });
         } else {
             return Promise.resolve();
