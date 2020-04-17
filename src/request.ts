@@ -43,14 +43,14 @@ function addDefaultInterceptors(req: RequestMethod) {
         const skipResponseInterceptors = options?.skipResponseInterceptors;
         if (!response) {
             !skipResponseInterceptors && message.error('服务异常，无结果返回！');
-            return response;
+            throw response;
         }
         const { status } = response;
         if (status < 200 || status >= 300) {
             // 错误码
             const msg = codeMessage[status];
             !skipResponseInterceptors && msg && message.error(`${status}：${msg}`);
-            return response;
+            throw response;
         }
 
         const { responseType } = options;

@@ -41,7 +41,7 @@ var __spreadArrays = this && this.__spreadArrays || function () {
   return r;
 };
 
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { EmptyObject } from '../utils';
 import { config } from '../Config';
 import { generateApi } from '../api';
@@ -88,8 +88,9 @@ function useWaterFall(_a) {
 
   var query = useRef({});
   var dataSourceRef = useRef(dataSource);
-  dataSourceRef.current = dataSource; // 直接读取
-
+  useMemo(function () {
+    dataSourceRef.current = dataSource; // 直接读取
+  }, [dataSource]);
   var hasMoreRef = useRef(true);
   var setQuery = useCallback(function (nextQuery) {
     query.current = nextQuery;

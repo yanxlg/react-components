@@ -1,4 +1,4 @@
-import { RefObject, useRef, useState, useCallback, useEffect } from 'react';
+import { RefObject, useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { JsonFormRef } from '../JsonForm';
 import { EmptyObject } from '../utils';
 import { config } from '../Config';
@@ -55,7 +55,9 @@ function useWaterFall<T = any, Q = any, E = {}>({
 
     const dataSourceRef = useRef(dataSource);
 
-    dataSourceRef.current = dataSource; // 直接读取
+    useMemo(() => {
+        dataSourceRef.current = dataSource; // 直接读取
+    }, [dataSource]);
 
     const hasMoreRef = useRef(true);
 

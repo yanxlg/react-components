@@ -216,9 +216,7 @@ function addDefaultInterceptors(req) {
 
             if (!response) {
               !skipResponseInterceptors && message.error('服务异常，无结果返回！');
-              return [2
-              /*return*/
-              , response];
+              throw response;
             }
 
             status = response.status;
@@ -226,9 +224,7 @@ function addDefaultInterceptors(req) {
             if (status < 200 || status >= 300) {
               msg = codeMessage[status];
               !skipResponseInterceptors && msg && message.error(status + "\uFF1A" + msg);
-              return [2
-              /*return*/
-              , response];
+              throw response;
             }
 
             responseType = options.responseType;
