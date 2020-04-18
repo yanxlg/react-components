@@ -10,7 +10,8 @@ export var isEmptyString = function isEmptyString(value) {
   return typeof value === 'string' && value.trim() === '';
 };
 export var clearEmptyVal = function clearEmptyVal(data) {
-  if (typeof data !== 'object') {
+  // formData直接返回
+  if (typeof data !== 'object' || data instanceof FormData) {
     return data;
   }
 
