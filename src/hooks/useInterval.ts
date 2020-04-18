@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 function useInterval() {
     const timer = useRef<number>();
@@ -23,6 +23,12 @@ function useInterval() {
         },
         [],
     );
+
+    useEffect(() => {
+        return () => {
+            stop();
+        };
+    }, []);
 
     return {
         /**
