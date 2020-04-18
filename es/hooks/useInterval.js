@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 function useInterval() {
   var timer = useRef();
@@ -23,6 +23,11 @@ function useInterval() {
     stop();
     execute && handler();
     timer.current = window.setInterval(handler, timeout);
+  }, []);
+  useEffect(function () {
+    return function () {
+      stop();
+    };
   }, []);
   return {
     /**
