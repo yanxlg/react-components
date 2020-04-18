@@ -12,7 +12,8 @@ export function isNumber(value?: string | number) {
 export const isEmptyString = (value: any) => typeof value === 'string' && value.trim() === '';
 
 export const clearEmptyVal = (data: any): any => {
-    if (typeof data !== 'object') {
+    // formData直接返回
+    if (typeof data !== 'object' || data instanceof FormData) {
         return data;
     }
     if (Array.isArray(data)) {
