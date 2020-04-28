@@ -78,6 +78,7 @@ export interface JsonFormRef {
     getFieldsValue: () => Store;
     validateFields: ValidateFields;
     setFieldsValue: (value: Store) => void;
+    resetFields: () => void;
 }
 
 export const getColChildren = (children: ReactElement, itemCol?: ColProps, times: number = 1) => {
@@ -325,6 +326,9 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                 },
                 setFieldsValue: (value: Store) => {
                     form.setFieldsValue(value);
+                },
+                resetFields: () => {
+                    form.resetFields();
                 },
             };
         },
