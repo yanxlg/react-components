@@ -65,7 +65,7 @@ const FormTextArea = (props: TextAreaProps) => {
                 />
             </Form.Item>
         );
-    }, []);
+    }, [_props]);
 };
 
 FormTextArea.typeList = typeList;
