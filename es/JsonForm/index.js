@@ -55,6 +55,7 @@ import DynamicItem from './items/DynamicItem';
 import HideItem from './items/HideItem';
 import formatter from '../utils/formatter';
 import FormTextArea from './items/TextArea';
+import FormCascader from './items/Cascader';
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
@@ -187,6 +188,15 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
 
   if (FormTextArea.typeList.includes(type)) {
     return React.createElement(FormTextArea, __assign({
+      key: String(index)
+    }, field, {
+      type: type,
+      form: form
+    }));
+  }
+
+  if (FormCascader.typeList.includes(type)) {
+    return React.createElement(FormCascader, __assign({
       key: String(index)
     }, field, {
       type: type,

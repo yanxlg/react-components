@@ -33,6 +33,7 @@ import DynamicItem, { DynamicItemProps, DynamicType } from './items/DynamicItem'
 import HideItem, { HideItemProps, HideType } from './items/HideItem';
 import formatter, { FormatterType } from '../utils/formatter';
 import FormTextArea, { TextAreaProps, TextAreaType } from './items/TextArea';
+import FormCascader, { CascaderProps, CascaderType } from './items/Cascader';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -52,6 +53,7 @@ export type FormField<T = string> = (
     | Omit<LayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>
     | Omit<DynamicItemProps, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>
     | Omit<HideItemProps, 'form'>
+    | Omit<CascaderProps, 'form'>
 ) & {
     form?: FormInstance;
 };
@@ -235,6 +237,16 @@ export const getFormItem = (
                 key={String(index)}
                 {...(field as TextAreaProps)}
                 type={type as TextAreaType}
+                form={form}
+            />
+        );
+    }
+    if (FormCascader.typeList.includes(type)) {
+        return (
+            <FormCascader
+                key={String(index)}
+                {...(field as CascaderProps)}
+                type={type as CascaderType}
                 form={form}
             />
         );
