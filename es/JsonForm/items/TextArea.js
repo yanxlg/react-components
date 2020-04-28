@@ -71,7 +71,7 @@ var FormTextArea = function FormTextArea(props) {
       placeholder: placeholder,
       className: className
     }, _props, eventProps)));
-  }, []);
+  }, [_props]);
 };
 
 FormTextArea.typeList = typeList;

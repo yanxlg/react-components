@@ -71,7 +71,7 @@ var FormInput = function FormInput(props) {
     }, _props, eventProps, {
       richType: type
     })));
-  }, []);
+  }, [_props]);
 };
 
 FormInput.typeList = typeList;
