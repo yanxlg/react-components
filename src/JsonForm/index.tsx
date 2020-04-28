@@ -32,6 +32,7 @@ import Layout, { LayoutType, LayoutProps } from './layout';
 import DynamicItem, { DynamicItemProps, DynamicType } from './items/DynamicItem';
 import HideItem, { HideItemProps, HideType } from './items/HideItem';
 import formatter, { FormatterType } from '../utils/formatter';
+import FormTextArea, { TextAreaProps, TextAreaType } from './items/TextArea';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -47,6 +48,7 @@ export type FormField<T = string> = (
     | Omit<CheckboxGroupProps<T>, 'form'>
     | Omit<RadioGroupProps<T>, 'form'>
     | Omit<InputRangeProps<T>, 'form'>
+    | Omit<TextAreaProps<T>, 'form'>
     | Omit<LayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>
     | Omit<DynamicItemProps, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>
     | Omit<HideItemProps, 'form'>
@@ -227,6 +229,16 @@ export const getFormItem = (
             />
         );
     }
+    if (FormTextArea.typeList.includes(type)) {
+        return (
+            <FormTextArea
+                key={String(index)}
+                {...(field as TextAreaProps)}
+                type={type as TextAreaType}
+                form={form}
+            />
+        );
+    }
     return null;
 };
 
@@ -327,12 +339,12 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                     };
                 } else {
                     const { formatter: formatterName, name } = (field as unknown) as any;
-                    if (FormInput.typeList.includes(type)) {
-                        values[name as string] = getFormatterFunc(
-                            formatterName,
-                            formatter.null,
-                        )(form.getFieldValue(name));
-                    } else if (FormSelect.typeList.includes(type)) {
+                    if (
+                        FormInput.typeList.includes(type) ||
+                        FormTextArea.typeList.includes(type) ||
+                        FormSelect.typeList.includes(type) ||
+                        FormDatePicker.typeList.includes(type)
+                    ) {
                         values[name as string] = getFormatterFunc(
                             formatterName,
                             formatter.null,
@@ -347,11 +359,6 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                             formatterName?.[1],
                             formatter.null,
                         )(form.getFieldValue(name2));
-                    } else if (FormDatePicker.typeList.includes(type)) {
-                        values[name as string] = getFormatterFunc(
-                            formatterName,
-                            formatter.null,
-                        )(form.getFieldValue(name));
                     } else if (FormInputRange.typeList.includes(type)) {
                         const [name1, name2] = name;
                         values[name1 as string] = getFormatterFunc(

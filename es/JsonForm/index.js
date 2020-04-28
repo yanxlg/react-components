@@ -54,6 +54,7 @@ import Layout from './layout';
 import DynamicItem from './items/DynamicItem';
 import HideItem from './items/HideItem';
 import formatter from '../utils/formatter';
+import FormTextArea from './items/TextArea';
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
@@ -184,6 +185,15 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
     }));
   }
 
+  if (FormTextArea.typeList.includes(type)) {
+    return React.createElement(FormTextArea, __assign({
+      key: String(index)
+    }, field, {
+      type: type,
+      form: form
+    }));
+  }
+
   return null;
 };
 export var getFormItems = function getFormItems(fieldList, form, labelClassName, itemCol, itemRow) {
@@ -275,17 +285,13 @@ var JsonForm = function JsonForm(props, ref) {
             formatterName = _a.formatter,
             name_1 = _a.name;
 
-        if (FormInput.typeList.includes(type)) {
-          values[name_1] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_1));
-        } else if (FormSelect.typeList.includes(type)) {
+        if (FormInput.typeList.includes(type) || FormTextArea.typeList.includes(type) || FormSelect.typeList.includes(type) || FormDatePicker.typeList.includes(type)) {
           values[name_1] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_1));
         } else if (FormDateRanger.typeList.includes(type)) {
           var name1 = name_1[0],
               name2 = name_1[1];
           values[name1] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[0], formatter["null"])(form.getFieldValue(name1));
           values[name2] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[1], formatter["null"])(form.getFieldValue(name2));
-        } else if (FormDatePicker.typeList.includes(type)) {
-          values[name_1] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_1));
         } else if (FormInputRange.typeList.includes(type)) {
           var name1 = name_1[0],
               name2 = name_1[1];
