@@ -22,14 +22,13 @@ export type CascaderProps<T = string> = FormItemLabelProps &
         type: CascaderType;
         form: FormInstance;
         placeholder?: string;
-        optionList?: CascaderOptionType[]; // 支持异步获取， 支持配置api地址及response path进行配置
         className?: string;
         formItemClassName?: string;
         onChange?: (name: FormItemName<T>, form: FormInstance) => void; // change监听，支持外部执行表单操作，可以实现关联筛选，重置等操作
         name: FormItemName<T>;
         formatter?: FormatterType;
         rules?: Rule[];
-    } & Omit<AntdCascaderProps, 'loading' | 'onChange' | 'className' | 'options'>;
+    } & Omit<AntdCascaderProps, 'loading' | 'onChange' | 'className'>;
 
 const FormCascader = (props: CascaderProps) => {
     const {
@@ -40,7 +39,6 @@ const FormCascader = (props: CascaderProps) => {
         onChange,
         labelClassName,
         form,
-        optionList,
         rules,
         placeholder,
         disabled,
@@ -68,7 +66,6 @@ const FormCascader = (props: CascaderProps) => {
                 <Cascader
                     disabled={disabled}
                     className={className}
-                    options={optionList}
                     placeholder={placeholder}
                     showSearch={{ filter }}
                     {...eventProps}
@@ -76,7 +73,7 @@ const FormCascader = (props: CascaderProps) => {
                 />
             </Form.Item>
         );
-    }, [optionList, disabled]);
+    }, [extraProps, disabled]);
 };
 
 FormCascader.typeList = typeList;

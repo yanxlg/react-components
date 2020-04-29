@@ -52,11 +52,10 @@ var FormCascader = function FormCascader(props) {
       _onChange = props.onChange,
       labelClassName = props.labelClassName,
       form = props.form,
-      optionList = props.optionList,
       rules = props.rules,
       placeholder = props.placeholder,
       disabled = props.disabled,
-      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "optionList", "rules", "placeholder", "disabled"]);
+      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "rules", "placeholder", "disabled"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -76,13 +75,12 @@ var FormCascader = function FormCascader(props) {
     }, React.createElement(_Cascader, __assign({
       disabled: disabled,
       className: className,
-      options: optionList,
       placeholder: placeholder,
       showSearch: {
         filter: filter
       }
     }, eventProps, extraProps)));
-  }, [optionList, disabled]);
+  }, [extraProps, disabled]);
 };
 
 FormCascader.typeList = typeList;
