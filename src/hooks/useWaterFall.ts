@@ -33,9 +33,7 @@ function useWaterFall<T = any, Q = any, E = {}>({
     dependenceKey = 'id',
     size = config.defaultWaterFallSize,
 }: {
-    queryPromise:
-        | JsonApi
-        | ((query: Q) => ApiService<Promise<IResponse<IPaginationResponse<T, E>>>>);
+    queryPromise: JsonApi | ((query: Q) => ApiService<IResponse<IPaginationResponse<T, E>>>);
     formRef?: RefObject<JsonFormRef> | Array<RefObject<JsonFormRef>>;
     extraQuery?: { [key: string]: any };
     autoQuery?: boolean;

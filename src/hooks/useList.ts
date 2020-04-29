@@ -36,7 +36,7 @@ function useList<T, Q = any, E = {}>({
     pageNumberKey = config.defaultPageNumberKey,
     pageSizeKey = config.defaultPageSizeKey,
 }: {
-    queryList: JsonApi | ((query: Q) => ApiService<Promise<IResponse<IPaginationResponse<T, E>>>>);
+    queryList: JsonApi | ((query: Q) => ApiService<IResponse<IPaginationResponse<T, E>>>);
     formRef?: RefObject<JsonFormRef> | Array<RefObject<JsonFormRef>>;
     extraQuery?: { [key: string]: any };
     defaultState?: { pageNumber?: number; pageSize?: number };

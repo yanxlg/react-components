@@ -22,7 +22,7 @@ export declare type IPaginationResponse<T, U = {}> = {
  * @param pageSizeKey
  */
 declare function useList<T, Q = any, E = {}>({ queryList, formRef, extraQuery, defaultState, autoQuery, pageNumberKey, pageSizeKey, }: {
-    queryList: JsonApi | ((query: Q) => ApiService<Promise<IResponse<IPaginationResponse<T, E>>>>);
+    queryList: JsonApi | ((query: Q) => ApiService<IResponse<IPaginationResponse<T, E>>>);
     formRef?: RefObject<JsonFormRef> | Array<RefObject<JsonFormRef>>;
     extraQuery?: {
         [key: string]: any;

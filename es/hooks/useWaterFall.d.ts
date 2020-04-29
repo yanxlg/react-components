@@ -20,7 +20,7 @@ export declare type IPaginationResponse<T, U = {}> = {
  * @param size 瀑布流获取长度
  */
 declare function useWaterFall<T = any, Q = any, E = {}>({ queryPromise, formRef, extraQuery, autoQuery, dependenceKey, size, }: {
-    queryPromise: JsonApi | ((query: Q) => ApiService<Promise<IResponse<IPaginationResponse<T, E>>>>);
+    queryPromise: JsonApi | ((query: Q) => ApiService<IResponse<IPaginationResponse<T, E>>>);
     formRef?: RefObject<JsonFormRef> | Array<RefObject<JsonFormRef>>;
     extraQuery?: {
         [key: string]: any;
