@@ -247,7 +247,8 @@ function addDefaultInterceptors(req) {
 
             if (!successReg.test(String(state))) {
               !skipResponseInterceptors && message.error(msg);
-              throw data;
+              skipResponseInterceptors = true;
+              throw null;
             }
 
             return [2
