@@ -40,7 +40,7 @@ const successReg = /^200|success$/;
 
 function addDefaultInterceptors(req: RequestMethod) {
     req.interceptors.response.use(async (response, options) => {
-        const skipResponseInterceptors = options?.skipResponseInterceptors;
+        let skipResponseInterceptors = options?.skipResponseInterceptors;
         if (!response) {
             !skipResponseInterceptors && message.error('服务异常，无结果返回！');
             throw response;
@@ -62,7 +62,8 @@ function addDefaultInterceptors(req: RequestMethod) {
                 const msg = data.msg || data.message || data.error; // 错误信息
                 if (!successReg.test(String(state))) {
                     !skipResponseInterceptors && message.error(msg);
-                    throw data;
+                    skipResponseInterceptors = true;
+                    throw null;
                 }
                 return response;
             } catch (error) {
