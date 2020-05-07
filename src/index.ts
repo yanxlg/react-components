@@ -23,3 +23,5 @@ export { FilterColumns } from './hooks/useFilterColumns';
 export { default as useWaterFall } from './hooks/useWaterFall';
 export { default as useInterval } from './hooks/useInterval';
 export { default as useLoading } from './hooks/useLoading';
+
+export * from './utils/iterator';
