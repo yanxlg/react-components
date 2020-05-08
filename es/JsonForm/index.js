@@ -191,6 +191,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       key: String(index)
     }, field, {
       type: type,
+      labelClassName: labelClassName,
       form: form
     }));
   }
@@ -200,6 +201,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       key: String(index)
     }, field, {
       type: type,
+      labelClassName: labelClassName,
       form: form
     }));
   }

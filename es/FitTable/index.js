@@ -147,6 +147,7 @@ function FitTable(_a) {
   }, [onHeaderRow]);
   var tableContent = useMemo(function () {
     return React.createElement(_Table, __assign({
+      key: columns.length,
       scroll: scroll,
       columns: columns,
       rowSelection: rowSelection

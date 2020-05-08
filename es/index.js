@@ -21,3 +21,4 @@ export { default as useDataSet } from './hooks/useDataSet';
 export { default as useWaterFall } from './hooks/useWaterFall';
 export { default as useInterval } from './hooks/useInterval';
 export { default as useLoading } from './hooks/useLoading';
+export * from './utils/iterator';
