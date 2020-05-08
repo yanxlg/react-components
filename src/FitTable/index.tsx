@@ -156,6 +156,7 @@ function FitTable<T extends object = any>({
     const tableContent = useMemo(() => {
         return (
             <Table<T>
+                key={columns.length}
                 scroll={scroll}
                 columns={columns}
                 rowSelection={rowSelection}
