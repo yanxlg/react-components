@@ -238,6 +238,7 @@ export const getFormItem = (
                 key={String(index)}
                 {...(field as TextAreaProps)}
                 type={type as TextAreaType}
+                labelClassName={labelClassName}
                 form={form}
             />
         );
@@ -248,6 +249,7 @@ export const getFormItem = (
                 key={String(index)}
                 {...(field as CascaderProps)}
                 type={type as CascaderType}
+                labelClassName={labelClassName}
                 form={form}
             />
         );
