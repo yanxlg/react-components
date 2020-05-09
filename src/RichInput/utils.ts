@@ -13,3 +13,10 @@ export const positiveIntFormatter = (value?: string | number) =>
 
 export const numberSplit = (value?: string | number) =>
     typeof value === 'number' ? String(value) : value ? (/^\d+\,?\d*/.exec(value) || [''])[0] : '';
+
+export const naturalNumber = (value?: string | number) =>
+    typeof value === 'number'
+        ? String(value)
+        : value
+        ? (/^-?\d+(\.\d*)?/.exec(value) || [''])[0]
+        : '';

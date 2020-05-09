@@ -1,9 +1,21 @@
 import React, { ChangeEvent, useCallback, useMemo, useState } from 'react';
 import { InputProps } from 'antd/es/input';
 import { Input } from 'antd';
-import { intFormatter, numberFormatter, numberSplit, positiveIntFormatter } from './utils';
+import {
+    intFormatter,
+    naturalNumber,
+    numberFormatter,
+    numberSplit,
+    positiveIntFormatter,
+} from './utils';
 
-export type RichType = 'input' | 'integer' | 'number' | 'positiveInteger' | 'numberSplit';
+export type RichType =
+    | 'input'
+    | 'integer'
+    | 'number'
+    | 'positiveInteger'
+    | 'numberSplit'
+    | 'naturalNumber';
 
 declare interface RichInputProps extends InputProps {
     richType?: RichType;
@@ -27,6 +39,8 @@ const RichInput: React.FC<RichInputProps> = ({ richType, value, onChange, ...pro
                         ? positiveIntFormatter(_value)
                         : richType === 'numberSplit'
                         ? numberSplit(_value)
+                        : richType === 'naturalNumber'
+                        ? naturalNumber(_value)
                         : _value;
                 e.target.value = targetValue;
             }
