@@ -161,10 +161,10 @@ function FitTable(_a) {
     var top = pagination && pagination.position && pagination.position.includes('topRight'); // 需要有top配置，默认不显示
 
     return top ? React.createElement(_Row, null, React.createElement(_Col, {
-      className: formStyles.toolSpacing,
+      className: styles.toolSpacing,
       flex: 1
     }, toolBarRender()), React.createElement(_Col, {
-      className: formStyles.toolSpacing
+      className: styles.toolSpacing
     }, paginationComponent)) : null;
   }, [pagination, toolBarRender]);
   var paginationBottomContainer = useMemo(function () {

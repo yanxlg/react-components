@@ -172,8 +172,8 @@ function FitTable<T extends object = any>({
         const top = pagination && pagination.position && pagination.position.includes('topRight'); // 需要有top配置，默认不显示
         return top ? (
             <Row>
-                <Col className={formStyles.toolSpacing} flex={1}>{toolBarRender()}</Col>
-                <Col className={formStyles.toolSpacing}>{paginationComponent}</Col>
+                <Col className={styles.toolSpacing} flex={1}>{toolBarRender()}</Col>
+                <Col className={styles.toolSpacing}>{paginationComponent}</Col>
             </Row>
         ) : null;
     }, [pagination, toolBarRender]);
