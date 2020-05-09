@@ -15,7 +15,14 @@ export declare interface DynamicItemProps {
     itemRow?: RowProps;
 }
 declare const DynamicItem: {
-    ({ form, dynamic, shouldUpdate, labelClassName, itemCol, itemRow, }: DynamicItemProps): JSX.Element;
+    ({
+        form,
+        dynamic,
+        shouldUpdate,
+        labelClassName,
+        itemCol,
+        itemRow,
+    }: DynamicItemProps): JSX.Element;
     typeList: string[];
 };
 export default DynamicItem;
