@@ -31,7 +31,7 @@ var __rest = this && this.__rest || function (s, e) {
 };
 
 import React, { useCallback, useMemo, useState } from 'react';
-import { intFormatter, numberFormatter, numberSplit, positiveIntFormatter } from './utils';
+import { intFormatter, naturalNumber, numberFormatter, numberSplit, positiveIntFormatter } from './utils';
 
 var RichInput = function RichInput(_a) {
   var richType = _a.richType,
@@ -47,7 +47,7 @@ var RichInput = function RichInput(_a) {
     var _value = e.target.value;
 
     if (richType) {
-      var targetValue = richType === 'number' ? numberFormatter(_value) : richType === 'integer' ? intFormatter(_value) : richType === 'input' ? _value : richType === 'positiveInteger' ? positiveIntFormatter(_value) : richType === 'numberSplit' ? numberSplit(_value) : _value;
+      var targetValue = richType === 'number' ? numberFormatter(_value) : richType === 'integer' ? intFormatter(_value) : richType === 'input' ? _value : richType === 'positiveInteger' ? positiveIntFormatter(_value) : richType === 'numberSplit' ? numberSplit(_value) : richType === 'naturalNumber' ? naturalNumber(_value) : _value;
       e.target.value = targetValue;
     }
 
