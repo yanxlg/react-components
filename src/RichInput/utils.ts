@@ -18,5 +18,5 @@ export const naturalNumber = (value?: string | number) =>
     typeof value === 'number'
         ? String(value)
         : value
-        ? (/^-?\d+(\.\d*)?/.exec(value) || [''])[0]
+        ? (/^-?(\d+(\.\d*)?)?/.exec(value) || [''])[0]
         : '';
