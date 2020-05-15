@@ -34,6 +34,7 @@ import HideItem, { HideItemProps, HideType } from './items/HideItem';
 import formatter, { FormatterType } from '../utils/formatter';
 import FormTextArea, { TextAreaProps, TextAreaType } from './items/TextArea';
 import FormCascader, { CascaderProps, CascaderType } from './items/Cascader';
+import CustomFragment, { CustomFragmentProps, CustomFragmentType } from './items/CustomFragment';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -54,6 +55,7 @@ export type FormField<T = string> = (
     | Omit<DynamicItemProps, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>
     | Omit<HideItemProps, 'form'>
     | Omit<CascaderProps, 'form'>
+    | Omit<CustomFragmentProps, 'form'>
 ) & {
     form?: FormInstance;
 };
@@ -254,6 +256,16 @@ export const getFormItem = (
             />
         );
     }
+    if (CustomFragment.typeList.includes(type)) {
+        return (
+            <CustomFragment
+                key={String(index)}
+                {...(field as CustomFragmentProps)}
+                type={type as CustomFragmentType}
+                form={form}
+            />
+        );
+    }
     return null;
 };
 
@@ -387,6 +399,13 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                             formatterName?.[1],
                             formatter.number,
                         )(form.getFieldValue(name2));
+                    } else if (CustomFragment.typeList.includes(type)) {
+                        const { names } = field;
+                        const _values = form.getFieldsValue(names);
+                        values = {
+                            ...values,
+                            _values,
+                        };
                     } else {
                         values[name] = getFormatterFunc(
                             formatterName,
