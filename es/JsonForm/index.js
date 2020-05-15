@@ -56,6 +56,7 @@ import HideItem from './items/HideItem';
 import formatter from '../utils/formatter';
 import FormTextArea from './items/TextArea';
 import FormCascader from './items/Cascader';
+import CustomFragment from './items/CustomFragment';
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
@@ -206,6 +207,15 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
     }));
   }
 
+  if (CustomFragment.typeList.includes(type)) {
+    return React.createElement(CustomFragment, __assign({
+      key: String(index)
+    }, field, {
+      type: type,
+      form: form
+    }));
+  }
+
   return null;
 };
 export var getFormItems = function getFormItems(fieldList, form, labelClassName, itemCol, itemRow) {
@@ -312,6 +322,14 @@ var JsonForm = function JsonForm(props, ref) {
               name2 = name_1[1];
           values[name1] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[0], formatter.number)(form.getFieldValue(name1));
           values[name2] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[1], formatter.number)(form.getFieldValue(name2));
+        } else if (CustomFragment.typeList.includes(type)) {
+          var names = field.names;
+
+          var _values = form.getFieldsValue(names);
+
+          values = __assign(__assign({}, values), {
+            _values: _values
+          });
         } else {
           values[name_1] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_1));
         }
