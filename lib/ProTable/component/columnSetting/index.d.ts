@@ -6,7 +6,9 @@ export interface ColumnSettingProps<T = any> {
     columnsMap: {
         [key: string]: ColumnsState;
     };
-    setColumnsMap: (map: { [key: string]: ColumnsState }) => void;
+    setColumnsMap: (map: {
+        [key: string]: ColumnsState;
+    }) => void;
     setSortKeyColumns: (sortedColumns: (string | number)[]) => void;
     sortKeyColumns: (string | number)[];
 }
