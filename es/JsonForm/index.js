@@ -327,9 +327,7 @@ var JsonForm = function JsonForm(props, ref) {
 
           var _values = form.getFieldsValue(names);
 
-          values = __assign(__assign({}, values), {
-            _values: _values
-          });
+          values = __assign(__assign({}, values), _values);
         } else {
           values[name_1] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_1));
         }

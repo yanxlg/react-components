@@ -404,7 +404,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                         const _values = form.getFieldsValue(names);
                         values = {
                             ...values,
-                            _values,
+                            ..._values,
                         };
                     } else {
                         values[name] = getFormatterFunc(
