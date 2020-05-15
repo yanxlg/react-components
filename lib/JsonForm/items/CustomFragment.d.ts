@@ -5,9 +5,9 @@ export declare interface CustomFragmentProps {
     type: CustomFragmentType;
     form: FormInstance;
     Component: React.FC<{
-        form?: FormInstance;
+        form: FormInstance;
     }> | React.ComponentClass<{
-        form?: FormInstance;
+        form: FormInstance;
     }>;
     names: string[];
 }
