@@ -57,6 +57,7 @@ const FormSelect = (props: SelectProps) => {
         placeholder,
         isShortcut = false,
         disabled,
+        colon,
         ...extraProps
     } = props;
     const [options, setOptions] = useState<IOptionItem[] | undefined>(undefined);
@@ -173,6 +174,7 @@ const FormSelect = (props: SelectProps) => {
                     className={formItemClassName}
                     label={<span className={labelClassName}>{label}</span>}
                     rules={rules}
+                    colon={colon}
                 >
                     <Select
                         disabled={disabled}
@@ -224,6 +226,7 @@ const FormSelect = (props: SelectProps) => {
                                 className={formItemClassName}
                                 label={<span className={labelClassName}>{label}</span>}
                                 rules={rules}
+                                colon={colon}
                             >
                                 <Select
                                     disabled={disabled}

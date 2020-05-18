@@ -36,6 +36,7 @@ const FormInput = (props: InputProps) => {
         form,
         type,
         rules,
+        colon,
         ..._props
     } = props;
     const eventProps = useMemo(() => {
@@ -55,6 +56,7 @@ const FormInput = (props: InputProps) => {
                 name={name}
                 label={<span className={labelClassName}>{label}</span>}
                 rules={rules}
+                colon={colon}
             >
                 <RichInput
                     placeholder={placeholder}

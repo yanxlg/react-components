@@ -48,7 +48,8 @@ var FormInput = function FormInput(props) {
       form = props.form,
       type = props.type,
       rules = props.rules,
-      _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules"]);
+      colon = props.colon,
+      _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "colon"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -64,7 +65,8 @@ var FormInput = function FormInput(props) {
       label: React.createElement("span", {
         className: labelClassName
       }, label),
-      rules: rules
+      rules: rules,
+      colon: colon
     }, React.createElement(RichInput, __assign({
       placeholder: placeholder,
       className: className
