@@ -2,6 +2,7 @@ import React from 'react';
 import { TableProps } from 'antd/lib/table';
 import { useScrollXY } from './hooks';
 import { ColumnsSettingProps } from './ColumnsSetting';
+import { PaginationPosition, PaginationProps } from 'antd/lib/pagination/Pagination';
 declare module 'antd/es/table/interface' {
     interface ColumnType<RecordType> {
         defaultHide?: boolean;
@@ -14,11 +15,15 @@ declare module 'antd/lib/table/interface' {
         hideInSetting?: boolean;
     }
 }
-export declare interface IFitTableProps<T> extends TableProps<T>, Partial<Pick<ColumnsSettingProps<T>, 'columnsSettingRender' | 'resetColumnsSetting'>> {
+export interface PaginationConfig extends PaginationProps {
+    position?: PaginationPosition[] | PaginationPosition;
+}
+export declare interface IFitTableProps<T> extends Omit<TableProps<T>, 'pagination'>, Partial<Pick<ColumnsSettingProps<T>, 'columnsSettingRender' | 'resetColumnsSetting'>> {
     bottom?: number;
     minHeight?: number;
     autoFitY?: boolean;
     toolBarRender?: () => React.ReactNode[];
+    pagination?: PaginationConfig;
 }
 export declare const showTotal: (total: number) => JSX.Element;
 export declare const goButton: JSX.Element;

@@ -507,7 +507,7 @@ const ProTable = <T extends {}>(
                                   goButton: goButton,
                               },
                               showTotal: showTotal,
-                              ...pagination,
+                              ...((pagination as unknown) as any),
                           }
                         : false
                 }

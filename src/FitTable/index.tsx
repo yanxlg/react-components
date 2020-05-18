@@ -3,13 +3,13 @@ import { Table, Button, Pagination, Row, Col } from 'antd';
 import { ColumnType, TableProps } from 'antd/lib/table';
 import { useScrollXY } from './hooks';
 import styles from './_index.less';
-import { PaginationConfig } from 'antd/es/pagination';
 import { SorterResult, TableCurrentDataSource } from 'antd/es/table/interface';
 import ColumnsSettingWrap from './ColumnsSettingWrap';
 import { ColumnsSettingProps } from './ColumnsSetting';
 import { EmptyArray, EmptyObject } from '../utils';
 import { defaultPageSizeOptions } from '../ProTable/config';
 import formStyles from '../JsonForm/_form.less';
+import { PaginationPosition, PaginationProps } from 'antd/lib/pagination/Pagination';
 
 declare module 'antd/es/table/interface' {
     interface ColumnType<RecordType> {
@@ -25,13 +25,18 @@ declare module 'antd/lib/table/interface' {
     }
 }
 
+export interface PaginationConfig extends PaginationProps {
+    position?: PaginationPosition[] | PaginationPosition;
+}
+
 export declare interface IFitTableProps<T>
-    extends TableProps<T>,
+    extends Omit<TableProps<T>, 'pagination'>,
         Partial<Pick<ColumnsSettingProps<T>, 'columnsSettingRender' | 'resetColumnsSetting'>> {
     bottom?: number;
     minHeight?: number;
     autoFitY?: boolean;
     toolBarRender?: () => React.ReactNode[];
+    pagination?: PaginationConfig;
 }
 
 export const showTotal = (total: number) => {
@@ -81,7 +86,7 @@ function FitTable<T extends object = any>({
             sorterRef.current = sorter;
             extraRef.current = extra;
             if (onChange) {
-                onChange(pagination || {}, filters, sorter, extra);
+                onChange(pagination || (({} as unknown) as any), filters, sorter, extra);
             }
         },
         [pagination],
@@ -90,7 +95,7 @@ function FitTable<T extends object = any>({
     const onPageChange = useCallback((page: number, pageSize: number) => {
         if (onChange) {
             onChange(
-                { ...pagination, current: page, pageSize: pageSize },
+                { ...((pagination as unknown) as any), current: page, pageSize: pageSize },
                 filtersRef.current,
                 sorterRef.current,
                 extraRef.current,
