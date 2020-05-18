@@ -36,7 +36,7 @@ export declare interface IFitTableProps<T>
     minHeight?: number;
     autoFitY?: boolean;
     toolBarRender?: () => React.ReactNode[];
-    pagination?: PaginationConfig;
+    pagination?: PaginationConfig | false | undefined;
 }
 
 export const showTotal = (total: number) => {

@@ -11,25 +11,24 @@ export declare interface IOptionItem {
 }
 declare type OptionsPromise = () => Promise<IOptionItem[]>;
 export declare type SelectType = 'select';
-export declare type SelectProps<T = string> = FormItemLabelProps &
-    CustomFormProps & {
-        type: SelectType;
-        form: FormInstance;
-        placeholder?: string;
-        optionList?: IOptionItem[] | OptionsPromise;
-        syncDefaultOption?: IOptionItem;
-        optionListDependence?: {
-            name: FormItemName | FormItemName[];
-            key: string;
-        };
-        className?: string;
-        formItemClassName?: string;
-        onChange?: (name: FormItemName<T>, form: FormInstance) => void;
-        name: FormItemName<T>;
-        formatter?: FormatterType;
-        rules?: Rule[];
-        isShortcut?: boolean;
-    } & Omit<AntdSelectProps<string>, 'loading' | 'onChange' | 'className' | 'options'>;
+export declare type SelectProps<T = string> = FormItemLabelProps & CustomFormProps & {
+    type: SelectType;
+    form: FormInstance;
+    placeholder?: string;
+    optionList?: IOptionItem[] | OptionsPromise;
+    syncDefaultOption?: IOptionItem;
+    optionListDependence?: {
+        name: FormItemName | FormItemName[];
+        key: string;
+    };
+    className?: string;
+    formItemClassName?: string;
+    onChange?: (name: FormItemName<T>, form: FormInstance) => void;
+    name: FormItemName<T>;
+    formatter?: FormatterType;
+    rules?: Rule[];
+    isShortcut?: boolean;
+} & Omit<AntdSelectProps<string>, 'loading' | 'onChange' | 'className' | 'options'>;
 declare const FormSelect: {
     (props: SelectProps<string>): JSX.Element;
     typeList: string[];
