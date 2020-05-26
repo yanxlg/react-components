@@ -188,12 +188,15 @@ const FormSelect = (props: SelectProps) => {
                         {...extraProps}
                     >
                         {syncDefaultOption ? (
-                            <Select.Option value={syncDefaultOption.value}>
+                            <Select.Option
+                                value={syncDefaultOption.value}
+                                title={syncDefaultOption.name}
+                            >
                                 {syncDefaultOption.name}
                             </Select.Option>
                         ) : null}
                         {list!.map(item => (
-                            <Select.Option key={item.value} value={item.value}>
+                            <Select.Option key={item.value} value={item.value} title={item.name}>
                                 {item.name}
                             </Select.Option>
                         ))}
@@ -239,12 +242,19 @@ const FormSelect = (props: SelectProps) => {
                                     {...extraProps}
                                 >
                                     {syncDefaultOption ? (
-                                        <Select.Option value={syncDefaultOption.value}>
+                                        <Select.Option
+                                            value={syncDefaultOption.value}
+                                            title={syncDefaultOption.name}
+                                        >
                                             {syncDefaultOption.name}
                                         </Select.Option>
                                     ) : null}
                                     {list!.map(item => (
-                                        <Select.Option key={item.value} value={item.value}>
+                                        <Select.Option
+                                            key={item.value}
+                                            value={item.value}
+                                            title={item.name}
+                                        >
                                             {item.name}
                                         </Select.Option>
                                     ))}

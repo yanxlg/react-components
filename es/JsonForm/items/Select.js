@@ -190,11 +190,13 @@ var FormSelect = function FormSelect(props) {
         placeholder: placeholder,
         dropdownRender: dropdownRender
       }, extraProps), syncDefaultOption ? React.createElement(_Select.Option, {
-        value: syncDefaultOption.value
+        value: syncDefaultOption.value,
+        title: syncDefaultOption.name
       }, syncDefaultOption.name) : null, list.map(function (item) {
         return React.createElement(_Select.Option, {
           key: item.value,
-          value: item.value
+          value: item.value,
+          title: item.name
         }, item.name);
       })));
     } else {
@@ -239,11 +241,13 @@ var FormSelect = function FormSelect(props) {
         }, eventProps, {
           dropdownRender: dropdownRender
         }, extraProps), syncDefaultOption ? React.createElement(_Select.Option, {
-          value: syncDefaultOption.value
+          value: syncDefaultOption.value,
+          title: syncDefaultOption.name
         }, syncDefaultOption.name) : null, list.map(function (item) {
           return React.createElement(_Select.Option, {
             key: item.value,
-            value: item.value
+            value: item.value,
+            title: item.name
           }, item.name);
         })));
       });
