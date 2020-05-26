@@ -20,6 +20,7 @@ export type InputRangeProps<T = string> = FormItemLabelProps &
         name: [FormItemName<T>, FormItemName];
         formatter?: FormatterType;
         precision?: number;
+        endExtra?: string;
         rules?: [Rule[], Rule[]];
     };
 
@@ -33,6 +34,7 @@ const FormInputRange = (props: InputRangeProps) => {
         labelClassName = '',
         form,
         precision = 0,
+        endExtra,
         rules = [
             [
                 ({ getFieldValue, validateFields }) => ({
@@ -136,6 +138,11 @@ const FormInputRange = (props: InputRangeProps) => {
                         />
                     </Form.Item>
                 </Form.Item>
+                {endExtra ? (
+                    <span className={[formStyles.endExtra, formStyles.verticalMiddle].join(' ')}>
+                        {endExtra}
+                    </span>
+                ) : null}
             </Form.Item>
         );
     }, []);

@@ -37,6 +37,7 @@ var FormInputRange = function FormInputRange(props) {
       form = props.form,
       _d = props.precision,
       precision = _d === void 0 ? 0 : _d,
+      endExtra = props.endExtra,
       _e = props.rules,
       rules = _e === void 0 ? [[function (_a) {
     var getFieldValue = _a.getFieldValue,
@@ -115,7 +116,9 @@ var FormInputRange = function FormInputRange(props) {
       min: 0,
       precision: precision,
       className: className
-    }, event2Props)))));
+    }, event2Props)))), endExtra ? React.createElement("span", {
+      className: [formStyles.endExtra, formStyles.verticalMiddle].join(' ')
+    }, endExtra) : null);
   }, []);
 };
 
