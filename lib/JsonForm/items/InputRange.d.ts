@@ -14,6 +14,7 @@ export declare type InputRangeProps<T = string> = FormItemLabelProps & CustomFor
     name: [FormItemName<T>, FormItemName];
     formatter?: FormatterType;
     precision?: number;
+    endExtra?: string;
     rules?: [Rule[], Rule[]];
 };
 declare const FormInputRange: {
