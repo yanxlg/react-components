@@ -23,7 +23,7 @@ export type SelectProps<T = string> = FormItemLabelProps &
     CustomFormProps & {
         type: SelectType;
         form: FormInstance;
-        placeholder?: string;
+        // placeholder?: string;
         optionList?: IOptionItem[] | OptionsPromise; // 支持异步获取， 支持配置api地址及response path进行配置
         syncDefaultOption?: IOptionItem; // 异步获取options是默认选项，通常用于胚子'全部'
         optionListDependence?: {
@@ -54,7 +54,7 @@ const FormSelect = (props: SelectProps) => {
         rules,
         mode,
         maxTagCount,
-        placeholder,
+        // placeholder,
         isShortcut = false,
         disabled,
         colon,
@@ -87,12 +87,24 @@ const FormSelect = (props: SelectProps) => {
                 let parentItem = options;
                 for (let i = 0; i < dependenceNameList.length; i++) {
                     const dependenceName = dependenceNameList[i];
-                    const dependenceValue = form?.getFieldValue(dependenceName);
-
-                    const siblings = parentItem?.find(({ value }) => {
-                        return value === dependenceValue;
+                    // 兼容多选
+                    let dependenceValue = form?.getFieldValue(dependenceName);
+                    dependenceValue = Array.isArray(dependenceValue)
+                        ? dependenceValue
+                        : [dependenceValue];
+                    const siblings = parentItem?.filter(({ value }) => {
+                        return dependenceValue.indexOf(value) > -1;
                     });
-                    parentItem = siblings?.[dependenceKey] ?? undefined;
+                    if (siblings) {
+                        let list: IOptionItem[] = [];
+                        siblings.forEach(item => {
+                            list = [...list, ...(item[dependenceKey] || [])];
+                        });
+                        parentItem = list;
+                    } else {
+                        parentItem = [];
+                    }
+                    // parentItem = siblings?.[dependenceKey] ?? undefined;
                 }
                 const loading = !options;
                 const mergeList = parentItem || ([] as IOptionItem[]);
@@ -129,7 +141,7 @@ const FormSelect = (props: SelectProps) => {
     const dropdownRender = useCallback(
         (menu: React.ReactElement): React.ReactElement => {
             const { optionList: list } = getOptionList();
-            if (isShortcut) {
+            if (isShortcut && list.length) {
                 return (
                     <div>
                         <Radio.Group style={{ display: 'flex', padding: '5px 0' }} value="">
@@ -140,6 +152,7 @@ const FormSelect = (props: SelectProps) => {
                                     form!.setFieldsValue({
                                         [name]: list!.map(item => item.value),
                                     });
+                                    onChange && onChange(name as FormItemName, form);
                                 }}
                             >
                                 全选
@@ -151,6 +164,7 @@ const FormSelect = (props: SelectProps) => {
                                     form!.setFieldsValue({
                                         [name]: [],
                                     });
+                                    onChange && onChange(name as FormItemName, form);
                                 }}
                             >
                                 取消全选
@@ -162,7 +176,7 @@ const FormSelect = (props: SelectProps) => {
             }
             return menu;
         },
-        [isShortcut, getOptionList],
+        [isShortcut, getOptionList, onChange],
     );
 
     return useMemo(() => {
@@ -183,7 +197,7 @@ const FormSelect = (props: SelectProps) => {
                         mode={mode}
                         maxTagCount={maxTagCount}
                         {...eventProps}
-                        placeholder={placeholder}
+                        // placeholder={placeholder}
                         dropdownRender={dropdownRender}
                         {...extraProps}
                     >

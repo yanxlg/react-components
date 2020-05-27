@@ -14,7 +14,6 @@ export declare type SelectType = 'select';
 export declare type SelectProps<T = string> = FormItemLabelProps & CustomFormProps & {
     type: SelectType;
     form: FormInstance;
-    placeholder?: string;
     optionList?: IOptionItem[] | OptionsPromise;
     syncDefaultOption?: IOptionItem;
     optionListDependence?: {
