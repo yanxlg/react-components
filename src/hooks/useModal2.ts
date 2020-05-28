@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-function useModal2<T = string | boolean>() {
+function useModal2<T = string | boolean>(): [T | false, (visible: T) => void, () => void] {
     const [visible, setVisible] = useState<T | false>(false);
 
     const setHide = useCallback(() => {
