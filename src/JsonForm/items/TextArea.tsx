@@ -37,6 +37,7 @@ const FormTextArea = (props: TextAreaProps) => {
         form,
         type,
         rules,
+        autoSize = true,
         ..._props
     } = props;
     const eventProps = useMemo(() => {
@@ -58,6 +59,7 @@ const FormTextArea = (props: TextAreaProps) => {
                 rules={rules}
             >
                 <TextArea
+                    autoSize={autoSize}
                     placeholder={placeholder}
                     className={className}
                     {..._props}

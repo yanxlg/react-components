@@ -16,7 +16,7 @@ export function transNumber(value) {
 }
 export function transStrArr(value) {
   if (typeof value === 'string') {
-    return value.trim().split(',').filter(function (str) {
+    return value.trim().split(/\,|\s+|\;|\\r|\\n/g).filter(function (str) {
       return str;
     });
   }

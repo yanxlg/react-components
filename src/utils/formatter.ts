@@ -31,7 +31,7 @@ export function transStrArr(value: string | undefined): string[] | undefined {
     if (typeof value === 'string') {
         return value
             .trim()
-            .split(',')
+            .split(/\,|\s+|\;|\\r|\\n/g)
             .filter(str => str);
     }
     return value as undefined;

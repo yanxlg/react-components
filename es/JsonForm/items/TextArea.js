@@ -50,7 +50,9 @@ var FormTextArea = function FormTextArea(props) {
       form = props.form,
       type = props.type,
       rules = props.rules,
-      _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules"]);
+      _c = props.autoSize,
+      autoSize = _c === void 0 ? true : _c,
+      _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "autoSize"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -68,6 +70,7 @@ var FormTextArea = function FormTextArea(props) {
       }, label),
       rules: rules
     }, React.createElement(TextArea, __assign({
+      autoSize: autoSize,
       placeholder: placeholder,
       className: className
     }, _props, eventProps)));
