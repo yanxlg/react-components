@@ -39,8 +39,8 @@ var typeList = ['textarea'];
 
 var FormTextArea = function FormTextArea(props) {
   var name = props.name,
-      placeholder = props.placeholder,
-      label = props.label,
+      // placeholder,
+  label = props.label,
       _a = props.className,
       className = _a === void 0 ? formStyles.formItemDefault : _a,
       _b = props.formItemClassName,
@@ -51,8 +51,11 @@ var FormTextArea = function FormTextArea(props) {
       type = props.type,
       rules = props.rules,
       _c = props.autoSize,
-      autoSize = _c === void 0 ? true : _c,
-      _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "autoSize"]);
+      autoSize = _c === void 0 ? {
+    minRows: 1,
+    maxRows: 6
+  } : _c,
+      _props = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "autoSize"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -71,7 +74,7 @@ var FormTextArea = function FormTextArea(props) {
       rules: rules
     }, React.createElement(TextArea, __assign({
       autoSize: autoSize,
-      placeholder: placeholder,
+      // placeholder={placeholder}
       className: className
     }, _props, eventProps)));
   }, [_props]);

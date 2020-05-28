@@ -8,7 +8,6 @@ export declare type TextAreaType = 'textarea';
 export declare type TextAreaProps<T = string> = FormItemLabelProps & CustomFormProps & {
     form: FormInstance;
     type: TextAreaType;
-    placeholder?: string;
     className?: string;
     formItemClassName?: string;
     onChange?: (name: FormItemName<T>, form: FormInstance) => void;
