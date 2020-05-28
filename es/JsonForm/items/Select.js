@@ -34,6 +34,20 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
+var __spreadArrays = this && this.__spreadArrays || function () {
+  for (var s = 0, i = 0, il = arguments.length; i < il; i++) {
+    s += arguments[i].length;
+  }
+
+  for (var r = Array(s), k = 0, i = 0; i < il; i++) {
+    for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) {
+      r[k] = a[j];
+    }
+  }
+
+  return r;
+};
+
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import formStyles from '../_form.less';
 var typeList = ['select'];
@@ -54,12 +68,13 @@ var FormSelect = function FormSelect(props) {
       rules = props.rules,
       mode = props.mode,
       maxTagCount = props.maxTagCount,
-      placeholder = props.placeholder,
-      _c = props.isShortcut,
-      isShortcut = _c === void 0 ? false : _c,
+      // placeholder,
+  _c = props.isShortcut,
+      // placeholder,
+  isShortcut = _c === void 0 ? false : _c,
       disabled = props.disabled,
       colon = props.colon,
-      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "syncDefaultOption", "optionListDependence", "onChange", "labelClassName", "form", "optionList", "rules", "mode", "maxTagCount", "placeholder", "isShortcut", "disabled", "colon"]);
+      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "syncDefaultOption", "optionListDependence", "onChange", "labelClassName", "form", "optionList", "rules", "mode", "maxTagCount", "isShortcut", "disabled", "colon"]);
 
   var _d = useState(undefined),
       options = _d[0],
@@ -76,23 +91,32 @@ var FormSelect = function FormSelect(props) {
     }
   }, []);
   var getOptionList = useCallback(function () {
-    var _a;
-
     if (isFunction) {
       if (optionListDependence) {
         var name_1 = optionListDependence.name,
-            dependenceKey = optionListDependence.key;
+            dependenceKey_1 = optionListDependence.key;
         var dependenceNameList = typeof name_1 === 'string' ? [name_1] : name_1 || [];
         var parentItem = options;
 
         var _loop_1 = function _loop_1(i) {
-          var dependenceName = dependenceNameList[i];
+          var dependenceName = dependenceNameList[i]; // 兼容多选
+
           var dependenceValue = form === null || form === void 0 ? void 0 : form.getFieldValue(dependenceName);
-          var siblings = parentItem === null || parentItem === void 0 ? void 0 : parentItem.find(function (_a) {
+          dependenceValue = Array.isArray(dependenceValue) ? dependenceValue : [dependenceValue];
+          var siblings = parentItem === null || parentItem === void 0 ? void 0 : parentItem.filter(function (_a) {
             var value = _a.value;
-            return value === dependenceValue;
+            return dependenceValue.indexOf(value) > -1;
           });
-          parentItem = (_a = siblings === null || siblings === void 0 ? void 0 : siblings[dependenceKey]) !== null && _a !== void 0 ? _a : undefined;
+
+          if (siblings) {
+            var list_1 = [];
+            siblings.forEach(function (item) {
+              list_1 = __spreadArrays(list_1, item[dependenceKey_1] || []);
+            });
+            parentItem = list_1;
+          } else {
+            parentItem = [];
+          }
         };
 
         for (var i = 0; i < dependenceNameList.length; i++) {
@@ -130,7 +154,7 @@ var FormSelect = function FormSelect(props) {
   var dropdownRender = useCallback(function (menu) {
     var list = getOptionList().optionList;
 
-    if (isShortcut) {
+    if (isShortcut && list.length) {
       return React.createElement("div", null, React.createElement(_Radio.Group, {
         style: {
           display: 'flex',
@@ -149,6 +173,7 @@ var FormSelect = function FormSelect(props) {
           form.setFieldsValue((_a = {}, _a[name] = list.map(function (item) {
             return item.value;
           }), _a));
+          _onChange && _onChange(name, form);
         }
       }, "\u5168\u9009"), React.createElement(_Radio.Button, {
         value: "0",
@@ -160,12 +185,13 @@ var FormSelect = function FormSelect(props) {
           var _a;
 
           form.setFieldsValue((_a = {}, _a[name] = [], _a));
+          _onChange && _onChange(name, form);
         }
       }, "\u53D6\u6D88\u5168\u9009")), menu);
     }
 
     return menu;
-  }, [isShortcut, getOptionList]);
+  }, [isShortcut, getOptionList, _onChange]);
   return useMemo(function () {
     if (optionListDependence === void 0) {
       var _a = getOptionList(),
@@ -187,7 +213,7 @@ var FormSelect = function FormSelect(props) {
         mode: mode,
         maxTagCount: maxTagCount
       }, eventProps, {
-        placeholder: placeholder,
+        // placeholder={placeholder}
         dropdownRender: dropdownRender
       }, extraProps), syncDefaultOption ? React.createElement(_Select.Option, {
         value: syncDefaultOption.value,
