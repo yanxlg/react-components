@@ -42,14 +42,16 @@ var Layout = function Layout(props) {
       fieldList = props.fieldList,
       itemCol = props.itemCol,
       itemRow = props.itemRow,
-      _props = __rest(props, ["form", "labelClassName", "layoutType", "type", "fieldList", "itemCol", "itemRow"]);
+      header = props.header,
+      footer = props.footer,
+      _props = __rest(props, ["form", "labelClassName", "layoutType", "type", "fieldList", "itemCol", "itemRow", "header", "footer"]);
 
   switch (layoutType) {
     case 'card':
-      return React.createElement(_Card, __assign({}, _props), getFormItems(fieldList, form, labelClassName, itemCol, itemRow));
+      return React.createElement(_Card, __assign({}, _props), header, getFormItems(fieldList, form, labelClassName, itemCol, itemRow), footer);
 
     default:
-      return React.createElement("div", __assign({}, _props), getFormItems(fieldList, form, labelClassName, itemCol, itemRow));
+      return React.createElement("div", __assign({}, _props), header, getFormItems(fieldList, form, labelClassName, itemCol, itemRow), footer);
   }
 };
 

@@ -24,6 +24,8 @@ export declare type LayoutProps<T = string> = {
     labelClassName?: string;
     itemCol?: ColProps;
     itemRow?: RowProps;
+    header?: React.ReactElement;
+    footer?: React.ReactElement;
 } & (CardLayoutProps | DefaultLayoutProps);
 
 const Layout = (props: LayoutProps) => {
@@ -35,19 +37,25 @@ const Layout = (props: LayoutProps) => {
         fieldList,
         itemCol,
         itemRow,
+        header,
+        footer,
         ..._props
     } = props;
     switch (layoutType) {
         case 'card':
             return (
                 <Card {...(_props as CardLayoutProps)}>
+                    {header}
                     {getFormItems(fieldList, form, labelClassName, itemCol, itemRow)}
+                    {footer}
                 </Card>
             );
         default:
             return (
                 <div {...(_props as DefaultLayoutProps)}>
+                    {header}
                     {getFormItems(fieldList, form, labelClassName, itemCol, itemRow)}
+                    {footer}
                 </div>
             );
     }

@@ -18,6 +18,8 @@ export declare type LayoutProps<T = string> = {
     labelClassName?: string;
     itemCol?: ColProps;
     itemRow?: RowProps;
+    header?: React.ReactElement;
+    footer?: React.ReactElement;
 } & (CardLayoutProps | DefaultLayoutProps);
 declare const Layout: {
     (props: LayoutProps<string>): JSX.Element;
