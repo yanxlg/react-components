@@ -26,6 +26,7 @@ export type IPaginationResponse<T, U = {}> = {
  * @param autoQuery
  * @param pageNumberKey
  * @param pageSizeKey
+ * @param convertQuery
  */
 function useList<T, Q = any, E = {}>({
     queryList,
@@ -35,6 +36,7 @@ function useList<T, Q = any, E = {}>({
     autoQuery = true,
     pageNumberKey = config.defaultPageNumberKey,
     pageSizeKey = config.defaultPageSizeKey,
+    convertQuery,
 }: {
     queryList: JsonApi | ((query: Q) => ApiService<IResponse<IPaginationResponse<T, E>>>);
     formRef?: RefObject<JsonFormRef> | Array<RefObject<JsonFormRef>>;
@@ -43,6 +45,7 @@ function useList<T, Q = any, E = {}>({
     autoQuery?: boolean;
     pageNumberKey?: string;
     pageSizeKey?: string;
+    convertQuery?(query: object): object;
 }) {
     const [loading, setLoading] = useLoadingState();
     const extraQueryRef = useRef<{ [key: string]: any } | undefined>(undefined);
@@ -93,12 +96,15 @@ function useList<T, Q = any, E = {}>({
                 })
                 .then(formValues => {
                     setLoading(true);
-                    const query = {
+                    let query = {
                         [pageNumberKey]: page,
                         [pageSizeKey]: page_count,
                         ...extra,
                         ...formValues,
                     };
+                    if (convertQuery) {
+                        query = convertQuery(query);
+                    }
                     setSelectedRowKeys(EmptyArray);
                     req.current =
                         typeof queryList === 'object'

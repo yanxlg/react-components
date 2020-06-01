@@ -20,8 +20,9 @@ export declare type IPaginationResponse<T, U = {}> = {
  * @param autoQuery
  * @param pageNumberKey
  * @param pageSizeKey
+ * @param convertQuery
  */
-declare function useList<T, Q = any, E = {}>({ queryList, formRef, extraQuery, defaultState, autoQuery, pageNumberKey, pageSizeKey, }: {
+declare function useList<T, Q = any, E = {}>({ queryList, formRef, extraQuery, defaultState, autoQuery, pageNumberKey, pageSizeKey, convertQuery, }: {
     queryList: JsonApi | ((query: Q) => ApiService<IResponse<IPaginationResponse<T, E>>>);
     formRef?: RefObject<JsonFormRef> | Array<RefObject<JsonFormRef>>;
     extraQuery?: {
@@ -34,6 +35,7 @@ declare function useList<T, Q = any, E = {}>({ queryList, formRef, extraQuery, d
     autoQuery?: boolean;
     pageNumberKey?: string;
     pageSizeKey?: string;
+    convertQuery?(query: object): object;
 }): {
     queryRef: import("react").MutableRefObject<object>;
     pageNumberRef: import("react").MutableRefObject<number>;

@@ -55,6 +55,7 @@ import useLoadingState from './useLoadingState';
  * @param autoQuery
  * @param pageNumberKey
  * @param pageSizeKey
+ * @param convertQuery
  */
 
 function useList(_a) {
@@ -67,7 +68,8 @@ function useList(_a) {
       _c = _a.pageNumberKey,
       pageNumberKey = _c === void 0 ? config.defaultPageNumberKey : _c,
       _d = _a.pageSizeKey,
-      pageSizeKey = _d === void 0 ? config.defaultPageSizeKey : _d;
+      pageSizeKey = _d === void 0 ? config.defaultPageSizeKey : _d,
+      convertQuery = _a.convertQuery;
 
   var _e, _f;
 
@@ -139,6 +141,10 @@ function useList(_a) {
       setLoading(true);
 
       var query = __assign(__assign((_a = {}, _a[pageNumberKey] = page, _a[pageSizeKey] = page_count, _a), extra), formValues);
+
+      if (convertQuery) {
+        query = convertQuery(query);
+      }
 
       setSelectedRowKeys(EmptyArray);
       req.current = typeof queryList === 'object' ? generateApi(queryList) : queryList(query);
