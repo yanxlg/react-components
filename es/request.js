@@ -243,7 +243,7 @@ function addDefaultInterceptors(req) {
           case 2:
             data = _a.sent();
             state = data.code || data.status || data.state;
-            msg = data.msg || data.message || data.error;
+            msg = data.msg || (typeof data.data === 'string' ? 'data.data' : '') || data.message || data.error;
 
             if (!successReg.test(String(state))) {
               !skipResponseInterceptors && message.error(msg);

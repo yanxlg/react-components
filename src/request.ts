@@ -59,7 +59,11 @@ function addDefaultInterceptors(req: RequestMethod) {
             try {
                 const data = await response.clone().json();
                 const state = data.code || data.status || data.state; // 支持code和status及state三个字段进行校验
-                const msg = data.msg || data.message || data.error; // 错误信息
+                const msg =
+                    data.msg ||
+                    (typeof data.data === 'string' ? 'data.data' : '') ||
+                    data.message ||
+                    data.error; // 错误信息
                 if (!successReg.test(String(state))) {
                     !skipResponseInterceptors && message.error(msg);
                     skipResponseInterceptors = true;
