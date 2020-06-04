@@ -61,7 +61,7 @@ function addDefaultInterceptors(req: RequestMethod) {
                 const state = data.code || data.status || data.state; // 支持code和status及state三个字段进行校验
                 const msg =
                     data.msg ||
-                    (typeof data.data === 'string' ? 'data.data' : '') ||
+                    (typeof data.data === 'string' ? data.data : '') ||
                     data.message ||
                     data.error; // 错误信息
                 if (!successReg.test(String(state))) {
