@@ -18,6 +18,7 @@ export type CheckboxProps<T = string> = FormItemLabelProps &
         onChange?: (name: FormItemName<T>, form: FormInstance) => void; // change监听，支持外部执行表单操作，可以实现关联筛选，重置等操作
         name: FormItemName<T>;
         rules?: Rule[];
+        labelClassName?: string;
     } & Omit<AntdCheckboxProps, 'onChange' | 'name'>;
 
 const FormCheckbox = (props: CheckboxProps) => {

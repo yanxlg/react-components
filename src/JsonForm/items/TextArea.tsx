@@ -23,6 +23,7 @@ export type TextAreaProps<T = string> = FormItemLabelProps &
         name: FormItemName<T>;
         formatter?: FormatterType;
         rules?: Rule[];
+        labelClassName?: string;
     } & Omit<AntTextAreaProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange'>;
 
 const FormTextArea = (props: TextAreaProps) => {

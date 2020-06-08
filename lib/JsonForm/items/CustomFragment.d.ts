@@ -4,11 +4,13 @@ export declare type CustomFragmentType = 'component';
 export declare interface CustomFragmentProps {
     type: CustomFragmentType;
     form: FormInstance;
-    Component: React.FC<{
-        form: FormInstance;
-    }> | React.ComponentClass<{
-        form: FormInstance;
-    }>;
+    Component:
+        | React.FC<{
+              form: FormInstance;
+          }>
+        | React.ComponentClass<{
+              form: FormInstance;
+          }>;
     names: string[];
 }
 declare const CustomFragment: {

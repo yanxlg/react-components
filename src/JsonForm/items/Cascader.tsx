@@ -28,6 +28,7 @@ export type CascaderProps<T = string> = FormItemLabelProps &
         name: FormItemName<T>;
         formatter?: FormatterType;
         rules?: Rule[];
+        labelClassName?: string;
     } & Omit<AntdCascaderProps, 'loading' | 'onChange' | 'className'>;
 
 const FormCascader = (props: CascaderProps) => {

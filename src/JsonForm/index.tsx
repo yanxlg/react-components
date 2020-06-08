@@ -104,9 +104,9 @@ export const getFormItem = (
         return getColChildren(
             <FormInput
                 key={String(name)}
+                labelClassName={labelClassName}
                 {...(field as InputProps)}
                 type={type as InputType}
-                labelClassName={labelClassName}
                 form={form}
             />,
             itemCol,
@@ -116,9 +116,9 @@ export const getFormItem = (
         return getColChildren(
             <FormSelect
                 key={String(name)}
+                labelClassName={labelClassName}
                 {...(field as SelectProps)}
                 type={type as SelectType}
-                labelClassName={labelClassName}
                 form={form}
             />,
             itemCol,
@@ -128,9 +128,9 @@ export const getFormItem = (
         return getColChildren(
             <FormCheckbox
                 key={String(name)}
+                labelClassName={labelClassName}
                 {...(field as CheckboxProps)}
                 type={type as CheckboxType}
-                labelClassName={labelClassName}
                 form={form}
             />,
             itemCol,
@@ -140,9 +140,9 @@ export const getFormItem = (
         return getColChildren(
             <FormDatePicker
                 key={String(name)}
+                labelClassName={labelClassName}
                 {...(field as DatePickerProps)}
                 type={type as DatePickerType}
-                labelClassName={labelClassName}
                 form={form}
             />,
             itemCol,
@@ -152,9 +152,9 @@ export const getFormItem = (
         return getColChildren(
             <FormDateRanger
                 key={String(name)}
+                labelClassName={labelClassName}
                 {...(field as DateRangerProps)}
                 type={type as DateRangerType}
-                labelClassName={labelClassName}
                 form={form}
             />,
             itemCol,
@@ -165,9 +165,9 @@ export const getFormItem = (
         return getColChildren(
             <FormCheckboxGroup
                 key={String(name)}
+                labelClassName={labelClassName}
                 {...(field as CheckboxGroupProps)}
                 type={type as CheckboxGroupType}
-                labelClassName={labelClassName}
                 form={form}
             />,
             itemCol,
@@ -177,9 +177,9 @@ export const getFormItem = (
         return getColChildren(
             <FormRadioGroup
                 key={String(name)}
+                labelClassName={labelClassName}
                 {...(field as RadioGroupProps)}
                 type={type as RadioGroupType}
-                labelClassName={labelClassName}
                 form={form}
             />,
             itemCol,
@@ -189,9 +189,9 @@ export const getFormItem = (
         return (
             <FormInputRange
                 key={String(name)}
+                labelClassName={labelClassName}
                 {...(field as InputRangeProps)}
                 type={type as InputRangeType}
-                labelClassName={labelClassName}
                 form={form}
             />
         );
@@ -200,9 +200,9 @@ export const getFormItem = (
         return getColChildren(
             <Layout
                 key={String(index)}
+                labelClassName={labelClassName}
                 {...(field as LayoutProps)}
                 type={type as LayoutType}
-                labelClassName={labelClassName}
                 form={form}
                 itemRow={itemRow}
                 itemCol={itemCol}
@@ -214,9 +214,9 @@ export const getFormItem = (
         return getColChildren(
             <DynamicItem
                 key={String(index)}
+                labelClassName={labelClassName}
                 {...(field as DynamicItemProps)}
                 type={type as DynamicType}
-                labelClassName={labelClassName}
                 form={form}
                 itemRow={itemRow}
                 itemCol={itemCol}
@@ -238,9 +238,9 @@ export const getFormItem = (
         return (
             <FormTextArea
                 key={String(index)}
+                labelClassName={labelClassName}
                 {...(field as TextAreaProps)}
                 type={type as TextAreaType}
-                labelClassName={labelClassName}
                 form={form}
             />
         );
@@ -249,9 +249,9 @@ export const getFormItem = (
         return (
             <FormCascader
                 key={String(index)}
+                labelClassName={labelClassName}
                 {...(field as CascaderProps)}
                 type={type as CascaderType}
-                labelClassName={labelClassName}
                 form={form}
             />
         );

@@ -22,6 +22,7 @@ export type InputProps<T = string> = FormItemLabelProps &
         name: FormItemName<T>;
         formatter?: FormatterType;
         rules?: Rule[];
+        labelClassName?: string;
     } & Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange'>;
 
 const FormInput = (props: InputProps) => {

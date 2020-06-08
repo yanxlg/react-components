@@ -22,6 +22,7 @@ export type InputRangeProps<T = string> = FormItemLabelProps &
         precision?: number;
         endExtra?: string;
         rules?: [Rule[], Rule[]];
+        labelClassName?: string;
     };
 
 const FormInputRange = (props: InputRangeProps) => {

@@ -37,6 +37,7 @@ export type SelectProps<T = string> = FormItemLabelProps &
         formatter?: FormatterType;
         rules?: Rule[];
         isShortcut?: boolean;
+        labelClassName?: string;
     } & Omit<AntdSelectProps<string>, 'loading' | 'onChange' | 'className' | 'options'>;
 
 const FormSelect = (props: SelectProps) => {

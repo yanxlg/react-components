@@ -21,6 +21,7 @@ export type DateRangerProps<T = string> = FormItemLabelProps &
         name: [FormItemName<T>, FormItemName<T>];
         formatter?: [FormatterType, FormatterType];
         rules?: [Rule[], Rule[]];
+        labelClassName?: string;
     };
 
 const FormDateRanger = (props: DateRangerProps) => {
