@@ -16,7 +16,7 @@ export type TextAreaProps<T = string> = FormItemLabelProps &
     CustomFormProps & {
         form: FormInstance;
         type: TextAreaType;
-        placeholder?: string;
+        // placeholder?: string;
         className?: string;
         formItemClassName?: string;
         onChange?: (name: FormItemName<T>, form: FormInstance) => void; // change监听，支持外部执行表单操作，可以实现关联筛选，重置等操作
@@ -29,7 +29,7 @@ export type TextAreaProps<T = string> = FormItemLabelProps &
 const FormTextArea = (props: TextAreaProps) => {
     const {
         name,
-        placeholder,
+        // placeholder,
         label,
         className = formStyles.formItemDefault,
         formItemClassName = formStyles.formItem,
@@ -38,6 +38,7 @@ const FormTextArea = (props: TextAreaProps) => {
         form,
         type,
         rules,
+        autoSize = { minRows: 1, maxRows: 6 },
         ..._props
     } = props;
     const eventProps = useMemo(() => {
@@ -59,7 +60,8 @@ const FormTextArea = (props: TextAreaProps) => {
                 rules={rules}
             >
                 <TextArea
-                    placeholder={placeholder}
+                    autoSize={autoSize}
+                    // placeholder={placeholder}
                     className={className}
                     {..._props}
                     {...eventProps}
