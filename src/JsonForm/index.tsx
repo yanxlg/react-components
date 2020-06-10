@@ -307,7 +307,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         labelClassName,
         rowHeight = 56, // 32 + 24
         defaultCollapse = true,
-        enableCollapse = true,
+        enableCollapse = false,
         itemCol,
         itemRow,
         form: proForm,
