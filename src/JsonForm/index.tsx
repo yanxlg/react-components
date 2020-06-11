@@ -35,6 +35,7 @@ import formatter, { FormatterType } from '../utils/formatter';
 import FormTextArea, { TextAreaProps, TextAreaType } from './items/TextArea';
 import FormCascader, { CascaderProps, CascaderType } from './items/Cascader';
 import CustomFragment, { CustomFragmentProps, CustomFragmentType } from './items/CustomFragment';
+import FormTreeSelect, { TreeSelectType, TreeSelectProps } from './items/TreeSelect';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -56,6 +57,7 @@ export type FormField<T = string> = (
     | Omit<HideItemProps, 'form'>
     | Omit<CascaderProps, 'form'>
     | Omit<CustomFragmentProps, 'form'>
+    | Omit<TreeSelectProps<T>, 'form'>
 ) & {
     form?: FormInstance;
 };
@@ -264,6 +266,18 @@ export const getFormItem = (
                 type={type as CustomFragmentType}
                 form={form}
             />
+        );
+    }
+    if (FormTreeSelect.typeList.includes(type)) {
+        return getColChildren(
+            <FormTreeSelect
+                key={String(name)}
+                labelClassName={labelClassName}
+                {...(field as TreeSelectProps)}
+                type={type as TreeSelectType}
+                form={form}
+            />,
+            itemCol,
         );
     }
     return null;
