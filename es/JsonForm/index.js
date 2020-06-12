@@ -57,6 +57,7 @@ import formatter from '../utils/formatter';
 import FormTextArea from './items/TextArea';
 import FormCascader from './items/Cascader';
 import CustomFragment from './items/CustomFragment';
+import FormTreeSelect from './items/TreeSelect';
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
@@ -216,6 +217,16 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
     }));
   }
 
+  if (FormTreeSelect.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormTreeSelect, __assign({
+      key: String(name),
+      labelClassName: labelClassName
+    }, field, {
+      type: type,
+      form: form
+    })), itemCol);
+  }
+
   return null;
 };
 export var getFormItems = function getFormItems(fieldList, form, labelClassName, itemCol, itemRow) {
@@ -251,7 +262,7 @@ var JsonForm = function JsonForm(props, ref) {
       // 32 + 24
   defaultCollapse = _b === void 0 ? true : _b,
       _c = props.enableCollapse,
-      enableCollapse = _c === void 0 ? true : _c,
+      enableCollapse = _c === void 0 ? false : _c,
       itemCol = props.itemCol,
       itemRow = props.itemRow,
       proForm = props.form,
