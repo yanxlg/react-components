@@ -58,6 +58,7 @@ export type FormField<T = string> = (
     | Omit<CustomFragmentProps, 'form'>
 ) & {
     form?: FormInstance;
+    key?: string;
 };
 
 declare interface JsonFormProps<T = any> extends FormProps, CustomFormProps {
