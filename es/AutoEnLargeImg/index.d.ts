@@ -4,6 +4,7 @@ declare type IAutoEnLargeImgProps = {
     className?: string;
     enLargeClassName?: string;
     src?: string;
+    srcList?: string[];
     enlargeContent?: ReactElement;
 } & LazyImageProps;
 declare const AutoEnLargeImg: React.FC<IAutoEnLargeImgProps>;
