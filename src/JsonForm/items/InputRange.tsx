@@ -23,6 +23,7 @@ export type InputRangeProps<T = string> = FormItemLabelProps &
         endExtra?: string;
         rules?: [Rule[], Rule[]];
         labelClassName?: string;
+        initialValue?: any[];
     };
 
 const FormInputRange = (props: InputRangeProps) => {
@@ -36,6 +37,7 @@ const FormInputRange = (props: InputRangeProps) => {
         form,
         precision = 0,
         endExtra,
+        initialValue,
         rules = [
             [
                 ({ getFieldValue, validateFields }) => ({
@@ -107,6 +109,7 @@ const FormInputRange = (props: InputRangeProps) => {
                         className={formStyles.marginNone}
                         validateTrigger="onBlur"
                         rules={rules?.[0]}
+                        initialValue={initialValue?.[0]}
                     >
                         <InputNumber
                             min={0}
@@ -130,6 +133,7 @@ const FormInputRange = (props: InputRangeProps) => {
                         className={formStyles.marginNone}
                         validateTrigger="onBlur"
                         rules={rules?.[1]}
+                        initialValue={initialValue?.[1]}
                     >
                         <InputNumber
                             min={0}

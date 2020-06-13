@@ -10,7 +10,7 @@ export interface CheckboxRef {
         checked: boolean;
     };
 }
-declare const _default: React.ForwardRefExoticComponent<Pick<CheckboxProps, "autoFocus" | "disabled" | "name" | "value" | "onChange" | "defaultChecked" | "className" | "id" | "style" | "tabIndex" | "children" | "onKeyDown" | "onKeyPress" | "onClick" | "onMouseEnter" | "onMouseLeave" | "prefixCls" | "indeterminate"> & {
+declare const _default: React.ForwardRefExoticComponent<Pick<CheckboxProps, "type" | "autoFocus" | "disabled" | "name" | "value" | "onChange" | "defaultChecked" | "className" | "id" | "style" | "tabIndex" | "children" | "onKeyDown" | "onKeyPress" | "onClick" | "onMouseEnter" | "onMouseLeave" | "prefixCls" | "indeterminate"> & {
     componentWillUnMont: (value: string) => void;
 } & React.RefAttributes<CheckboxRef>>;
 export default _default;

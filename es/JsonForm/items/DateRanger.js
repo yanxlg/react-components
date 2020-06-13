@@ -36,7 +36,8 @@ var FormDateRanger = function FormDateRanger(props) {
       _c = props.labelClassName,
       labelClassName = _c === void 0 ? '' : _c,
       form = props.form,
-      rules = props.rules;
+      rules = props.rules,
+      initialValue = props.initialValue;
   var event1Props = useMemo(function () {
     return _onChange ? {
       onChange: function onChange() {
@@ -69,7 +70,8 @@ var FormDateRanger = function FormDateRanger(props) {
       return React.createElement(_Form.Item, {
         name: name1,
         className: formStyles.marginNone,
-        rules: rules === null || rules === void 0 ? void 0 : rules[0]
+        rules: rules === null || rules === void 0 ? void 0 : rules[0],
+        initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[0]
       }, React.createElement(_DatePicker, __assign({
         disabledDate: function disabledDate(currentDate) {
           return currentDate ? endTime ? currentDate.isAfter(endTime) : false : false;
@@ -89,7 +91,8 @@ var FormDateRanger = function FormDateRanger(props) {
       return React.createElement(_Form.Item, {
         name: name2,
         className: formStyles.marginNone,
-        rules: rules === null || rules === void 0 ? void 0 : rules[1]
+        rules: rules === null || rules === void 0 ? void 0 : rules[1],
+        initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[1]
       }, React.createElement(_DatePicker, __assign({
         disabledDate: function disabledDate(currentDate) {
           return currentDate ? startTime ? currentDate.isBefore(startTime) : false : false;

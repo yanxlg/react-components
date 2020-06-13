@@ -9,14 +9,10 @@ declare interface DensityIconProps {
     setTableSize: (tableSize: DensitySize) => void;
 }
 
-const DensityIcon: React.ForwardRefRenderFunction<Dropdown, DensityIconProps> = (
-    { tableSize, setTableSize },
-    ref,
-) => {
+const DensityIcon: React.FC<DensityIconProps> = ({ tableSize, setTableSize }) => {
     return useMemo(() => {
         return (
             <Dropdown
-                ref={ref}
                 overlay={
                     <Menu
                         selectedKeys={[tableSize as string]}
@@ -27,15 +23,9 @@ const DensityIcon: React.ForwardRefRenderFunction<Dropdown, DensityIconProps> = 
                             width: 80,
                         }}
                     >
-                        <Menu.Item key="large">
-                            默认
-                        </Menu.Item>
-                        <Menu.Item key="middle">
-                            中等
-                        </Menu.Item>
-                        <Menu.Item key="small">
-                            紧凑
-                        </Menu.Item>
+                        <Menu.Item key="large">默认</Menu.Item>
+                        <Menu.Item key="middle">中等</Menu.Item>
+                        <Menu.Item key="small">紧凑</Menu.Item>
                     </Menu>
                 }
                 trigger={['click']}
@@ -48,4 +38,4 @@ const DensityIcon: React.ForwardRefRenderFunction<Dropdown, DensityIconProps> = 
     }, [tableSize, setTableSize]);
 };
 
-export default React.forwardRef(DensityIcon);
+export default DensityIcon;

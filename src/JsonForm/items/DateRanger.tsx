@@ -22,6 +22,7 @@ export type DateRangerProps<T = string> = FormItemLabelProps &
         formatter?: [FormatterType, FormatterType];
         rules?: [Rule[], Rule[]];
         labelClassName?: string;
+        initialValue?: any[];
     };
 
 const FormDateRanger = (props: DateRangerProps) => {
@@ -34,6 +35,7 @@ const FormDateRanger = (props: DateRangerProps) => {
         labelClassName = '',
         form,
         rules,
+        initialValue,
     } = props;
 
     const event1Props = useMemo(() => {
@@ -80,6 +82,7 @@ const FormDateRanger = (props: DateRangerProps) => {
                                 name={name1}
                                 className={formStyles.marginNone}
                                 rules={rules?.[0]}
+                                initialValue={initialValue?.[0]}
                             >
                                 <DatePicker
                                     disabledDate={currentDate =>
@@ -112,6 +115,7 @@ const FormDateRanger = (props: DateRangerProps) => {
                                 name={name2}
                                 className={formStyles.marginNone}
                                 rules={rules?.[1]}
+                                initialValue={initialValue?.[1]}
                             >
                                 <DatePicker
                                     disabledDate={currentDate =>

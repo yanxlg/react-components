@@ -1,6 +1,6 @@
 {
     "name": "react-components",
-    "version": "0.0.5-alpha.87",
+    "version": "0.0.6-alpha.1",
     "description": "",
     "repository": {
         "type": "git",
@@ -38,7 +38,7 @@
         "abort-controller": "^3.0.0"
     },
     "devDependencies": {
-        "antd": "^4.1.1",
+        "antd": "^4.3.3",
         "@ant-design/icons": "^4.0.2",
         "umi-request": "^1.2.19",
         "@types/react-highlight-words": "^0.16.1",

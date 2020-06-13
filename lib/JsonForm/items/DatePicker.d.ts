@@ -20,6 +20,7 @@ export declare type DatePickerProps<T = string> = FormItemLabelProps & CustomFor
     formatter?: FormatterType;
     rules?: Rule[];
     labelClassName?: string;
+    initialValue?: any;
 } & Omit<PickerProps<Dayjs>, 'onChange'>;
 declare const FormDatePicker: {
     (props: DatePickerProps<string>): JSX.Element;

@@ -31,7 +31,8 @@ var FormCheckbox = function FormCheckbox(props) {
       className = props.className,
       _onChange = props.onChange,
       form = props.form,
-      rules = props.rules;
+      rules = props.rules,
+      initialValue = props.initialValue;
   var eventProps = useMemo(function () {
     return _onChange ? {
       onChange: function onChange() {
@@ -43,7 +44,8 @@ var FormCheckbox = function FormCheckbox(props) {
     name: name,
     className: formItemClassName,
     valuePropName: "checked",
-    rules: rules
+    rules: rules,
+    initialValue: initialValue
   }, React.createElement(_Checkbox, __assign({
     className: className
   }, eventProps), label));

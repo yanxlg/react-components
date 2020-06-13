@@ -19,6 +19,7 @@ export type CheckboxProps<T = string> = FormItemLabelProps &
         name: FormItemName<T>;
         rules?: Rule[];
         labelClassName?: string;
+        initialValue?: any;
     } & Omit<AntdCheckboxProps, 'onChange' | 'name'>;
 
 const FormCheckbox = (props: CheckboxProps) => {
@@ -30,6 +31,7 @@ const FormCheckbox = (props: CheckboxProps) => {
         onChange,
         form,
         rules,
+        initialValue,
     } = props;
     const eventProps = useMemo(() => {
         return onChange
@@ -42,7 +44,13 @@ const FormCheckbox = (props: CheckboxProps) => {
     }, []);
 
     return (
-        <Form.Item name={name} className={formItemClassName} valuePropName="checked" rules={rules}>
+        <Form.Item
+            name={name}
+            className={formItemClassName}
+            valuePropName="checked"
+            rules={rules}
+            initialValue={initialValue}
+        >
             <Checkbox className={className} {...eventProps}>
                 {label}
             </Checkbox>

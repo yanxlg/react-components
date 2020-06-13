@@ -17,6 +17,7 @@ export declare type InputRangeProps<T = string> = FormItemLabelProps & CustomFor
     endExtra?: string;
     rules?: [Rule[], Rule[]];
     labelClassName?: string;
+    initialValue?: any[];
 };
 declare const FormInputRange: {
     (props: InputRangeProps<string>): JSX.Element;

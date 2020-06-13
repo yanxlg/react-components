@@ -55,7 +55,8 @@ var FormTextArea = function FormTextArea(props) {
     minRows: 1,
     maxRows: 6
   } : _c,
-      _props = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "autoSize"]);
+      initialValue = props.initialValue,
+      _props = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "autoSize", "initialValue"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -71,7 +72,8 @@ var FormTextArea = function FormTextArea(props) {
       label: React.createElement("span", {
         className: labelClassName
       }, label),
-      rules: rules
+      rules: rules,
+      initialValue: initialValue
     }, React.createElement(TextArea, __assign({
       autoSize: autoSize,
       // placeholder={placeholder}

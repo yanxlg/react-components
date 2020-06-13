@@ -38,6 +38,7 @@ var FormInputRange = function FormInputRange(props) {
       _d = props.precision,
       precision = _d === void 0 ? 0 : _d,
       endExtra = props.endExtra,
+      initialValue = props.initialValue,
       _e = props.rules,
       rules = _e === void 0 ? [[function (_a) {
     var getFieldValue = _a.getFieldValue,
@@ -95,7 +96,8 @@ var FormInputRange = function FormInputRange(props) {
       name: name1,
       className: formStyles.marginNone,
       validateTrigger: "onBlur",
-      rules: rules === null || rules === void 0 ? void 0 : rules[0]
+      rules: rules === null || rules === void 0 ? void 0 : rules[0],
+      initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[0]
     }, React.createElement(_InputNumber, __assign({
       min: 0,
       precision: precision,
@@ -111,7 +113,8 @@ var FormInputRange = function FormInputRange(props) {
       name: name2,
       className: formStyles.marginNone,
       validateTrigger: "onBlur",
-      rules: rules === null || rules === void 0 ? void 0 : rules[1]
+      rules: rules === null || rules === void 0 ? void 0 : rules[1],
+      initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[1]
     }, React.createElement(_InputNumber, __assign({
       min: 0,
       precision: precision,

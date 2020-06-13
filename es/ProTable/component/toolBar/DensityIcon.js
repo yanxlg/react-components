@@ -7,12 +7,11 @@ import _Dropdown from "antd/es/dropdown";
 import React, { useMemo } from 'react';
 import { ColumnHeightOutlined } from '@ant-design/icons';
 
-var DensityIcon = function DensityIcon(_a, ref) {
+var DensityIcon = function DensityIcon(_a) {
   var tableSize = _a.tableSize,
       setTableSize = _a.setTableSize;
   return useMemo(function () {
     return React.createElement(_Dropdown, {
-      ref: ref,
       overlay: React.createElement(_Menu, {
         selectedKeys: [tableSize],
         onClick: function onClick(_a) {
@@ -36,4 +35,4 @@ var DensityIcon = function DensityIcon(_a, ref) {
   }, [tableSize, setTableSize]);
 };
 
-export default React.forwardRef(DensityIcon);
+export default DensityIcon;

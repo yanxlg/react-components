@@ -71,7 +71,8 @@ var FormTreeSelect = function FormTreeSelect(props) {
       maxTagCount = _e === void 0 ? 6 : _e,
       _f = props.treeNodeLabelProp,
       treeNodeLabelProp = _f === void 0 ? 'name' : _f,
-      extraProps = __rest(props, ["form", "label", "rules", "name", "labelClassName", "optionListDependence", "optionList", "onChange", "className", "formItemClassName", "treeCheckable", "treeDefaultExpandAll", "maxTagCount", "treeNodeLabelProp"]);
+      initialValue = props.initialValue,
+      extraProps = __rest(props, ["form", "label", "rules", "name", "labelClassName", "optionListDependence", "optionList", "onChange", "className", "formItemClassName", "treeCheckable", "treeDefaultExpandAll", "maxTagCount", "treeNodeLabelProp", "initialValue"]);
 
   var _g = useState(undefined),
       options = _g[0],
@@ -178,7 +179,8 @@ var FormTreeSelect = function FormTreeSelect(props) {
       label: React.createElement("span", {
         className: labelClassName
       }, label),
-      rules: rules
+      rules: rules,
+      initialValue: initialValue
     }, React.createElement(_TreeSelect, __assign({
       treeNodeLabelProp: "name",
       loading: loading,

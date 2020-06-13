@@ -36,6 +36,7 @@ import FormTextArea, { TextAreaProps, TextAreaType } from './items/TextArea';
 import FormCascader, { CascaderProps, CascaderType } from './items/Cascader';
 import CustomFragment, { CustomFragmentProps, CustomFragmentType } from './items/CustomFragment';
 import FormTreeSelect, { TreeSelectType, TreeSelectProps } from './items/TreeSelect';
+import LoadingItem, { LoadingItemProps, LoadingType } from './items/LoadingItem';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -58,6 +59,7 @@ export type FormField<T = string> = (
     | Omit<CascaderProps, 'form'>
     | Omit<CustomFragmentProps, 'form'>
     | Omit<TreeSelectProps<T>, 'form'>
+    | Omit<LoadingItemProps<T>, 'form'>
 ) & {
     form?: FormInstance;
     key?: string;
@@ -276,6 +278,18 @@ export const getFormItem = (
                 labelClassName={labelClassName}
                 {...(field as TreeSelectProps)}
                 type={type as TreeSelectType}
+                form={form}
+            />,
+            itemCol,
+        );
+    }
+    if (LoadingItem.typeList.includes(type)) {
+        return getColChildren(
+            <LoadingItem
+                key={String(name)}
+                labelClassName={labelClassName}
+                {...(field as LoadingItemProps)}
+                type={type as LoadingType}
                 form={form}
             />,
             itemCol,

@@ -14,15 +14,16 @@ export type HideItemProps<T = string> = {
     form: FormInstance;
     type: HideType;
     name: FormItemName<T>;
+    initialValue?: any;
 };
 
 /**
  * 隐藏元素，通常用于保存数据
  * @constructor
  */
-const HideItem = ({ form, type, name }: HideItemProps) => {
+const HideItem = ({ form, type, name, initialValue }: HideItemProps) => {
     return (
-        <Form.Item noStyle={true} name={name}>
+        <Form.Item noStyle={true} name={name} initialValue={initialValue}>
             <DateItem />
         </Form.Item>
     );

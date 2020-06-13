@@ -23,6 +23,7 @@ export type InputProps<T = string> = FormItemLabelProps &
         formatter?: FormatterType;
         rules?: Rule[];
         labelClassName?: string;
+        initialValue?: any;
     } & Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange'>;
 
 const FormInput = (props: InputProps) => {
@@ -38,6 +39,7 @@ const FormInput = (props: InputProps) => {
         type,
         rules,
         colon,
+        initialValue,
         ..._props
     } = props;
     const eventProps = useMemo(() => {
@@ -58,6 +60,7 @@ const FormInput = (props: InputProps) => {
                 label={<span className={labelClassName}>{label}</span>}
                 rules={rules}
                 colon={colon}
+                initialValue={initialValue}
             >
                 <RichInput
                     placeholder={placeholder}

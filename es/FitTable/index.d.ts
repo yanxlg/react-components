@@ -1,8 +1,9 @@
 import React from 'react';
 import { TableProps } from 'antd/lib/table';
 import { useScrollXY } from './hooks';
+import { TablePaginationConfig } from 'antd/es/table/interface';
 import { ColumnsSettingProps } from './ColumnsSetting';
-import { PaginationPosition, PaginationProps } from 'antd/lib/pagination/Pagination';
+import { PaginationProps } from 'antd/lib/pagination/Pagination';
 declare module 'antd/es/table/interface' {
     interface ColumnType<RecordType> {
         defaultHide?: boolean;
@@ -16,7 +17,7 @@ declare module 'antd/lib/table/interface' {
     }
 }
 export interface PaginationConfig extends PaginationProps {
-    position?: PaginationPosition[] | PaginationPosition;
+    position?: TablePaginationConfig['position'];
 }
 export declare interface IFitTableProps<T> extends Omit<TableProps<T>, 'pagination'>, Partial<Pick<ColumnsSettingProps<T>, 'columnsSettingRender' | 'resetColumnsSetting'>> {
     bottom?: number;

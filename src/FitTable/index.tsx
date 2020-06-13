@@ -3,13 +3,17 @@ import { Table, Button, Pagination, Row, Col } from 'antd';
 import { ColumnType, TableProps } from 'antd/lib/table';
 import { useScrollXY } from './hooks';
 import styles from './_index.less';
-import { SorterResult, TableCurrentDataSource } from 'antd/es/table/interface';
+import {
+    SorterResult,
+    TableCurrentDataSource,
+    TablePaginationConfig,
+} from 'antd/es/table/interface';
 import ColumnsSettingWrap from './ColumnsSettingWrap';
 import { ColumnsSettingProps } from './ColumnsSetting';
 import { EmptyArray, EmptyObject } from '../utils';
 import { defaultPageSizeOptions } from '../ProTable/config';
 import formStyles from '../JsonForm/_form.less';
-import { PaginationPosition, PaginationProps } from 'antd/lib/pagination/Pagination';
+import { PaginationProps } from 'antd/lib/pagination/Pagination';
 
 declare module 'antd/es/table/interface' {
     interface ColumnType<RecordType> {
@@ -26,7 +30,7 @@ declare module 'antd/lib/table/interface' {
 }
 
 export interface PaginationConfig extends PaginationProps {
-    position?: PaginationPosition[] | PaginationPosition;
+    position?: TablePaginationConfig['position'];
 }
 
 export declare interface IFitTableProps<T>

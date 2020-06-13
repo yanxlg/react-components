@@ -22,6 +22,7 @@ export declare type TreeSelectProps<T = string> = FormItemLabelProps & CustomFor
     formatter?: FormatterType;
     rules?: Rule[];
     labelClassName?: string;
+    initialValue?: any;
 } & Omit<AntdTreeSelectProps<string>, 'loading' | 'onChange' | 'className'>;
 declare const FormTreeSelect: {
     (props: TreeSelectProps<string>): JSX.Element;

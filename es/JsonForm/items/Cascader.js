@@ -55,7 +55,8 @@ var FormCascader = function FormCascader(props) {
       rules = props.rules,
       placeholder = props.placeholder,
       disabled = props.disabled,
-      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "rules", "placeholder", "disabled"]);
+      initialValue = props.initialValue,
+      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "rules", "placeholder", "disabled", "initialValue"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -71,7 +72,8 @@ var FormCascader = function FormCascader(props) {
       label: React.createElement("span", {
         className: labelClassName
       }, label),
-      rules: rules
+      rules: rules,
+      initialValue: initialValue
     }, React.createElement(_Cascader, __assign({
       disabled: disabled,
       className: className,

@@ -3,7 +3,7 @@ import './index.less';
 import React, { useEffect, CSSProperties, useRef, useState, useCallback, useMemo } from 'react';
 import { ConfigProvider, Card, Typography, Empty, Tooltip } from 'antd';
 import classNames from 'classnames';
-import { ColumnsType, ColumnType } from 'antd/es/table';
+import { ColumnType } from 'antd/es/table';
 import { ConfigConsumer, ConfigConsumerProps } from 'antd/lib/config-provider';
 
 import Toolbar, { OptionConfig, ToolBarProps, ToolBarRef } from './component/toolBar';
@@ -189,7 +189,7 @@ const genColumnList = <T, U = {}>(
     map: {
         [key: string]: ColumnsState;
     },
-): (ColumnsType<T>[number] & { index?: number })[] => {
+): (ProColumns<T> & { index?: number })[] => {
     return columns.map((item, columnsIndex) => {
         const { key, dataIndex } = item;
         const columnKey = genColumnKey(key, dataIndex);
@@ -279,7 +279,7 @@ const ProTable = <T extends {}>(
     useDeepCompareEffect(() => {
         const tableColumn = genColumnList<T>(proColumns, columnsMap);
         if (tableColumn && tableColumn.length > 0) {
-            setTableColumns(tableColumn);
+            setTableColumns(tableColumn as ProColumns<T>[]);
             // 重新生成key的字符串用于排序
             setSortKeyColumns(
                 tableColumn.map((item, index) => {

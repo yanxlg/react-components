@@ -21,6 +21,7 @@ export type RadioGroupProps<T = string> = FormItemLabelProps &
         rules?: Rule[];
         radioType?: 'button' | 'radio';
         labelClassName?: string;
+        initialValue?: any;
     } & Omit<AntdRadioGroupProps, 'onChange'>;
 
 const FormRadioGroup = (props: RadioGroupProps) => {
@@ -35,6 +36,7 @@ const FormRadioGroup = (props: RadioGroupProps) => {
         rules,
         radioType = 'radio',
         options,
+        initialValue,
         ..._props
     } = props;
 
@@ -54,6 +56,7 @@ const FormRadioGroup = (props: RadioGroupProps) => {
             label={label ? <span className={labelClassName}>{label}</span> : undefined}
             className={formItemClassName}
             rules={rules}
+            initialValue={initialValue}
         >
             <Radio.Group className={className} {...eventProps} {..._props}>
                 {options.map(option => {

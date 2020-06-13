@@ -38,6 +38,7 @@ export type SelectProps<T = string> = FormItemLabelProps &
         rules?: Rule[];
         isShortcut?: boolean;
         labelClassName?: string;
+        initialValue?: any;
     } & Omit<AntdSelectProps<string>, 'loading' | 'onChange' | 'className' | 'options'>;
 
 const FormSelect = (props: SelectProps) => {
@@ -59,6 +60,7 @@ const FormSelect = (props: SelectProps) => {
         isShortcut = false,
         disabled,
         colon,
+        initialValue,
         ...extraProps
     } = props;
     const [options, setOptions] = useState<IOptionItem[] | undefined>(undefined);
@@ -190,6 +192,7 @@ const FormSelect = (props: SelectProps) => {
                     label={<span className={labelClassName}>{label}</span>}
                     rules={rules}
                     colon={colon}
+                    initialValue={initialValue}
                 >
                     <Select
                         disabled={disabled}
@@ -245,6 +248,7 @@ const FormSelect = (props: SelectProps) => {
                                 label={<span className={labelClassName}>{label}</span>}
                                 rules={rules}
                                 colon={colon}
+                                initialValue={initialValue}
                             >
                                 <Select
                                     disabled={disabled}

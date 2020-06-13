@@ -58,6 +58,7 @@ import FormTextArea from './items/TextArea';
 import FormCascader from './items/Cascader';
 import CustomFragment from './items/CustomFragment';
 import FormTreeSelect from './items/TreeSelect';
+import LoadingItem from './items/LoadingItem';
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
@@ -219,6 +220,16 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
 
   if (FormTreeSelect.typeList.includes(type)) {
     return getColChildren(React.createElement(FormTreeSelect, __assign({
+      key: String(name),
+      labelClassName: labelClassName
+    }, field, {
+      type: type,
+      form: form
+    })), itemCol);
+  }
+
+  if (LoadingItem.typeList.includes(type)) {
+    return getColChildren(React.createElement(LoadingItem, __assign({
       key: String(name),
       labelClassName: labelClassName
     }, field, {

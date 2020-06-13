@@ -3,13 +3,14 @@ import { ProColumns } from '../ProTable';
 import { SimpleRowSelection } from '../ProTable/Table';
 import debounce from 'lodash/debounce';
 import { TableProps as RcTableProps } from 'rc-table/lib/Table';
+import { ColumnsType } from 'antd/lib/table/interface';
 
 function useScrollXY<T>(
     containerRef: RefObject<HTMLElement>,
     bottom: number,
     minHeight: number,
     autoFitY: boolean,
-    columns: ProColumns<T>[],
+    columns: ProColumns<T>[] | ColumnsType<T>,
     rowSelection: SimpleRowSelection<T> | undefined,
     scroll?: RcTableProps<T>['scroll'] & {
         scrollToFirstRowOnChange?: boolean;
@@ -23,7 +24,7 @@ function useScrollXY<T>(
             if (rowSelection && rowSelection.columnWidth) {
                 x += parseInt(rowSelection.columnWidth as string) || 0;
             }
-            columns?.forEach(column => {
+            columns?.forEach((column: any) => {
                 // 支持表头分组
                 if (column['children']) {
                     column['children'].map((item: any) => {

@@ -15,6 +15,7 @@ export declare type DateRangerProps<T = string> = FormItemLabelProps & CustomFor
     formatter?: [FormatterType, FormatterType];
     rules?: [Rule[], Rule[]];
     labelClassName?: string;
+    initialValue?: any[];
 };
 declare const FormDateRanger: {
     (props: DateRangerProps<string>): JSX.Element;

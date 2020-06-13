@@ -20,6 +20,7 @@ export type CheckboxGroupProps<T = string> = FormItemLabelProps &
         rules?: Rule[];
         labelClassName?: string;
         required?: boolean;
+        initialValue?: any;
     } & Omit<AntdCheckboxGroupProps, 'onChange'>;
 
 const FormCheckboxGroup = (props: CheckboxGroupProps) => {
@@ -33,6 +34,7 @@ const FormCheckboxGroup = (props: CheckboxGroupProps) => {
         form,
         rules,
         required,
+        initialValue,
         ..._props
     } = props;
 
@@ -59,6 +61,7 @@ const FormCheckboxGroup = (props: CheckboxGroupProps) => {
             className={formItemClassName}
             {...requiredProps}
             rules={rules}
+            initialValue={initialValue}
         >
             <Checkbox.Group className={className} {...eventProps} {..._props} />
         </Form.Item>

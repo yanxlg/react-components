@@ -15,6 +15,7 @@ export declare type TextAreaProps<T = string> = FormItemLabelProps & CustomFormP
     formatter?: FormatterType;
     rules?: Rule[];
     labelClassName?: string;
+    initialValue?: any;
 } & Omit<AntTextAreaProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange'>;
 declare const FormTextArea: {
     (props: TextAreaProps<string>): JSX.Element;

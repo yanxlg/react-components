@@ -30,6 +30,7 @@ export type TreeSelectProps<T = string> = FormItemLabelProps &
         formatter?: FormatterType;
         rules?: Rule[];
         labelClassName?: string;
+        initialValue?: any;
         //  | 'options'
     } & Omit<AntdTreeSelectProps<string>, 'loading' | 'onChange' | 'className'>;
 
@@ -49,6 +50,7 @@ const FormTreeSelect = (props: TreeSelectProps) => {
         treeDefaultExpandAll = true,
         maxTagCount = 6,
         treeNodeLabelProp = 'name',
+        initialValue,
         ...extraProps
     } = props;
 
@@ -156,6 +158,7 @@ const FormTreeSelect = (props: TreeSelectProps) => {
                 className={formItemClassName}
                 label={<span className={labelClassName}>{label}</span>}
                 rules={rules}
+                initialValue={initialValue}
             >
                 <TreeSelect
                     treeNodeLabelProp="name"

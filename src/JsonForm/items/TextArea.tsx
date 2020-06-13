@@ -24,6 +24,7 @@ export type TextAreaProps<T = string> = FormItemLabelProps &
         formatter?: FormatterType;
         rules?: Rule[];
         labelClassName?: string;
+        initialValue?: any;
     } & Omit<AntTextAreaProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange'>;
 
 const FormTextArea = (props: TextAreaProps) => {
@@ -39,6 +40,7 @@ const FormTextArea = (props: TextAreaProps) => {
         type,
         rules,
         autoSize = { minRows: 1, maxRows: 6 },
+        initialValue,
         ..._props
     } = props;
     const eventProps = useMemo(() => {
@@ -58,6 +60,7 @@ const FormTextArea = (props: TextAreaProps) => {
                 name={name}
                 label={<span className={labelClassName}>{label}</span>}
                 rules={rules}
+                initialValue={initialValue}
             >
                 <TextArea
                     autoSize={autoSize}

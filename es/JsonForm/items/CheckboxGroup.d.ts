@@ -14,6 +14,7 @@ export declare type CheckboxGroupProps<T = string> = FormItemLabelProps & Custom
     rules?: Rule[];
     labelClassName?: string;
     required?: boolean;
+    initialValue?: any;
 } & Omit<AntdCheckboxGroupProps, 'onChange'>;
 declare const FormCheckboxGroup: {
     (props: CheckboxGroupProps<string>): JSX.Element;

@@ -29,6 +29,7 @@ export type CascaderProps<T = string> = FormItemLabelProps &
         formatter?: FormatterType;
         rules?: Rule[];
         labelClassName?: string;
+        initialValue?: any;
     } & Omit<AntdCascaderProps, 'loading' | 'onChange' | 'className'>;
 
 const FormCascader = (props: CascaderProps) => {
@@ -43,6 +44,7 @@ const FormCascader = (props: CascaderProps) => {
         rules,
         placeholder,
         disabled,
+        initialValue,
         ...extraProps
     } = props;
 
@@ -63,6 +65,7 @@ const FormCascader = (props: CascaderProps) => {
                 className={formItemClassName}
                 label={<span className={labelClassName}>{label}</span>}
                 rules={rules}
+                initialValue={initialValue}
             >
                 <Cascader
                     disabled={disabled}

@@ -49,7 +49,8 @@ var FormInput = function FormInput(props) {
       type = props.type,
       rules = props.rules,
       colon = props.colon,
-      _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "colon"]);
+      initialValue = props.initialValue,
+      _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "colon", "initialValue"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -66,7 +67,8 @@ var FormInput = function FormInput(props) {
         className: labelClassName
       }, label),
       rules: rules,
-      colon: colon
+      colon: colon,
+      initialValue: initialValue
     }, React.createElement(RichInput, __assign({
       placeholder: placeholder,
       className: className
