@@ -14,9 +14,11 @@ export declare interface LoadingItemProps<T = string> {
     placeholder: {
         label: string;
     };
+    formItemClassName?: string;
+    colon?: boolean;
 }
 declare const LoadingItem: {
-    ({ placeholder, loading, form, labelClassName, itemCol, itemRow, }: LoadingItemProps<string>): JSX.Element;
+    ({ placeholder, loading, form, labelClassName, itemCol, itemRow, formItemClassName, colon, }: LoadingItemProps<string>): JSX.Element;
     typeList: string[];
 };
 export default LoadingItem;

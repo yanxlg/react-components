@@ -19,6 +19,8 @@ export declare interface LoadingItemProps<T = string> {
     placeholder: {
         label: string;
     };
+    formItemClassName?: string;
+    colon?: boolean;
 }
 
 const LoadingItem = ({
@@ -28,6 +30,8 @@ const LoadingItem = ({
     labelClassName,
     itemCol,
     itemRow,
+    formItemClassName,
+    colon,
 }: LoadingItemProps) => {
     const [loadState, setLoadState] = useState(true);
     const [field, setField] = useState<FormField | undefined>(undefined);
@@ -55,14 +59,22 @@ const LoadingItem = ({
 
     return loadState
         ? getColChildren(
-              <Form.Item noStyle={true} label={placeholder.label}>
+              <Form.Item
+                  className={formItemClassName}
+                  label={<span className={labelClassName}>{placeholder.label}</span>}
+                  colon={colon}
+              >
                   <Spin spinning={true} />
               </Form.Item>,
               itemCol,
           )
         : field
         ? getColChildren(
-              <Form.Item noStyle={true} label={placeholder.label}>
+              <Form.Item
+                  className={formItemClassName}
+                  label={<span className={labelClassName}>{placeholder.label}</span>}
+                  colon={colon}
+              >
                   <LoadingButton type="link" onClick={onReload}>
                       重试
                   </LoadingButton>
