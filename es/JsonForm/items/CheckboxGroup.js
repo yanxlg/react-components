@@ -56,15 +56,18 @@ var FormCheckboxGroup = function FormCheckboxGroup(props) {
       }
     } : {};
   }, []);
-  return React.createElement(_Form.Item, {
+  var requiredProps = required ? {
+    required: required
+  } : {};
+  return React.createElement(_Form.Item, __assign({
     name: name,
     label: label ? React.createElement("span", {
       className: labelClassName
     }, label) : undefined,
-    className: formItemClassName,
-    rules: rules,
-    required: required
-  }, React.createElement(_Checkbox.Group, __assign({
+    className: formItemClassName
+  }, requiredProps, {
+    rules: rules
+  }), React.createElement(_Checkbox.Group, __assign({
     className: className
   }, eventProps, _props)));
 };

@@ -46,13 +46,19 @@ const FormCheckboxGroup = (props: CheckboxGroupProps) => {
             : {};
     }, []);
 
+    const requiredProps = required
+        ? {
+              required: required,
+          }
+        : {};
+
     return (
         <Form.Item
             name={name}
             label={label ? <span className={labelClassName}>{label}</span> : undefined}
             className={formItemClassName}
+            {...requiredProps}
             rules={rules}
-            required={required}
         >
             <Checkbox.Group className={className} {...eventProps} {..._props} />
         </Form.Item>
