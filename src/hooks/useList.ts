@@ -2,9 +2,9 @@ import { RefObject, useRef, useState, useCallback, useEffect } from 'react';
 import { JsonFormRef } from '../JsonForm';
 import { config } from '../Config';
 import { EmptyArray, EmptyObject } from '../utils';
-import { PaginationConfig } from 'antd/es/pagination';
 import { ApiService, generateApi, JsonApi } from '../api';
 import useLoadingState from './useLoadingState';
+import { TablePaginationConfig } from 'antd/lib/table/interface';
 
 export interface IResponse<T> {
     code: number;
@@ -149,21 +149,24 @@ function useList<T, Q = any, E = {}>({
         [],
     );
 
-    const onChange = useCallback(({ current, pageSize }: PaginationConfig, filters, sorter) => {
-        const sorterConfig =
-            sorter && sorter.field
-                ? {
-                      sort_by: sorter.field,
-                      sort_order: sorter.order,
-                  }
-                : {};
-        return getListData({
-            page: current,
-            page_count: pageSize,
-            ...sorterConfig,
-            ...extraQueryRef.current,
-        });
-    }, []);
+    const onChange = useCallback(
+        ({ current, pageSize }: TablePaginationConfig, filters, sorter) => {
+            const sorterConfig =
+                sorter && sorter.field
+                    ? {
+                          sort_by: sorter.field,
+                          sort_order: sorter.order,
+                      }
+                    : {};
+            return getListData({
+                page: current,
+                page_count: pageSize,
+                ...sorterConfig,
+                ...extraQueryRef.current,
+            });
+        },
+        [],
+    );
 
     useEffect(() => {
         autoQuery && onSearch();

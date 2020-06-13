@@ -1,7 +1,7 @@
 import { RefObject } from 'react';
 import { JsonFormRef } from '../JsonForm';
-import { PaginationConfig } from 'antd/es/pagination';
 import { ApiService, JsonApi } from '../api';
+import { TablePaginationConfig } from 'antd/lib/table/interface';
 export interface IResponse<T> {
     code: number;
     message: string;
@@ -56,7 +56,7 @@ declare function useList<T, Q = any, E = {}>({ queryList, formRef, extraQuery, d
     setTotal: import("react").Dispatch<import("react").SetStateAction<number>>;
     onReload: () => Promise<void>;
     onSearch: () => Promise<void>;
-    onChange: ({ current, pageSize }: PaginationConfig, filters: any, sorter: any) => Promise<void>;
+    onChange: ({ current, pageSize }: TablePaginationConfig, filters: any, sorter: any) => Promise<void>;
     getListData: ({ page, page_count, ...extra }?: {
         [key: string]: any;
         page?: number;
