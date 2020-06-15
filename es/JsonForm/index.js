@@ -7,6 +7,8 @@ import _Row from "antd/es/row";
 import "antd/es/col/style/css";
 import _Col from "antd/es/col";
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -230,9 +232,10 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
 
   if (LoadingItem.typeList.includes(type)) {
     return getColChildren(React.createElement(LoadingItem, __assign({
-      key: String(name),
-      labelClassName: labelClassName
-    }, field, {
+      key: String(name)
+    }, field, _extends({}, field.placeholder, {
+      labelClassName: field.placeholder.labelClassName || labelClassName
+    }), {
       type: type,
       form: form
     })), itemCol);

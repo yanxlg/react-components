@@ -287,8 +287,11 @@ export const getFormItem = (
         return getColChildren(
             <LoadingItem
                 key={String(name)}
-                labelClassName={labelClassName}
                 {...(field as LoadingItemProps)}
+                {...Object.assign({}, (field as LoadingItemProps).placeholder, {
+                    labelClassName:
+                        (field as LoadingItemProps).placeholder.labelClassName || labelClassName,
+                })}
                 type={type as LoadingType}
                 form={form}
             />,

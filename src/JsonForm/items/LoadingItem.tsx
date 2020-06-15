@@ -5,6 +5,7 @@ import { FormInstance } from 'antd/es/form';
 import { ColProps } from 'antd/lib/grid/col';
 import { RowProps } from 'antd/lib/grid/row';
 import LoadingButton from '../../LoadingButton';
+import formStyles from '../_form.less';
 
 export type LoadingType = 'loading';
 const typeList = ['loading'];
@@ -13,25 +14,22 @@ export declare interface LoadingItemProps<T = string> {
     type: LoadingType;
     form: FormInstance;
     loading: (form: FormInstance) => Promise<FormField>;
-    labelClassName?: string;
     itemCol?: ColProps;
     itemRow?: RowProps;
     placeholder: {
         label: string;
+        labelClassName?: string;
+        formItemClassName?: string;
+        colon?: boolean;
     };
-    formItemClassName?: string;
-    colon?: boolean;
 }
 
 const LoadingItem = ({
-    placeholder,
+    placeholder: { label, labelClassName, formItemClassName = formStyles.formItem, colon },
     loading,
     form,
-    labelClassName,
     itemCol,
     itemRow,
-    formItemClassName,
-    colon,
 }: LoadingItemProps) => {
     const [loadState, setLoadState] = useState(true);
     const [field, setField] = useState<FormField | undefined>(undefined);
@@ -61,18 +59,18 @@ const LoadingItem = ({
         ? getColChildren(
               <Form.Item
                   className={formItemClassName}
-                  label={<span className={labelClassName}>{placeholder.label}</span>}
+                  label={<span className={labelClassName}>{label}</span>}
                   colon={colon}
               >
                   <Spin spinning={true} />
               </Form.Item>,
               itemCol,
           )
-        : field
+        : field === void 0
         ? getColChildren(
               <Form.Item
                   className={formItemClassName}
-                  label={<span className={labelClassName}>{placeholder.label}</span>}
+                  label={<span className={labelClassName}>{label}</span>}
                   colon={colon}
               >
                   <LoadingButton type="link" onClick={onReload}>

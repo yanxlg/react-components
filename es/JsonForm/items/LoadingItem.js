@@ -5,25 +5,28 @@ import _Form from "antd/es/form";
 import React, { useCallback, useEffect, useState } from 'react';
 import { getColChildren, getFormItem } from '../index';
 import LoadingButton from '../../LoadingButton';
+import formStyles from '../_form.less';
 var typeList = ['loading'];
 
 var LoadingItem = function LoadingItem(_a) {
-  var placeholder = _a.placeholder,
+  var _b = _a.placeholder,
+      label = _b.label,
+      labelClassName = _b.labelClassName,
+      _c = _b.formItemClassName,
+      formItemClassName = _c === void 0 ? formStyles.formItem : _c,
+      colon = _b.colon,
       loading = _a.loading,
       form = _a.form,
-      labelClassName = _a.labelClassName,
       itemCol = _a.itemCol,
-      itemRow = _a.itemRow,
-      formItemClassName = _a.formItemClassName,
-      colon = _a.colon;
+      itemRow = _a.itemRow;
 
-  var _b = useState(true),
-      loadState = _b[0],
-      setLoadState = _b[1];
+  var _d = useState(true),
+      loadState = _d[0],
+      setLoadState = _d[1];
 
-  var _c = useState(undefined),
-      field = _c[0],
-      setField = _c[1]; // 重试
+  var _e = useState(undefined),
+      field = _e[0],
+      setField = _e[1]; // 重试
 
 
   useEffect(function () {
@@ -45,15 +48,15 @@ var LoadingItem = function LoadingItem(_a) {
     className: formItemClassName,
     label: React.createElement("span", {
       className: labelClassName
-    }, placeholder.label),
+    }, label),
     colon: colon
   }, React.createElement(_Spin, {
     spinning: true
-  })), itemCol) : field ? getColChildren(React.createElement(_Form.Item, {
+  })), itemCol) : field === void 0 ? getColChildren(React.createElement(_Form.Item, {
     className: formItemClassName,
     label: React.createElement("span", {
       className: labelClassName
-    }, placeholder.label),
+    }, label),
     colon: colon
   }, React.createElement(LoadingButton, {
     type: "link",

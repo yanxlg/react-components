@@ -8,17 +8,17 @@ export declare interface LoadingItemProps<T = string> {
     type: LoadingType;
     form: FormInstance;
     loading: (form: FormInstance) => Promise<FormField>;
-    labelClassName?: string;
     itemCol?: ColProps;
     itemRow?: RowProps;
     placeholder: {
         label: string;
+        labelClassName?: string;
+        formItemClassName?: string;
+        colon?: boolean;
     };
-    formItemClassName?: string;
-    colon?: boolean;
 }
 declare const LoadingItem: {
-    ({ placeholder, loading, form, labelClassName, itemCol, itemRow, formItemClassName, colon, }: LoadingItemProps<string>): JSX.Element;
+    ({ placeholder: { label, labelClassName, formItemClassName, colon }, loading, form, itemCol, itemRow, }: LoadingItemProps<string>): JSX.Element;
     typeList: string[];
 };
 export default LoadingItem;
