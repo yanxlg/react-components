@@ -31,7 +31,9 @@ var LoadingItem = function LoadingItem(_a) {
 
   useEffect(function () {
     loading(form).then(function (field) {
-      setField(field);
+      setField(field); // @ts-ignore
+
+      loading._cache = field;
     })["finally"](function () {
       setLoadState(false);
     });
@@ -39,7 +41,9 @@ var LoadingItem = function LoadingItem(_a) {
   var onReload = useCallback(function () {
     setLoadState(true);
     return loading(form).then(function (field) {
-      setField(field);
+      setField(field); // @ts-ignore
+
+      loading._cache = field; // 缓存，用来进行读值处理
     })["finally"](function () {
       setLoadState(false);
     });

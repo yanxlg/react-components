@@ -393,6 +393,14 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                         ...values,
                         ...getValues((field as LayoutProps).fieldList),
                     };
+                } else if (LoadingItem.typeList.includes(type)) {
+                    // @ts-ignore
+                    const field = (field as LoadingItemProps).loading._cache;
+                    const _value = getValues(field ? [field] : []);
+                    values = {
+                        ...values,
+                        ..._value,
+                    };
                 } else if (DynamicItem.typeList.includes(type)) {
                     const _value = getValues([(field as DynamicItemProps).dynamic(form)]);
                     values = {

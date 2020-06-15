@@ -326,6 +326,13 @@ var JsonForm = function JsonForm(props, ref) {
       if (Layout.typeList.includes(type)) {
         // layout 组件
         values = __assign(__assign({}, values), getValues(field.fieldList));
+      } else if (LoadingItem.typeList.includes(type)) {
+        // @ts-ignore
+        var field_1 = field_1.loading._cache;
+
+        var _value = getValues(field_1 ? [field_1] : []);
+
+        values = __assign(__assign({}, values), _value);
       } else if (DynamicItem.typeList.includes(type)) {
         var _value = getValues([field.dynamic(form)]);
 

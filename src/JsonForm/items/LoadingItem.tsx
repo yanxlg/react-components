@@ -38,6 +38,8 @@ const LoadingItem = ({
         loading(form)
             .then(field => {
                 setField(field);
+                // @ts-ignore
+                loading._cache = field;
             })
             .finally(() => {
                 setLoadState(false);
@@ -49,6 +51,8 @@ const LoadingItem = ({
         return loading(form)
             .then(field => {
                 setField(field);
+                // @ts-ignore
+                loading._cache = field; // 缓存，用来进行读值处理
             })
             .finally(() => {
                 setLoadState(false);
