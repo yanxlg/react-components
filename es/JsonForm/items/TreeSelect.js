@@ -71,12 +71,14 @@ var FormTreeSelect = function FormTreeSelect(props) {
       maxTagCount = _e === void 0 ? 6 : _e,
       _f = props.treeNodeLabelProp,
       treeNodeLabelProp = _f === void 0 ? 'name' : _f,
+      _g = props.dropdownClassName,
+      dropdownClassName = _g === void 0 ? formStyles.customTreeSelect : _g,
       initialValue = props.initialValue,
-      extraProps = __rest(props, ["form", "label", "rules", "name", "labelClassName", "optionListDependence", "optionList", "onChange", "className", "formItemClassName", "treeCheckable", "treeDefaultExpandAll", "maxTagCount", "treeNodeLabelProp", "initialValue"]);
+      extraProps = __rest(props, ["form", "label", "rules", "name", "labelClassName", "optionListDependence", "optionList", "onChange", "className", "formItemClassName", "treeCheckable", "treeDefaultExpandAll", "maxTagCount", "treeNodeLabelProp", "dropdownClassName", "initialValue"]);
 
-  var _g = useState(undefined),
-      options = _g[0],
-      setOptions = _g[1];
+  var _h = useState(undefined),
+      options = _h[0],
+      setOptions = _h[1];
 
   var isFunction = typeof optionList === 'function';
   useEffect(function () {
@@ -188,7 +190,8 @@ var FormTreeSelect = function FormTreeSelect(props) {
       treeData: treeData,
       treeCheckable: treeCheckable,
       maxTagCount: maxTagCount,
-      treeDefaultExpandAll: treeDefaultExpandAll
+      treeDefaultExpandAll: treeDefaultExpandAll,
+      dropdownClassName: dropdownClassName
     }, eventProps, extraProps)));
   }, [options, optionList, getOptionList]);
   return useMemo(function () {

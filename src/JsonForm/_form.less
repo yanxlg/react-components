@@ -42,7 +42,7 @@
     padding: @itemSpacing/2 0 !important;
 
     ~.form-container {
-        margin-top: -@itemSpacing !important;
+        margin-top: -@itemSpacing  !important;
     }
 }
 
@@ -181,4 +181,10 @@
 
 .end-extra {
     margin-left: 6px;
+}
+
+.custom-tree-select {
+    :global .ant-select-tree-switcher-noop {
+        display: none !important;
+    }
 }
