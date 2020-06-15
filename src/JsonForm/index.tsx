@@ -395,8 +395,8 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                     };
                 } else if (LoadingItem.typeList.includes(type)) {
                     // @ts-ignore
-                    const field = (field as LoadingItemProps).loading._cache;
-                    const _value = getValues(field ? [field] : []);
+                    const _field = (field as LoadingItemProps).loading._cache;
+                    const _value = getValues(_field ? [_field] : []);
                     values = {
                         ...values,
                         ..._value,

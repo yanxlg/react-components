@@ -328,9 +328,9 @@ var JsonForm = function JsonForm(props, ref) {
         values = __assign(__assign({}, values), getValues(field.fieldList));
       } else if (LoadingItem.typeList.includes(type)) {
         // @ts-ignore
-        var field_1 = field_1.loading._cache;
+        var _field = field.loading._cache;
 
-        var _value = getValues(field_1 ? [field_1] : []);
+        var _value = getValues(_field ? [_field] : []);
 
         values = __assign(__assign({}, values), _value);
       } else if (DynamicItem.typeList.includes(type)) {
