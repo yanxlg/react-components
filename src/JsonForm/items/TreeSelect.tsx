@@ -50,6 +50,7 @@ const FormTreeSelect = (props: TreeSelectProps) => {
         treeDefaultExpandAll = true,
         maxTagCount = 6,
         treeNodeLabelProp = 'name',
+        dropdownClassName = formStyles.customTreeSelect,
         initialValue,
         ...extraProps
     } = props;
@@ -168,6 +169,7 @@ const FormTreeSelect = (props: TreeSelectProps) => {
                     treeCheckable={treeCheckable}
                     maxTagCount={maxTagCount}
                     treeDefaultExpandAll={treeDefaultExpandAll}
+                    dropdownClassName={dropdownClassName}
                     {...eventProps}
                     {...extraProps}
                 />
