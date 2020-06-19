@@ -61,6 +61,7 @@ export type FormField<T = string> = (
     | Omit<CustomFragmentProps, 'form'>
     | Omit<TreeSelectProps<T>, 'form'>
     | Omit<LoadingItemProps<T>, 'form'>
+    | Omit<NumberRangeProps<T>, 'form'>
 ) & {
     form?: FormInstance;
     key?: string;
