@@ -119,18 +119,6 @@ export const getFormItem = (
             itemCol,
         );
     }
-    if (FormNumberRange.typeList.includes(type)) {
-        return getColChildren(
-            <FormNumberRange
-                key={String(name)}
-                labelClassName={labelClassName}
-                {...(field as NumberRangeProps)}
-                type={type as NumberRangeType}
-                form={form}
-            />,
-            itemCol,
-        );
-    }
     if (FormSelect.typeList.includes(type)) {
         return getColChildren(
             <FormSelect
@@ -307,6 +295,18 @@ export const getFormItem = (
                         (field as LoadingItemProps).placeholder.labelClassName || labelClassName,
                 })}
                 type={type as LoadingType}
+                form={form}
+            />,
+            itemCol,
+        );
+    }
+    if (FormNumberRange.typeList.includes(type)) {
+        return getColChildren(
+            <FormNumberRange
+                key={String(name)}
+                labelClassName={labelClassName}
+                {...(field as NumberRangeProps)}
+                type={type as NumberRangeType}
                 form={form}
             />,
             itemCol,

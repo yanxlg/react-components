@@ -89,16 +89,6 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
     })), itemCol);
   }
 
-  if (FormNumberRange.typeList.includes(type)) {
-    return getColChildren(React.createElement(FormNumberRange, __assign({
-      key: String(name),
-      labelClassName: labelClassName
-    }, field, {
-      type: type,
-      form: form
-    })), itemCol);
-  }
-
   if (FormSelect.typeList.includes(type)) {
     return getColChildren(React.createElement(FormSelect, __assign({
       key: String(name),
@@ -247,6 +237,16 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
     }, field, _extends({}, field.placeholder, {
       labelClassName: field.placeholder.labelClassName || labelClassName
     }), {
+      type: type,
+      form: form
+    })), itemCol);
+  }
+
+  if (FormNumberRange.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormNumberRange, __assign({
+      key: String(name),
+      labelClassName: labelClassName
+    }, field, {
       type: type,
       form: form
     })), itemCol);
