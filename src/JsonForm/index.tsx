@@ -378,11 +378,11 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         form: proForm,
         className,
         containerClassName = formStyles.formContainer,
-        collapseItems = [],
+        collapseItems,
         ..._props
     } = props;
 
-    const enableCollapse = collapseItems.length > 0;
+    const enableCollapse = collapseItems && collapseItems.length > 0;
 
     const [collapse, setCollapse] = useState<boolean>(defaultCollapse); // 展开收起状态控制
 

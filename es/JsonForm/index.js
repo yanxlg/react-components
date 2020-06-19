@@ -302,15 +302,14 @@ var JsonForm = function JsonForm(props, ref) {
       className = props.className,
       _b = props.containerClassName,
       containerClassName = _b === void 0 ? formStyles.formContainer : _b,
-      _c = props.collapseItems,
-      collapseItems = _c === void 0 ? [] : _c,
+      collapseItems = props.collapseItems,
       _props = __rest(props, ["fieldList", "children", "labelClassName", "defaultCollapse", "itemCol", "itemRow", "form", "className", "containerClassName", "collapseItems"]);
 
-  var enableCollapse = collapseItems.length > 0;
+  var enableCollapse = collapseItems && collapseItems.length > 0;
 
-  var _d = useState(defaultCollapse),
-      collapse = _d[0],
-      setCollapse = _d[1]; // 展开收起状态控制
+  var _c = useState(defaultCollapse),
+      collapse = _c[0],
+      setCollapse = _c[1]; // 展开收起状态控制
 
 
   var form = _Form.useForm(proForm)[0];
