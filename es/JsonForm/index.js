@@ -269,7 +269,7 @@ export var getFormItems = function getFormItems(fieldList, form, labelClassName,
   var fields = fieldList.map(function (field, index) {
     var name = field['name']; // undefined | string | string[];
 
-    var hide = !showList || typeof name == 'string' ? showList.indexOf(name) === -1 : Array.isArray(name) ? showList.indexOf(name.join(',')) === -1 : false;
+    var hide = showList === void 0 ? false : typeof name == 'string' ? showList.indexOf(name) === -1 : Array.isArray(name) ? showList.indexOf(name.join(',')) === -1 : false;
     return getFormItem(field, form, labelClassName, itemCol, itemRow, index, hide);
   });
 
@@ -392,8 +392,8 @@ var JsonForm = function JsonForm(props, ref) {
         ref: btnWrap,
         style: {
           display: 'flex',
-          flex: collapse ? 1 : 0,
-          justifyContent: 'flex-end'
+          justifyContent: 'flex-end',
+          alignItems: 'flex-end'
         },
         className: formStyles.formItem
       }, React.createElement(_Button, {
@@ -406,11 +406,11 @@ var JsonForm = function JsonForm(props, ref) {
     } else {
       return null;
     }
-  }, [collapse]);
+  }, [collapse, enableCollapse]);
   var fromItemList = useMemo(function () {
     var showList = collapse ? undefined : collapseItems;
     return getFormItems(fieldList, form, labelClassName, itemCol, itemRow, showList);
-  }, [fieldList, collapse]);
+  }, [fieldList, collapse, collapseItems]);
   var wrapChildren = useMemo(function () {
     return React.Children.map(children, function (child) {
       return React.createElement("span", {
@@ -420,7 +420,7 @@ var JsonForm = function JsonForm(props, ref) {
   }, [children]);
   var formContent = useMemo(function () {
     return React.createElement(React.Fragment, null, fromItemList, wrapChildren);
-  }, [fieldList, children, collapse]);
+  }, [fieldList, children, collapse, collapseItems]);
   return useMemo(function () {
     if (enableCollapse) {
       return React.createElement("div", {
@@ -444,7 +444,7 @@ var JsonForm = function JsonForm(props, ref) {
         className: className
       }), formContent);
     }
-  }, [fieldList, collapse, children]);
+  }, [fieldList, collapse, children, collapseItems, enableCollapse]);
 };
 
 export default forwardRef(JsonForm);

@@ -337,7 +337,9 @@ export const getFormItems = (
     const fields = fieldList.map((field, index) => {
         const name = field['name']; // undefined | string | string[];
         const hide =
-            !showList || typeof name == 'string'
+            showList === void 0
+                ? false
+                : typeof name == 'string'
                 ? showList.indexOf(name) === -1
                 : Array.isArray(name)
                 ? showList.indexOf(name.join(',')) === -1
@@ -502,8 +504,8 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                     ref={btnWrap}
                     style={{
                         display: 'flex',
-                        flex: collapse ? 1 : 0,
                         justifyContent: 'flex-end',
+                        alignItems: 'flex-end',
                     }}
                     className={formStyles.formItem}
                 >
@@ -525,12 +527,12 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         } else {
             return null;
         }
-    }, [collapse]);
+    }, [collapse, enableCollapse]);
 
     const fromItemList = useMemo(() => {
         const showList = collapse ? undefined : collapseItems;
         return getFormItems(fieldList, form, labelClassName, itemCol, itemRow, showList);
-    }, [fieldList, collapse]);
+    }, [fieldList, collapse, collapseItems]);
 
     const wrapChildren = useMemo(() => {
         return React.Children.map(children, child => {
@@ -545,7 +547,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                 {wrapChildren}
             </>
         );
-    }, [fieldList, children, collapse]);
+    }, [fieldList, children, collapse, collapseItems]);
 
     return useMemo(() => {
         if (enableCollapse) {
@@ -569,7 +571,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                 </Form>
             );
         }
-    }, [fieldList, collapse, children]);
+    }, [fieldList, collapse, children, collapseItems, enableCollapse]);
 };
 
 export default forwardRef(JsonForm);
