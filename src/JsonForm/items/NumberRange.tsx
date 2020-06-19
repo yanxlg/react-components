@@ -29,7 +29,7 @@ export type NumberRangeProps<T = string> = FormItemLabelProps &
         rules?: Rule[];
         labelClassName?: string;
         initialValue?: any;
-    } & Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange'>;
+    } & Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange' | 'name'>;
 
 const FormNumberRange = (props: NumberRangeProps) => {
     const {
@@ -51,16 +51,6 @@ const FormNumberRange = (props: NumberRangeProps) => {
     // console.log(11111111, name1, name2);
 
     const _type = type.replace('Range', '') as RichType;
-
-    const eventProps = useMemo(() => {
-        return onChange
-            ? {
-                  onChange: () => {
-                      onChange(name as FormItemName, form);
-                  },
-              }
-            : {};
-    }, []);
 
     return useMemo(() => {
         return (
@@ -95,7 +85,6 @@ const FormNumberRange = (props: NumberRangeProps) => {
                             placeholder={placeholder}
                             className={classnames(className, formStyles.inputRangeLeft)}
                             {..._props}
-                            {...eventProps}
                         />
                     </Form.Item>
                     <Input className={formStyles.inputRangeSplit} placeholder="~" disabled />
@@ -109,7 +98,6 @@ const FormNumberRange = (props: NumberRangeProps) => {
                             placeholder={placeholder}
                             className={classnames(className, formStyles.inputRangeRight)}
                             {..._props}
-                            {...eventProps}
                         />
                     </Form.Item>
                 </Input.Group>

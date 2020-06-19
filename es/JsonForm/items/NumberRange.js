@@ -62,7 +62,7 @@ var FormNumberRange = function FormNumberRange(props) {
   _b = props.formItemClassName,
       // formStyles.formItemDefault,
   formItemClassName = _b === void 0 ? formStyles.formItem : _b,
-      _onChange = props.onChange,
+      onChange = props.onChange,
       labelClassName = props.labelClassName,
       form = props.form,
       type = props.type,
@@ -77,13 +77,6 @@ var FormNumberRange = function FormNumberRange(props) {
 
   var _type = type.replace('Range', '');
 
-  var eventProps = useMemo(function () {
-    return _onChange ? {
-      onChange: function onChange() {
-        _onChange(name, form);
-      }
-    } : {};
-  }, []);
   return useMemo(function () {
     return React.createElement(_Form.Item, {
       className: formItemClassName,
@@ -119,7 +112,7 @@ var FormNumberRange = function FormNumberRange(props) {
       richType: _type,
       placeholder: placeholder,
       className: classnames(className, formStyles.inputRangeLeft)
-    }, _props, eventProps))), React.createElement(_Input, {
+    }, _props))), React.createElement(_Input, {
       className: formStyles.inputRangeSplit,
       placeholder: "~",
       disabled: true
@@ -131,7 +124,7 @@ var FormNumberRange = function FormNumberRange(props) {
       richType: _type,
       placeholder: placeholder,
       className: classnames(className, formStyles.inputRangeRight)
-    }, _props, eventProps)))));
+    }, _props)))));
   }, [_props]);
 };
 

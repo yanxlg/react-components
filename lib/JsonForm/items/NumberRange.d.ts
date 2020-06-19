@@ -17,7 +17,7 @@ export declare type NumberRangeProps<T = string> = FormItemLabelProps & CustomFo
     rules?: Rule[];
     labelClassName?: string;
     initialValue?: any;
-} & Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange'>;
+} & Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange' | 'name'>;
 declare const FormNumberRange: {
     (props: NumberRangeProps<string>): JSX.Element;
     typeList: string[];
