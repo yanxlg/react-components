@@ -512,7 +512,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                     <Button type="link" style={{ float: 'right' }} onClick={onCollapseChange}>
                         {collapse ? (
                             <>
-                                收起至一行
+                                收起
                                 <UpOutlined />
                             </>
                         ) : (

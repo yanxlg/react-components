@@ -401,7 +401,7 @@ var JsonForm = function JsonForm(props, ref) {
           "float": 'right'
         },
         onClick: onCollapseChange
-      }, collapse ? React.createElement(React.Fragment, null, "\u6536\u8D77\u81F3\u4E00\u884C", React.createElement(UpOutlined, null)) : React.createElement(React.Fragment, null, "\u5C55\u5F00", React.createElement(DownOutlined, null))));
+      }, collapse ? React.createElement(React.Fragment, null, "\u6536\u8D77", React.createElement(UpOutlined, null)) : React.createElement(React.Fragment, null, "\u5C55\u5F00", React.createElement(DownOutlined, null))));
     } else {
       return null;
     }
