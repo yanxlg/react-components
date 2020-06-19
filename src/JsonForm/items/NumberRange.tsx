@@ -36,7 +36,7 @@ const FormNumberRange = (props: NumberRangeProps) => {
         name,
         placeholder,
         label,
-        className = formStyles.flex1, // formStyles.formItemDefault,
+        className = formStyles.inputRange, // formStyles.formItemDefault,
         formItemClassName = formStyles.formItem,
         onChange,
         labelClassName,
@@ -91,15 +91,11 @@ const FormNumberRange = (props: NumberRangeProps) => {
                         initialValue={initialValue?.[0]}
                     >
                         <RichInput
+                            richType={_type}
                             placeholder={placeholder}
-                            className={classnames(
-                                formStyles.inputRange,
-                                formStyles.inputRangeLeft,
-                                className,
-                            )}
+                            className={classnames(className, formStyles.inputRangeLeft)}
                             {..._props}
                             {...eventProps}
-                            richType={_type}
                         />
                     </Form.Item>
                     <Input className={formStyles.inputRangeSplit} placeholder="~" disabled />
@@ -109,15 +105,11 @@ const FormNumberRange = (props: NumberRangeProps) => {
                         initialValue={initialValue?.[1]}
                     >
                         <RichInput
+                            richType={_type}
                             placeholder={placeholder}
-                            className={classnames(
-                                formStyles.inputRange,
-                                formStyles.inputRangeRight,
-                                className,
-                            )}
+                            className={classnames(className, formStyles.inputRangeRight)}
                             {..._props}
                             {...eventProps}
-                            richType={_type}
                         />
                     </Form.Item>
                 </Input.Group>

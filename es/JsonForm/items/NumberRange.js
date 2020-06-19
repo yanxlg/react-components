@@ -57,7 +57,7 @@ var FormNumberRange = function FormNumberRange(props) {
       placeholder = props.placeholder,
       label = props.label,
       _a = props.className,
-      className = _a === void 0 ? formStyles.flex1 : _a,
+      className = _a === void 0 ? formStyles.inputRange : _a,
       // formStyles.formItemDefault,
   _b = props.formItemClassName,
       // formStyles.formItemDefault,
@@ -116,11 +116,10 @@ var FormNumberRange = function FormNumberRange(props) {
       className: classnames(formStyles.marginNone),
       initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[0]
     }, React.createElement(RichInput, __assign({
+      richType: _type,
       placeholder: placeholder,
-      className: classnames(formStyles.inputRange, formStyles.inputRangeLeft, className)
-    }, _props, eventProps, {
-      richType: _type
-    }))), React.createElement(_Input, {
+      className: classnames(className, formStyles.inputRangeLeft)
+    }, _props, eventProps))), React.createElement(_Input, {
       className: formStyles.inputRangeSplit,
       placeholder: "~",
       disabled: true
@@ -129,11 +128,10 @@ var FormNumberRange = function FormNumberRange(props) {
       className: classnames(formStyles.marginNone),
       initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[1]
     }, React.createElement(RichInput, __assign({
+      richType: _type,
       placeholder: placeholder,
-      className: classnames(formStyles.inputRange, formStyles.inputRangeRight, className)
-    }, _props, eventProps, {
-      richType: _type
-    })))));
+      className: classnames(className, formStyles.inputRangeRight)
+    }, _props, eventProps)))));
   }, [_props]);
 };
 
