@@ -17,6 +17,7 @@ export declare type CascaderProps<T = string> = FormItemLabelProps & CustomFormP
     rules?: Rule[];
     labelClassName?: string;
     initialValue?: any;
+    hide?: boolean;
 } & Omit<AntdCascaderProps, 'loading' | 'onChange' | 'className'>;
 declare const FormCascader: {
     (props: CascaderProps<string>): JSX.Element;

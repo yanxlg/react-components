@@ -18,7 +18,6 @@ import FormDateRanger, { DateRangerType, DateRangerProps } from './items/DateRan
 import FormInputRange, { InputRangeType, InputRangeProps } from './items/InputRange';
 import { Store, ValidateFields } from 'rc-field-form/lib/interface';
 import { FormInstance } from 'antd/es/form';
-import RcResizeObserver from 'rc-resize-observer';
 import { UpOutlined, DownOutlined } from '@ant-design/icons';
 import { ColProps } from 'antd/lib/grid/col';
 import { RowProps } from 'antd/lib/grid/row';
@@ -69,12 +68,11 @@ export type FormField<T = string> = (
 
 declare interface JsonFormProps<T = any> extends FormProps, CustomFormProps {
     fieldList: Array<FormField<T>>;
-    rowHeight?: number; // 行高，默认为60
     defaultCollapse?: boolean; // 初始状态，默认为true
-    enableCollapse?: boolean; // 默认为true
     itemCol?: ColProps;
     itemRow?: RowProps;
     containerClassName?: string;
+    collapseItems?: string[];
 }
 
 export type FormItemName<T = string> = T;
@@ -105,6 +103,7 @@ export const getFormItem = (
     itemCol?: ColProps,
     itemRow?: RowProps,
     index?: number,
+    hide?: boolean,
 ) => {
     const name = field['name'];
     if (FormInput.typeList.includes(type)) {
@@ -115,6 +114,7 @@ export const getFormItem = (
                 {...(field as InputProps)}
                 type={type as InputType}
                 form={form}
+                hide={hide}
             />,
             itemCol,
         );
@@ -127,6 +127,7 @@ export const getFormItem = (
                 {...(field as SelectProps)}
                 type={type as SelectType}
                 form={form}
+                hide={hide}
             />,
             itemCol,
         );
@@ -139,6 +140,7 @@ export const getFormItem = (
                 {...(field as CheckboxProps)}
                 type={type as CheckboxType}
                 form={form}
+                hide={hide}
             />,
             itemCol,
         );
@@ -151,6 +153,7 @@ export const getFormItem = (
                 {...(field as DatePickerProps)}
                 type={type as DatePickerType}
                 form={form}
+                hide={hide}
             />,
             itemCol,
         );
@@ -163,6 +166,7 @@ export const getFormItem = (
                 {...(field as DateRangerProps)}
                 type={type as DateRangerType}
                 form={form}
+                hide={hide}
             />,
             itemCol,
         );
@@ -176,6 +180,7 @@ export const getFormItem = (
                 {...(field as CheckboxGroupProps)}
                 type={type as CheckboxGroupType}
                 form={form}
+                hide={hide}
             />,
             itemCol,
         );
@@ -188,6 +193,7 @@ export const getFormItem = (
                 {...(field as RadioGroupProps)}
                 type={type as RadioGroupType}
                 form={form}
+                hide={hide}
             />,
             itemCol,
         );
@@ -200,6 +206,7 @@ export const getFormItem = (
                 {...(field as InputRangeProps)}
                 type={type as InputRangeType}
                 form={form}
+                hide={hide}
             />
         );
     }
@@ -249,6 +256,7 @@ export const getFormItem = (
                 {...(field as TextAreaProps)}
                 type={type as TextAreaType}
                 form={form}
+                hide={hide}
             />
         );
     }
@@ -260,6 +268,7 @@ export const getFormItem = (
                 {...(field as CascaderProps)}
                 type={type as CascaderType}
                 form={form}
+                hide={hide}
             />
         );
     }
@@ -281,6 +290,7 @@ export const getFormItem = (
                 {...(field as TreeSelectProps)}
                 type={type as TreeSelectType}
                 form={form}
+                hide={hide}
             />,
             itemCol,
         );
@@ -308,6 +318,7 @@ export const getFormItem = (
                 {...(field as NumberRangeProps)}
                 type={type as NumberRangeType}
                 form={form}
+                hide={hide}
             />,
             itemCol,
         );
@@ -321,9 +332,17 @@ export const getFormItems = (
     labelClassName?: string,
     itemCol?: ColProps,
     itemRow?: RowProps,
+    showList?: string[],
 ) => {
     const fields = fieldList.map((field, index) => {
-        return getFormItem(field, form, labelClassName, itemCol, itemRow, index);
+        const name = field['name']; // undefined | string | string[];
+        const hide =
+            !showList || typeof name == 'string'
+                ? showList.indexOf(name) === -1
+                : Array.isArray(name)
+                ? showList.indexOf(name.join(',')) === -1
+                : false;
+        return getFormItem(field, form, labelClassName, itemCol, itemRow, index, hide);
     });
 
     if (itemCol) {
@@ -351,28 +370,23 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         fieldList,
         children,
         labelClassName,
-        rowHeight = 56, // 32 + 24
         defaultCollapse = true,
-        enableCollapse = false,
         itemCol,
         itemRow,
         form: proForm,
         className,
         containerClassName = formStyles.formContainer,
+        collapseItems = [],
         ..._props
     } = props;
 
-    const [collapse, setCollapse] = useState<boolean>(defaultCollapse);
+    const enableCollapse = collapseItems.length > 0;
 
-    const [collapseBtnVisible, setCollapseBtnVisible] = useState(false);
+    const [collapse, setCollapse] = useState<boolean>(defaultCollapse); // 展开收起状态控制
 
     const [form] = Form.useForm(proForm);
 
     const btnWrap = useRef<HTMLDivElement>(null);
-
-    const [formHeight, setFormHeight] = useState<number | undefined>(
-        defaultCollapse ? rowHeight : undefined,
-    );
 
     useImperativeHandle(
         ref,
@@ -481,31 +495,6 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         setCollapse(!collapse);
     }, [collapse]);
 
-    const equalSize = useCallback((size, value) => {
-        return Math.abs(value - size) <= 1;
-    }, []);
-
-    const onResize = useCallback(({ height, width }) => {
-        if (enableCollapse) {
-            const btnWrapOffsetLeft = btnWrap.current!.offsetLeft;
-            if (btnWrapOffsetLeft === 0) {
-                // 按钮换行了
-                if (equalSize(height, rowHeight * 2)) {
-                    setFormHeight(rowHeight);
-                    setCollapseBtnVisible(false);
-                    return;
-                }
-            }
-            if (equalSize(height, rowHeight)) {
-                setCollapseBtnVisible(false);
-                setFormHeight(height);
-                return;
-            }
-            setFormHeight(height);
-            setCollapseBtnVisible(true);
-        }
-    }, []);
-
     const collapseBtn = useMemo(() => {
         if (enableCollapse) {
             return (
@@ -515,7 +504,6 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                         display: 'flex',
                         flex: collapse ? 1 : 0,
                         justifyContent: 'flex-end',
-                        visibility: collapseBtnVisible ? 'visible' : 'hidden',
                     }}
                     className={formStyles.formItem}
                 >
@@ -537,11 +525,12 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         } else {
             return null;
         }
-    }, [collapseBtnVisible, collapse]);
+    }, [collapse]);
 
     const fromItemList = useMemo(() => {
-        return getFormItems(fieldList, form, labelClassName, itemCol, itemRow);
-    }, [fieldList]);
+        const showList = collapse ? undefined : collapseItems;
+        return getFormItems(fieldList, form, labelClassName, itemCol, itemRow, showList);
+    }, [fieldList, collapse]);
 
     const wrapChildren = useMemo(() => {
         return React.Children.map(children, child => {
@@ -550,66 +539,37 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
     }, [children]);
 
     const formContent = useMemo(() => {
-        if (collapse) {
-            return (
-                <>
-                    {fromItemList}
-                    {wrapChildren}
-                    {collapseBtn}
-                </>
-            );
-        } else {
+        return (
+            <>
+                {fromItemList}
+                {wrapChildren}
+            </>
+        );
+    }, [fieldList, children, collapse]);
+
+    return useMemo(() => {
+        if (enableCollapse) {
             return (
                 <div className={classNames(formStyles.flex, formStyles.flex1)}>
                     <div
                         className={classNames(formStyles.flex1, formStyles.flexRow)}
                         style={{ flexWrap: 'wrap' }}
                     >
-                        {fromItemList}
+                        <Form layout="inline" {..._props} form={form} className={className}>
+                            {formContent}
+                        </Form>
                     </div>
-                    {wrapChildren}
                     {collapseBtn}
                 </div>
             );
+        } else {
+            return (
+                <Form layout="inline" {..._props} form={form} className={className}>
+                    {formContent}
+                </Form>
+            );
         }
-    }, [fieldList, children, collapse, collapseBtnVisible]);
-
-    const formComponent = useMemo(() => {
-        return (
-            <RcResizeObserver onResize={onResize}>
-                <div>
-                    <Form layout="inline" {..._props} form={form} className={className}>
-                        {formContent}
-                    </Form>
-                </div>
-            </RcResizeObserver>
-        );
-    }, [fieldList, collapseBtnVisible, collapse, children]);
-
-    return useMemo(() => {
-        return (
-            <div
-                style={
-                    enableCollapse
-                        ? collapse
-                            ? {
-                                  overflow: 'hidden',
-                                  height: formHeight,
-                                  boxSizing: 'content-box',
-                              }
-                            : {
-                                  overflow: 'hidden',
-                                  height: rowHeight,
-                                  boxSizing: 'content-box',
-                              }
-                        : {}
-                }
-                className={containerClassName}
-            >
-                {formComponent}
-            </div>
-        );
-    }, [formHeight, fieldList, collapseBtnVisible, collapse, children]);
+    }, [fieldList, collapse, children]);
 };
 
 export default forwardRef(JsonForm);

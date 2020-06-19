@@ -50,7 +50,8 @@ var FormRadioGroup = function FormRadioGroup(props) {
       radioType = _b === void 0 ? 'radio' : _b,
       options = props.options,
       initialValue = props.initialValue,
-      _props = __rest(props, ["name", "label", "labelClassName", "formItemClassName", "className", "onChange", "form", "rules", "radioType", "options", "initialValue"]);
+      hide = props.hide,
+      _props = __rest(props, ["name", "label", "labelClassName", "formItemClassName", "className", "onChange", "form", "rules", "radioType", "options", "initialValue", "hide"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -66,7 +67,10 @@ var FormRadioGroup = function FormRadioGroup(props) {
     }, label) : undefined,
     className: formItemClassName,
     rules: rules,
-    initialValue: initialValue
+    initialValue: initialValue,
+    style: hide ? {
+      display: 'none'
+    } : {}
   }, React.createElement(_Radio.Group, __assign({
     className: className
   }, eventProps, _props), options.map(function (option) {

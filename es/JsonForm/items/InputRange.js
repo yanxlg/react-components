@@ -39,6 +39,7 @@ var FormInputRange = function FormInputRange(props) {
       precision = _d === void 0 ? 0 : _d,
       endExtra = props.endExtra,
       initialValue = props.initialValue,
+      hide = props.hide,
       _e = props.rules,
       rules = _e === void 0 ? [[function (_a) {
     var getFieldValue = _a.getFieldValue,
@@ -86,7 +87,10 @@ var FormInputRange = function FormInputRange(props) {
       label: React.createElement("span", {
         className: labelClassName
       }, label),
-      className: "" + formItemClassName
+      className: "" + formItemClassName,
+      style: hide ? {
+        display: 'none'
+      } : {}
     }, React.createElement(_Form.Item, {
       shouldUpdate: function shouldUpdate(prevValues, currentValues) {
         return prevValues[name2] !== currentValues[name2];
@@ -122,7 +126,7 @@ var FormInputRange = function FormInputRange(props) {
     }, event2Props)))), endExtra ? React.createElement("span", {
       className: [formStyles.endExtra, formStyles.verticalMiddle].join(' ')
     }, endExtra) : null);
-  }, []);
+  }, [hide]);
 };
 
 FormInputRange.typeList = typeList;

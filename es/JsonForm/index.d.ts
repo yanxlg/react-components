@@ -31,12 +31,11 @@ export declare type FormField<T = string> = (Omit<InputProps<T>, 'form'> | Omit<
 };
 declare interface JsonFormProps<T = any> extends FormProps, CustomFormProps {
     fieldList: Array<FormField<T>>;
-    rowHeight?: number;
     defaultCollapse?: boolean;
-    enableCollapse?: boolean;
     itemCol?: ColProps;
     itemRow?: RowProps;
     containerClassName?: string;
+    collapseItems?: string[];
 }
 export declare type FormItemName<T = string> = T;
 export declare interface CustomFormProps {
@@ -49,7 +48,7 @@ export interface JsonFormRef {
     resetFields: () => void;
 }
 export declare const getColChildren: (children: React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)>) | (new (props: any) => React.Component<any, any, any>)>, itemCol?: ColProps, times?: number) => JSX.Element;
-export declare const getFormItem: ({ type, ...field }: FormField<string>, form: FormInstance, labelClassName?: string, itemCol?: ColProps, itemRow?: RowProps, index?: number) => JSX.Element;
-export declare const getFormItems: (fieldList: FormField<string>[], form: FormInstance, labelClassName?: string, itemCol?: ColProps, itemRow?: RowProps) => JSX.Element | JSX.Element[];
+export declare const getFormItem: ({ type, ...field }: FormField<string>, form: FormInstance, labelClassName?: string, itemCol?: ColProps, itemRow?: RowProps, index?: number, hide?: boolean) => JSX.Element;
+export declare const getFormItems: (fieldList: FormField<string>[], form: FormInstance, labelClassName?: string, itemCol?: ColProps, itemRow?: RowProps, showList?: string[]) => JSX.Element | JSX.Element[];
 declare const _default_1: React.ForwardRefExoticComponent<JsonFormProps<any> & React.RefAttributes<JsonFormRef>>;
 export default _default_1;

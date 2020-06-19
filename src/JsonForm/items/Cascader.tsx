@@ -30,6 +30,7 @@ export type CascaderProps<T = string> = FormItemLabelProps &
         rules?: Rule[];
         labelClassName?: string;
         initialValue?: any;
+        hide?: boolean;
     } & Omit<AntdCascaderProps, 'loading' | 'onChange' | 'className'>;
 
 const FormCascader = (props: CascaderProps) => {
@@ -45,6 +46,7 @@ const FormCascader = (props: CascaderProps) => {
         placeholder,
         disabled,
         initialValue,
+        hide,
         ...extraProps
     } = props;
 
@@ -66,6 +68,13 @@ const FormCascader = (props: CascaderProps) => {
                 label={<span className={labelClassName}>{label}</span>}
                 rules={rules}
                 initialValue={initialValue}
+                style={
+                    hide
+                        ? {
+                              display: 'none',
+                          }
+                        : {}
+                }
             >
                 <Cascader
                     disabled={disabled}
@@ -77,7 +86,7 @@ const FormCascader = (props: CascaderProps) => {
                 />
             </Form.Item>
         );
-    }, [extraProps, disabled]);
+    }, [extraProps, disabled, hide]);
 };
 
 FormCascader.typeList = typeList;

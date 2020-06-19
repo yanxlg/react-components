@@ -53,7 +53,8 @@ var FormDatePicker = function FormDatePicker(props) {
       rules = props.rules,
       picker = props.picker,
       initialValue = props.initialValue,
-      _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "dateBeginWith", "dateEndWith", "onChange", "labelClassName", "form", "rules", "picker", "initialValue"]);
+      hide = props.hide,
+      _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "dateBeginWith", "dateEndWith", "onChange", "labelClassName", "form", "rules", "picker", "initialValue", "hide"]);
 
   var disabledStartDate = useCallback(function (dateBeginWith) {
     if (!dateBeginWith || dateBeginWith.length === 0) {
@@ -126,7 +127,10 @@ var FormDatePicker = function FormDatePicker(props) {
       className: labelClassName
     }, label),
     rules: rules,
-    initialValue: initialValue
+    initialValue: initialValue,
+    style: hide ? {
+      display: 'none'
+    } : {}
   }, React.createElement(_DatePicker, __assign({
     className: className,
     placeholder: placeholder,

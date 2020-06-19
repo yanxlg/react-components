@@ -45,7 +45,6 @@ import FormCheckbox from './items/Checkbox';
 import FormDatePicker from './items/DatePicker';
 import FormDateRanger from './items/DateRanger';
 import FormInputRange from './items/InputRange';
-import RcResizeObserver from 'rc-resize-observer';
 import { UpOutlined, DownOutlined } from '@ant-design/icons';
 import FormCheckboxGroup from './items/CheckboxGroup';
 import FormRadioGroup from './items/RadioGroup';
@@ -73,7 +72,7 @@ export var getColChildren = function getColChildren(children, itemCol, times) {
     return children;
   }
 };
-export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol, itemRow, index) {
+export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol, itemRow, index, hide) {
   var type = _a.type,
       field = __rest(_a, ["type"]);
 
@@ -85,7 +84,8 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       labelClassName: labelClassName
     }, field, {
       type: type,
-      form: form
+      form: form,
+      hide: hide
     })), itemCol);
   }
 
@@ -95,7 +95,8 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       labelClassName: labelClassName
     }, field, {
       type: type,
-      form: form
+      form: form,
+      hide: hide
     })), itemCol);
   }
 
@@ -105,7 +106,8 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       labelClassName: labelClassName
     }, field, {
       type: type,
-      form: form
+      form: form,
+      hide: hide
     })), itemCol);
   }
 
@@ -115,7 +117,8 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       labelClassName: labelClassName
     }, field, {
       type: type,
-      form: form
+      form: form,
+      hide: hide
     })), itemCol);
   }
 
@@ -125,7 +128,8 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       labelClassName: labelClassName
     }, field, {
       type: type,
-      form: form
+      form: form,
+      hide: hide
     })), itemCol);
   }
 
@@ -135,7 +139,8 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       labelClassName: labelClassName
     }, field, {
       type: type,
-      form: form
+      form: form,
+      hide: hide
     })), itemCol);
   }
 
@@ -145,7 +150,8 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       labelClassName: labelClassName
     }, field, {
       type: type,
-      form: form
+      form: form,
+      hide: hide
     })), itemCol);
   }
 
@@ -155,7 +161,8 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       labelClassName: labelClassName
     }, field, {
       type: type,
-      form: form
+      form: form,
+      hide: hide
     }));
   }
 
@@ -198,7 +205,8 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       labelClassName: labelClassName
     }, field, {
       type: type,
-      form: form
+      form: form,
+      hide: hide
     }));
   }
 
@@ -208,7 +216,8 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       labelClassName: labelClassName
     }, field, {
       type: type,
-      form: form
+      form: form,
+      hide: hide
     }));
   }
 
@@ -227,7 +236,8 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       labelClassName: labelClassName
     }, field, {
       type: type,
-      form: form
+      form: form,
+      hide: hide
     })), itemCol);
   }
 
@@ -248,15 +258,19 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       labelClassName: labelClassName
     }, field, {
       type: type,
-      form: form
+      form: form,
+      hide: hide
     })), itemCol);
   }
 
   return null;
 };
-export var getFormItems = function getFormItems(fieldList, form, labelClassName, itemCol, itemRow) {
+export var getFormItems = function getFormItems(fieldList, form, labelClassName, itemCol, itemRow, showList) {
   var fields = fieldList.map(function (field, index) {
-    return getFormItem(field, form, labelClassName, itemCol, itemRow, index);
+    var name = field['name']; // undefined | string | string[];
+
+    var hide = !showList || typeof name == 'string' ? showList.indexOf(name) === -1 : Array.isArray(name) ? showList.indexOf(name.join(',')) === -1 : false;
+    return getFormItem(field, form, labelClassName, itemCol, itemRow, index, hide);
   });
 
   if (itemCol) {
@@ -280,38 +294,28 @@ var JsonForm = function JsonForm(props, ref) {
   var fieldList = props.fieldList,
       children = props.children,
       labelClassName = props.labelClassName,
-      _a = props.rowHeight,
-      rowHeight = _a === void 0 ? 56 : _a,
-      // 32 + 24
-  _b = props.defaultCollapse,
-      // 32 + 24
-  defaultCollapse = _b === void 0 ? true : _b,
-      _c = props.enableCollapse,
-      enableCollapse = _c === void 0 ? false : _c,
+      _a = props.defaultCollapse,
+      defaultCollapse = _a === void 0 ? true : _a,
       itemCol = props.itemCol,
       itemRow = props.itemRow,
       proForm = props.form,
       className = props.className,
-      _d = props.containerClassName,
-      containerClassName = _d === void 0 ? formStyles.formContainer : _d,
-      _props = __rest(props, ["fieldList", "children", "labelClassName", "rowHeight", "defaultCollapse", "enableCollapse", "itemCol", "itemRow", "form", "className", "containerClassName"]);
+      _b = props.containerClassName,
+      containerClassName = _b === void 0 ? formStyles.formContainer : _b,
+      _c = props.collapseItems,
+      collapseItems = _c === void 0 ? [] : _c,
+      _props = __rest(props, ["fieldList", "children", "labelClassName", "defaultCollapse", "itemCol", "itemRow", "form", "className", "containerClassName", "collapseItems"]);
 
-  var _e = useState(defaultCollapse),
-      collapse = _e[0],
-      setCollapse = _e[1];
+  var enableCollapse = collapseItems.length > 0;
 
-  var _f = useState(false),
-      collapseBtnVisible = _f[0],
-      setCollapseBtnVisible = _f[1];
+  var _d = useState(defaultCollapse),
+      collapse = _d[0],
+      setCollapse = _d[1]; // 展开收起状态控制
+
 
   var form = _Form.useForm(proForm)[0];
 
   var btnWrap = useRef(null);
-
-  var _g = useState(defaultCollapse ? rowHeight : undefined),
-      formHeight = _g[0],
-      setFormHeight = _g[1];
-
   useImperativeHandle(ref, function () {
     return {
       getFieldsValue: getValues,
@@ -382,35 +386,6 @@ var JsonForm = function JsonForm(props, ref) {
     // 需要判断当前元素位置
     setCollapse(!collapse);
   }, [collapse]);
-  var equalSize = useCallback(function (size, value) {
-    return Math.abs(value - size) <= 1;
-  }, []);
-  var onResize = useCallback(function (_a) {
-    var height = _a.height,
-        width = _a.width;
-
-    if (enableCollapse) {
-      var btnWrapOffsetLeft = btnWrap.current.offsetLeft;
-
-      if (btnWrapOffsetLeft === 0) {
-        // 按钮换行了
-        if (equalSize(height, rowHeight * 2)) {
-          setFormHeight(rowHeight);
-          setCollapseBtnVisible(false);
-          return;
-        }
-      }
-
-      if (equalSize(height, rowHeight)) {
-        setCollapseBtnVisible(false);
-        setFormHeight(height);
-        return;
-      }
-
-      setFormHeight(height);
-      setCollapseBtnVisible(true);
-    }
-  }, []);
   var collapseBtn = useMemo(function () {
     if (enableCollapse) {
       return React.createElement("div", {
@@ -418,8 +393,7 @@ var JsonForm = function JsonForm(props, ref) {
         style: {
           display: 'flex',
           flex: collapse ? 1 : 0,
-          justifyContent: 'flex-end',
-          visibility: collapseBtnVisible ? 'visible' : 'hidden'
+          justifyContent: 'flex-end'
         },
         className: formStyles.formItem
       }, React.createElement(_Button, {
@@ -432,10 +406,11 @@ var JsonForm = function JsonForm(props, ref) {
     } else {
       return null;
     }
-  }, [collapseBtnVisible, collapse]);
+  }, [collapse]);
   var fromItemList = useMemo(function () {
-    return getFormItems(fieldList, form, labelClassName, itemCol, itemRow);
-  }, [fieldList]);
+    var showList = collapse ? undefined : collapseItems;
+    return getFormItems(fieldList, form, labelClassName, itemCol, itemRow, showList);
+  }, [fieldList, collapse]);
   var wrapChildren = useMemo(function () {
     return React.Children.map(children, function (child) {
       return React.createElement("span", {
@@ -444,9 +419,10 @@ var JsonForm = function JsonForm(props, ref) {
     });
   }, [children]);
   var formContent = useMemo(function () {
-    if (collapse) {
-      return React.createElement(React.Fragment, null, fromItemList, wrapChildren, collapseBtn);
-    } else {
+    return React.createElement(React.Fragment, null, fromItemList, wrapChildren);
+  }, [fieldList, children, collapse]);
+  return useMemo(function () {
+    if (enableCollapse) {
       return React.createElement("div", {
         className: classNames(formStyles.flex, formStyles.flex1)
       }, React.createElement("div", {
@@ -454,33 +430,21 @@ var JsonForm = function JsonForm(props, ref) {
         style: {
           flexWrap: 'wrap'
         }
-      }, fromItemList), wrapChildren, collapseBtn);
+      }, React.createElement(_Form, __assign({
+        layout: "inline"
+      }, _props, {
+        form: form,
+        className: className
+      }), formContent)), collapseBtn);
+    } else {
+      return React.createElement(_Form, __assign({
+        layout: "inline"
+      }, _props, {
+        form: form,
+        className: className
+      }), formContent);
     }
-  }, [fieldList, children, collapse, collapseBtnVisible]);
-  var formComponent = useMemo(function () {
-    return React.createElement(RcResizeObserver, {
-      onResize: onResize
-    }, React.createElement("div", null, React.createElement(_Form, __assign({
-      layout: "inline"
-    }, _props, {
-      form: form,
-      className: className
-    }), formContent)));
-  }, [fieldList, collapseBtnVisible, collapse, children]);
-  return useMemo(function () {
-    return React.createElement("div", {
-      style: enableCollapse ? collapse ? {
-        overflow: 'hidden',
-        height: formHeight,
-        boxSizing: 'content-box'
-      } : {
-        overflow: 'hidden',
-        height: rowHeight,
-        boxSizing: 'content-box'
-      } : {},
-      className: containerClassName
-    }, formComponent);
-  }, [formHeight, fieldList, collapseBtnVisible, collapse, children]);
+  }, [fieldList, collapse, children]);
 };
 
 export default forwardRef(JsonForm);

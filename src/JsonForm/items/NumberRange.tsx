@@ -29,6 +29,7 @@ export type NumberRangeProps<T = string> = FormItemLabelProps &
         rules?: Rule[];
         labelClassName?: string;
         initialValue?: any;
+        hide?: boolean;
     } & Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange' | 'name'>;
 
 const FormNumberRange = (props: NumberRangeProps) => {
@@ -45,6 +46,7 @@ const FormNumberRange = (props: NumberRangeProps) => {
         rules = [],
         colon,
         initialValue,
+        hide,
         ..._props
     } = props;
     const [name1, name2] = name;
@@ -60,6 +62,13 @@ const FormNumberRange = (props: NumberRangeProps) => {
                 label={<span className={labelClassName}>{label}</span>}
                 colon={colon}
                 validateTrigger="onBlur"
+                style={
+                    hide
+                        ? {
+                              display: 'none',
+                          }
+                        : {}
+                }
                 rules={[
                     ({ getFieldValue }) => ({
                         validator(rule, value) {
@@ -103,7 +112,7 @@ const FormNumberRange = (props: NumberRangeProps) => {
                 </Input.Group>
             </Form.Item>
         );
-    }, [_props]);
+    }, [_props, hide]);
 };
 
 FormNumberRange.typeList = typeList;

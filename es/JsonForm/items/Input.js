@@ -50,7 +50,8 @@ var FormInput = function FormInput(props) {
       rules = props.rules,
       colon = props.colon,
       initialValue = props.initialValue,
-      _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "colon", "initialValue"]);
+      hide = props.hide,
+      _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "colon", "initialValue", "hide"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -68,14 +69,17 @@ var FormInput = function FormInput(props) {
       }, label),
       rules: rules,
       colon: colon,
-      initialValue: initialValue
+      initialValue: initialValue,
+      style: hide ? {
+        display: 'none'
+      } : {}
     }, React.createElement(RichInput, __assign({
       placeholder: placeholder,
       className: className
     }, _props, eventProps, {
       richType: type
     })));
-  }, [_props]);
+  }, [_props, hide]);
 };
 
 FormInput.typeList = typeList;

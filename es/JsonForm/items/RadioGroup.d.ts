@@ -16,6 +16,7 @@ export declare type RadioGroupProps<T = string> = FormItemLabelProps & CustomFor
     radioType?: 'button' | 'radio';
     labelClassName?: string;
     initialValue?: any;
+    hide?: boolean;
 } & Omit<AntdRadioGroupProps, 'onChange'>;
 declare const FormRadioGroup: {
     (props: RadioGroupProps<string>): JSX.Element;

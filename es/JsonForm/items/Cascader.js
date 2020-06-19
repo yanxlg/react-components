@@ -56,7 +56,8 @@ var FormCascader = function FormCascader(props) {
       placeholder = props.placeholder,
       disabled = props.disabled,
       initialValue = props.initialValue,
-      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "rules", "placeholder", "disabled", "initialValue"]);
+      hide = props.hide,
+      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "rules", "placeholder", "disabled", "initialValue", "hide"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -73,7 +74,10 @@ var FormCascader = function FormCascader(props) {
         className: labelClassName
       }, label),
       rules: rules,
-      initialValue: initialValue
+      initialValue: initialValue,
+      style: hide ? {
+        display: 'none'
+      } : {}
     }, React.createElement(_Cascader, __assign({
       disabled: disabled,
       className: className,
@@ -82,7 +86,7 @@ var FormCascader = function FormCascader(props) {
         filter: filter
       }
     }, eventProps, extraProps)));
-  }, [extraProps, disabled]);
+  }, [extraProps, disabled, hide]);
 };
 
 FormCascader.typeList = typeList;

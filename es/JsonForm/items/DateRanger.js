@@ -37,7 +37,8 @@ var FormDateRanger = function FormDateRanger(props) {
       labelClassName = _c === void 0 ? '' : _c,
       form = props.form,
       rules = props.rules,
-      initialValue = props.initialValue;
+      initialValue = props.initialValue,
+      hide = props.hide;
   var event1Props = useMemo(function () {
     return _onChange ? {
       onChange: function onChange() {
@@ -58,7 +59,10 @@ var FormDateRanger = function FormDateRanger(props) {
       label: React.createElement("span", {
         className: labelClassName
       }, label),
-      className: "" + formItemClassName
+      className: "" + formItemClassName,
+      style: hide ? {
+        display: 'none'
+      } : {}
     }, React.createElement(_Form.Item, {
       shouldUpdate: function shouldUpdate(prevValues, currentValues) {
         return prevValues[name2] !== currentValues[name2];
@@ -100,7 +104,7 @@ var FormDateRanger = function FormDateRanger(props) {
         className: className
       }, event2Props)));
     }));
-  }, []);
+  }, [hide]);
 };
 
 FormDateRanger.typeList = typeList;

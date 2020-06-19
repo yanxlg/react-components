@@ -24,6 +24,7 @@ export type InputRangeProps<T = string> = FormItemLabelProps &
         rules?: [Rule[], Rule[]];
         labelClassName?: string;
         initialValue?: any[];
+        hide?: boolean;
     };
 
 const FormInputRange = (props: InputRangeProps) => {
@@ -38,6 +39,7 @@ const FormInputRange = (props: InputRangeProps) => {
         precision = 0,
         endExtra,
         initialValue,
+        hide,
         rules = [
             [
                 ({ getFieldValue, validateFields }) => ({
@@ -97,6 +99,13 @@ const FormInputRange = (props: InputRangeProps) => {
             <Form.Item
                 label={<span className={labelClassName}>{label}</span>}
                 className={`${formItemClassName}`}
+                style={
+                    hide
+                        ? {
+                              display: 'none',
+                          }
+                        : {}
+                }
             >
                 <Form.Item
                     shouldUpdate={(prevValues, currentValues) =>
@@ -150,7 +159,7 @@ const FormInputRange = (props: InputRangeProps) => {
                 ) : null}
             </Form.Item>
         );
-    }, []);
+    }, [hide]);
 };
 
 FormInputRange.typeList = typeList;

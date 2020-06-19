@@ -31,6 +31,7 @@ export type TreeSelectProps<T = string> = FormItemLabelProps &
         rules?: Rule[];
         labelClassName?: string;
         initialValue?: any;
+        hide?: boolean;
         //  | 'options'
     } & Omit<AntdTreeSelectProps<string>, 'loading' | 'onChange' | 'className'>;
 
@@ -52,6 +53,7 @@ const FormTreeSelect = (props: TreeSelectProps) => {
         treeNodeLabelProp = 'name',
         dropdownClassName = formStyles.customTreeSelect,
         initialValue,
+        hide,
         ...extraProps
     } = props;
 
@@ -160,6 +162,13 @@ const FormTreeSelect = (props: TreeSelectProps) => {
                 label={<span className={labelClassName}>{label}</span>}
                 rules={rules}
                 initialValue={initialValue}
+                style={
+                    hide
+                        ? {
+                              display: 'none',
+                          }
+                        : {}
+                }
             >
                 <TreeSelect
                     treeNodeLabelProp="name"
@@ -204,7 +213,7 @@ const FormTreeSelect = (props: TreeSelectProps) => {
                 </Form.Item>
             );
         }
-    }, [options, optionList, optionListDependence, getFormItem]);
+    }, [options, optionList, optionListDependence, getFormItem, hide]);
 };
 
 FormTreeSelect.typeList = typeList;

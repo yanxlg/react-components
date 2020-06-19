@@ -74,7 +74,8 @@ var FormTreeSelect = function FormTreeSelect(props) {
       _g = props.dropdownClassName,
       dropdownClassName = _g === void 0 ? formStyles.customTreeSelect : _g,
       initialValue = props.initialValue,
-      extraProps = __rest(props, ["form", "label", "rules", "name", "labelClassName", "optionListDependence", "optionList", "onChange", "className", "formItemClassName", "treeCheckable", "treeDefaultExpandAll", "maxTagCount", "treeNodeLabelProp", "dropdownClassName", "initialValue"]);
+      hide = props.hide,
+      extraProps = __rest(props, ["form", "label", "rules", "name", "labelClassName", "optionListDependence", "optionList", "onChange", "className", "formItemClassName", "treeCheckable", "treeDefaultExpandAll", "maxTagCount", "treeNodeLabelProp", "dropdownClassName", "initialValue", "hide"]);
 
   var _h = useState(undefined),
       options = _h[0],
@@ -182,7 +183,10 @@ var FormTreeSelect = function FormTreeSelect(props) {
         className: labelClassName
       }, label),
       rules: rules,
-      initialValue: initialValue
+      initialValue: initialValue,
+      style: hide ? {
+        display: 'none'
+      } : {}
     }, React.createElement(_TreeSelect, __assign({
       treeNodeLabelProp: "name",
       loading: loading,
@@ -219,7 +223,7 @@ var FormTreeSelect = function FormTreeSelect(props) {
         return getFormItem();
       });
     }
-  }, [options, optionList, optionListDependence, getFormItem]);
+  }, [options, optionList, optionListDependence, getFormItem, hide]);
 };
 
 FormTreeSelect.typeList = typeList;

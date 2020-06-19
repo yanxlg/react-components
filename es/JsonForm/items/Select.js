@@ -75,7 +75,8 @@ var FormSelect = function FormSelect(props) {
       disabled = props.disabled,
       colon = props.colon,
       initialValue = props.initialValue,
-      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "syncDefaultOption", "optionListDependence", "onChange", "labelClassName", "form", "optionList", "rules", "mode", "maxTagCount", "isShortcut", "disabled", "colon", "initialValue"]);
+      hide = props.hide,
+      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "syncDefaultOption", "optionListDependence", "onChange", "labelClassName", "form", "optionList", "rules", "mode", "maxTagCount", "isShortcut", "disabled", "colon", "initialValue", "hide"]);
 
   var _d = useState(undefined),
       options = _d[0],
@@ -207,7 +208,10 @@ var FormSelect = function FormSelect(props) {
         }, label),
         rules: rules,
         colon: colon,
-        initialValue: initialValue
+        initialValue: initialValue,
+        style: hide ? {
+          display: 'none'
+        } : {}
       }, React.createElement(_Select, __assign({
         disabled: disabled,
         className: className,
@@ -260,7 +264,10 @@ var FormSelect = function FormSelect(props) {
           }, label),
           rules: rules,
           colon: colon,
-          initialValue: initialValue
+          initialValue: initialValue,
+          style: hide ? {
+            display: 'none'
+          } : {}
         }, React.createElement(_Select, __assign({
           disabled: disabled,
           className: className,
@@ -281,7 +288,7 @@ var FormSelect = function FormSelect(props) {
         })));
       });
     }
-  }, [options, optionList, optionListDependence, disabled]);
+  }, [options, optionList, optionListDependence, disabled, hide]);
 };
 
 FormSelect.typeList = typeList;

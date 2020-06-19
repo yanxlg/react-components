@@ -28,6 +28,7 @@ export type DatePickerProps<T = string> = FormItemLabelProps &
         rules?: Rule[];
         labelClassName?: string;
         initialValue?: any;
+        hide?: boolean;
     } & Omit<PickerProps<Dayjs>, 'onChange'>;
 
 const FormDatePicker = (props: DatePickerProps) => {
@@ -45,6 +46,7 @@ const FormDatePicker = (props: DatePickerProps) => {
         rules,
         picker,
         initialValue,
+        hide,
         ..._props
     } = props;
 
@@ -119,6 +121,13 @@ const FormDatePicker = (props: DatePickerProps) => {
             label={<span className={labelClassName}>{label}</span>}
             rules={rules}
             initialValue={initialValue}
+            style={
+                hide
+                    ? {
+                          display: 'none',
+                      }
+                    : {}
+            }
         >
             <DatePicker
                 className={className}

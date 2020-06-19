@@ -48,7 +48,8 @@ var FormCheckboxGroup = function FormCheckboxGroup(props) {
       rules = props.rules,
       required = props.required,
       initialValue = props.initialValue,
-      _props = __rest(props, ["name", "label", "labelClassName", "formItemClassName", "className", "onChange", "form", "rules", "required", "initialValue"]);
+      hide = props.hide,
+      _props = __rest(props, ["name", "label", "labelClassName", "formItemClassName", "className", "onChange", "form", "rules", "required", "initialValue", "hide"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -68,7 +69,10 @@ var FormCheckboxGroup = function FormCheckboxGroup(props) {
     className: formItemClassName
   }, requiredProps, {
     rules: rules,
-    initialValue: initialValue
+    initialValue: initialValue,
+    style: hide ? {
+      display: 'none'
+    } : {}
   }), React.createElement(_Checkbox.Group, __assign({
     className: className
   }, eventProps, _props)));

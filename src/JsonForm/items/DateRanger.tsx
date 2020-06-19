@@ -23,6 +23,7 @@ export type DateRangerProps<T = string> = FormItemLabelProps &
         rules?: [Rule[], Rule[]];
         labelClassName?: string;
         initialValue?: any[];
+        hide?: boolean;
     };
 
 const FormDateRanger = (props: DateRangerProps) => {
@@ -36,6 +37,7 @@ const FormDateRanger = (props: DateRangerProps) => {
         form,
         rules,
         initialValue,
+        hide,
     } = props;
 
     const event1Props = useMemo(() => {
@@ -68,6 +70,13 @@ const FormDateRanger = (props: DateRangerProps) => {
             <Form.Item
                 label={<span className={labelClassName}>{label}</span>}
                 className={`${formItemClassName}`}
+                style={
+                    hide
+                        ? {
+                              display: 'none',
+                          }
+                        : {}
+                }
             >
                 <Form.Item
                     shouldUpdate={(prevValues, currentValues) =>
@@ -134,7 +143,7 @@ const FormDateRanger = (props: DateRangerProps) => {
                 </Form.Item>
             </Form.Item>
         );
-    }, []);
+    }, [hide]);
 };
 
 FormDateRanger.typeList = typeList;

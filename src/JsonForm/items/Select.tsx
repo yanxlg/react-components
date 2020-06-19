@@ -39,6 +39,7 @@ export type SelectProps<T = string> = FormItemLabelProps &
         isShortcut?: boolean;
         labelClassName?: string;
         initialValue?: any;
+        hide?: boolean;
     } & Omit<AntdSelectProps<string>, 'loading' | 'onChange' | 'className' | 'options'>;
 
 const FormSelect = (props: SelectProps) => {
@@ -61,6 +62,7 @@ const FormSelect = (props: SelectProps) => {
         disabled,
         colon,
         initialValue,
+        hide,
         ...extraProps
     } = props;
     const [options, setOptions] = useState<IOptionItem[] | undefined>(undefined);
@@ -193,6 +195,13 @@ const FormSelect = (props: SelectProps) => {
                     rules={rules}
                     colon={colon}
                     initialValue={initialValue}
+                    style={
+                        hide
+                            ? {
+                                  display: 'none',
+                              }
+                            : {}
+                    }
                 >
                     <Select
                         disabled={disabled}
@@ -249,6 +258,13 @@ const FormSelect = (props: SelectProps) => {
                                 rules={rules}
                                 colon={colon}
                                 initialValue={initialValue}
+                                style={
+                                    hide
+                                        ? {
+                                              display: 'none',
+                                          }
+                                        : {}
+                                }
                             >
                                 <Select
                                     disabled={disabled}
@@ -284,7 +300,7 @@ const FormSelect = (props: SelectProps) => {
                 </Form.Item>
             );
         }
-    }, [options, optionList, optionListDependence, disabled]);
+    }, [options, optionList, optionListDependence, disabled, hide]);
 };
 
 FormSelect.typeList = typeList;

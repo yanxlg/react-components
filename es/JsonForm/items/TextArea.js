@@ -56,7 +56,8 @@ var FormTextArea = function FormTextArea(props) {
     maxRows: 6
   } : _c,
       initialValue = props.initialValue,
-      _props = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "autoSize", "initialValue"]);
+      hide = props.hide,
+      _props = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "autoSize", "initialValue", "hide"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -73,13 +74,16 @@ var FormTextArea = function FormTextArea(props) {
         className: labelClassName
       }, label),
       rules: rules,
-      initialValue: initialValue
+      initialValue: initialValue,
+      style: hide ? {
+        display: 'none'
+      } : {}
     }, React.createElement(TextArea, __assign({
       autoSize: autoSize,
       // placeholder={placeholder}
       className: className
     }, _props, eventProps)));
-  }, [_props]);
+  }, [_props, hide]);
 };
 
 FormTextArea.typeList = typeList;
