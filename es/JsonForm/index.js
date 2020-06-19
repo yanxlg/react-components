@@ -61,6 +61,7 @@ import FormCascader from './items/Cascader';
 import CustomFragment from './items/CustomFragment';
 import FormTreeSelect from './items/TreeSelect';
 import LoadingItem from './items/LoadingItem';
+import FormNumberRange from './items/NumberRange';
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
@@ -80,6 +81,16 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
 
   if (FormInput.typeList.includes(type)) {
     return getColChildren(React.createElement(FormInput, __assign({
+      key: String(name),
+      labelClassName: labelClassName
+    }, field, {
+      type: type,
+      form: form
+    })), itemCol);
+  }
+
+  if (FormNumberRange.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormNumberRange, __assign({
       key: String(name),
       labelClassName: labelClassName
     }, field, {
@@ -349,7 +360,7 @@ var JsonForm = function JsonForm(props, ref) {
               name2 = name_1[1];
           values[name1] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[0], formatter["null"])(form.getFieldValue(name1));
           values[name2] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[1], formatter["null"])(form.getFieldValue(name2));
-        } else if (FormInputRange.typeList.includes(type)) {
+        } else if (FormInputRange.typeList.includes(type) || FormNumberRange.typeList.includes(type)) {
           var name1 = name_1[0],
               name2 = name_1[1];
           values[name1] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[0], formatter.number)(form.getFieldValue(name1));

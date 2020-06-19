@@ -2,15 +2,17 @@
 @inputWidth: 150px;
 @inputLargeWidth: 320px;
 @inputSmallWidth: 87px;
+@inputRangeWidth: 60px;
+@inputRangeSplit: 30px;
 
 .form-item {
-    padding: @itemSpacing/2 0 !important;
+    padding: @itemSpacing / 2 0 !important;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
 }
 
 .form-item-bottom {
-    padding: 0 0 @itemSpacing/2 0 !important;
+    padding: 0 0 @itemSpacing / 2 0 !important;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
 }
@@ -26,7 +28,7 @@
 }
 
 .form-next-card {
-    margin-top: @itemSpacing  !important;
+    margin-top: @itemSpacing !important;
 }
 
 .form-card {
@@ -39,10 +41,10 @@
 }
 
 .form-container {
-    padding: @itemSpacing/2 0 !important;
+    padding: @itemSpacing / 2 0 !important;
 
-    ~.form-container {
-        margin-top: -@itemSpacing  !important;
+    ~ .form-container {
+        margin-top: -@itemSpacing !important;
     }
 }
 
@@ -99,15 +101,15 @@
 }
 
 .form-item-default {
-    width: @inputWidth  !important;
+    width: @inputWidth !important;
 }
 
 .form-item-large {
-    width: @inputLargeWidth  !important;
+    width: @inputLargeWidth !important;
 }
 
 .form-item-small {
-    width: @inputSmallWidth  !important;
+    width: @inputSmallWidth !important;
 }
 
 .form-checkbox {
@@ -143,7 +145,6 @@
 .flex-wrap {
     flex-wrap: wrap;
 }
-
 
 .inline-block {
     display: inline-block !important;
@@ -187,4 +188,34 @@
     :global .ant-select-tree-switcher-noop {
         display: none !important;
     }
+}
+
+.input-range {
+    width: @inputRangeWidth;
+}
+
+.input-range-left {
+    border-right-width: 0;
+
+    &:hover,
+    &:focus {
+        border-right-width: 1px;
+    }
+}
+
+.input-range-right {
+    border-left-width: 0;
+
+    &:hover,
+    &:focus {
+        border-left-width: 1px;
+    }
+}
+
+.input-range-split {
+    width: @inputRangeSplit !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    pointer-events: 'none' !important;
+    background: #fff !important;
 }

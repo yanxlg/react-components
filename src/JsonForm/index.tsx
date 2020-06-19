@@ -37,6 +37,7 @@ import FormCascader, { CascaderProps, CascaderType } from './items/Cascader';
 import CustomFragment, { CustomFragmentProps, CustomFragmentType } from './items/CustomFragment';
 import FormTreeSelect, { TreeSelectType, TreeSelectProps } from './items/TreeSelect';
 import LoadingItem, { LoadingItemProps, LoadingType } from './items/LoadingItem';
+import FormNumberRange, { NumberRangeType, NumberRangeProps } from './items/NumberRange';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -112,6 +113,18 @@ export const getFormItem = (
                 labelClassName={labelClassName}
                 {...(field as InputProps)}
                 type={type as InputType}
+                form={form}
+            />,
+            itemCol,
+        );
+    }
+    if (FormNumberRange.typeList.includes(type)) {
+        return getColChildren(
+            <FormNumberRange
+                key={String(name)}
+                labelClassName={labelClassName}
+                {...(field as NumberRangeProps)}
+                type={type as NumberRangeType}
                 form={form}
             />,
             itemCol,
@@ -429,7 +442,10 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                             formatterName?.[1],
                             formatter.null,
                         )(form.getFieldValue(name2));
-                    } else if (FormInputRange.typeList.includes(type)) {
+                    } else if (
+                        FormInputRange.typeList.includes(type) ||
+                        FormNumberRange.typeList.includes(type)
+                    ) {
                         const [name1, name2] = name;
                         values[name1 as string] = getFormatterFunc(
                             formatterName?.[0],
