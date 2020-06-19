@@ -423,6 +423,8 @@ var JsonForm = function JsonForm(props, ref) {
   return useMemo(function () {
     if (enableCollapse) {
       return React.createElement("div", {
+        className: containerClassName
+      }, React.createElement("div", {
         className: classNames(formStyles.flex, formStyles.flex1)
       }, React.createElement("div", {
         className: classNames(formStyles.flex1, formStyles.flexRow),
@@ -434,14 +436,16 @@ var JsonForm = function JsonForm(props, ref) {
       }, _props, {
         form: form,
         className: className
-      }), formContent)), collapseBtn);
+      }), formContent)), collapseBtn));
     } else {
-      return React.createElement(_Form, __assign({
+      return React.createElement("div", {
+        className: containerClassName
+      }, React.createElement(_Form, __assign({
         layout: "inline"
       }, _props, {
         form: form,
         className: className
-      }), formContent);
+      }), formContent));
     }
   }, [fieldList, collapse, children, collapseItems, enableCollapse]);
 };

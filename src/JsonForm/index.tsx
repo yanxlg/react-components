@@ -552,23 +552,27 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
     return useMemo(() => {
         if (enableCollapse) {
             return (
-                <div className={classNames(formStyles.flex, formStyles.flex1)}>
-                    <div
-                        className={classNames(formStyles.flex1, formStyles.flexRow)}
-                        style={{ flexWrap: 'wrap' }}
-                    >
-                        <Form layout="inline" {..._props} form={form} className={className}>
-                            {formContent}
-                        </Form>
+                <div className={containerClassName}>
+                    <div className={classNames(formStyles.flex, formStyles.flex1)}>
+                        <div
+                            className={classNames(formStyles.flex1, formStyles.flexRow)}
+                            style={{ flexWrap: 'wrap' }}
+                        >
+                            <Form layout="inline" {..._props} form={form} className={className}>
+                                {formContent}
+                            </Form>
+                        </div>
+                        {collapseBtn}
                     </div>
-                    {collapseBtn}
                 </div>
             );
         } else {
             return (
-                <Form layout="inline" {..._props} form={form} className={className}>
-                    {formContent}
-                </Form>
+                <div className={containerClassName}>
+                    <Form layout="inline" {..._props} form={form} className={className}>
+                        {formContent}
+                    </Form>
+                </div>
             );
         }
     }, [fieldList, collapse, children, collapseItems, enableCollapse]);
