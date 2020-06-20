@@ -197,7 +197,7 @@ var FormTreeSelect = function FormTreeSelect(props) {
       treeDefaultExpandAll: treeDefaultExpandAll,
       dropdownClassName: dropdownClassName
     }, eventProps, extraProps)));
-  }, [options, optionList, getOptionList]);
+  }, [options, optionList, getOptionList, hide]);
   return useMemo(function () {
     if (optionListDependence === void 0) {
       return getFormItem();

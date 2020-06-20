@@ -184,7 +184,7 @@ const FormTreeSelect = (props: TreeSelectProps) => {
                 />
             </Form.Item>
         );
-    }, [options, optionList, getOptionList]);
+    }, [options, optionList, getOptionList, hide]);
 
     return useMemo(() => {
         if (optionListDependence === void 0) {
