@@ -1,3 +1,5 @@
+import "antd/es/collapse/style/css";
+import _Collapse from "antd/es/collapse";
 import "antd/es/card/style/css";
 import _Card from "antd/es/card";
 
@@ -32,6 +34,7 @@ var __rest = this && this.__rest || function (s, e) {
 
 import React from 'react';
 import { getFormItems } from './index';
+import { CaretRightOutlined } from '@ant-design/icons/lib';
 var typeList = ['layout'];
 
 var Layout = function Layout(props) {
@@ -49,6 +52,22 @@ var Layout = function Layout(props) {
   switch (layoutType) {
     case 'card':
       return React.createElement(_Card, __assign({}, _props), header, getFormItems(fieldList, form, labelClassName, itemCol, itemRow), footer);
+
+    case 'collapse':
+      var _a = _props,
+          panelProps = _a.panelProps,
+          __props = __rest(_a, ["panelProps"]);
+
+      return React.createElement(_Collapse, __assign({
+        expandIcon: function expandIcon(_a) {
+          var isActive = _a.isActive;
+          return React.createElement(CaretRightOutlined, {
+            rotate: isActive ? 90 : 0
+          });
+        }
+      }, __props), React.createElement(_Collapse.Panel, __assign({}, panelProps, {
+        header: getFormItems([panelProps.header], form, labelClassName, itemCol, itemRow)
+      }), getFormItems(fieldList, form, labelClassName, itemCol, itemRow)));
 
     default:
       return React.createElement("div", __assign({}, _props), header, getFormItems(fieldList, form, labelClassName, itemCol, itemRow), footer);
