@@ -37,6 +37,7 @@ import CustomFragment, { CustomFragmentProps, CustomFragmentType } from './items
 import FormTreeSelect, { TreeSelectType, TreeSelectProps } from './items/TreeSelect';
 import LoadingItem, { LoadingItemProps, LoadingType } from './items/LoadingItem';
 import FormNumberRange, { NumberRangeType, NumberRangeProps } from './items/NumberRange';
+import FormTree, { FormTreeProps, FormTreeType } from './items/TreeItem';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -61,6 +62,7 @@ export type FormField<T = string> = (
     | Omit<TreeSelectProps<T>, 'form'>
     | Omit<LoadingItemProps<T>, 'form'>
     | Omit<NumberRangeProps<T>, 'form'>
+    | Omit<FormTreeProps<T>, 'form'>
 ) & {
     form?: FormInstance;
     key?: string;
@@ -317,6 +319,19 @@ export const getFormItem = (
                 labelClassName={labelClassName}
                 {...(field as NumberRangeProps)}
                 type={type as NumberRangeType}
+                form={form}
+                hide={hide}
+            />,
+            itemCol,
+        );
+    }
+    if (FormTree.typeList.includes(type)) {
+        return getColChildren(
+            <FormTree
+                key={String(name)}
+                labelClassName={labelClassName}
+                {...(field as FormTreeProps)}
+                type={type as FormTreeType}
                 form={form}
                 hide={hide}
             />,

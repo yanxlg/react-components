@@ -22,10 +22,11 @@ import { CustomFragmentProps } from './items/CustomFragment';
 import { TreeSelectProps } from './items/TreeSelect';
 import { LoadingItemProps } from './items/LoadingItem';
 import { NumberRangeProps } from './items/NumberRange';
+import { FormTreeProps } from './items/TreeItem';
 export declare interface CustomFormProps {
     labelClassName?: string;
 }
-export declare type FormField<T = string> = (Omit<InputProps<T>, 'form'> | Omit<SelectProps<T>, 'form'> | Omit<CheckboxProps<T>, 'form'> | Omit<DatePickerProps<T>, 'form'> | Omit<DateRangerProps<T>, 'form'> | Omit<CheckboxGroupProps<T>, 'form'> | Omit<RadioGroupProps<T>, 'form'> | Omit<InputRangeProps<T>, 'form'> | Omit<TextAreaProps<T>, 'form'> | Omit<LayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'> | Omit<DynamicItemProps, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'> | Omit<HideItemProps, 'form'> | Omit<CascaderProps, 'form'> | Omit<CustomFragmentProps, 'form'> | Omit<TreeSelectProps<T>, 'form'> | Omit<LoadingItemProps<T>, 'form'> | Omit<NumberRangeProps<T>, 'form'>) & {
+export declare type FormField<T = string> = (Omit<InputProps<T>, 'form'> | Omit<SelectProps<T>, 'form'> | Omit<CheckboxProps<T>, 'form'> | Omit<DatePickerProps<T>, 'form'> | Omit<DateRangerProps<T>, 'form'> | Omit<CheckboxGroupProps<T>, 'form'> | Omit<RadioGroupProps<T>, 'form'> | Omit<InputRangeProps<T>, 'form'> | Omit<TextAreaProps<T>, 'form'> | Omit<LayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'> | Omit<DynamicItemProps, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'> | Omit<HideItemProps, 'form'> | Omit<CascaderProps, 'form'> | Omit<CustomFragmentProps, 'form'> | Omit<TreeSelectProps<T>, 'form'> | Omit<LoadingItemProps<T>, 'form'> | Omit<NumberRangeProps<T>, 'form'> | Omit<FormTreeProps<T>, 'form'>) & {
     form?: FormInstance;
     key?: string;
 };
