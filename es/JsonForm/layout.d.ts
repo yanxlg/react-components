@@ -7,19 +7,7 @@ import { CardProps } from 'antd/es/card';
 import { CollapseProps } from 'antd/lib/collapse/Collapse';
 import { CollapsePanelProps } from 'antd/es/collapse';
 export declare type LayoutType = 'layout';
-declare type CardLayoutProps = {
-    layoutType: 'card';
-} & Omit<CardProps, 'type'>;
-declare type DefaultLayoutProps = {
-    layoutType?: 'default';
-} & Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'type'>;
-declare type CollapseLayoutProps = {
-    layoutType: 'collapse';
-    panelProps: Omit<CollapsePanelProps, 'header'> & {
-        header: FormField;
-    };
-} & CollapseProps;
-export declare type LayoutProps<T = string> = {
+declare type BaseLayoutProps<T = string> = {
     form: FormInstance;
     type: LayoutType;
     fieldList: Array<FormField<T>>;
@@ -28,7 +16,20 @@ export declare type LayoutProps<T = string> = {
     itemRow?: RowProps;
     header?: React.ReactElement;
     footer?: React.ReactElement;
-} & (CardLayoutProps | DefaultLayoutProps | CollapseLayoutProps);
+};
+declare interface CardLayoutProps<T = string> extends BaseLayoutProps<T>, Omit<CardProps, 'type'> {
+    layoutType: 'card';
+}
+declare interface DefaultLayoutProps<T = string> extends BaseLayoutProps<T>, Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'type'> {
+    layoutType?: 'default';
+}
+declare interface CollapseLayoutProps<T = string> extends BaseLayoutProps<T>, CollapseProps {
+    layoutType: 'collapse';
+    panelProps: Omit<CollapsePanelProps, 'header'> & {
+        header: FormField;
+    };
+}
+export declare type LayoutProps<T = string> = CardLayoutProps<T> | DefaultLayoutProps<T> | CollapseLayoutProps<T>;
 declare const Layout: {
     (props: LayoutProps<string>): JSX.Element;
     typeList: string[];
