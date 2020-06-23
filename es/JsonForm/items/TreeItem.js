@@ -73,7 +73,8 @@ var FormTree = function FormTree(props) {
     style: hide ? {
       display: 'none'
     } : {},
-    valuePropName: 'checkedKeys'
+    valuePropName: 'checkedKeys',
+    trigger: 'onCheck'
   }), React.createElement(_Tree, __assign({
     className: className
   }, eventProps, _props)));

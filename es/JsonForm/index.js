@@ -62,6 +62,7 @@ import FormTreeSelect from './items/TreeSelect';
 import LoadingItem from './items/LoadingItem';
 import FormNumberRange from './items/NumberRange';
 import FormTree from './items/TreeItem';
+import CollapseLayout from './layout/CollapseLayout';
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
@@ -272,6 +273,18 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       type: type,
       form: form,
       hide: hide
+    })), itemCol);
+  }
+
+  if (CollapseLayout.typeList.includes(type)) {
+    return getColChildren(React.createElement(CollapseLayout, __assign({
+      key: String(index),
+      labelClassName: labelClassName
+    }, field, {
+      type: type,
+      form: form,
+      itemRow: itemRow,
+      itemCol: itemCol
     })), itemCol);
   }
 

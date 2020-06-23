@@ -1,5 +1,5 @@
-import "antd/es/card/style/css";
-import _Card from "antd/es/card";
+import "antd/es/collapse/style/css";
+import _Collapse from "antd/es/collapse";
 
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
@@ -28,33 +28,33 @@ var __rest = this && this.__rest || function (s, e) {
     if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
   }
   return t;
-}; // 有问题，属性会出现红色报错提示
-
+};
 
 import React from 'react';
-import { getFormItems } from './index';
-var typeList = ['layout'];
+import { getFormItems } from '../index';
+import formStyles from '../_form.less';
+var typeList = ['collapse'];
 
-var Layout = function Layout(props) {
+var CollapseLayout = function CollapseLayout(props) {
   var form = props.form,
       labelClassName = props.labelClassName,
-      layoutType = props.layoutType,
       type = props.type,
       fieldList = props.fieldList,
       itemCol = props.itemCol,
       itemRow = props.itemRow,
       header = props.header,
       footer = props.footer,
-      _props = __rest(props, ["form", "labelClassName", "layoutType", "type", "fieldList", "itemCol", "itemRow", "header", "footer"]);
+      _a = props.panel,
+      _header = _a.header,
+      __props = __rest(_a, ["header"]),
+      _props = __rest(props, ["form", "labelClassName", "type", "fieldList", "itemCol", "itemRow", "header", "footer", "panel"]);
 
-  switch (layoutType) {
-    case 'card':
-      return React.createElement(_Card, __assign({}, _props), header, getFormItems(fieldList, form, labelClassName, itemCol, itemRow), footer);
-
-    default:
-      return React.createElement("div", __assign({}, _props), header, getFormItems(fieldList, form, labelClassName, itemCol, itemRow), footer);
-  }
+  return React.createElement(_Collapse, __assign({
+    className: formStyles.formCollapse
+  }, _props), React.createElement(_Collapse.Panel, __assign({
+    header: getFormItems([_header], form)
+  }, __props), getFormItems(fieldList, form, labelClassName, itemCol, itemRow)));
 };
 
-Layout.typeList = typeList;
-export default Layout;
+CollapseLayout.typeList = typeList;
+export default CollapseLayout;

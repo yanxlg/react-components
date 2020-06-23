@@ -72,6 +72,7 @@ const FormTree = (props: FormTreeProps) => {
                     : {}
             }
             valuePropName={'checkedKeys'}
+            trigger={'onCheck'}
         >
             <Tree className={className} {...eventProps} {..._props} />
         </Form.Item>

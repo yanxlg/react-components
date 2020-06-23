@@ -6,6 +6,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { generateApi } from '../src/api';
+import JsonForm from '../src/JsonForm';
 
 class Test extends React.Component<any, any> {
     componentDidMount(): void {
@@ -29,7 +30,23 @@ class Test extends React.Component<any, any> {
     }
 
     render() {
-        return <div></div>;
+        return (
+            <JsonForm
+                fieldList={[
+                    {
+                        type: 'collapseLayout',
+                        fieldList: [],
+                        panel: {
+                            header: {
+                                type: 'input',
+                                name: 'aaa',
+                                label: '1111',
+                            },
+                        },
+                    },
+                ]}
+            />
+        );
     }
 }
 

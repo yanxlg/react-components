@@ -1,3 +1,4 @@
+// 有问题，属性会出现红色报错提示
 import React from 'react';
 import { Card } from 'antd';
 import { FormInstance } from 'antd/es/form';

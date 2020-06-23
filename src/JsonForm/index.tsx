@@ -38,6 +38,7 @@ import FormTreeSelect, { TreeSelectType, TreeSelectProps } from './items/TreeSel
 import LoadingItem, { LoadingItemProps, LoadingType } from './items/LoadingItem';
 import FormNumberRange, { NumberRangeType, NumberRangeProps } from './items/NumberRange';
 import FormTree, { FormTreeProps, FormTreeType } from './items/TreeItem';
+import CollapseLayout, { CollapseLayoutProps, CollapseLayoutType } from './layout/CollapseLayout';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -55,6 +56,7 @@ export type FormField<T = string> = (
     | Omit<InputRangeProps<T>, 'form'>
     | Omit<TextAreaProps<T>, 'form'>
     | Omit<LayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>
+    | Omit<CollapseLayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>
     | Omit<DynamicItemProps, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>
     | Omit<HideItemProps, 'form'>
     | Omit<CascaderProps, 'form'>
@@ -173,7 +175,6 @@ export const getFormItem = (
             itemCol,
         );
     }
-
     if (FormCheckboxGroup.typeList.includes(type)) {
         return getColChildren(
             <FormCheckboxGroup
@@ -334,6 +335,20 @@ export const getFormItem = (
                 type={type as FormTreeType}
                 form={form}
                 hide={hide}
+            />,
+            itemCol,
+        );
+    }
+    if (CollapseLayout.typeList.includes(type)) {
+        return getColChildren(
+            <CollapseLayout
+                key={String(index)}
+                labelClassName={labelClassName}
+                {...(field as CollapseLayoutProps)}
+                type={type as CollapseLayoutType}
+                form={form}
+                itemRow={itemRow}
+                itemCol={itemCol}
             />,
             itemCol,
         );
