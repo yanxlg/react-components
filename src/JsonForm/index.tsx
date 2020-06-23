@@ -453,6 +453,14 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                         ...values,
                         ...getValues((field as LayoutProps).fieldList),
                     };
+                } else if (CollapseLayout.typeList.indexOf(type)) {
+                    values = {
+                        ...values,
+                        ...getValues([
+                            ...(field as CollapseLayoutProps).fieldList,
+                            (field as CollapseLayoutProps).panel.header,
+                        ]),
+                    };
                 } else if (LoadingItem.typeList.includes(type)) {
                     // @ts-ignore
                     const _field = (field as LoadingItemProps).loading._cache;

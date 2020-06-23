@@ -38,6 +38,20 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
+var __spreadArrays = this && this.__spreadArrays || function () {
+  for (var s = 0, i = 0, il = arguments.length; i < il; i++) {
+    s += arguments[i].length;
+  }
+
+  for (var r = Array(s), k = 0, i = 0; i < il; i++) {
+    for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) {
+      r[k] = a[j];
+    }
+  }
+
+  return r;
+};
+
 import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import FormInput from './items/Input';
 import FormSelect from './items/Select';
@@ -365,6 +379,8 @@ var JsonForm = function JsonForm(props, ref) {
       if (Layout.typeList.includes(type)) {
         // layout 组件
         values = __assign(__assign({}, values), getValues(field.fieldList));
+      } else if (CollapseLayout.typeList.indexOf(type)) {
+        values = __assign(__assign({}, values), getValues(__spreadArrays(field.fieldList, [field.panel.header])));
       } else if (LoadingItem.typeList.includes(type)) {
         // @ts-ignore
         var _field = field.loading._cache;
