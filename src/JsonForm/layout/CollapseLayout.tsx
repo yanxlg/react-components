@@ -39,7 +39,6 @@ const CollapseLayout = (props: CollapseLayoutProps) => {
         panel: { header: _header, ...__props },
         activeKey,
         controlByIcon = false,
-        expandIcon,
         onChange,
         ..._props
     } = props;
@@ -48,16 +47,17 @@ const CollapseLayout = (props: CollapseLayoutProps) => {
 
     const onMixChange = useCallback((key: string | string[]) => {
         const target = targetRef.current as HTMLElement;
+        console.log(target);
         if (
             controlByIcon &&
             target &&
             /ant-collapse-header/.test(target.parentElement.className) &&
             /anticon/.test(target.className)
         ) {
-            onChange(key);
+            onChange && onChange(key);
             setKey(key);
         } else {
-            onChange(key);
+            onChange && onChange(key);
             setKey(key);
         }
     }, []);

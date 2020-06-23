@@ -51,9 +51,8 @@ var CollapseLayout = function CollapseLayout(props) {
       activeKey = props.activeKey,
       _b = props.controlByIcon,
       controlByIcon = _b === void 0 ? false : _b,
-      expandIcon = props.expandIcon,
       onChange = props.onChange,
-      _props = __rest(props, ["form", "labelClassName", "type", "fieldList", "itemCol", "itemRow", "header", "footer", "panel", "activeKey", "controlByIcon", "expandIcon", "onChange"]);
+      _props = __rest(props, ["form", "labelClassName", "type", "fieldList", "itemCol", "itemRow", "header", "footer", "panel", "activeKey", "controlByIcon", "onChange"]);
 
   var _c = useState(activeKey),
       key = _c[0],
@@ -62,12 +61,13 @@ var CollapseLayout = function CollapseLayout(props) {
   var targetRef = useRef(null);
   var onMixChange = useCallback(function (key) {
     var target = targetRef.current;
+    console.log(target);
 
     if (controlByIcon && target && /ant-collapse-header/.test(target.parentElement.className) && /anticon/.test(target.className)) {
-      onChange(key);
+      onChange && onChange(key);
       setKey(key);
     } else {
-      onChange(key);
+      onChange && onChange(key);
       setKey(key);
     }
   }, []);
