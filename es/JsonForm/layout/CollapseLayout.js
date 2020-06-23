@@ -31,7 +31,7 @@ var __rest = this && this.__rest || function (s, e) {
 }; // 支持仅Icon可控
 
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { getFormItems } from '../index';
 import formStyles from '../_form.less';
 var typeList = ['collapse'];
@@ -52,40 +52,49 @@ var CollapseLayout = function CollapseLayout(props) {
       _b = props.controlByIcon,
       controlByIcon = _b === void 0 ? false : _b,
       onChange = props.onChange,
-      _props = __rest(props, ["form", "labelClassName", "type", "fieldList", "itemCol", "itemRow", "header", "footer", "panel", "activeKey", "controlByIcon", "onChange"]);
+      expandIcon = props.expandIcon,
+      _props = __rest(props, ["form", "labelClassName", "type", "fieldList", "itemCol", "itemRow", "header", "footer", "panel", "activeKey", "controlByIcon", "onChange", "expandIcon"]);
 
   var _c = useState(activeKey),
       key = _c[0],
       setKey = _c[1];
 
-  var targetRef = useRef(null);
   var onMixChange = useCallback(function (key) {
-    var target = targetRef.current;
-    console.log(target);
-
-    if (controlByIcon && target && /ant-collapse-header/.test(target.parentElement.className) && /anticon/.test(target.className)) {
-      onChange && onChange(key);
-      setKey(key);
-    } else {
+    if (!controlByIcon) {
       onChange && onChange(key);
       setKey(key);
     }
   }, []);
-  useEffect(function () {
-    var clickFn = function clickFn(e) {
-      targetRef.current = e.target;
-    };
+  var toggleActive = useCallback(function () {
+    setKey(function (key) {
+      if (key === __props.key || Array.isArray(key) && key.indexOf(__props.key) > -1) {
+        onChange && onChange([]);
+        return [];
+      } else {
+        onChange && onChange([__props.key]);
+        return [__props.key];
+      }
+    });
+  }, []);
+  var icon = useMemo(function () {
+    if (expandIcon) {
+      return function (props) {
+        var _icon = expandIcon(props);
 
-    document.addEventListener('click', clickFn);
-    return function () {
-      return document.removeEventListener('click', clickFn);
-    };
+        return React.cloneElement(_icon, __assign(__assign({}, _icon.props), {
+          onClick: controlByIcon ? toggleActive : undefined
+        }));
+      };
+    } else {
+      return undefined;
+    }
   }, []);
   return React.createElement(_Collapse, __assign({
     className: formStyles.formCollapse
   }, _props, {
     activeKey: key,
-    onChange: onMixChange
+    onChange: onMixChange,
+    expandIcon: icon
   }), React.createElement(_Collapse.Panel, __assign({
     header: getFormItems([_header], form)
   }, __props), getFormItems(fieldList, form, labelClassName, itemCol, itemRow)));

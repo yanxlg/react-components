@@ -1,5 +1,5 @@
 // 支持仅Icon可控
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Collapse } from 'antd';
 import { FormInstance } from 'antd/es/form';
 import { FormField, getFormItems } from '../index';
@@ -40,34 +40,42 @@ const CollapseLayout = (props: CollapseLayoutProps) => {
         activeKey,
         controlByIcon = false,
         onChange,
+        expandIcon,
         ..._props
     } = props;
     const [key, setKey] = useState(activeKey);
-    const targetRef = useRef<EventTarget>(null);
 
     const onMixChange = useCallback((key: string | string[]) => {
-        const target = targetRef.current as HTMLElement;
-        console.log(target);
-        if (
-            controlByIcon &&
-            target &&
-            /ant-collapse-header/.test(target.parentElement.className) &&
-            /anticon/.test(target.className)
-        ) {
-            onChange && onChange(key);
-            setKey(key);
-        } else {
+        if (!controlByIcon) {
             onChange && onChange(key);
             setKey(key);
         }
     }, []);
 
-    useEffect(() => {
-        const clickFn = (e: MouseEvent) => {
-            targetRef.current = e.target;
-        };
-        document.addEventListener('click', clickFn);
-        return () => document.removeEventListener('click', clickFn);
+    const toggleActive = useCallback(() => {
+        setKey(key => {
+            if (key === __props.key || (Array.isArray(key) && key.indexOf(__props.key) > -1)) {
+                onChange && onChange([]);
+                return [];
+            } else {
+                onChange && onChange([__props.key as any]);
+                return [__props.key];
+            }
+        });
+    }, []);
+
+    const icon = useMemo(() => {
+        if (expandIcon) {
+            return (props: any) => {
+                const _icon = expandIcon(props);
+                return React.cloneElement(_icon as any, {
+                    ...(_icon as any).props,
+                    onClick: controlByIcon ? toggleActive : undefined,
+                });
+            };
+        } else {
+            return undefined;
+        }
     }, []);
 
     return (
@@ -76,6 +84,7 @@ const CollapseLayout = (props: CollapseLayoutProps) => {
             {..._props}
             activeKey={key}
             onChange={onMixChange}
+            expandIcon={icon}
         >
             <Collapse.Panel header={getFormItems([_header], form)} {...__props}>
                 {getFormItems(fieldList, form, labelClassName, itemCol, itemRow)}
