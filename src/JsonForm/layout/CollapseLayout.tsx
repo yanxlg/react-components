@@ -1,4 +1,5 @@
-import React from 'react';
+// 支持仅Icon可控
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Collapse } from 'antd';
 import { FormInstance } from 'antd/es/form';
 import { FormField, getFormItems } from '../index';
@@ -22,6 +23,7 @@ export declare interface CollapseLayoutProps<T = string> extends CollapseProps {
     panel: CollapsePanelProps & {
         header: FormField<T>;
     };
+    controlByIcon?: boolean; // 是否限制为仅icon可触控
 }
 
 const CollapseLayout = (props: CollapseLayoutProps) => {
@@ -35,10 +37,46 @@ const CollapseLayout = (props: CollapseLayoutProps) => {
         header,
         footer,
         panel: { header: _header, ...__props },
+        activeKey,
+        controlByIcon = false,
+        expandIcon,
+        onChange,
         ..._props
     } = props;
+    const [key, setKey] = useState(activeKey);
+    const targetRef = useRef<EventTarget>(null);
+
+    const onMixChange = useCallback((key: string | string[]) => {
+        const target = targetRef.current as HTMLElement;
+        if (
+            controlByIcon &&
+            target &&
+            /ant-collapse-header/.test(target.parentElement.className) &&
+            /anticon/.test(target.className)
+        ) {
+            onChange(key);
+            setKey(key);
+        } else {
+            onChange(key);
+            setKey(key);
+        }
+    }, []);
+
+    useEffect(() => {
+        const clickFn = (e: MouseEvent) => {
+            targetRef.current = e.target;
+        };
+        document.addEventListener('click', clickFn);
+        return () => document.removeEventListener('click', clickFn);
+    }, []);
+
     return (
-        <Collapse className={formStyles.formCollapse} {..._props}>
+        <Collapse
+            className={formStyles.formCollapse}
+            {..._props}
+            activeKey={key}
+            onChange={onMixChange}
+        >
             <Collapse.Panel header={getFormItems([_header], form)} {...__props}>
                 {getFormItems(fieldList, form, labelClassName, itemCol, itemRow)}
             </Collapse.Panel>

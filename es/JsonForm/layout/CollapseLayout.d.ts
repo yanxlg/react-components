@@ -17,6 +17,7 @@ export declare interface CollapseLayoutProps<T = string> extends CollapseProps {
     panel: CollapsePanelProps & {
         header: FormField<T>;
     };
+    controlByIcon?: boolean;
 }
 declare const CollapseLayout: {
     (props: CollapseLayoutProps<string>): JSX.Element;

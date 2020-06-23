@@ -28,9 +28,10 @@ var __rest = this && this.__rest || function (s, e) {
     if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
   }
   return t;
-};
+}; // 支持仅Icon可控
 
-import React from 'react';
+
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { getFormItems } from '../index';
 import formStyles from '../_form.less';
 var typeList = ['collapse'];
@@ -47,11 +48,45 @@ var CollapseLayout = function CollapseLayout(props) {
       _a = props.panel,
       _header = _a.header,
       __props = __rest(_a, ["header"]),
-      _props = __rest(props, ["form", "labelClassName", "type", "fieldList", "itemCol", "itemRow", "header", "footer", "panel"]);
+      activeKey = props.activeKey,
+      _b = props.controlByIcon,
+      controlByIcon = _b === void 0 ? false : _b,
+      expandIcon = props.expandIcon,
+      onChange = props.onChange,
+      _props = __rest(props, ["form", "labelClassName", "type", "fieldList", "itemCol", "itemRow", "header", "footer", "panel", "activeKey", "controlByIcon", "expandIcon", "onChange"]);
 
+  var _c = useState(activeKey),
+      key = _c[0],
+      setKey = _c[1];
+
+  var targetRef = useRef(null);
+  var onMixChange = useCallback(function (key) {
+    var target = targetRef.current;
+
+    if (controlByIcon && target && /ant-collapse-header/.test(target.parentElement.className) && /anticon/.test(target.className)) {
+      onChange(key);
+      setKey(key);
+    } else {
+      onChange(key);
+      setKey(key);
+    }
+  }, []);
+  useEffect(function () {
+    var clickFn = function clickFn(e) {
+      targetRef.current = e.target;
+    };
+
+    document.addEventListener('click', clickFn);
+    return function () {
+      return document.removeEventListener('click', clickFn);
+    };
+  }, []);
   return React.createElement(_Collapse, __assign({
     className: formStyles.formCollapse
-  }, _props), React.createElement(_Collapse.Panel, __assign({
+  }, _props, {
+    activeKey: key,
+    onChange: onMixChange
+  }), React.createElement(_Collapse.Panel, __assign({
     header: getFormItems([_header], form)
   }, __props), getFormItems(fieldList, form, labelClassName, itemCol, itemRow)));
 };
