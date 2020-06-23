@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { CustomFormProps, FormItemName } from '../index';
 import { FormInstance, Rule } from 'antd/es/form';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
@@ -15,9 +15,13 @@ export declare type FormPasswordProps<T = string> = FormItemLabelProps & CustomF
     rules?: Rule[];
     labelClassName?: string;
     initialValue?: any;
+    defaultVisible?: boolean;
 } & Omit<PasswordProps, 'type' | 'size' | 'form' | 'onChange'>;
 declare const FormPassword: {
     (props: FormPasswordProps<string>): JSX.Element;
+    defaultProps: {
+        iconRender: (visible: boolean) => React.FunctionComponentElement<import("@ant-design/icons/lib/components/AntdIcon").AntdIconProps & React.RefAttributes<HTMLSpanElement>>;
+    };
     typeList: string[];
 };
 export default FormPassword;

@@ -1,10 +1,11 @@
 import { Form, Input } from 'antd';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { CustomFormProps, FormItemName } from '../index';
 import { FormInstance, Rule } from 'antd/es/form';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
 import { PasswordProps } from 'antd/es/input';
 import formStyles from '../_form.less';
+import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 
 export type PasswordType = 'password';
 const typeList = ['password'];
@@ -21,6 +22,7 @@ export type FormPasswordProps<T = string> = FormItemLabelProps &
         rules?: Rule[];
         labelClassName?: string;
         initialValue?: any;
+        defaultVisible?: boolean;
     } & Omit<PasswordProps, 'type' | 'size' | 'form' | 'onChange'>;
 
 const FormPassword = (props: FormPasswordProps) => {
@@ -36,6 +38,8 @@ const FormPassword = (props: FormPasswordProps) => {
         rules,
         colon,
         initialValue,
+        iconRender,
+        defaultVisible = false,
         ..._props
     } = props;
     const eventProps = useMemo(() => {
@@ -48,6 +52,30 @@ const FormPassword = (props: FormPasswordProps) => {
             : {};
     }, []);
 
+    const [visible, setVisible] = useState(defaultVisible);
+
+    const suffix = useMemo(() => {
+        const icon = iconRender(visible);
+        const iconProps = {
+            onClick: () => {
+                setVisible(visible => !visible);
+            },
+            className: formStyles.formPwdIcon,
+            onMouseDown: (e: MouseEvent) => {
+                e.preventDefault();
+            },
+            onMouseUp: (e: MouseEvent) => {
+                e.preventDefault();
+            },
+        };
+        return /*#__PURE__*/ React.cloneElement(
+            /*#__PURE__*/ React.isValidElement(icon)
+                ? icon
+                : /*#__PURE__*/ React.createElement('span', null, icon),
+            iconProps,
+        );
+    }, [visible]);
+
     return useMemo(() => {
         return (
             <Form.Item
@@ -58,10 +86,24 @@ const FormPassword = (props: FormPasswordProps) => {
                 colon={colon}
                 initialValue={initialValue}
             >
-                <Input.Password className={className} {..._props} {...eventProps} />
+                <Input
+                    className={className}
+                    {..._props}
+                    {...eventProps}
+                    suffix={suffix}
+                    type={visible ? 'text' : 'password'}
+                />
             </Form.Item>
         );
-    }, [_props]);
+    }, [_props, visible]);
+};
+
+FormPassword.defaultProps = {
+    iconRender: function(visible: boolean) {
+        return visible
+            ? /*#__PURE__*/ React.createElement(EyeOutlined, null)
+            : /*#__PURE__*/ React.createElement(EyeInvisibleOutlined, null);
+    },
 };
 
 FormPassword.typeList = typeList;

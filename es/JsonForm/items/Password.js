@@ -32,8 +32,9 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import formStyles from '../_form.less';
+import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 var typeList = ['password'];
 
 var FormPassword = function FormPassword(props) {
@@ -50,7 +51,10 @@ var FormPassword = function FormPassword(props) {
       rules = props.rules,
       colon = props.colon,
       initialValue = props.initialValue,
-      _props = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "colon", "initialValue"]);
+      iconRender = props.iconRender,
+      _c = props.defaultVisible,
+      defaultVisible = _c === void 0 ? false : _c,
+      _props = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "colon", "initialValue", "iconRender", "defaultVisible"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -59,6 +63,29 @@ var FormPassword = function FormPassword(props) {
       }
     } : {};
   }, []);
+
+  var _d = useState(defaultVisible),
+      visible = _d[0],
+      setVisible = _d[1];
+
+  var suffix = useMemo(function () {
+    var icon = iconRender(visible);
+    var iconProps = {
+      onClick: function onClick() {
+        setVisible(function (visible) {
+          return !visible;
+        });
+      },
+      className: formStyles.formPwdIcon,
+      onMouseDown: function onMouseDown(e) {
+        e.preventDefault();
+      },
+      onMouseUp: function onMouseUp(e) {
+        e.preventDefault();
+      }
+    };
+    return /*#__PURE__*/React.cloneElement( /*#__PURE__*/React.isValidElement(icon) ? icon : /*#__PURE__*/React.createElement('span', null, icon), iconProps);
+  }, [visible]);
   return useMemo(function () {
     return React.createElement(_Form.Item, {
       className: formItemClassName,
@@ -69,11 +96,19 @@ var FormPassword = function FormPassword(props) {
       rules: rules,
       colon: colon,
       initialValue: initialValue
-    }, React.createElement(_Input.Password, __assign({
+    }, React.createElement(_Input, __assign({
       className: className
-    }, _props, eventProps)));
-  }, [_props]);
+    }, _props, eventProps, {
+      suffix: suffix,
+      type: visible ? 'text' : 'password'
+    })));
+  }, [_props, visible]);
 };
 
+FormPassword.defaultProps = {
+  iconRender: function iconRender(visible) {
+    return visible ? /*#__PURE__*/React.createElement(EyeOutlined, null) : /*#__PURE__*/React.createElement(EyeInvisibleOutlined, null);
+  }
+};
 FormPassword.typeList = typeList;
 export default FormPassword;
