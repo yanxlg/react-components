@@ -57,7 +57,9 @@ var FormTextArea = function FormTextArea(props) {
   } : _c,
       initialValue = props.initialValue,
       hide = props.hide,
-      _props = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "autoSize", "initialValue", "hide"]);
+      _d = props.allowClear,
+      allowClear = _d === void 0 ? true : _d,
+      _props = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "autoSize", "initialValue", "hide", "allowClear"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -82,7 +84,9 @@ var FormTextArea = function FormTextArea(props) {
       autoSize: autoSize,
       // placeholder={placeholder}
       className: className
-    }, _props, eventProps)));
+    }, _props, eventProps, {
+      allowClear: allowClear
+    })));
   }, [_props, hide]);
 };
 

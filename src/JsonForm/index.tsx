@@ -40,6 +40,7 @@ import FormNumberRange, { NumberRangeType, NumberRangeProps } from './items/Numb
 import FormTree, { FormTreeProps, FormTreeType } from './items/TreeItem';
 import CollapseLayout, { CollapseLayoutProps, CollapseLayoutType } from './layout/CollapseLayout';
 import FormPassword, { FormPasswordProps, PasswordType } from './items/Password';
+import FormLabel, { LabelProps, LabelType } from './items/Label';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -48,6 +49,7 @@ export declare interface CustomFormProps {
 
 export type FormField<T = string> = (
     | Omit<InputProps<T>, 'form'>
+    | Omit<LabelProps<T>, 'form'>
     | Omit<FormPasswordProps<T>, 'form'>
     | Omit<SelectProps<T>, 'form'>
     | Omit<CheckboxProps<T>, 'form'>
@@ -112,6 +114,19 @@ export const getFormItem = (
     hide?: boolean,
 ) => {
     const name = field['name'];
+    if (FormLabel.typeList.includes(type)) {
+        return getColChildren(
+            <FormLabel
+                key={String(name)}
+                labelClassName={labelClassName}
+                {...(field as LabelProps)}
+                type={type as LabelType}
+                form={form}
+                hide={hide}
+            />,
+            itemCol,
+        );
+    }
     if (FormInput.typeList.includes(type)) {
         return getColChildren(
             <FormInput
@@ -461,7 +476,9 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
             const target = targetFieldList || fieldList;
             (target as any[]).map((field: any) => {
                 const { type } = field;
-                if (FormPassword.typeList.includes(type)) {
+                if (FormLabel.typeList.includes(type)) {
+                    // 没有值需要获取
+                } else if (FormPassword.typeList.includes(type)) {
                     values[name] = form.getFieldValue(name);
                 } else if (Layout.typeList.includes(type)) {
                     // layout 组件

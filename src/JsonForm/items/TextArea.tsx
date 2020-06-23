@@ -43,6 +43,7 @@ const FormTextArea = (props: TextAreaProps) => {
         autoSize = { minRows: 1, maxRows: 6 },
         initialValue,
         hide,
+        allowClear = true,
         ..._props
     } = props;
     const eventProps = useMemo(() => {
@@ -77,6 +78,7 @@ const FormTextArea = (props: TextAreaProps) => {
                     className={className}
                     {..._props}
                     {...eventProps}
+                    allowClear={allowClear}
                 />
             </Form.Item>
         );
