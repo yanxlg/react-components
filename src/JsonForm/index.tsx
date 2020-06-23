@@ -39,6 +39,7 @@ import LoadingItem, { LoadingItemProps, LoadingType } from './items/LoadingItem'
 import FormNumberRange, { NumberRangeType, NumberRangeProps } from './items/NumberRange';
 import FormTree, { FormTreeProps, FormTreeType } from './items/TreeItem';
 import CollapseLayout, { CollapseLayoutProps, CollapseLayoutType } from './layout/CollapseLayout';
+import FormPassword, { FormPasswordProps, PasswordType } from './items/Password';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -47,6 +48,7 @@ export declare interface CustomFormProps {
 
 export type FormField<T = string> = (
     | Omit<InputProps<T>, 'form'>
+    | Omit<FormPasswordProps<T>, 'form'>
     | Omit<SelectProps<T>, 'form'>
     | Omit<CheckboxProps<T>, 'form'>
     | Omit<DatePickerProps<T>, 'form'>
@@ -119,6 +121,18 @@ export const getFormItem = (
                 type={type as InputType}
                 form={form}
                 hide={hide}
+            />,
+            itemCol,
+        );
+    }
+    if (FormPassword.typeList.includes(type)) {
+        return getColChildren(
+            <FormPassword
+                key={String(name)}
+                labelClassName={labelClassName}
+                {...(field as FormPasswordProps)}
+                type={type as PasswordType}
+                form={form}
             />,
             itemCol,
         );
@@ -447,7 +461,9 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
             const target = targetFieldList || fieldList;
             (target as any[]).map((field: any) => {
                 const { type } = field;
-                if (Layout.typeList.includes(type)) {
+                if (FormPassword.typeList.includes(type)) {
+                    values[name] = form.getFieldValue(name);
+                } else if (Layout.typeList.includes(type)) {
                     // layout 组件
                     values = {
                         ...values,

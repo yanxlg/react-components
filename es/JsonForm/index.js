@@ -77,6 +77,7 @@ import LoadingItem from './items/LoadingItem';
 import FormNumberRange from './items/NumberRange';
 import FormTree from './items/TreeItem';
 import CollapseLayout from './layout/CollapseLayout';
+import FormPassword from './items/Password';
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
@@ -102,6 +103,16 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       type: type,
       form: form,
       hide: hide
+    })), itemCol);
+  }
+
+  if (FormPassword.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormPassword, __assign({
+      key: String(name),
+      labelClassName: labelClassName
+    }, field, {
+      type: type,
+      form: form
     })), itemCol);
   }
 
@@ -376,7 +387,9 @@ var JsonForm = function JsonForm(props, ref) {
     target.map(function (field) {
       var type = field.type;
 
-      if (Layout.typeList.includes(type)) {
+      if (FormPassword.typeList.includes(type)) {
+        values[name] = form.getFieldValue(name);
+      } else if (Layout.typeList.includes(type)) {
         // layout 组件
         values = __assign(__assign({}, values), getValues(field.fieldList));
       } else if (CollapseLayout.typeList.indexOf(type)) {
