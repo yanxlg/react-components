@@ -6,7 +6,7 @@ import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
 import formStyles from '../_form.less';
 import { SelectProps as AntdSelectProps } from 'antd/es/select/index';
 import { FormatterType } from '../../utils/formatter';
-import { DefaultRootState, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export declare interface IOptionItem {
     name: string;
@@ -22,7 +22,7 @@ const typeList = ['select'];
 
 interface DvaSelector {
     type: 'select';
-    selector: (state: DefaultRootState) => unknown;
+    selector: (state: any) => unknown;
     equalityFn?: (left: unknown, right: unknown) => boolean;
 }
 
@@ -132,14 +132,22 @@ const FormSelect = (props: SelectProps) => {
                     optionList: mergeList,
                 };
             } else {
-                const loading = (isFunction && !options) || (useDva && !dvaOptions); // dva 显示进度
-                const mergeList = (useDva ? dvaOptions : options) || ([] as IOptionItem[]);
+                const loading = isFunction && !options; // dva 显示进度
+                const mergeList = options || ([] as IOptionItem[]);
                 return {
                     loading: loading,
                     optionList: mergeList,
                 };
             }
         } else {
+            if (useDva) {
+                const loading = !dvaOptions; // dva 显示进度
+                const mergeList = dvaOptions || ([] as IOptionItem[]);
+                return {
+                    loading: loading,
+                    optionList: mergeList,
+                };
+            }
             return {
                 loading: false,
                 optionList: (optionList || []) as IOptionItem[],

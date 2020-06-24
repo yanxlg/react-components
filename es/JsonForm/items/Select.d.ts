@@ -4,7 +4,6 @@ import { FormInstance, Rule } from 'antd/es/form';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
 import { SelectProps as AntdSelectProps } from 'antd/es/select/index';
 import { FormatterType } from '../../utils/formatter';
-import { DefaultRootState } from 'react-redux';
 export declare interface IOptionItem {
     name: string;
     value: string | number;
@@ -14,7 +13,7 @@ declare type OptionsPromise = () => Promise<IOptionItem[]>;
 export declare type SelectType = 'select';
 interface DvaSelector {
     type: 'select';
-    selector: (state: DefaultRootState) => unknown;
+    selector: (state: any) => unknown;
     equalityFn?: (left: unknown, right: unknown) => boolean;
 }
 export declare type SelectProps<T = string> = FormItemLabelProps & CustomFormProps & {
