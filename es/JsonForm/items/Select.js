@@ -296,7 +296,7 @@ var FormSelect = function FormSelect(props) {
         })));
       });
     }
-  }, [options, optionList, optionListDependence, disabled, hide]);
+  }, [options, optionList, optionListDependence, disabled, hide, dvaOptions]);
 };
 
 FormSelect.typeList = typeList;

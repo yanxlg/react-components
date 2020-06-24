@@ -314,7 +314,7 @@ const FormSelect = (props: SelectProps) => {
                 </Form.Item>
             );
         }
-    }, [options, optionList, optionListDependence, disabled, hide]);
+    }, [options, optionList, optionListDependence, disabled, hide, dvaOptions]);
 };
 
 FormSelect.typeList = typeList;
