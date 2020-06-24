@@ -6,6 +6,7 @@ import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
 import formStyles from '../_form.less';
 import { SelectProps as AntdSelectProps } from 'antd/es/select/index';
 import { FormatterType } from '../../utils/formatter';
+import { DefaultRootState, useSelector } from 'react-redux';
 
 export declare interface IOptionItem {
     name: string;
@@ -19,12 +20,18 @@ type OptionsPromise = () => Promise<IOptionItem[]>;
 export type SelectType = 'select';
 const typeList = ['select'];
 
+interface DvaSelector {
+    type: 'select';
+    selector: (state: DefaultRootState) => unknown;
+    equalityFn?: (left: unknown, right: unknown) => boolean;
+}
+
 export type SelectProps<T = string> = FormItemLabelProps &
     CustomFormProps & {
         type: SelectType;
         form: FormInstance;
         // placeholder?: string;
-        optionList?: IOptionItem[] | OptionsPromise; // 支持异步获取， 支持配置api地址及response path进行配置
+        optionList?: IOptionItem[] | OptionsPromise | DvaSelector; // 支持异步获取， 支持配置api地址及response path进行配置
         syncDefaultOption?: IOptionItem; // 异步获取options是默认选项，通常用于胚子'全部'
         optionListDependence?: {
             name: FormItemName | FormItemName[]; // 依赖名成
@@ -66,6 +73,13 @@ const FormSelect = (props: SelectProps) => {
         ...extraProps
     } = props;
     const [options, setOptions] = useState<IOptionItem[] | undefined>(undefined);
+
+    const useDva = optionList?.['type'] === 'select';
+
+    const dvaOptions = useSelector(
+        useDva ? (optionList as DvaSelector).selector : () => undefined,
+        (optionList as DvaSelector)?.equalityFn,
+    ) as IOptionItem[];
 
     const isFunction = typeof optionList === 'function';
 
@@ -118,8 +132,8 @@ const FormSelect = (props: SelectProps) => {
                     optionList: mergeList,
                 };
             } else {
-                const loading = isFunction && !options;
-                const mergeList = options || ([] as IOptionItem[]);
+                const loading = (isFunction && !options) || (useDva && !dvaOptions); // dva 显示进度
+                const mergeList = (useDva ? dvaOptions : options) || ([] as IOptionItem[]);
                 return {
                     loading: loading,
                     optionList: mergeList,

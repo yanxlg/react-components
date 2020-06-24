@@ -50,15 +50,18 @@ var __spreadArrays = this && this.__spreadArrays || function () {
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import formStyles from '../_form.less';
+import { useSelector } from 'react-redux';
 var typeList = ['select'];
 
 var FormSelect = function FormSelect(props) {
+  var _a;
+
   var name = props.name,
       label = props.label,
-      _a = props.className,
-      className = _a === void 0 ? formStyles.formItemDefault : _a,
-      _b = props.formItemClassName,
-      formItemClassName = _b === void 0 ? formStyles.formItem : _b,
+      _b = props.className,
+      className = _b === void 0 ? formStyles.formItemDefault : _b,
+      _c = props.formItemClassName,
+      formItemClassName = _c === void 0 ? formStyles.formItem : _c,
       syncDefaultOption = props.syncDefaultOption,
       optionListDependence = props.optionListDependence,
       _onChange = props.onChange,
@@ -69,19 +72,23 @@ var FormSelect = function FormSelect(props) {
       mode = props.mode,
       maxTagCount = props.maxTagCount,
       // placeholder,
-  _c = props.isShortcut,
+  _d = props.isShortcut,
       // placeholder,
-  isShortcut = _c === void 0 ? false : _c,
+  isShortcut = _d === void 0 ? false : _d,
       disabled = props.disabled,
       colon = props.colon,
       initialValue = props.initialValue,
       hide = props.hide,
       extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "syncDefaultOption", "optionListDependence", "onChange", "labelClassName", "form", "optionList", "rules", "mode", "maxTagCount", "isShortcut", "disabled", "colon", "initialValue", "hide"]);
 
-  var _d = useState(undefined),
-      options = _d[0],
-      setOptions = _d[1];
+  var _e = useState(undefined),
+      options = _e[0],
+      setOptions = _e[1];
 
+  var useDva = (optionList === null || optionList === void 0 ? void 0 : optionList['type']) === 'select';
+  var dvaOptions = useSelector(useDva ? optionList.selector : function () {
+    return undefined;
+  }, (_a = optionList) === null || _a === void 0 ? void 0 : _a.equalityFn);
   var isFunction = typeof optionList === 'function';
   useEffect(function () {
     if (isFunction) {
@@ -132,8 +139,9 @@ var FormSelect = function FormSelect(props) {
           optionList: mergeList
         };
       } else {
-        var loading = isFunction && !options;
-        var mergeList = options || [];
+        var loading = isFunction && !options || useDva && !dvaOptions; // dva 显示进度
+
+        var mergeList = (useDva ? dvaOptions : options) || [];
         return {
           loading: loading,
           optionList: mergeList
