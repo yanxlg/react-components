@@ -486,7 +486,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                         ...values,
                         ...getValues((field as LayoutProps).fieldList),
                     };
-                } else if (CollapseLayout.typeList.indexOf(type)) {
+                } else if (CollapseLayout.typeList.includes(type)) {
                     values = {
                         ...values,
                         ...getValues([

@@ -405,7 +405,7 @@ var JsonForm = function JsonForm(props, ref) {
       } else if (Layout.typeList.includes(type)) {
         // layout 组件
         values = __assign(__assign({}, values), getValues(field.fieldList));
-      } else if (CollapseLayout.typeList.indexOf(type)) {
+      } else if (CollapseLayout.typeList.includes(type)) {
         values = __assign(__assign({}, values), getValues(__spreadArrays(field.fieldList, [field.panel.header])));
       } else if (LoadingItem.typeList.includes(type)) {
         // @ts-ignore
