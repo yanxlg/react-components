@@ -163,7 +163,7 @@ var FormSelect = function FormSelect(props) {
         optionList: optionList || []
       };
     }
-  }, [optionListDependence, optionList, options]);
+  }, [optionListDependence, optionList, options, dvaOptions]);
   var eventProps = useMemo(function () {
     return _onChange ? {
       onChange: function onChange() {

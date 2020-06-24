@@ -153,7 +153,7 @@ const FormSelect = (props: SelectProps) => {
                 optionList: (optionList || []) as IOptionItem[],
             };
         }
-    }, [optionListDependence, optionList, options]);
+    }, [optionListDependence, optionList, options, dvaOptions]);
 
     const eventProps = useMemo(() => {
         return onChange
