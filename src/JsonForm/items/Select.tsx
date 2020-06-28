@@ -163,7 +163,7 @@ const FormSelect = (props: SelectProps) => {
                   },
               }
             : {};
-    }, []);
+    }, [onChange]);
 
     const dropdownRender = useCallback(
         (menu: React.ReactElement): React.ReactElement => {
