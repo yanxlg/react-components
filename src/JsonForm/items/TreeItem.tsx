@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Form, Tree } from 'antd';
 import { CustomFormProps, FormItemName } from '../index';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
@@ -15,7 +15,6 @@ export type FormTreeProps<T = string> = FormItemLabelProps &
         type: FormTreeType;
         className?: string;
         formItemClassName?: string;
-        onChange?: (name: FormItemName<T>, form: FormInstance) => void; // change监听，支持外部执行表单操作，可以实现关联筛选，重置等操作
         name: FormItemName<T>;
         rules?: Rule[];
         labelClassName?: string;
@@ -31,7 +30,6 @@ const FormTree = (props: FormTreeProps) => {
         labelClassName,
         formItemClassName = formStyles.formItem,
         className,
-        onChange,
         form,
         rules,
         required,
@@ -39,16 +37,6 @@ const FormTree = (props: FormTreeProps) => {
         hide,
         ..._props
     } = props;
-
-    const eventProps = useMemo(() => {
-        return onChange
-            ? {
-                  onCheck: () => {
-                      onChange(name as FormItemName, form);
-                  },
-              }
-            : {};
-    }, []);
 
     const requiredProps = required
         ? {
@@ -74,7 +62,7 @@ const FormTree = (props: FormTreeProps) => {
             valuePropName={'checkedKeys'}
             trigger={'onCheck'}
         >
-            <Tree className={className} {...eventProps} {..._props} />
+            <Tree className={className} {..._props} />
         </Form.Item>
     );
 };

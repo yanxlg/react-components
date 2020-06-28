@@ -32,7 +32,7 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-import React, { useMemo } from 'react';
+import React from 'react';
 import formStyles from '../_form.less';
 var typeList = ['tree'];
 
@@ -43,21 +43,13 @@ var FormTree = function FormTree(props) {
       _a = props.formItemClassName,
       formItemClassName = _a === void 0 ? formStyles.formItem : _a,
       className = props.className,
-      onChange = props.onChange,
       form = props.form,
       rules = props.rules,
       required = props.required,
       initialValue = props.initialValue,
       hide = props.hide,
-      _props = __rest(props, ["name", "label", "labelClassName", "formItemClassName", "className", "onChange", "form", "rules", "required", "initialValue", "hide"]);
+      _props = __rest(props, ["name", "label", "labelClassName", "formItemClassName", "className", "form", "rules", "required", "initialValue", "hide"]);
 
-  var eventProps = useMemo(function () {
-    return onChange ? {
-      onCheck: function onCheck() {
-        onChange(name, form);
-      }
-    } : {};
-  }, []);
   var requiredProps = required ? {
     required: required
   } : {};
@@ -77,7 +69,7 @@ var FormTree = function FormTree(props) {
     trigger: 'onCheck'
   }), React.createElement(_Tree, __assign({
     className: className
-  }, eventProps, _props)));
+  }, _props)));
 };
 
 FormTree.typeList = typeList;

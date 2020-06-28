@@ -21,7 +21,7 @@ export declare interface CollapseLayoutProps<T = string> extends CollapseProps {
     header?: React.ReactElement;
     footer?: React.ReactElement;
     panel: CollapsePanelProps & {
-        header: FormField<T>;
+        header: FormField<T> | React.ReactNode;
     };
     controlByIcon?: boolean; // 是否限制为仅icon可触控
 }
@@ -78,6 +78,7 @@ const CollapseLayout = (props: CollapseLayoutProps) => {
         }
     }, []);
 
+    const isHeaderFormComponent = typeof _header === 'object' && _header.hasOwnProperty('name');
     return (
         <Collapse
             className={formStyles.formCollapse}
@@ -86,7 +87,12 @@ const CollapseLayout = (props: CollapseLayoutProps) => {
             onChange={onMixChange}
             expandIcon={icon}
         >
-            <Collapse.Panel header={getFormItems([_header], form)} {...__props}>
+            <Collapse.Panel
+                header={
+                    isHeaderFormComponent ? getFormItems([_header as FormField], form) : _header
+                }
+                {...__props}
+            >
                 {getFormItems(fieldList, form, labelClassName, itemCol, itemRow)}
             </Collapse.Panel>
         </Collapse>

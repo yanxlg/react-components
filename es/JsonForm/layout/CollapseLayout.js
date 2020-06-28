@@ -89,6 +89,9 @@ var CollapseLayout = function CollapseLayout(props) {
       return undefined;
     }
   }, []);
+
+  var isHeaderFormComponent = typeof _header === 'object' && _header.hasOwnProperty('name');
+
   return React.createElement(_Collapse, __assign({
     className: formStyles.formCollapse
   }, _props, {
@@ -96,7 +99,7 @@ var CollapseLayout = function CollapseLayout(props) {
     onChange: onMixChange,
     expandIcon: icon
   }), React.createElement(_Collapse.Panel, __assign({
-    header: getFormItems([_header], form)
+    header: isHeaderFormComponent ? getFormItems([_header], form) : _header
   }, __props), getFormItems(fieldList, form, labelClassName, itemCol, itemRow)));
 };
 

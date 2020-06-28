@@ -15,7 +15,7 @@ export declare interface CollapseLayoutProps<T = string> extends CollapseProps {
     header?: React.ReactElement;
     footer?: React.ReactElement;
     panel: CollapsePanelProps & {
-        header: FormField<T>;
+        header: FormField<T> | React.ReactNode;
     };
     controlByIcon?: boolean;
 }

@@ -9,7 +9,6 @@ export declare type FormTreeProps<T = string> = FormItemLabelProps & CustomFormP
     type: FormTreeType;
     className?: string;
     formItemClassName?: string;
-    onChange?: (name: FormItemName<T>, form: FormInstance) => void;
     name: FormItemName<T>;
     rules?: Rule[];
     labelClassName?: string;
