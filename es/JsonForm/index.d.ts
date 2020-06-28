@@ -26,6 +26,7 @@ import { FormTreeProps } from './items/TreeItem';
 import { CollapseLayoutProps } from './layout/CollapseLayout';
 import { FormPasswordProps } from './items/Password';
 import { LabelProps } from './items/Label';
+import { NamePath } from 'rc-field-form/es/interface';
 export declare interface CustomFormProps {
     labelClassName?: string;
 }
@@ -49,7 +50,7 @@ export interface JsonFormRef {
     getFieldsValue: () => Store;
     validateFields: ValidateFields;
     setFieldsValue: (value: Store) => void;
-    resetFields: () => void;
+    resetFields: (fields?: NamePath[]) => void;
 }
 export declare const getColChildren: (children: React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)>) | (new (props: any) => React.Component<any, any, any>)>, itemCol?: ColProps, times?: number) => JSX.Element;
 export declare const getFormItem: ({ type, ...field }: FormField<string>, form: FormInstance, labelClassName?: string, itemCol?: ColProps, itemRow?: RowProps, index?: number, hide?: boolean) => JSX.Element;

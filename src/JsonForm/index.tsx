@@ -41,6 +41,7 @@ import FormTree, { FormTreeProps, FormTreeType } from './items/TreeItem';
 import CollapseLayout, { CollapseLayoutProps, CollapseLayoutType } from './layout/CollapseLayout';
 import FormPassword, { FormPasswordProps, PasswordType } from './items/Password';
 import FormLabel, { LabelProps, LabelType } from './items/Label';
+import { NamePath } from 'rc-field-form/es/interface';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -93,7 +94,7 @@ export interface JsonFormRef {
     getFieldsValue: () => Store;
     validateFields: ValidateFields;
     setFieldsValue: (value: Store) => void;
-    resetFields: () => void;
+    resetFields: (fields?: NamePath[]) => void;
 }
 
 export const getColChildren = (children: ReactElement, itemCol?: ColProps, times: number = 1) => {
@@ -462,8 +463,8 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                 setFieldsValue: (value: Store) => {
                     form.setFieldsValue(value);
                 },
-                resetFields: () => {
-                    form.resetFields();
+                resetFields: (fields?: NamePath[]) => {
+                    form.resetFields(fields);
                 },
             };
         },

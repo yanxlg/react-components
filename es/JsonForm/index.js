@@ -388,8 +388,8 @@ var JsonForm = function JsonForm(props, ref) {
       setFieldsValue: function setFieldsValue(value) {
         form.setFieldsValue(value);
       },
-      resetFields: function resetFields() {
-        form.resetFields();
+      resetFields: function resetFields(fields) {
+        form.resetFields(fields);
       }
     };
   }, [fieldList]);
