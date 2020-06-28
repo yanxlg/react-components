@@ -444,7 +444,12 @@ var JsonForm = function JsonForm(props, ref) {
 
           values = __assign(__assign({}, values), _values);
         } else {
-          values[name_1] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_1));
+          // name 可能是数组
+          if (Array.isArray(name_1)) {
+            values[name_1[0]] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_1[0]));
+          } else {
+            values[name_1] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_1));
+          }
         }
       }
     });

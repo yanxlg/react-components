@@ -554,10 +554,18 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                             ..._values,
                         };
                     } else {
-                        values[name] = getFormatterFunc(
-                            formatterName,
-                            formatter.null,
-                        )(form.getFieldValue(name));
+                        // name 可能是数组
+                        if (Array.isArray(name)) {
+                            values[name[0]] = getFormatterFunc(
+                                formatterName,
+                                formatter.null,
+                            )(form.getFieldValue(name[0]));
+                        } else {
+                            values[name] = getFormatterFunc(
+                                formatterName,
+                                formatter.null,
+                            )(form.getFieldValue(name));
+                        }
                     }
                 }
             });
