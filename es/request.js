@@ -268,6 +268,8 @@ function addDefaultInterceptors(req) {
         }
       });
     });
+  }, {
+    global: false
   });
   req.interceptors.request.use(function (url, options) {
     options.headers = _extends({}, options.headers, {
@@ -285,6 +287,8 @@ function addDefaultInterceptors(req) {
         data: data ? clearEmptyVal(data) : undefined
       })
     };
+  }, {
+    global: false
   }); // 处理abort 逻辑
 
   req.interceptors.request.use(function (url, options) {
@@ -307,6 +311,8 @@ function addDefaultInterceptors(req) {
         options: options
       };
     }
+  }, {
+    global: false
   });
 }
 

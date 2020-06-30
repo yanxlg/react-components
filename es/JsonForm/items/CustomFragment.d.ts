@@ -10,9 +10,12 @@ export declare interface CustomFragmentProps {
         form: FormInstance;
     }>;
     names: string[];
+    props?: {
+        [key: string]: any;
+    };
 }
 declare const CustomFragment: {
-    ({ form, Component }: CustomFragmentProps): JSX.Element;
+    ({ form, Component, props }: CustomFragmentProps): JSX.Element;
     typeList: string[];
 };
 export default CustomFragment;

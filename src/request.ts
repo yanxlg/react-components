@@ -39,81 +39,90 @@ const requestId = function() {
 const successReg = /^200|success$/;
 
 function addDefaultInterceptors(req: RequestMethod) {
-    req.interceptors.response.use(async (response, options) => {
-        let skipResponseInterceptors = options?.skipResponseInterceptors;
-        if (!response) {
-            !skipResponseInterceptors && message.error('服务异常，无结果返回！');
-            throw response;
-        }
-        const { status } = response;
-        if (status < 200 || status >= 300) {
-            // 错误码
-            const msg = codeMessage[status];
-            !skipResponseInterceptors && msg && message.error(`${status}：${msg}`);
-            throw response;
-        }
-
-        const { responseType } = options;
-        if (responseType === void 0 || responseType === 'json') {
-            // json数据，默认解析判断数据结构
-            try {
-                const data = await response.clone().json();
-                const state = data.code || data.status || data.state; // 支持code和status及state三个字段进行校验
-                const msg =
-                    data.msg ||
-                    (typeof data.data === 'string' ? data.data : '') ||
-                    data.message ||
-                    data.error; // 错误信息
-                if (!successReg.test(String(state))) {
-                    !skipResponseInterceptors && message.error(msg);
-                    skipResponseInterceptors = true;
-                    throw null;
-                }
-                return response;
-            } catch (error) {
-                // 结果存在问题，类似no response 进行处理
-                !skipResponseInterceptors && message.error('服务异常，返回结果无法解析！');
+    req.interceptors.response.use(
+        async (response, options) => {
+            let skipResponseInterceptors = options?.skipResponseInterceptors;
+            if (!response) {
+                !skipResponseInterceptors && message.error('服务异常，无结果返回！');
                 throw response;
             }
-        }
-        return response;
-    });
-    req.interceptors.request.use((url: string, options: RequestOptionsInit) => {
-        options.headers = Object.assign({}, options.headers, {
-            request_id: requestId(),
-        });
-        const { params, data, ...extra } = options;
-        return {
-            url,
-            options: {
-                ...extra,
-                params: params ? clearEmptyVal(params) : undefined,
-                data: data ? clearEmptyVal(data) : undefined,
-            },
-        };
-    });
-    // 处理abort 逻辑
-    req.interceptors.request.use((url: string, options: RequestOptionsInit) => {
-        if (options?.cancelToken) {
-            const controller = new AbortController(); // fetch abort
-            const signal = controller.signal;
-            options.cancelToken.promise.then(() => {
-                controller.abort();
+            const { status } = response;
+            if (status < 200 || status >= 300) {
+                // 错误码
+                const msg = codeMessage[status];
+                !skipResponseInterceptors && msg && message.error(`${status}：${msg}`);
+                throw response;
+            }
+
+            const { responseType } = options;
+            if (responseType === void 0 || responseType === 'json') {
+                // json数据，默认解析判断数据结构
+                try {
+                    const data = await response.clone().json();
+                    const state = data.code || data.status || data.state; // 支持code和status及state三个字段进行校验
+                    const msg =
+                        data.msg ||
+                        (typeof data.data === 'string' ? data.data : '') ||
+                        data.message ||
+                        data.error; // 错误信息
+                    if (!successReg.test(String(state))) {
+                        !skipResponseInterceptors && message.error(msg);
+                        skipResponseInterceptors = true;
+                        throw null;
+                    }
+                    return response;
+                } catch (error) {
+                    // 结果存在问题，类似no response 进行处理
+                    !skipResponseInterceptors && message.error('服务异常，返回结果无法解析！');
+                    throw response;
+                }
+            }
+            return response;
+        },
+        { global: false },
+    );
+    req.interceptors.request.use(
+        (url: string, options: RequestOptionsInit) => {
+            options.headers = Object.assign({}, options.headers, {
+                request_id: requestId(),
             });
+            const { params, data, ...extra } = options;
             return {
                 url,
                 options: {
-                    ...options,
-                    signal,
+                    ...extra,
+                    params: params ? clearEmptyVal(params) : undefined,
+                    data: data ? clearEmptyVal(data) : undefined,
                 },
             };
-        } else {
-            return {
-                url,
-                options,
-            };
-        }
-    });
+        },
+        { global: false },
+    );
+    // 处理abort 逻辑
+    req.interceptors.request.use(
+        (url: string, options: RequestOptionsInit) => {
+            if (options?.cancelToken) {
+                const controller = new AbortController(); // fetch abort
+                const signal = controller.signal;
+                options.cancelToken.promise.then(() => {
+                    controller.abort();
+                });
+                return {
+                    url,
+                    options: {
+                        ...options,
+                        signal,
+                    },
+                };
+            } else {
+                return {
+                    url,
+                    options,
+                };
+            }
+        },
+        { global: false },
+    );
 }
 
 let request = extend({
