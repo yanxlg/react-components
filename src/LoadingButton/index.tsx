@@ -14,7 +14,8 @@ const LoadingButton: React.FC<ILoadingButtonProps> = props => {
     const onClick = useCallback(
         (event: React.MouseEvent<HTMLButtonElement>) => {
             // 如果没有onClick则不执行任何操作
-            if (props.onClick) {
+            if (props.onClick && !props['_privateClick']) {
+                // tooltip会添加onClick,_privateClick表示onClick不是正常情况下添加，私有属性
                 setLoading(true);
                 props.onClick(event).finally(() => {
                     setLoading(false);
