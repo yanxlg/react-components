@@ -30,29 +30,7 @@ import { NamePath } from 'rc-field-form/es/interface';
 export declare interface CustomFormProps {
     labelClassName?: string;
 }
-export declare type FormField<T = string> = (
-    | Omit<InputProps<T>, 'form'>
-    | Omit<LabelProps<T>, 'form'>
-    | Omit<FormPasswordProps<T>, 'form'>
-    | Omit<SelectProps<T>, 'form'>
-    | Omit<CheckboxProps<T>, 'form'>
-    | Omit<DatePickerProps<T>, 'form'>
-    | Omit<DateRangerProps<T>, 'form'>
-    | Omit<CheckboxGroupProps<T>, 'form'>
-    | Omit<RadioGroupProps<T>, 'form'>
-    | Omit<InputRangeProps<T>, 'form'>
-    | Omit<TextAreaProps<T>, 'form'>
-    | Omit<LayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>
-    | Omit<CollapseLayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>
-    | Omit<DynamicItemProps, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'>
-    | Omit<HideItemProps, 'form'>
-    | Omit<CascaderProps, 'form'>
-    | Omit<CustomFragmentProps, 'form'>
-    | Omit<TreeSelectProps<T>, 'form'>
-    | Omit<LoadingItemProps<T>, 'form'>
-    | Omit<NumberRangeProps<T>, 'form'>
-    | Omit<FormTreeProps<T>, 'form'>
-) & {
+export declare type FormField<T = string> = (Omit<InputProps<T>, 'form'> | Omit<LabelProps<T>, 'form'> | Omit<FormPasswordProps<T>, 'form'> | Omit<SelectProps<T>, 'form'> | Omit<CheckboxProps<T>, 'form'> | Omit<DatePickerProps<T>, 'form'> | Omit<DateRangerProps<T>, 'form'> | Omit<CheckboxGroupProps<T>, 'form'> | Omit<RadioGroupProps<T>, 'form'> | Omit<InputRangeProps<T>, 'form'> | Omit<TextAreaProps<T>, 'form'> | Omit<LayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'> | Omit<CollapseLayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'> | Omit<DynamicItemProps, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'> | Omit<HideItemProps, 'form'> | Omit<CascaderProps, 'form'> | Omit<CustomFragmentProps, 'form'> | Omit<TreeSelectProps<T>, 'form'> | Omit<LoadingItemProps<T>, 'form'> | Omit<NumberRangeProps<T>, 'form'> | Omit<FormTreeProps<T>, 'form'>) & {
     form?: FormInstance;
     key?: string;
 };
@@ -74,38 +52,8 @@ export interface JsonFormRef {
     setFieldsValue: (value: Store) => void;
     resetFields: (fields?: NamePath[]) => void;
 }
-export declare const getColChildren: (
-    children: React.ReactElement<
-        any,
-        | string
-        | ((
-              props: any,
-          ) => React.ReactElement<
-              any,
-              string | any | (new (props: any) => React.Component<any, any, any>)
-          >)
-        | (new (props: any) => React.Component<any, any, any>)
-    >,
-    itemCol?: ColProps,
-    times?: number,
-) => JSX.Element;
-export declare const getFormItem: (
-    { type, ...field }: FormField<string>,
-    form: FormInstance,
-    labelClassName?: string,
-    itemCol?: ColProps,
-    itemRow?: RowProps,
-    index?: number,
-    hide?: boolean,
-) => JSX.Element;
-export declare const getFormItems: (
-    fieldList: FormField<string>[],
-    form: FormInstance,
-    labelClassName?: string,
-    itemCol?: ColProps,
-    itemRow?: RowProps,
-    showList?: string[],
-) => JSX.Element | JSX.Element[];
-declare const _default_1: React.ForwardRefExoticComponent<JsonFormProps<any> &
-    React.RefAttributes<JsonFormRef>>;
+export declare const getColChildren: (children: React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)>) | (new (props: any) => React.Component<any, any, any>)>, itemCol?: ColProps, times?: number) => JSX.Element;
+export declare const getFormItem: ({ type, ...field }: FormField<string>, form: FormInstance, labelClassName?: string, itemCol?: ColProps, itemRow?: RowProps, index?: number, hide?: boolean) => JSX.Element;
+export declare const getFormItems: (fieldList: FormField<string>[], form: FormInstance, labelClassName?: string, itemCol?: ColProps, itemRow?: RowProps, showList?: string[]) => JSX.Element | JSX.Element[];
+declare const _default_1: React.ForwardRefExoticComponent<JsonFormProps<any> & React.RefAttributes<JsonFormRef>>;
 export default _default_1;
