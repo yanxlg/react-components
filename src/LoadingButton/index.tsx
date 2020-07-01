@@ -13,10 +13,13 @@ const LoadingButton: React.FC<ILoadingButtonProps> = props => {
     const { loading: outerLoading, icon, className, ..._props } = props;
     const onClick = useCallback(
         (event: React.MouseEvent<HTMLButtonElement>) => {
-            setLoading(true);
-            props?.onClick(event).finally(() => {
-                setLoading(false);
-            });
+            // 如果没有onClick则不执行任何操作
+            if (props.onClick) {
+                setLoading(true);
+                props.onClick(event).finally(() => {
+                    setLoading(false);
+                });
+            }
         },
         [props.onClick],
     );
