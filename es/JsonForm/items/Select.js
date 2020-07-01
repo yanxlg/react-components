@@ -170,7 +170,7 @@ var FormSelect = function FormSelect(props) {
         _onChange(name, form);
       }
     } : {};
-  }, []);
+  }, [_onChange]);
   var dropdownRender = useCallback(function (menu) {
     var list = getOptionList().optionList;
 
