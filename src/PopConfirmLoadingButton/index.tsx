@@ -14,6 +14,7 @@ declare interface IPopConfirmLoadingButtonProps {
 const PopConfirmLoadingButton: React.FC<IPopConfirmLoadingButtonProps> = ({
     popConfirmProps,
     buttonProps,
+    ...others
 }) => {
     const [loading, setLoading] = useState(false);
     const onConfirm = useCallback(
@@ -27,7 +28,7 @@ const PopConfirmLoadingButton: React.FC<IPopConfirmLoadingButtonProps> = ({
     );
     return useMemo(() => {
         return (
-            <Popconfirm {...popConfirmProps} onConfirm={onConfirm}>
+            <Popconfirm {...popConfirmProps} onConfirm={onConfirm} {...others}>
                 <span>
                     <Button {...buttonProps} loading={loading} />
                 </span>
