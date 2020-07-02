@@ -51,7 +51,10 @@ function addDefaultInterceptors(req: RequestMethod) {
                 // 错误码
                 const msg = codeMessage[status];
                 !skipResponseInterceptors && msg && message.error(`${status}：${msg}`);
-                throw response;
+                throw {
+                    type: 'HttpError',
+                    data: response.body,
+                };
             }
 
             const { responseType } = options;
@@ -68,13 +71,19 @@ function addDefaultInterceptors(req: RequestMethod) {
                     if (!successReg.test(String(state))) {
                         !skipResponseInterceptors && message.error(msg);
                         skipResponseInterceptors = true;
-                        throw null;
+                        throw {
+                            type: 'HttpError',
+                            data: response.body,
+                        };
                     }
                     return response;
                 } catch (error) {
                     // 结果存在问题，类似no response 进行处理
                     !skipResponseInterceptors && message.error('服务异常，返回结果无法解析！');
-                    throw response;
+                    throw {
+                        type: 'HttpError',
+                        data: response.body,
+                    };
                 }
             }
             return response;

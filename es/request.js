@@ -224,7 +224,10 @@ function addDefaultInterceptors(req) {
             if (status < 200 || status >= 300) {
               msg = codeMessage[status];
               !skipResponseInterceptors && msg && message.error(status + "\uFF1A" + msg);
-              throw response;
+              throw {
+                type: 'HttpError',
+                data: response.body
+              };
             }
 
             responseType = options.responseType;
@@ -248,7 +251,10 @@ function addDefaultInterceptors(req) {
             if (!successReg.test(String(state))) {
               !skipResponseInterceptors && message.error(msg);
               skipResponseInterceptors = true;
-              throw null;
+              throw {
+                type: 'HttpError',
+                data: response.body
+              };
             }
 
             return [2
@@ -259,7 +265,10 @@ function addDefaultInterceptors(req) {
             error_1 = _a.sent(); // 结果存在问题，类似no response 进行处理
 
             !skipResponseInterceptors && message.error('服务异常，返回结果无法解析！');
-            throw response;
+            throw {
+              type: 'HttpError',
+              data: response.body
+            };
 
           case 4:
             return [2
