@@ -401,7 +401,10 @@ var JsonForm = function JsonForm(props, ref) {
 
       if (FormLabel.typeList.includes(type)) {// 没有值需要获取
       } else if (FormPassword.typeList.includes(type)) {
-        values[name] = form.getFieldValue(name);
+        var _a = field,
+            formatterName = _a.formatter,
+            name_1 = _a.name;
+        values[name_1] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_1));
       } else if (Layout.typeList.includes(type)) {
         // layout 组件
         values = __assign(__assign({}, values), getValues(field.fieldList));
@@ -421,20 +424,20 @@ var JsonForm = function JsonForm(props, ref) {
 
         values = __assign(__assign({}, values), _value);
       } else {
-        var _a = field,
-            formatterName = _a.formatter,
-            name_1 = _a.name;
+        var _b = field,
+            formatterName = _b.formatter,
+            name_2 = _b.name;
 
         if (FormInput.typeList.includes(type) || FormTextArea.typeList.includes(type) || FormSelect.typeList.includes(type) || FormDatePicker.typeList.includes(type)) {
-          values[name_1] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_1));
+          values[name_2] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_2));
         } else if (FormDateRanger.typeList.includes(type)) {
-          var name1 = name_1[0],
-              name2 = name_1[1];
+          var name1 = name_2[0],
+              name2 = name_2[1];
           values[name1] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[0], formatter["null"])(form.getFieldValue(name1));
           values[name2] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[1], formatter["null"])(form.getFieldValue(name2));
         } else if (FormInputRange.typeList.includes(type) || FormNumberRange.typeList.includes(type)) {
-          var name1 = name_1[0],
-              name2 = name_1[1];
+          var name1 = name_2[0],
+              name2 = name_2[1];
           values[name1] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[0], formatter.number)(form.getFieldValue(name1));
           values[name2] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[1], formatter.number)(form.getFieldValue(name2));
         } else if (CustomFragment.typeList.includes(type)) {
@@ -445,10 +448,10 @@ var JsonForm = function JsonForm(props, ref) {
           values = __assign(__assign({}, values), _values);
         } else {
           // name 可能是数组
-          if (Array.isArray(name_1)) {
-            values[name_1[0]] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_1[0]));
+          if (Array.isArray(name_2)) {
+            values[name_2[0]] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_2[0]));
           } else {
-            values[name_1] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_1));
+            values[name_2] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_2));
           }
         }
       }

@@ -14,13 +14,8 @@ declare interface IPopConfirmLoadingButtonProps {
 const PopConfirmLoadingButton: React.FC<IPopConfirmLoadingButtonProps> = ({
     popConfirmProps,
     buttonProps,
-    ...props
 }) => {
     const [loading, setLoading] = useState(false);
-    const privateClick = !!props['_privateClick']; // 权限组件控制
-    const permissionClick = props['onClick']; // 权限组件强制设置的click事件
-    const disabled = popConfirmProps.disabled || privateClick;
-
     const onConfirm = useCallback(
         (e?: React.MouseEvent<HTMLElement>) => {
             setLoading(true);
@@ -30,16 +25,15 @@ const PopConfirmLoadingButton: React.FC<IPopConfirmLoadingButtonProps> = ({
         },
         [popConfirmProps?.onConfirm],
     );
-
     return useMemo(() => {
         return (
-            <Popconfirm {...popConfirmProps} onConfirm={onConfirm} disabled={disabled}>
+            <Popconfirm {...popConfirmProps} onConfirm={onConfirm}>
                 <span>
-                    <Button {...buttonProps} loading={loading} onClick={permissionClick} />
+                    <Button {...buttonProps} loading={loading} />
                 </span>
             </Popconfirm>
         );
-    }, [popConfirmProps, buttonProps, loading, disabled]);
+    }, [popConfirmProps, buttonProps, loading]);
 };
 
 export default PopConfirmLoadingButton;

@@ -480,7 +480,11 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                 if (FormLabel.typeList.includes(type)) {
                     // 没有值需要获取
                 } else if (FormPassword.typeList.includes(type)) {
-                    values[name] = form.getFieldValue(name);
+                    const { formatter: formatterName, name } = (field as unknown) as any;
+                    values[name as string] = getFormatterFunc(
+                        formatterName,
+                        formatter.null,
+                    )(form.getFieldValue(name));
                 } else if (Layout.typeList.includes(type)) {
                     // layout 组件
                     values = {
