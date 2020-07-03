@@ -208,7 +208,7 @@ var FormTreeSelect = function FormTreeSelect(props) {
         optionList: optionList || []
       };
     }
-  }, [optionListDependence, optionList, options]);
+  }, [optionListDependence, optionList, options, dvaOptions]);
   var getTreeData = useCallback(function (optionList) {
     if (optionList.length === 0) {
       return [];
@@ -254,7 +254,7 @@ var FormTreeSelect = function FormTreeSelect(props) {
       treeDefaultExpandAll: treeDefaultExpandAll,
       dropdownClassName: dropdownClassName
     }, eventProps, extraProps)));
-  }, [options, optionList, getOptionList, hide]);
+  }, [options, optionList, getOptionList, hide, dvaOptions]);
   return useMemo(function () {
     if (optionListDependence === void 0) {
       return getFormItem();
@@ -280,7 +280,7 @@ var FormTreeSelect = function FormTreeSelect(props) {
         return getFormItem();
       });
     }
-  }, [options, optionList, optionListDependence, getFormItem, hide]);
+  }, [options, optionList, optionListDependence, getFormItem, hide, dvaOptions]);
 };
 
 FormTreeSelect.typeList = typeList;

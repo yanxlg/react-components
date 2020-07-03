@@ -181,7 +181,7 @@ const FormTreeSelect = (props: TreeSelectProps) => {
                 optionList: (optionList || []) as IOptionItem[],
             };
         }
-    }, [optionListDependence, optionList, options]);
+    }, [optionListDependence, optionList, options, dvaOptions]);
 
     const getTreeData = useCallback((optionList: IOptionItem[]) => {
         if (optionList.length === 0) {
@@ -232,7 +232,7 @@ const FormTreeSelect = (props: TreeSelectProps) => {
                 />
             </Form.Item>
         );
-    }, [options, optionList, getOptionList, hide]);
+    }, [options, optionList, getOptionList, hide, dvaOptions]);
 
     return useMemo(() => {
         if (optionListDependence === void 0) {
@@ -261,7 +261,7 @@ const FormTreeSelect = (props: TreeSelectProps) => {
                 </Form.Item>
             );
         }
-    }, [options, optionList, optionListDependence, getFormItem, hide]);
+    }, [options, optionList, optionListDependence, getFormItem, hide, dvaOptions]);
 };
 
 FormTreeSelect.typeList = typeList;
