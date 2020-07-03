@@ -191,9 +191,10 @@ const FormTreeSelect = (props: TreeSelectProps) => {
             {
                 name: '全部',
                 value: 'all',
-                children: optionList.map(({ name, value }) => ({
+                children: optionList.map(({ name, value, disabled }) => ({
                     name,
                     value,
+                    disabled: disabled,
                 })),
             },
         ];
