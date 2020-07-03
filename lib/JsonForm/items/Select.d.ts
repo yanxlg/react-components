@@ -12,7 +12,7 @@ export declare interface IOptionItem {
 }
 declare type OptionsPromise = () => Promise<IOptionItem[]>;
 export declare type SelectType = 'select';
-interface DvaSelector {
+export interface DvaSelector {
     type: 'select';
     selector: (state: any) => unknown;
     equalityFn?: (left: unknown, right: unknown) => boolean;

@@ -1,6 +1,6 @@
 import React, { useMemo, useCallback, useState, useEffect } from 'react';
 import { Form, TreeSelect } from 'antd';
-import { IOptionItem } from './Select';
+import { DvaSelector, IOptionItem } from './Select';
 import { CustomFormProps, FormItemName } from '../index';
 import { FormInstance, Rule } from 'antd/es/form';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
@@ -8,6 +8,7 @@ import { FormatterType } from '../../utils/formatter';
 import { TreeSelectProps as AntdTreeSelectProps } from 'antd/es/tree-select';
 
 import formStyles from '../_form.less';
+import { useSelector } from 'react-redux';
 
 export type TreeSelectType = 'treeSelect';
 const typeList = ['treeSelect'];
@@ -18,7 +19,7 @@ export type TreeSelectProps<T = string> = FormItemLabelProps &
     CustomFormProps & {
         type: TreeSelectType;
         form: FormInstance;
-        optionList?: IOptionItem[] | OptionsPromise; // 支持异步获取， 支持配置api地址及response path进行配置
+        optionList?: IOptionItem[] | OptionsPromise | DvaSelector; // 支持异步获取， 支持配置api地址及response path进行配置
         optionListDependence?: {
             name: FormItemName | FormItemName[]; // 依赖名成
             key: string; // 关联key，暂时不支持多个对应
@@ -58,6 +59,12 @@ const FormTreeSelect = (props: TreeSelectProps) => {
     } = props;
 
     const [options, setOptions] = useState<IOptionItem[] | undefined>(undefined);
+
+    const useDva = optionList?.['type'] === 'select';
+    const dvaOptions = useSelector(
+        useDva ? (optionList as DvaSelector).selector : () => undefined,
+        (optionList as DvaSelector)?.equalityFn,
+    ) as IOptionItem[];
 
     const isFunction = typeof optionList === 'function';
 
@@ -128,6 +135,47 @@ const FormTreeSelect = (props: TreeSelectProps) => {
                 };
             }
         } else {
+            if (useDva) {
+                if (optionListDependence) {
+                    const { name, key: dependenceKey } = optionListDependence;
+                    const dependenceNameList = typeof name === 'string' ? [name] : name || [];
+                    let parentItem = dvaOptions;
+                    for (let i = 0; i < dependenceNameList.length; i++) {
+                        const dependenceName = dependenceNameList[i];
+                        // 兼容多选
+                        let dependenceValue = form?.getFieldValue(dependenceName);
+                        dependenceValue = Array.isArray(dependenceValue)
+                            ? dependenceValue
+                            : [dependenceValue];
+                        const siblings = parentItem?.filter(({ value }) => {
+                            return dependenceValue.indexOf(value) > -1;
+                        });
+                        if (siblings) {
+                            let list: IOptionItem[] = [];
+                            siblings.forEach(item => {
+                                list = [...list, ...(item[dependenceKey] || [])];
+                            });
+                            parentItem = list;
+                        } else {
+                            parentItem = [];
+                        }
+                        // parentItem = siblings?.[dependenceKey] ?? undefined;
+                    }
+                    const loading = !dvaOptions; // dva 显示进度
+                    const mergeList = parentItem || ([] as IOptionItem[]);
+                    return {
+                        loading: loading,
+                        optionList: mergeList,
+                    };
+                } else {
+                    const loading = !dvaOptions; // dva 显示进度
+                    const mergeList = dvaOptions || ([] as IOptionItem[]);
+                    return {
+                        loading: loading,
+                        optionList: mergeList,
+                    };
+                }
+            }
             return {
                 loading: false,
                 optionList: (optionList || []) as IOptionItem[],

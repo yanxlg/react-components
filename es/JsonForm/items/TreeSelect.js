@@ -48,9 +48,12 @@ var __spreadArrays = this && this.__spreadArrays || function () {
 
 import React, { useMemo, useCallback, useState, useEffect } from 'react';
 import formStyles from '../_form.less';
+import { useSelector } from 'react-redux';
 var typeList = ['treeSelect'];
 
 var FormTreeSelect = function FormTreeSelect(props) {
+  var _a;
+
   var form = props.form,
       label = props.label,
       rules = props.rules,
@@ -59,28 +62,32 @@ var FormTreeSelect = function FormTreeSelect(props) {
       optionListDependence = props.optionListDependence,
       optionList = props.optionList,
       _onChange = props.onChange,
-      _a = props.className,
-      className = _a === void 0 ? formStyles.formItemDefault : _a,
-      _b = props.formItemClassName,
-      formItemClassName = _b === void 0 ? formStyles.formItem : _b,
-      _c = props.treeCheckable,
-      treeCheckable = _c === void 0 ? true : _c,
-      _d = props.treeDefaultExpandAll,
-      treeDefaultExpandAll = _d === void 0 ? true : _d,
-      _e = props.maxTagCount,
-      maxTagCount = _e === void 0 ? 6 : _e,
-      _f = props.treeNodeLabelProp,
-      treeNodeLabelProp = _f === void 0 ? 'name' : _f,
-      _g = props.dropdownClassName,
-      dropdownClassName = _g === void 0 ? formStyles.customTreeSelect : _g,
+      _b = props.className,
+      className = _b === void 0 ? formStyles.formItemDefault : _b,
+      _c = props.formItemClassName,
+      formItemClassName = _c === void 0 ? formStyles.formItem : _c,
+      _d = props.treeCheckable,
+      treeCheckable = _d === void 0 ? true : _d,
+      _e = props.treeDefaultExpandAll,
+      treeDefaultExpandAll = _e === void 0 ? true : _e,
+      _f = props.maxTagCount,
+      maxTagCount = _f === void 0 ? 6 : _f,
+      _g = props.treeNodeLabelProp,
+      treeNodeLabelProp = _g === void 0 ? 'name' : _g,
+      _h = props.dropdownClassName,
+      dropdownClassName = _h === void 0 ? formStyles.customTreeSelect : _h,
       initialValue = props.initialValue,
       hide = props.hide,
       extraProps = __rest(props, ["form", "label", "rules", "name", "labelClassName", "optionListDependence", "optionList", "onChange", "className", "formItemClassName", "treeCheckable", "treeDefaultExpandAll", "maxTagCount", "treeNodeLabelProp", "dropdownClassName", "initialValue", "hide"]);
 
-  var _h = useState(undefined),
-      options = _h[0],
-      setOptions = _h[1];
+  var _j = useState(undefined),
+      options = _j[0],
+      setOptions = _j[1];
 
+  var useDva = (optionList === null || optionList === void 0 ? void 0 : optionList['type']) === 'select';
+  var dvaOptions = useSelector(useDva ? optionList.selector : function () {
+    return undefined;
+  }, (_a = optionList) === null || _a === void 0 ? void 0 : _a.equalityFn);
   var isFunction = typeof optionList === 'function';
   useEffect(function () {
     if (isFunction) {
@@ -146,6 +153,56 @@ var FormTreeSelect = function FormTreeSelect(props) {
         };
       }
     } else {
+      if (useDva) {
+        if (optionListDependence) {
+          var name_2 = optionListDependence.name,
+              dependenceKey_2 = optionListDependence.key;
+          var dependenceNameList = typeof name_2 === 'string' ? [name_2] : name_2 || [];
+          var parentItem = dvaOptions;
+
+          var _loop_2 = function _loop_2(i) {
+            var dependenceName = dependenceNameList[i]; // 兼容多选
+
+            var dependenceValue = form === null || form === void 0 ? void 0 : form.getFieldValue(dependenceName);
+            dependenceValue = Array.isArray(dependenceValue) ? dependenceValue : [dependenceValue];
+            var siblings = parentItem === null || parentItem === void 0 ? void 0 : parentItem.filter(function (_a) {
+              var value = _a.value;
+              return dependenceValue.indexOf(value) > -1;
+            });
+
+            if (siblings) {
+              var list_2 = [];
+              siblings.forEach(function (item) {
+                list_2 = __spreadArrays(list_2, item[dependenceKey_2] || []);
+              });
+              parentItem = list_2;
+            } else {
+              parentItem = [];
+            }
+          };
+
+          for (var i = 0; i < dependenceNameList.length; i++) {
+            _loop_2(i);
+          }
+
+          var loading = !dvaOptions; // dva 显示进度
+
+          var mergeList = parentItem || [];
+          return {
+            loading: loading,
+            optionList: mergeList
+          };
+        } else {
+          var loading = !dvaOptions; // dva 显示进度
+
+          var mergeList = dvaOptions || [];
+          return {
+            loading: loading,
+            optionList: mergeList
+          };
+        }
+      }
+
       return {
         loading: false,
         optionList: optionList || []

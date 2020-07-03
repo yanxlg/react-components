@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { IOptionItem } from './Select';
+import { DvaSelector, IOptionItem } from './Select';
 import { CustomFormProps, FormItemName } from '../index';
 import { FormInstance, Rule } from 'antd/es/form';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
@@ -10,7 +10,7 @@ declare type OptionsPromise = () => Promise<IOptionItem[]>;
 export declare type TreeSelectProps<T = string> = FormItemLabelProps & CustomFormProps & {
     type: TreeSelectType;
     form: FormInstance;
-    optionList?: IOptionItem[] | OptionsPromise;
+    optionList?: IOptionItem[] | OptionsPromise | DvaSelector;
     optionListDependence?: {
         name: FormItemName | FormItemName[];
         key: string;
