@@ -52,9 +52,10 @@ var FormPassword = function FormPassword(props) {
       colon = props.colon,
       initialValue = props.initialValue,
       iconRender = props.iconRender,
+      validateTrigger = props.validateTrigger,
       _c = props.defaultVisible,
       defaultVisible = _c === void 0 ? false : _c,
-      _props = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "colon", "initialValue", "iconRender", "defaultVisible"]);
+      _props = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "type", "rules", "colon", "initialValue", "iconRender", "validateTrigger", "defaultVisible"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -95,7 +96,8 @@ var FormPassword = function FormPassword(props) {
       }, label),
       rules: rules,
       colon: colon,
-      initialValue: initialValue
+      initialValue: initialValue,
+      validateTrigger: validateTrigger
     }, React.createElement(_Input, __assign({
       className: className
     }, _props, eventProps, {

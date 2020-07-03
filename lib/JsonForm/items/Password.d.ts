@@ -16,6 +16,7 @@ export declare type FormPasswordProps<T = string> = FormItemLabelProps & CustomF
     labelClassName?: string;
     initialValue?: any;
     defaultVisible?: boolean;
+    validateTrigger?: string | string[];
 } & Omit<PasswordProps, 'type' | 'size' | 'form' | 'onChange'>;
 declare const FormPassword: {
     (props: FormPasswordProps<string>): JSX.Element;

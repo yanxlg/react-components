@@ -23,6 +23,7 @@ export type FormPasswordProps<T = string> = FormItemLabelProps &
         labelClassName?: string;
         initialValue?: any;
         defaultVisible?: boolean;
+        validateTrigger?: string | string[];
     } & Omit<PasswordProps, 'type' | 'size' | 'form' | 'onChange'>;
 
 const FormPassword = (props: FormPasswordProps) => {
@@ -39,6 +40,7 @@ const FormPassword = (props: FormPasswordProps) => {
         colon,
         initialValue,
         iconRender,
+        validateTrigger,
         defaultVisible = false,
         ..._props
     } = props;
@@ -85,6 +87,7 @@ const FormPassword = (props: FormPasswordProps) => {
                 rules={rules}
                 colon={colon}
                 initialValue={initialValue}
+                validateTrigger={validateTrigger}
             >
                 <Input
                     className={className}
