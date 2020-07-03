@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 export declare interface IOptionItem {
     name: string;
     value: string | number;
+    disabled?: boolean;
 
     [key: string]: any; // 子节点key
 }
@@ -141,12 +142,45 @@ const FormSelect = (props: SelectProps) => {
             }
         } else {
             if (useDva) {
-                const loading = !dvaOptions; // dva 显示进度
-                const mergeList = dvaOptions || ([] as IOptionItem[]);
-                return {
-                    loading: loading,
-                    optionList: mergeList,
-                };
+                if (optionListDependence) {
+                    const { name, key: dependenceKey } = optionListDependence;
+                    const dependenceNameList = typeof name === 'string' ? [name] : name || [];
+                    let parentItem = dvaOptions;
+                    for (let i = 0; i < dependenceNameList.length; i++) {
+                        const dependenceName = dependenceNameList[i];
+                        // 兼容多选
+                        let dependenceValue = form?.getFieldValue(dependenceName);
+                        dependenceValue = Array.isArray(dependenceValue)
+                            ? dependenceValue
+                            : [dependenceValue];
+                        const siblings = parentItem?.filter(({ value }) => {
+                            return dependenceValue.indexOf(value) > -1;
+                        });
+                        if (siblings) {
+                            let list: IOptionItem[] = [];
+                            siblings.forEach(item => {
+                                list = [...list, ...(item[dependenceKey] || [])];
+                            });
+                            parentItem = list;
+                        } else {
+                            parentItem = [];
+                        }
+                        // parentItem = siblings?.[dependenceKey] ?? undefined;
+                    }
+                    const loading = !dvaOptions; // dva 显示进度
+                    const mergeList = parentItem || ([] as IOptionItem[]);
+                    return {
+                        loading: loading,
+                        optionList: mergeList,
+                    };
+                } else {
+                    const loading = !dvaOptions; // dva 显示进度
+                    const mergeList = dvaOptions || ([] as IOptionItem[]);
+                    return {
+                        loading: loading,
+                        optionList: mergeList,
+                    };
+                }
             }
             return {
                 loading: false,
@@ -245,7 +279,12 @@ const FormSelect = (props: SelectProps) => {
                             </Select.Option>
                         ) : null}
                         {list!.map(item => (
-                            <Select.Option key={item.value} value={item.value} title={item.name}>
+                            <Select.Option
+                                key={item.value}
+                                value={item.value}
+                                title={item.name}
+                                disabled={item.disabled}
+                            >
                                 {item.name}
                             </Select.Option>
                         ))}
@@ -311,6 +350,7 @@ const FormSelect = (props: SelectProps) => {
                                             key={item.value}
                                             value={item.value}
                                             title={item.name}
+                                            disabled={item.disabled}
                                         >
                                             {item.name}
                                         </Select.Option>

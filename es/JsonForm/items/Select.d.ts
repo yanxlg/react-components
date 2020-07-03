@@ -7,6 +7,7 @@ import { FormatterType } from '../../utils/formatter';
 export declare interface IOptionItem {
     name: string;
     value: string | number;
+    disabled?: boolean;
     [key: string]: any;
 }
 declare type OptionsPromise = () => Promise<IOptionItem[]>;
