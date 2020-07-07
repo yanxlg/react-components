@@ -28,7 +28,7 @@ const RichInput: React.FC<RichInputProps> = ({ richType, value, onChange, ...pro
         (e: ChangeEvent<HTMLInputElement>) => {
             const _value = e.target.value;
             if (richType) {
-                const targetValue =
+                e.target.value =
                     richType === 'number'
                         ? numberFormatter(_value)
                         : richType === 'integer'
@@ -42,7 +42,6 @@ const RichInput: React.FC<RichInputProps> = ({ richType, value, onChange, ...pro
                         : richType === 'naturalNumber'
                         ? naturalNumber(_value)
                         : _value;
-                e.target.value = targetValue;
             }
             if (value === void 0) {
                 setInnerValue(_value);

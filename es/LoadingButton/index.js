@@ -33,25 +33,28 @@ var __rest = this && this.__rest || function (s, e) {
 import React, { useCallback, useMemo, useState } from 'react';
 import btnStyles from './_btn.less';
 import classNames from 'classnames';
+import useUpdate from '../hooks/useUpdate';
 
-var LoadingButton = function LoadingButton(props) {
-  var _a = useState(false),
-      loading = _a[0],
-      setLoading = _a[1];
+var LoadingButton = function LoadingButton(_a) {
+  var outerLoading = _a.loading,
+      icon = _a.icon,
+      className = _a.className,
+      onDefaultClick = _a.onClick,
+      _props = __rest(_a, ["loading", "icon", "className", "onClick"]);
 
-  var outerLoading = props.loading,
-      icon = props.icon,
-      className = props.className,
-      _props = __rest(props, ["loading", "icon", "className"]);
+  var _b = useState(!!outerLoading),
+      loading = _b[0],
+      setLoading = _b[1];
 
   var onClick = useCallback(function (event) {
-    // 如果没有onClick则不执行任何操作
-    if (props['_privateClick']) {
-      props === null || props === void 0 ? void 0 : props.onClick(event);
-    } else if (props.onClick) {
-      // tooltip会添加onClick,_privateClick表示onClick不是正常情况下添加，私有属性
-      setLoading(true);
-      var result = props.onClick(event);
+    // 根据result 类型判断是否需要loading
+    if (onDefaultClick) {
+      var result = onDefaultClick(event);
+
+      if (result['then']) {
+        // promise
+        setLoading(true);
+      }
 
       if (result['finally']) {
         result['finally'](function () {
@@ -61,16 +64,18 @@ var LoadingButton = function LoadingButton(props) {
         setLoading(false);
       }
     }
-  }, [props.onClick]);
-  var currentLoading = outerLoading || loading;
+  }, [onDefaultClick]);
+  useUpdate(function () {
+    setLoading(!!outerLoading);
+  }, [outerLoading]);
   return useMemo(function () {
     return React.createElement(_Button, __assign({}, _props, {
       icon: icon,
       className: classNames(className, icon ? btnStyles.btnWithoutAnim : ''),
-      loading: currentLoading,
+      loading: loading,
       onClick: onClick
     }));
-  }, [props, currentLoading, onClick]);
+  }, [_props, loading, onDefaultClick, icon, className]);
 };
 
 export default LoadingButton;

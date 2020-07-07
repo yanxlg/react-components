@@ -1,7 +1,7 @@
 import React, { ReactElement, useMemo } from 'react';
 import { Popover, Carousel } from 'antd';
-import styles from './_index.less';
 import LazyImage, { LazyImageProps } from '../LazyImage';
+import styles from './_index.less';
 
 type IAutoEnLargeImgProps = {
     className?: string;
@@ -46,32 +46,32 @@ const AutoEnLargeImg: React.FC<IAutoEnLargeImgProps> = ({
                     <LazyImage src={srcList[0]} className={className} alt="" {...props} />
                 </Popover>
             );
-        } else {
-            return src || children ? (
-                <Popover
-                    placement="right"
-                    content={
-                        src ? (
-                            <img
-                                src={src.replace('150_150', '240_240')}
-                                alt=""
-                                className={`${styles.enlarge} ${enLargeClassName}`}
-                            />
-                        ) : (
-                            enlargeContent
-                        )
-                    }
-                    title={null}
-                    autoAdjustOverflow={true}
-                >
-                    {src ? (
-                        <LazyImage src={src} className={className} alt="" {...props} />
-                    ) : (
-                        (children as React.ReactElement)
-                    )}
-                </Popover>
-            ) : null;
         }
+
+        return src || children ? (
+            <Popover
+                placement="right"
+                content={
+                    src ? (
+                        <img
+                            src={src.replace('150_150', '240_240')}
+                            alt=""
+                            className={`${styles.enlarge} ${enLargeClassName}`}
+                        />
+                    ) : (
+                        enlargeContent
+                    )
+                }
+                title={null}
+                autoAdjustOverflow={true}
+            >
+                {src ? (
+                    <LazyImage src={src} className={className} alt="" {...props} />
+                ) : (
+                    (children as React.ReactElement)
+                )}
+            </Popover>
+        ) : null;
     }, [className, enLargeClassName, src]);
 };
 

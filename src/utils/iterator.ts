@@ -1,8 +1,8 @@
-export function iterator<T extends Object>(
+export function iterator<T extends Object, S = any>(
     data: T,
-    render: (key: keyof T, value: T[keyof T]) => any,
+    render: (key: keyof T, value: T[keyof T]) => S,
 ) {
-    let list: any[] = [];
+    let list: S[] = [];
     for (let key in data) {
         if (data.hasOwnProperty(key)) {
             list.push(render(key, data[key]));

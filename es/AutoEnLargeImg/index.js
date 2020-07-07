@@ -33,8 +33,8 @@ var __rest = this && this.__rest || function (s, e) {
 };
 
 import React, { useMemo } from 'react';
-import styles from './_index.less';
 import LazyImage from '../LazyImage';
+import styles from './_index.less';
 
 var AutoEnLargeImg = function AutoEnLargeImg(_a) {
   var _b = _a.className,
@@ -78,22 +78,22 @@ var AutoEnLargeImg = function AutoEnLargeImg(_a) {
         className: className,
         alt: ""
       }, props)));
-    } else {
-      return src || children ? React.createElement(_Popover, {
-        placement: "right",
-        content: src ? React.createElement("img", {
-          src: src.replace('150_150', '240_240'),
-          alt: "",
-          className: styles.enlarge + " " + enLargeClassName
-        }) : enlargeContent,
-        title: null,
-        autoAdjustOverflow: true
-      }, src ? React.createElement(LazyImage, __assign({
-        src: src,
-        className: className,
-        alt: ""
-      }, props)) : children) : null;
     }
+
+    return src || children ? React.createElement(_Popover, {
+      placement: "right",
+      content: src ? React.createElement("img", {
+        src: src.replace('150_150', '240_240'),
+        alt: "",
+        className: styles.enlarge + " " + enLargeClassName
+      }) : enlargeContent,
+      title: null,
+      autoAdjustOverflow: true
+    }, src ? React.createElement(LazyImage, __assign({
+      src: src,
+      className: className,
+      alt: ""
+    }, props)) : children) : null;
   }, [className, enLargeClassName, src]);
 };
 

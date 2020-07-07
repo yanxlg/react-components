@@ -47,8 +47,7 @@ var RichInput = function RichInput(_a) {
     var _value = e.target.value;
 
     if (richType) {
-      var targetValue = richType === 'number' ? numberFormatter(_value) : richType === 'integer' ? intFormatter(_value) : richType === 'input' ? _value : richType === 'positiveInteger' ? positiveIntFormatter(_value) : richType === 'numberSplit' ? numberSplit(_value) : richType === 'naturalNumber' ? naturalNumber(_value) : _value;
-      e.target.value = targetValue;
+      e.target.value = richType === 'number' ? numberFormatter(_value) : richType === 'integer' ? intFormatter(_value) : richType === 'input' ? _value : richType === 'positiveInteger' ? positiveIntFormatter(_value) : richType === 'numberSplit' ? numberSplit(_value) : richType === 'naturalNumber' ? naturalNumber(_value) : _value;
     }
 
     if (value === void 0) {

@@ -3,23 +3,30 @@ import { Button } from 'antd';
 import { ButtonProps } from 'antd/lib/button/button';
 import btnStyles from './_btn.less';
 import classNames from 'classnames';
+import useUpdate from '../hooks/useUpdate';
 
 declare interface ILoadingButtonProps extends ButtonProps {
     onClick: (event: React.MouseEvent<HTMLButtonElement>) => Promise<any> | void;
 }
 
-const LoadingButton: React.FC<ILoadingButtonProps> = props => {
-    const [loading, setLoading] = useState(false);
-    const { loading: outerLoading, icon, className, ..._props } = props;
+const LoadingButton: React.FC<ILoadingButtonProps> = ({
+    loading: outerLoading,
+    icon,
+    className,
+    onClick: onDefaultClick,
+    ..._props
+}) => {
+    const [loading, setLoading] = useState<boolean>(!!outerLoading);
+
     const onClick = useCallback(
         (event: React.MouseEvent<HTMLButtonElement>) => {
-            // 如果没有onClick则不执行任何操作
-            if (props['_privateClick']) {
-                props?.onClick(event);
-            } else if (props.onClick) {
-                // tooltip会添加onClick,_privateClick表示onClick不是正常情况下添加，私有属性
-                setLoading(true);
-                const result = props.onClick(event);
+            // 根据result 类型判断是否需要loading
+            if (onDefaultClick) {
+                const result = onDefaultClick(event);
+                if (result['then']) {
+                    // promise
+                    setLoading(true);
+                }
                 if (result['finally']) {
                     result['finally'](() => {
                         setLoading(false);
@@ -29,20 +36,24 @@ const LoadingButton: React.FC<ILoadingButtonProps> = props => {
                 }
             }
         },
-        [props.onClick],
+        [onDefaultClick],
     );
-    const currentLoading = outerLoading || loading;
+
+    useUpdate(() => {
+        setLoading(!!outerLoading);
+    }, [outerLoading]);
+
     return useMemo(() => {
         return (
             <Button
                 {..._props}
                 icon={icon}
                 className={classNames(className, icon ? btnStyles.btnWithoutAnim : '')}
-                loading={currentLoading}
+                loading={loading}
                 onClick={onClick}
             />
         );
-    }, [props, currentLoading, onClick]);
+    }, [_props, loading, onDefaultClick, icon, className]);
 };
 
 export default LoadingButton;
