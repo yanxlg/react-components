@@ -4,7 +4,7 @@ export var isNull = function isNull(value) {
   return value === null || value === void 0;
 };
 export function transNullValue(value) {
-  return value === '' || isNull(value) ? undefined : value;
+  return value === '' || isNull(value) || Array.isArray(value) && !value.length ? undefined : value;
 }
 export function transJoinStr(value) {
   return value && value.length ? value.join(',') : undefined;

@@ -8,7 +8,9 @@ export const isNull = function(value: any) {
 };
 
 export function transNullValue(value?: any) {
-    return value === '' || isNull(value) ? undefined : value;
+    return value === '' || isNull(value) || (Array.isArray(value) && !value.length)
+        ? undefined
+        : value;
 }
 
 export function transJoinStr(value?: any) {
