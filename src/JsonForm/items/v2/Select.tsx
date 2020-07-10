@@ -278,6 +278,7 @@ const FormSelect = (props: SelectProps) => {
                         showArrow={true}
                         showCheckedStrategy={'SHOW_PARENT'}
                         treeNodeFilterProp={'title'}
+                        dropdownClassName={formStyles.customTreeSelect}
                         className={formStyles.formItemDefault}
                         {...(itemProps as MultipleSelectProps)}
                         {...eventProps}

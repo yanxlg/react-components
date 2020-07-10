@@ -263,6 +263,7 @@ var FormSelect = function FormSelect(props) {
       showArrow: true,
       showCheckedStrategy: 'SHOW_PARENT',
       treeNodeFilterProp: 'title',
+      dropdownClassName: formStyles.customTreeSelect,
       className: formStyles.formItemDefault
     }, itemProps, eventProps, {
       loading: loading,
