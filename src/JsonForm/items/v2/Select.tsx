@@ -278,6 +278,7 @@ const FormSelect = (props: SelectProps) => {
                         treeNodeFilterProp={'title'}
                         dropdownClassName={formStyles.customTreeSelect}
                         className={formStyles.formItemDefault}
+                        choiceTransitionName={''} //禁用动画
                         {...(childrenProps as MultipleSelectProps)}
                         {...eventProps}
                         loading={loading}

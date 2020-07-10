@@ -261,7 +261,8 @@ var FormSelect = function FormSelect(props) {
       showCheckedStrategy: 'SHOW_PARENT',
       treeNodeFilterProp: 'title',
       dropdownClassName: formStyles.customTreeSelect,
-      className: formStyles.formItemDefault
+      className: formStyles.formItemDefault,
+      choiceTransitionName: ''
     }, childrenProps, eventProps, {
       loading: loading,
       treeData: data
