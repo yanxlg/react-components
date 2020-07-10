@@ -223,7 +223,7 @@ const FormSelect = (props: SelectProps) => {
                     value: parentValue,
                     children: optionList.map(item => ({
                         ...item,
-                        name: item[optionKeys[0]],
+                        label: item[optionKeys[0]],
                         value: item[optionKeys[1]],
                     })),
                 },

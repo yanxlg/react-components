@@ -214,7 +214,7 @@ var FormSelect = function FormSelect(props) {
         value: parentValue,
         children: optionList.map(function (item) {
           return __assign(__assign({}, item), {
-            name: item[optionKeys[0]],
+            label: item[optionKeys[0]],
             value: item[optionKeys[1]]
           });
         })
