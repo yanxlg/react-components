@@ -82,10 +82,11 @@ var FormSelect = function FormSelect(props) {
       childrenProps = props.childrenProps,
       _b = props.defaultOption,
       defaultOption = _b === void 0 ? true : _b,
+      defaultCheckedType = props.defaultCheckedType,
       _c = props.optionKeys,
       optionKeys = _c === void 0 ? ['label', 'value'] : _c,
       labelCol = props.labelCol,
-      formItemProps = __rest(props, ["className", "relation", "onChange", "labelClassName", "form", "options", "childrenProps", "defaultOption", "optionKeys", "labelCol"]);
+      formItemProps = __rest(props, ["className", "relation", "onChange", "labelClassName", "form", "options", "childrenProps", "defaultOption", "defaultCheckedType", "optionKeys", "labelCol"]);
 
   var withSelector = !!options['selector'];
   var withRequest = !!options['url'];
@@ -241,6 +242,20 @@ var FormSelect = function FormSelect(props) {
       return optionList;
     }
   }, []);
+  var g_normalise = useCallback(function (list) {
+    return function (value, prevValue, prevValues) {
+      var defaultValue = defaultOption === true ? '' : defaultOption ? defaultOption.value : undefined;
+
+      if (value === defaultValue || Array.isArray(value) && value.indexOf(defaultValue) > -1) {
+        return list.map(function (_a) {
+          var value = _a.value;
+          return value;
+        });
+      } else {
+        return value;
+      }
+    };
+  }, []);
   var formItem = useCallback(function () {
     var _a = getOptionList(),
         loading = _a.loading,
@@ -252,7 +267,8 @@ var FormSelect = function FormSelect(props) {
       className: className,
       labelCol: __assign(__assign({}, labelCol), {
         className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
-      })
+      }),
+      normalize: defaultCheckedType === 'checkedAll' ? g_normalise(list) : undefined
     }, formItemProps), multiple ? React.createElement(_TreeSelect, __assign({
       treeNodeLabelProp: "label",
       treeCheckable: true,

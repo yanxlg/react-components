@@ -37,6 +37,7 @@ export declare type SelectProps = Omit<FormItemProps, 'children'> & {
         label: string;
         value?: any;
     } | true;
+    defaultCheckedType?: 'checkedAll';
     name: NamePath;
     formatter?: FormatterType;
     labelClassName?: string | false;

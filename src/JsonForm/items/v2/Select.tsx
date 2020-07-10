@@ -12,6 +12,7 @@ import { FormatterType } from '../../../utils/formatter';
 import formStyles from '../../_form.less';
 import { FormItemName } from '../../index';
 import { iterator } from '../../..';
+import { StoreValue, Store } from 'antd/es/form/interface';
 
 export type SelectType = 'select@2';
 const typeList = ['select@2'];
@@ -51,6 +52,7 @@ export type SelectProps = Omit<FormItemProps, 'children'> & {
     type: SelectType;
     form: FormInstance;
     defaultOption?: { label: string; value?: any } | true; // 默认全选配置
+    defaultCheckedType?: 'checkedAll'; // 全选后Form值处理
     name: NamePath;
     formatter?: FormatterType;
     labelClassName?: string | false;
@@ -87,6 +89,7 @@ const FormSelect = (props: SelectProps) => {
         options,
         childrenProps,
         defaultOption = true,
+        defaultCheckedType,
         optionKeys = ['label', 'value'],
         labelCol,
         ...formItemProps
@@ -254,6 +257,21 @@ const FormSelect = (props: SelectProps) => {
         }
     }, []);
 
+    const g_normalise = useCallback((list: IOptionItem[]) => {
+        return (value: StoreValue, prevValue: StoreValue, prevValues: Store) => {
+            const defaultValue =
+                defaultOption === true ? '' : defaultOption ? defaultOption.value : undefined;
+            if (
+                value === defaultValue ||
+                (Array.isArray(value) && value.indexOf(defaultValue) > -1)
+            ) {
+                return list.map(({ value }) => value);
+            } else {
+                return value;
+            }
+        };
+    }, []);
+
     const formItem = useCallback(() => {
         const { loading, options: list } = getOptionList();
         const multiple =
@@ -266,6 +284,7 @@ const FormSelect = (props: SelectProps) => {
                     ...labelCol,
                     className: classNames(labelCol?.className, labelClassName),
                 }}
+                normalize={defaultCheckedType === 'checkedAll' ? g_normalise(list) : undefined}
                 {...formItemProps}
             >
                 {multiple ? (
