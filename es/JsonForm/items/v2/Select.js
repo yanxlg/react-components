@@ -245,7 +245,10 @@ var FormSelect = function FormSelect(props) {
       treeNodeLabelProp: "label",
       className: className,
       treeCheckable: true,
-      treeDefaultExpandAll: true
+      treeDefaultExpandAll: true,
+      showArrow: true,
+      showCheckedStrategy: 'SHOW_PARENT',
+      treeNodeFilterProp: 'title'
     }, itemProps, eventProps, {
       loading: loading,
       treeData: data

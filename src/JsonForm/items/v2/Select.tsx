@@ -184,10 +184,10 @@ const FormSelect = (props: SelectProps) => {
     const eventProps = useMemo(() => {
         return onChange
             ? {
-                onChange: () => {
-                    onChange(name as FormItemName, form);
-                },
-            }
+                  onChange: () => {
+                      onChange(name as FormItemName, form);
+                  },
+              }
             : {};
     }, [onChange]);
 
@@ -242,12 +242,10 @@ const FormSelect = (props: SelectProps) => {
                 name={name}
                 className={className}
                 label={label}
-                labelCol={
-                    {
-                        ...labelCol,
-                        className: classNames(labelCol?.className, labelClassName),
-                    }
-                }
+                labelCol={{
+                    ...labelCol,
+                    className: classNames(labelCol?.className, labelClassName),
+                }}
                 {...formItemProps}
             >
                 {multiple ? (
@@ -256,6 +254,9 @@ const FormSelect = (props: SelectProps) => {
                         className={className}
                         treeCheckable={true}
                         treeDefaultExpandAll={true}
+                        showArrow={true}
+                        showCheckedStrategy={'SHOW_PARENT'}
+                        treeNodeFilterProp={'title'}
                         {...(itemProps as MultipleSelectProps)}
                         {...eventProps}
                         loading={loading}
