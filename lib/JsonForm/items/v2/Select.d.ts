@@ -47,7 +47,7 @@ export declare type SelectProps = Omit<FormItemProps, 'children'> & {
         key?: string;
     };
     onChange?: (name: NamePath, form: FormInstance) => void;
-    itemProps?: SelectComponentProps | MultipleSelectProps;
+    childrenProps?: SelectComponentProps | MultipleSelectProps;
 };
 declare const FormSelect: {
     (props: SelectProps): JSX.Element;

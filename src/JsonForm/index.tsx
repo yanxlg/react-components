@@ -41,11 +41,17 @@ import FormTree, { FormTreeProps, FormTreeType } from './items/TreeItem';
 import CollapseLayout, { CollapseLayoutProps, CollapseLayoutType } from './layout/CollapseLayout';
 import FormPassword, { FormPasswordProps, PasswordType } from './items/Password';
 import FormLabel, { LabelProps, LabelType } from './items/Label';
+import { NamePath } from 'rc-field-form/es/interface';
+
+////////////////////////////// ====v2==== ////////////////////////////
 import FormSelectV2, {
     SelectProps as SelectPropsV2,
     SelectType as SelectTypeV2,
 } from './items/v2/Select';
-import { NamePath } from 'rc-field-form/es/interface';
+import FormInputV2, {
+    InputProps as InputPropsV2,
+    InputTypeAll as InputTypeV2,
+} from './items/v2/Input';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -75,6 +81,7 @@ export type FormField<T = string> = (
     | Omit<NumberRangeProps<T>, 'form'>
     | Omit<FormTreeProps<T>, 'form'>
     | Omit<SelectPropsV2, 'form'>
+    | Omit<InputPropsV2, 'form'>
 ) & {
     form?: FormInstance;
     key?: string;
@@ -400,6 +407,18 @@ export const getFormItem = (
             itemCol,
         );
     }
+    if (FormInputV2.typeList.includes(type)) {
+        return getColChildren(
+            <FormInputV2
+                key={String(index)}
+                labelClassName={labelClassName}
+                {...(field as any)}
+                type={type as InputTypeV2}
+                form={form}
+            />,
+            itemCol,
+        );
+    }
     return null;
 };
 
@@ -540,7 +559,8 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                         FormTextArea.typeList.includes(type) ||
                         FormSelect.typeList.includes(type) ||
                         FormDatePicker.typeList.includes(type) ||
-                        FormSelectV2.typeList.includes(type)
+                        FormSelectV2.typeList.includes(type) ||
+                        FormInputV2.typeList.includes(type)
                     ) {
                         values[name as string] = getFormatterFunc(
                             formatterName,

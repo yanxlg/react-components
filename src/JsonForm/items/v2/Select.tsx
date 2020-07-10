@@ -61,7 +61,7 @@ export type SelectProps = Omit<FormItemProps, 'children'> & {
         key?: string; // 关联key,默认为children
     }; // 依赖关联
     onChange?: (name: NamePath, form: FormInstance) => void; // change监听，支持外部执行表单操作，可以实现关联筛选，重置等操作
-    itemProps?: SelectComponentProps | MultipleSelectProps;
+    childrenProps?: SelectComponentProps | MultipleSelectProps;
 };
 
 function getValueByNamePath(target: any, namePath: NamePath): any {
@@ -79,14 +79,13 @@ function getValueByNamePath(target: any, namePath: NamePath): any {
 
 const FormSelect = (props: SelectProps) => {
     const {
-        label,
         className = formStyles.formItem,
         relation,
         onChange,
         labelClassName,
         form,
         options,
-        itemProps,
+        childrenProps,
         defaultOption = true,
         optionKeys = ['label', 'value'],
         labelCol,
@@ -257,13 +256,12 @@ const FormSelect = (props: SelectProps) => {
 
     const formItem = useCallback(() => {
         const { loading, options: list } = getOptionList();
-        const multiple = itemProps && (itemProps.mode === 'tags' || itemProps.mode === 'multiple');
+        const multiple =
+            childrenProps && (childrenProps.mode === 'tags' || childrenProps.mode === 'multiple');
         const data = multiple ? getTreeData(list) : getSelectData(list);
         return (
             <Form.Item
-                name={name}
                 className={className}
-                label={label}
                 labelCol={{
                     ...labelCol,
                     className: classNames(labelCol?.className, labelClassName),
@@ -280,7 +278,7 @@ const FormSelect = (props: SelectProps) => {
                         treeNodeFilterProp={'title'}
                         dropdownClassName={formStyles.customTreeSelect}
                         className={formStyles.formItemDefault}
-                        {...(itemProps as MultipleSelectProps)}
+                        {...(childrenProps as MultipleSelectProps)}
                         {...eventProps}
                         loading={loading}
                         treeData={data}
@@ -288,7 +286,7 @@ const FormSelect = (props: SelectProps) => {
                 ) : (
                     <Select
                         className={formStyles.formItemDefault}
-                        {...(itemProps as SelectComponentProps)}
+                        {...(childrenProps as SelectComponentProps)}
                         options={data}
                         loading={loading}
                         {...eventProps}

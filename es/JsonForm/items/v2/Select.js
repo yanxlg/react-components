@@ -72,21 +72,20 @@ function getValueByNamePath(target, namePath) {
 }
 
 var FormSelect = function FormSelect(props) {
-  var label = props.label,
-      _a = props.className,
+  var _a = props.className,
       className = _a === void 0 ? formStyles.formItem : _a,
       relation = props.relation,
       _onChange = props.onChange,
       labelClassName = props.labelClassName,
       form = props.form,
       options = props.options,
-      itemProps = props.itemProps,
+      childrenProps = props.childrenProps,
       _b = props.defaultOption,
       defaultOption = _b === void 0 ? true : _b,
       _c = props.optionKeys,
       optionKeys = _c === void 0 ? ['label', 'value'] : _c,
       labelCol = props.labelCol,
-      formItemProps = __rest(props, ["label", "className", "relation", "onChange", "labelClassName", "form", "options", "itemProps", "defaultOption", "optionKeys", "labelCol"]);
+      formItemProps = __rest(props, ["className", "relation", "onChange", "labelClassName", "form", "options", "childrenProps", "defaultOption", "optionKeys", "labelCol"]);
 
   var withSelector = !!options['selector'];
   var withRequest = !!options['url'];
@@ -247,12 +246,10 @@ var FormSelect = function FormSelect(props) {
         loading = _a.loading,
         list = _a.options;
 
-    var multiple = itemProps && (itemProps.mode === 'tags' || itemProps.mode === 'multiple');
+    var multiple = childrenProps && (childrenProps.mode === 'tags' || childrenProps.mode === 'multiple');
     var data = multiple ? getTreeData(list) : getSelectData(list);
     return React.createElement(_Form.Item, __assign({
-      name: name,
       className: className,
-      label: label,
       labelCol: __assign(__assign({}, labelCol), {
         className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
       })
@@ -265,12 +262,12 @@ var FormSelect = function FormSelect(props) {
       treeNodeFilterProp: 'title',
       dropdownClassName: formStyles.customTreeSelect,
       className: formStyles.formItemDefault
-    }, itemProps, eventProps, {
+    }, childrenProps, eventProps, {
       loading: loading,
       treeData: data
     })) : React.createElement(_Select, __assign({
       className: formStyles.formItemDefault
-    }, itemProps, {
+    }, childrenProps, {
       options: data,
       loading: loading
     }, eventProps)));
