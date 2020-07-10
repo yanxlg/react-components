@@ -76,7 +76,7 @@ var FormInput = function FormInput(props) {
     }, childrenProps, eventProps, {
       richType: type.replace(/@\d+/, '')
     })));
-  }, []);
+  }, [childrenProps, formItemProps]);
 };
 
 FormInput.typeList = typeList;

@@ -95,7 +95,7 @@ const FormInput = (props: InputProps) => {
                 )}
             </Form.Item>
         );
-    }, []);
+    }, [childrenProps, formItemProps]);
 };
 
 FormInput.typeList = typeList;
