@@ -32,7 +32,6 @@ export declare type SelectProps<T = string> = FormItemLabelProps & CustomFormPro
     name: FormItemName<T>;
     formatter?: FormatterType;
     rules?: Rule[];
-    isShortcut?: boolean;
     labelClassName?: string;
     initialValue?: any;
     hide?: boolean;

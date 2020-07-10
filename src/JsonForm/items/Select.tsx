@@ -1,4 +1,4 @@
-import { Form, Select, Radio } from 'antd';
+import { Form, Select } from 'antd';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { CustomFormProps, FormItemName } from '../index';
 import { FormInstance, Rule } from 'antd/es/form';
@@ -31,7 +31,6 @@ export type SelectProps<T = string> = FormItemLabelProps &
     CustomFormProps & {
         type: SelectType;
         form: FormInstance;
-        // placeholder?: string;
         optionList?: IOptionItem[] | OptionsPromise | DvaSelector; // 支持异步获取， 支持配置api地址及response path进行配置
         syncDefaultOption?: IOptionItem; // 异步获取options是默认选项，通常用于胚子'全部'
         optionListDependence?: {
@@ -44,7 +43,6 @@ export type SelectProps<T = string> = FormItemLabelProps &
         name: FormItemName<T>;
         formatter?: FormatterType;
         rules?: Rule[];
-        isShortcut?: boolean;
         labelClassName?: string;
         initialValue?: any;
         hide?: boolean;
@@ -66,7 +64,6 @@ const FormSelect = (props: SelectProps) => {
         mode,
         maxTagCount,
         // placeholder,
-        isShortcut = false,
         disabled,
         colon,
         initialValue,
@@ -199,47 +196,6 @@ const FormSelect = (props: SelectProps) => {
             : {};
     }, [onChange]);
 
-    const dropdownRender = useCallback(
-        (menu: React.ReactElement): React.ReactElement => {
-            const { optionList: list } = getOptionList();
-            if (isShortcut && list.length) {
-                return (
-                    <div>
-                        <Radio.Group style={{ display: 'flex', padding: '5px 0' }} value="">
-                            <Radio.Button
-                                value="1"
-                                style={{ flex: 1, textAlign: 'center' }}
-                                onClick={() => {
-                                    form!.setFieldsValue({
-                                        [name]: list!.map(item => item.value),
-                                    });
-                                    onChange && onChange(name as FormItemName, form);
-                                }}
-                            >
-                                全选
-                            </Radio.Button>
-                            <Radio.Button
-                                value="0"
-                                style={{ flex: 1, textAlign: 'center' }}
-                                onClick={() => {
-                                    form!.setFieldsValue({
-                                        [name]: [],
-                                    });
-                                    onChange && onChange(name as FormItemName, form);
-                                }}
-                            >
-                                取消全选
-                            </Radio.Button>
-                        </Radio.Group>
-                        {menu}
-                    </div>
-                );
-            }
-            return menu;
-        },
-        [isShortcut, getOptionList, onChange],
-    );
-
     return useMemo(() => {
         if (optionListDependence === void 0) {
             const { loading, optionList: list } = getOptionList();
@@ -267,7 +223,6 @@ const FormSelect = (props: SelectProps) => {
                         maxTagCount={maxTagCount}
                         {...eventProps}
                         // placeholder={placeholder}
-                        dropdownRender={dropdownRender}
                         {...extraProps}
                     >
                         {syncDefaultOption ? (
@@ -334,7 +289,6 @@ const FormSelect = (props: SelectProps) => {
                                     mode={mode}
                                     maxTagCount={maxTagCount}
                                     {...eventProps}
-                                    dropdownRender={dropdownRender}
                                     {...extraProps}
                                 >
                                     {syncDefaultOption ? (

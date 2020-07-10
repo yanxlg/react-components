@@ -79,6 +79,7 @@ import FormTree from './items/TreeItem';
 import CollapseLayout from './layout/CollapseLayout';
 import FormPassword from './items/Password';
 import FormLabel from './items/Label';
+import FormSelectV2 from './items/v2/Select';
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
@@ -325,6 +326,16 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
     })), itemCol);
   }
 
+  if (FormSelectV2.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormSelectV2, __assign({
+      key: String(index),
+      labelClassName: labelClassName
+    }, field, {
+      type: type,
+      form: form
+    })), itemCol);
+  }
+
   return null;
 };
 export var getFormItems = function getFormItems(fieldList, form, labelClassName, itemCol, itemRow, showList) {
@@ -428,7 +439,7 @@ var JsonForm = function JsonForm(props, ref) {
             formatterName = _b.formatter,
             name_2 = _b.name;
 
-        if (FormInput.typeList.includes(type) || FormTextArea.typeList.includes(type) || FormSelect.typeList.includes(type) || FormDatePicker.typeList.includes(type)) {
+        if (FormInput.typeList.includes(type) || FormTextArea.typeList.includes(type) || FormSelect.typeList.includes(type) || FormDatePicker.typeList.includes(type) || FormSelectV2.typeList.includes(type)) {
           values[name_2] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_2));
         } else if (FormDateRanger.typeList.includes(type)) {
           var name1 = name_2[0],

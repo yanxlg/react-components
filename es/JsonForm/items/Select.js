@@ -2,8 +2,6 @@ import "antd/es/select/style/css";
 import _Select from "antd/es/select";
 import "antd/es/form/style/css";
 import _Form from "antd/es/form";
-import "antd/es/radio/style/css";
-import _Radio from "antd/es/radio";
 
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
@@ -72,18 +70,15 @@ var FormSelect = function FormSelect(props) {
       mode = props.mode,
       maxTagCount = props.maxTagCount,
       // placeholder,
-  _d = props.isShortcut,
-      // placeholder,
-  isShortcut = _d === void 0 ? false : _d,
-      disabled = props.disabled,
+  disabled = props.disabled,
       colon = props.colon,
       initialValue = props.initialValue,
       hide = props.hide,
-      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "syncDefaultOption", "optionListDependence", "onChange", "labelClassName", "form", "optionList", "rules", "mode", "maxTagCount", "isShortcut", "disabled", "colon", "initialValue", "hide"]);
+      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "syncDefaultOption", "optionListDependence", "onChange", "labelClassName", "form", "optionList", "rules", "mode", "maxTagCount", "disabled", "colon", "initialValue", "hide"]);
 
-  var _e = useState(undefined),
-      options = _e[0],
-      setOptions = _e[1];
+  var _d = useState(undefined),
+      options = _d[0],
+      setOptions = _d[1];
 
   var useDva = (optionList === null || optionList === void 0 ? void 0 : optionList['type']) === 'select';
   var dvaOptions = useSelector(useDva ? optionList.selector : function () {
@@ -211,47 +206,6 @@ var FormSelect = function FormSelect(props) {
       }
     } : {};
   }, [_onChange]);
-  var dropdownRender = useCallback(function (menu) {
-    var list = getOptionList().optionList;
-
-    if (isShortcut && list.length) {
-      return React.createElement("div", null, React.createElement(_Radio.Group, {
-        style: {
-          display: 'flex',
-          padding: '5px 0'
-        },
-        value: ""
-      }, React.createElement(_Radio.Button, {
-        value: "1",
-        style: {
-          flex: 1,
-          textAlign: 'center'
-        },
-        onClick: function onClick() {
-          var _a;
-
-          form.setFieldsValue((_a = {}, _a[name] = list.map(function (item) {
-            return item.value;
-          }), _a));
-          _onChange && _onChange(name, form);
-        }
-      }, "\u5168\u9009"), React.createElement(_Radio.Button, {
-        value: "0",
-        style: {
-          flex: 1,
-          textAlign: 'center'
-        },
-        onClick: function onClick() {
-          var _a;
-
-          form.setFieldsValue((_a = {}, _a[name] = [], _a));
-          _onChange && _onChange(name, form);
-        }
-      }, "\u53D6\u6D88\u5168\u9009")), menu);
-    }
-
-    return menu;
-  }, [isShortcut, getOptionList, _onChange]);
   return useMemo(function () {
     if (optionListDependence === void 0) {
       var _a = getOptionList(),
@@ -276,10 +230,7 @@ var FormSelect = function FormSelect(props) {
         loading: loading,
         mode: mode,
         maxTagCount: maxTagCount
-      }, eventProps, {
-        // placeholder={placeholder}
-        dropdownRender: dropdownRender
-      }, extraProps), syncDefaultOption ? React.createElement(_Select.Option, {
+      }, eventProps, extraProps), syncDefaultOption ? React.createElement(_Select.Option, {
         value: syncDefaultOption.value,
         title: syncDefaultOption.name
       }, syncDefaultOption.name) : null, list.map(function (item) {
@@ -333,9 +284,7 @@ var FormSelect = function FormSelect(props) {
           loading: loading,
           mode: mode,
           maxTagCount: maxTagCount
-        }, eventProps, {
-          dropdownRender: dropdownRender
-        }, extraProps), syncDefaultOption ? React.createElement(_Select.Option, {
+        }, eventProps, extraProps), syncDefaultOption ? React.createElement(_Select.Option, {
           value: syncDefaultOption.value,
           title: syncDefaultOption.name
         }, syncDefaultOption.name) : null, list.map(function (item) {

@@ -1,16 +1,23 @@
 {
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
-  "rules":{
-    "no-unused-expression": false,
-    "no-unused-variable": false,
-    "forin": false,
-    "no-console": false,
-    "object-literal-shorthand": false
-  },
-  "linterOptions": {
-    "exclude": [
-      "config/**/*.js",
-      "node_modules/**/*.ts"
-    ]
-  }
+    "extends": [
+        "tslint:recommended",
+        "tslint-react",
+        "tslint-config-prettier"
+    ],
+    "rules": {
+        "no-unused-expression": false,
+        "no-unused-variable": false,
+        "forin": false,
+        "no-console": false,
+        "object-literal-shorthand": false,
+        "no-string-literal": false,
+        "object-literal-sort-keys": false,
+        "jsx-no-lambda": false
+    },
+    "linterOptions": {
+        "exclude": [
+            "config/**/*.js",
+            "node_modules/**/*.ts"
+        ]
+    }
 }

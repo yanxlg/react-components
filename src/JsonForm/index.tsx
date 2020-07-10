@@ -41,6 +41,10 @@ import FormTree, { FormTreeProps, FormTreeType } from './items/TreeItem';
 import CollapseLayout, { CollapseLayoutProps, CollapseLayoutType } from './layout/CollapseLayout';
 import FormPassword, { FormPasswordProps, PasswordType } from './items/Password';
 import FormLabel, { LabelProps, LabelType } from './items/Label';
+import FormSelectV2, {
+    SelectProps as SelectPropsV2,
+    SelectType as SelectTypeV2,
+} from './items/v2/Select';
 import { NamePath } from 'rc-field-form/es/interface';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
@@ -70,6 +74,7 @@ export type FormField<T = string> = (
     | Omit<LoadingItemProps<T>, 'form'>
     | Omit<NumberRangeProps<T>, 'form'>
     | Omit<FormTreeProps<T>, 'form'>
+    | Omit<SelectPropsV2, 'form'>
 ) & {
     form?: FormInstance;
     key?: string;
@@ -383,6 +388,18 @@ export const getFormItem = (
             itemCol,
         );
     }
+    if (FormSelectV2.typeList.includes(type)) {
+        return getColChildren(
+            <FormSelectV2
+                key={String(index)}
+                labelClassName={labelClassName}
+                {...(field as SelectPropsV2)}
+                type={type as SelectTypeV2}
+                form={form}
+            />,
+            itemCol,
+        );
+    }
     return null;
 };
 
@@ -522,7 +539,8 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                         FormInput.typeList.includes(type) ||
                         FormTextArea.typeList.includes(type) ||
                         FormSelect.typeList.includes(type) ||
-                        FormDatePicker.typeList.includes(type)
+                        FormDatePicker.typeList.includes(type) ||
+                        FormSelectV2.typeList.includes(type)
                     ) {
                         values[name as string] = getFormatterFunc(
                             formatterName,
