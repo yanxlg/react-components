@@ -443,9 +443,13 @@ var JsonForm = function JsonForm(props, ref) {
 
         values = __assign(__assign({}, values), _value);
       } else if (DynamicItem.typeList.includes(type)) {
-        var _value = getValues([field.dynamic(form)]);
+        var _field = field.dynamic(form);
 
-        values = __assign(__assign({}, values), _value);
+        if (_field) {
+          var _value = getValues([_field]);
+
+          values = __assign(__assign({}, values), _value);
+        }
       } else {
         var _b = field,
             formatterName = _b.formatter,

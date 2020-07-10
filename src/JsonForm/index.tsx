@@ -547,11 +547,14 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                         ..._value,
                     };
                 } else if (DynamicItem.typeList.includes(type)) {
-                    const _value = getValues([(field as DynamicItemProps).dynamic(form)]);
-                    values = {
-                        ...values,
-                        ..._value,
-                    };
+                    const _field = (field as DynamicItemProps).dynamic(form);
+                    if (_field) {
+                        const _value = getValues([_field]);
+                        values = {
+                            ...values,
+                            ..._value,
+                        };
+                    }
                 } else {
                     const { formatter: formatterName, name } = (field as unknown) as any;
                     if (
