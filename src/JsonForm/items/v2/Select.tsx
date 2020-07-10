@@ -9,8 +9,8 @@ import { useSelector } from 'react-redux';
 import useUpdate from '../../../hooks/useUpdate';
 import baseRequest from '../../../request';
 import { FormatterType } from '../../../utils/formatter';
+import formStyles from '../../_form.less';
 import { FormItemName } from '../../index';
-import formStyles from '../_form.less';
 
 export type SelectType = 'select@2';
 const typeList = ['select@2'];
