@@ -11,6 +11,7 @@ import baseRequest from '../../../request';
 import { FormatterType } from '../../../utils/formatter';
 import formStyles from '../../_form.less';
 import { FormItemName } from '../../index';
+import { iterator } from '../../..';
 
 export type SelectType = 'select@2';
 const typeList = ['select@2'];
@@ -27,6 +28,7 @@ interface IHttpOptions {
         [key: string]: any;
     };
     dataPath?: NamePath; // default:data
+    parser?: 'object' | 'array';
 }
 
 export interface IOptionItem {
@@ -112,11 +114,31 @@ const FormSelect = (props: SelectProps) => {
 
     useEffect(() => {
         if (withRequest) {
-            const { url, request = baseRequest, dataPath = 'data' } = options as IHttpOptions;
+            const {
+                url,
+                request = baseRequest,
+                dataPath = 'data',
+                parser = 'array',
+            } = options as IHttpOptions;
             request
                 .get(url)
                 .then(result => {
-                    setMergeOptions(getValueByNamePath(result, dataPath));
+                    const values = getValueByNamePath(result, dataPath);
+                    const parseOptions =
+                        parser === 'array'
+                            ? values.map((item: any) => {
+                                  return {
+                                      label: item[optionKeys[0]],
+                                      value: item[optionKeys[1]],
+                                  };
+                              })
+                            : iterator(values, (key, value) => {
+                                  return {
+                                      label: value,
+                                      value: key,
+                                  };
+                              });
+                    setMergeOptions(parseOptions);
                 })
                 .catch(() => {
                     setMergeOptions([]);

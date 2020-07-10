@@ -16,6 +16,7 @@ interface IHttpOptions {
         [key: string]: any;
     };
     dataPath?: NamePath;
+    parser?: 'object' | 'array';
 }
 export interface IOptionItem {
     label: string;

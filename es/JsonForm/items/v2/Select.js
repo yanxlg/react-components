@@ -54,6 +54,7 @@ import { useSelector } from 'react-redux';
 import useUpdate from '../../../hooks/useUpdate';
 import baseRequest from '../../../request';
 import formStyles from '../../_form.less';
+import { iterator } from '../../..';
 var typeList = ['select@2'];
 
 function getValueByNamePath(target, namePath) {
@@ -110,9 +111,23 @@ var FormSelect = function FormSelect(props) {
           _b = _a.request,
           request = _b === void 0 ? baseRequest : _b,
           _c = _a.dataPath,
-          dataPath_1 = _c === void 0 ? 'data' : _c;
+          dataPath_1 = _c === void 0 ? 'data' : _c,
+          _d = _a.parser,
+          parser_1 = _d === void 0 ? 'array' : _d;
       request.get(url).then(function (result) {
-        setMergeOptions(getValueByNamePath(result, dataPath_1));
+        var values = getValueByNamePath(result, dataPath_1);
+        var parseOptions = parser_1 === 'array' ? values.map(function (item) {
+          return {
+            label: item[optionKeys[0]],
+            value: item[optionKeys[1]]
+          };
+        }) : iterator(values, function (key, value) {
+          return {
+            label: value,
+            value: key
+          };
+        });
+        setMergeOptions(parseOptions);
       })["catch"](function () {
         setMergeOptions([]);
       });
