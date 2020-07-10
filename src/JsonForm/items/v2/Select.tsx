@@ -51,7 +51,7 @@ type MultipleSelectProps = Omit<TreeSelectProps<string>, 'loading' | 'onChange' 
 export type SelectProps = Omit<FormItemProps, 'children'> & {
     type: SelectType;
     form: FormInstance;
-    defaultOption?: { label: string; value?: any } | true; // 默认全选配置
+    defaultOption?: { label: string; value?: any } | boolean; // 默认全选配置
     defaultCheckedType?: 'checkedAll'; // 全选后Form值处理
     name: NamePath;
     formatter?: FormatterType;
