@@ -273,12 +273,12 @@ const FormSelect = (props: SelectProps) => {
                 {multiple ? (
                     <TreeSelect
                         treeNodeLabelProp="label"
-                        className={className}
                         treeCheckable={true}
                         treeDefaultExpandAll={true}
                         showArrow={true}
                         showCheckedStrategy={'SHOW_PARENT'}
                         treeNodeFilterProp={'title'}
+                        className={formStyles.formItemDefault}
                         {...(itemProps as MultipleSelectProps)}
                         {...eventProps}
                         loading={loading}
@@ -286,6 +286,7 @@ const FormSelect = (props: SelectProps) => {
                     />
                 ) : (
                     <Select
+                        className={formStyles.formItemDefault}
                         {...(itemProps as SelectComponentProps)}
                         options={data}
                         loading={loading}

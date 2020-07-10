@@ -258,16 +258,18 @@ var FormSelect = function FormSelect(props) {
       })
     }, formItemProps), multiple ? React.createElement(_TreeSelect, __assign({
       treeNodeLabelProp: "label",
-      className: className,
       treeCheckable: true,
       treeDefaultExpandAll: true,
       showArrow: true,
       showCheckedStrategy: 'SHOW_PARENT',
-      treeNodeFilterProp: 'title'
+      treeNodeFilterProp: 'title',
+      className: formStyles.formItemDefault
     }, itemProps, eventProps, {
       loading: loading,
       treeData: data
-    })) : React.createElement(_Select, __assign({}, itemProps, {
+    })) : React.createElement(_Select, __assign({
+      className: formStyles.formItemDefault
+    }, itemProps, {
       options: data,
       loading: loading
     }, eventProps)));
