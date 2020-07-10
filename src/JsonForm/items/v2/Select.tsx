@@ -91,7 +91,7 @@ const FormSelect = (props: SelectProps) => {
         ...formItemProps
     } = props;
 
-    const withSelector = !options['selector'];
+    const withSelector = !!options['selector'];
     const withRequest = !!options['url'];
     const withList = Array.isArray(options);
 

@@ -87,7 +87,7 @@ var FormSelect = function FormSelect(props) {
       labelCol = props.labelCol,
       formItemProps = __rest(props, ["label", "className", "relation", "onChange", "labelClassName", "form", "options", "itemProps", "defaultOption", "optionKeys", "labelCol"]);
 
-  var withSelector = !options['selector'];
+  var withSelector = !!options['selector'];
   var withRequest = !!options['url'];
   var withList = Array.isArray(options);
 
