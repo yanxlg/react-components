@@ -15,7 +15,7 @@ const typeList = ['dynamic'];
 export declare interface DynamicItemProps {
     type: DynamicType;
     form: FormInstance;
-    dynamic: (form: FormInstance) => FormField;
+    dynamic: (form: FormInstance) => FormField | undefined;
     shouldUpdate: ShouldUpdate;
     labelClassName?: string;
     itemCol?: ColProps;
@@ -34,7 +34,11 @@ const DynamicItem = ({
         <Form.Item shouldUpdate={shouldUpdate} noStyle={true}>
             {() => {
                 const formField = dynamic(form);
-                return getFormItem(formField, form, labelClassName, itemCol, itemRow);
+                if (formField) {
+                    return getFormItem(formField, form, labelClassName, itemCol, itemRow);
+                } else {
+                    return null;
+                }
             }}
         </Form.Item>
     );

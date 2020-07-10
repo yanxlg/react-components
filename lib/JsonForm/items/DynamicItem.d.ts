@@ -8,7 +8,7 @@ export declare type DynamicType = 'dynamic';
 export declare interface DynamicItemProps {
     type: DynamicType;
     form: FormInstance;
-    dynamic: (form: FormInstance) => FormField;
+    dynamic: (form: FormInstance) => FormField | undefined;
     shouldUpdate: ShouldUpdate;
     labelClassName?: string;
     itemCol?: ColProps;

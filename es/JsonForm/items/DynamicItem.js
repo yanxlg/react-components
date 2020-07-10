@@ -20,7 +20,12 @@ var DynamicItem = function DynamicItem(_a) {
     noStyle: true
   }, function () {
     var formField = dynamic(form);
-    return getFormItem(formField, form, labelClassName, itemCol, itemRow);
+
+    if (formField) {
+      return getFormItem(formField, form, labelClassName, itemCol, itemRow);
+    } else {
+      return null;
+    }
   });
 };
 
