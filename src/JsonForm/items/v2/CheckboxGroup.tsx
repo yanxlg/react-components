@@ -42,7 +42,7 @@ const FormCheckboxGroup = (props: CheckboxGroupProps) => {
         childrenProps,
         type,
         options,
-        optionKeys,
+        optionKeys = ['label', 'value'],
         showLoading = true,
         labelCol,
         ...formItemProps

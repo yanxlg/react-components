@@ -53,9 +53,10 @@ var FormCheckboxGroup = function FormCheckboxGroup(props) {
       childrenProps = props.childrenProps,
       type = props.type,
       options = props.options,
-      optionKeys = props.optionKeys,
-      _b = props.showLoading,
-      showLoading = _b === void 0 ? true : _b,
+      _b = props.optionKeys,
+      optionKeys = _b === void 0 ? ['label', 'value'] : _b,
+      _c = props.showLoading,
+      showLoading = _c === void 0 ? true : _c,
       labelCol = props.labelCol,
       formItemProps = __rest(props, ["labelClassName", "className", "onChange", "form", "childrenProps", "type", "options", "optionKeys", "showLoading", "labelCol"]);
 
@@ -63,9 +64,9 @@ var FormCheckboxGroup = function FormCheckboxGroup(props) {
   var withRequest = !!options['url'];
   var withList = Array.isArray(options);
 
-  var _c = useState(withList ? parseOptionList(options, optionKeys) : undefined),
-      mergeOptions = _c[0],
-      setMergeOptions = _c[1];
+  var _d = useState(withList ? parseOptionList(options, optionKeys) : undefined),
+      mergeOptions = _d[0],
+      setMergeOptions = _d[1];
 
   useUpdate(function () {
     if (Array.isArray(options)) {
