@@ -8,9 +8,12 @@ export const isNull = function(value: any) {
 };
 
 export function transNullValue(value?: any) {
-    return value === '' || isNull(value) || (Array.isArray(value) && !value.length)
-        ? undefined
-        : value;
+    // 数组中去除空字符
+    if (Array.isArray(value)) {
+        const filter_value = value.filter(item => item !== '' && !isNull(item));
+        return filter_value.length ? filter_value : undefined;
+    }
+    return value === '' || isNull(value) ? undefined : value;
 }
 
 export function transJoinStr(value?: any) {
