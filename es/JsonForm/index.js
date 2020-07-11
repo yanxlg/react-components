@@ -82,6 +82,7 @@ import FormLabel from './items/Label'; ////////////////////////////// ====v2====
 
 import FormSelectV2 from './items/v2/Select';
 import FormInputV2 from './items/v2/Input';
+import FormCheckboxV2 from './items/v2/CheckboxGroup';
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
@@ -340,6 +341,16 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
 
   if (FormInputV2.typeList.includes(type)) {
     return getColChildren(React.createElement(FormInputV2, __assign({
+      key: String(index),
+      labelClassName: labelClassName
+    }, field, {
+      type: type,
+      form: form
+    })), itemCol);
+  }
+
+  if (FormCheckboxV2.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormCheckboxV2, __assign({
       key: String(index),
       labelClassName: labelClassName
     }, field, {

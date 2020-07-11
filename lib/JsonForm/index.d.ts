@@ -29,10 +29,11 @@ import { LabelProps } from './items/Label';
 import { NamePath } from 'rc-field-form/es/interface';
 import { SelectProps as SelectPropsV2 } from './items/v2/Select';
 import { InputProps as InputPropsV2 } from './items/v2/Input';
+import { CheckboxGroupProps as CheckboxGroupPropsV2 } from './items/v2/CheckboxGroup';
 export declare interface CustomFormProps {
     labelClassName?: string;
 }
-export declare type FormField<T = string> = (Omit<InputProps<T>, 'form'> | Omit<LabelProps<T>, 'form'> | Omit<FormPasswordProps<T>, 'form'> | Omit<SelectProps<T>, 'form'> | Omit<CheckboxProps<T>, 'form'> | Omit<DatePickerProps<T>, 'form'> | Omit<DateRangerProps<T>, 'form'> | Omit<CheckboxGroupProps<T>, 'form'> | Omit<RadioGroupProps<T>, 'form'> | Omit<InputRangeProps<T>, 'form'> | Omit<TextAreaProps<T>, 'form'> | Omit<LayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'> | Omit<CollapseLayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'> | Omit<DynamicItemProps, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'> | Omit<HideItemProps, 'form'> | Omit<CascaderProps, 'form'> | Omit<CustomFragmentProps, 'form'> | Omit<TreeSelectProps<T>, 'form'> | Omit<LoadingItemProps<T>, 'form'> | Omit<NumberRangeProps<T>, 'form'> | Omit<FormTreeProps<T>, 'form'> | Omit<SelectPropsV2, 'form'> | Omit<InputPropsV2, 'form'>) & {
+export declare type FormField<T = string> = (Omit<InputProps<T>, 'form'> | Omit<LabelProps<T>, 'form'> | Omit<FormPasswordProps<T>, 'form'> | Omit<SelectProps<T>, 'form'> | Omit<CheckboxProps<T>, 'form'> | Omit<DatePickerProps<T>, 'form'> | Omit<DateRangerProps<T>, 'form'> | Omit<CheckboxGroupProps<T>, 'form'> | Omit<RadioGroupProps<T>, 'form'> | Omit<InputRangeProps<T>, 'form'> | Omit<TextAreaProps<T>, 'form'> | Omit<LayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'> | Omit<CollapseLayoutProps<T>, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'> | Omit<DynamicItemProps, 'form' | 'labelClassName' | 'itemCol' | 'itemRow'> | Omit<HideItemProps, 'form'> | Omit<CascaderProps, 'form'> | Omit<CustomFragmentProps, 'form'> | Omit<TreeSelectProps<T>, 'form'> | Omit<LoadingItemProps<T>, 'form'> | Omit<NumberRangeProps<T>, 'form'> | Omit<FormTreeProps<T>, 'form'> | Omit<SelectPropsV2, 'form'> | Omit<InputPropsV2, 'form'> | Omit<CheckboxGroupPropsV2, 'form'>) & {
     form?: FormInstance;
     key?: string;
 };

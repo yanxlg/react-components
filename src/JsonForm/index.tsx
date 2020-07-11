@@ -52,6 +52,10 @@ import FormInputV2, {
     InputProps as InputPropsV2,
     InputTypeAll as InputTypeV2,
 } from './items/v2/Input';
+import FormCheckboxV2, {
+    CheckboxGroupProps as CheckboxGroupPropsV2,
+    CheckboxGroupType as CheckboxGroupTypeV2,
+} from './items/v2/CheckboxGroup';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -82,6 +86,7 @@ export type FormField<T = string> = (
     | Omit<FormTreeProps<T>, 'form'>
     | Omit<SelectPropsV2, 'form'>
     | Omit<InputPropsV2, 'form'>
+    | Omit<CheckboxGroupPropsV2, 'form'>
 ) & {
     form?: FormInstance;
     key?: string;
@@ -414,6 +419,18 @@ export const getFormItem = (
                 labelClassName={labelClassName}
                 {...(field as any)}
                 type={type as InputTypeV2}
+                form={form}
+            />,
+            itemCol,
+        );
+    }
+    if (FormCheckboxV2.typeList.includes(type)) {
+        return getColChildren(
+            <FormCheckboxV2
+                key={String(index)}
+                labelClassName={labelClassName}
+                {...(field as CheckboxGroupPropsV2)}
+                type={type as CheckboxGroupTypeV2}
                 form={form}
             />,
             itemCol,
