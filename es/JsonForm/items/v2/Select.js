@@ -56,8 +56,7 @@ import baseRequest from '../../../request';
 import formStyles from '../../_form.less';
 import { iterator } from '../../..';
 var typeList = ['select@2'];
-
-function getValueByNamePath(target, namePath) {
+export function getValueByNamePath(target, namePath) {
   if (Array.isArray(namePath)) {
     var name_1 = namePath.shift();
 
@@ -68,6 +67,25 @@ function getValueByNamePath(target, namePath) {
     }
   } else {
     return target[namePath];
+  }
+}
+export function parseOptionList(options, optionKeys, relationKey) {
+  if (relationKey) {
+    return options.map(function (item) {
+      var _a;
+
+      return __assign(__assign({}, item), (_a = {
+        label: item[optionKeys[0]],
+        value: item[optionKeys[1]]
+      }, _a[relationKey] = parseOptionList(item[relationKey] || [], optionKeys, relationKey), _a));
+    });
+  } else {
+    return options.map(function (item) {
+      return __assign(__assign({}, item), {
+        label: item[optionKeys[0]],
+        value: item[optionKeys[1]]
+      });
+    });
   }
 }
 
@@ -92,7 +110,7 @@ var FormSelect = function FormSelect(props) {
   var withRequest = !!options['url'];
   var withList = Array.isArray(options);
 
-  var _d = useState(withList ? options : undefined),
+  var _d = useState(withList ? parseOptionList(options, optionKeys, relation === null || relation === void 0 ? void 0 : relation.key) : undefined),
       mergeOptions = _d[0],
       setMergeOptions = _d[1];
 
@@ -101,7 +119,10 @@ var FormSelect = function FormSelect(props) {
       setMergeOptions(options);
     }
   }, [options]);
-  var reduxOptions = useSelector(withSelector ? options['selector'] : function () {
+  var reduxOptions = useSelector(withSelector ? function (state) {
+    var primaryValue = options['selector'](state);
+    return primaryValue ? parseOptionList(primaryValue, optionKeys, relation === null || relation === void 0 ? void 0 : relation.key) : undefined;
+  } : function () {
     return undefined;
   }, options['equalityFn']);
   useEffect(function () {
@@ -116,12 +137,7 @@ var FormSelect = function FormSelect(props) {
           parser_1 = _d === void 0 ? 'array' : _d;
       request.get(url).then(function (result) {
         var values = getValueByNamePath(result, dataPath_1);
-        var parseOptions = parser_1 === 'array' ? values.map(function (item) {
-          return {
-            label: item[optionKeys[0]],
-            value: item[optionKeys[1]]
-          };
-        }) : iterator(values, function (key, value) {
+        var parseOptions = parser_1 === 'array' ? parseOptionList(values, optionKeys, relation === null || relation === void 0 ? void 0 : relation.key) : iterator(values, function (key, value) {
           return {
             label: value,
             value: key
@@ -149,7 +165,7 @@ var FormSelect = function FormSelect(props) {
           var dependenceValue = form === null || form === void 0 ? void 0 : form.getFieldValue(dependenceName);
           dependenceValue = Array.isArray(dependenceValue) ? dependenceValue : [dependenceValue];
           var siblings = parentItem === null || parentItem === void 0 ? void 0 : parentItem.filter(function (item) {
-            var value = item[optionKeys[1]];
+            var value = item.value;
             return dependenceValue.indexOf(value) > -1;
           });
 
@@ -213,20 +229,10 @@ var FormSelect = function FormSelect(props) {
       return [{
         label: parentName,
         value: parentValue,
-        children: optionList.map(function (item) {
-          return __assign(__assign({}, item), {
-            label: item[optionKeys[0]],
-            value: item[optionKeys[1]]
-          });
-        })
+        children: optionList
       }];
     } else {
-      return optionList.map(function (item) {
-        return __assign(__assign({}, item), {
-          label: item[optionKeys[0]],
-          value: item[optionKeys[1]]
-        });
-      });
+      return optionList;
     }
   }, []);
   var getSelectData = useCallback(function (optionList) {
@@ -288,7 +294,7 @@ var FormSelect = function FormSelect(props) {
       options: data,
       loading: loading
     }, eventProps)));
-  }, [mergeOptions, reduxOptions]);
+  }, [mergeOptions, reduxOptions, childrenProps, formItemProps]);
   return useMemo(function () {
     if (relation === void 0) {
       return formItem();
@@ -315,7 +321,7 @@ var FormSelect = function FormSelect(props) {
         return formItem();
       });
     }
-  }, [mergeOptions, reduxOptions]);
+  }, [mergeOptions, reduxOptions, childrenProps, formItemProps]);
 };
 
 FormSelect.typeList = typeList;

@@ -9,7 +9,7 @@ export interface ISelector {
     selector: (state: any) => unknown;
     equalityFn?: (left: unknown, right: unknown) => boolean;
 }
-interface IHttpOptions {
+export interface IHttpOptions {
     url: string;
     request?: {
         get: (url: string) => Promise<any>;
@@ -50,6 +50,10 @@ export declare type SelectProps = Omit<FormItemProps, 'children'> & {
     onChange?: (name: NamePath, form: FormInstance) => void;
     childrenProps?: SelectComponentProps | MultipleSelectProps;
 };
+export declare function getValueByNamePath(target: any, namePath: NamePath): any;
+export declare function parseOptionList(options: Array<{
+    [key: string]: any;
+}>, optionKeys: [string, string], relationKey?: string): IOptionItem[];
 declare const FormSelect: {
     (props: SelectProps): JSX.Element;
     typeList: string[];

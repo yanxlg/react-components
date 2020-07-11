@@ -22,7 +22,7 @@ export interface ISelector {
     equalityFn?: (left: unknown, right: unknown) => boolean;
 }
 
-interface IHttpOptions {
+export interface IHttpOptions {
     url: string;
     request?: {
         get: (url: string) => Promise<any>;
@@ -66,7 +66,7 @@ export type SelectProps = Omit<FormItemProps, 'children'> & {
     childrenProps?: SelectComponentProps | MultipleSelectProps;
 };
 
-function getValueByNamePath(target: any, namePath: NamePath): any {
+export function getValueByNamePath(target: any, namePath: NamePath): any {
     if (Array.isArray(namePath)) {
         const name = namePath.shift();
         if (namePath.length === 0) {
@@ -76,6 +76,35 @@ function getValueByNamePath(target: any, namePath: NamePath): any {
         }
     } else {
         return target[namePath];
+    }
+}
+
+export function parseOptionList(
+    options: Array<{ [key: string]: any }>,
+    optionKeys: [string, string],
+    relationKey?: string,
+): IOptionItem[] {
+    if (relationKey) {
+        return options.map(item => {
+            return {
+                ...item,
+                label: item[optionKeys[0]] as string,
+                value: item[optionKeys[1]] as string,
+                [relationKey]: parseOptionList(
+                    (item[relationKey] as any[]) || [],
+                    optionKeys,
+                    relationKey,
+                ),
+            };
+        });
+    } else {
+        return options.map(item => {
+            return {
+                ...item,
+                label: item[optionKeys[0]] as string,
+                value: item[optionKeys[1]] as string,
+            };
+        });
     }
 }
 
@@ -100,7 +129,13 @@ const FormSelect = (props: SelectProps) => {
     const withList = Array.isArray(options);
 
     const [mergeOptions, setMergeOptions] = useState<IOptionItem[]>(
-        withList ? (options as IOptionItem[]) : undefined,
+        withList
+            ? (parseOptionList(
+                  options as IOptionItem[],
+                  optionKeys,
+                  relation?.key,
+              ) as IOptionItem[])
+            : undefined,
     );
 
     useUpdate(() => {
@@ -110,7 +145,14 @@ const FormSelect = (props: SelectProps) => {
     }, [options]);
 
     const reduxOptions = useSelector(
-        withSelector ? options['selector'] : () => undefined,
+        withSelector
+            ? (state: any) => {
+                  const primaryValue = options['selector'](state);
+                  return primaryValue
+                      ? parseOptionList(primaryValue, optionKeys, relation?.key)
+                      : undefined;
+              }
+            : () => undefined,
         options['equalityFn'],
     ) as IOptionItem[] | undefined;
 
@@ -128,12 +170,7 @@ const FormSelect = (props: SelectProps) => {
                     const values = getValueByNamePath(result, dataPath);
                     const parseOptions =
                         parser === 'array'
-                            ? values.map((item: any) => {
-                                  return {
-                                      label: item[optionKeys[0]],
-                                      value: item[optionKeys[1]],
-                                  };
-                              })
+                            ? parseOptionList(values, optionKeys, relation?.key)
                             : iterator(values, (key, value) => {
                                   return {
                                       label: value,
@@ -165,7 +202,7 @@ const FormSelect = (props: SelectProps) => {
                         ? dependenceValue
                         : [dependenceValue];
                     const siblings = parentItem?.filter(item => {
-                        const value = item[optionKeys[1]];
+                        const value = item.value;
                         return dependenceValue.indexOf(value) > -1;
                     });
                     if (siblings) {
@@ -224,19 +261,11 @@ const FormSelect = (props: SelectProps) => {
                 {
                     label: parentName,
                     value: parentValue,
-                    children: optionList.map(item => ({
-                        ...item,
-                        label: item[optionKeys[0]],
-                        value: item[optionKeys[1]],
-                    })),
+                    children: optionList,
                 },
             ];
         } else {
-            return optionList.map(item => ({
-                ...item,
-                label: item[optionKeys[0]],
-                value: item[optionKeys[1]],
-            }));
+            return optionList;
         }
     }, []);
 
@@ -314,7 +343,7 @@ const FormSelect = (props: SelectProps) => {
                 )}
             </Form.Item>
         );
-    }, [mergeOptions, reduxOptions]);
+    }, [mergeOptions, reduxOptions, childrenProps, formItemProps]);
 
     return useMemo(() => {
         if (relation === void 0) {
@@ -343,7 +372,7 @@ const FormSelect = (props: SelectProps) => {
                 </Form.Item>
             );
         }
-    }, [mergeOptions, reduxOptions]);
+    }, [mergeOptions, reduxOptions, childrenProps, formItemProps]);
 };
 
 FormSelect.typeList = typeList;
