@@ -226,7 +226,8 @@ function addDefaultInterceptors(req) {
               !skipResponseInterceptors && msg && message.error(status + "\uFF1A" + msg);
               throw {
                 type: 'HttpError',
-                data: response.body
+                data: response.body,
+                message: msg
               };
             }
 
@@ -253,7 +254,9 @@ function addDefaultInterceptors(req) {
               skipResponseInterceptors = true;
               throw {
                 type: 'HttpError',
-                data: response.body
+                data: data,
+                message: msg,
+                response: response
               };
             }
 
@@ -267,7 +270,9 @@ function addDefaultInterceptors(req) {
             !skipResponseInterceptors && message.error('服务异常，返回结果无法解析！');
             throw {
               type: 'HttpError',
-              data: response.body
+              data: response.body,
+              response: response,
+              message: error_1.message
             };
 
           case 4:

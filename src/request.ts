@@ -54,6 +54,7 @@ function addDefaultInterceptors(req: RequestMethod) {
                 throw {
                     type: 'HttpError',
                     data: response.body,
+                    message: msg,
                 };
             }
 
@@ -73,7 +74,9 @@ function addDefaultInterceptors(req: RequestMethod) {
                         skipResponseInterceptors = true;
                         throw {
                             type: 'HttpError',
-                            data: response.body,
+                            data: data,
+                            message: msg,
+                            response: response,
                         };
                     }
                     return response;
@@ -83,6 +86,8 @@ function addDefaultInterceptors(req: RequestMethod) {
                     throw {
                         type: 'HttpError',
                         data: response.body,
+                        response: response,
+                        message: error.message,
                     };
                 }
             }
