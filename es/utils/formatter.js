@@ -4,7 +4,15 @@ export var isNull = function isNull(value) {
   return value === null || value === void 0;
 };
 export function transNullValue(value) {
-  return value === '' || isNull(value) || Array.isArray(value) && !value.length ? undefined : value;
+  // 数组中去除空字符
+  if (Array.isArray(value)) {
+    var filter_value = value.filter(function (item) {
+      return item !== '' && !isNull(item);
+    });
+    return filter_value.length ? filter_value : undefined;
+  }
+
+  return value === '' || isNull(value) ? undefined : value;
 }
 export function transJoinStr(value) {
   return value && value.length ? value.join(',') : undefined;

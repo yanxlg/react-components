@@ -24,27 +24,19 @@ export interface IOptionItem {
     disabled?: boolean;
     [key: string]: any;
 }
-declare type SelectComponentProps = Omit<
-    AntdSelectProps<string>,
-    'loading' | 'onChange' | 'options'
-> & {
+declare type SelectComponentProps = Omit<AntdSelectProps<string>, 'loading' | 'onChange' | 'options'> & {
     mode?: Exclude<'tags' | 'multiple', AntdSelectProps<string>['mode']>;
 };
-declare type MultipleSelectProps = Omit<
-    TreeSelectProps<string>,
-    'loading' | 'onChange' | 'treeData'
-> & {
+declare type MultipleSelectProps = Omit<TreeSelectProps<string>, 'loading' | 'onChange' | 'treeData'> & {
     mode: 'tags' | 'multiple';
 };
 export declare type SelectProps = Omit<FormItemProps, 'children'> & {
     type: SelectType;
     form: FormInstance;
-    defaultOption?:
-        | {
-              label: string;
-              value?: any;
-          }
-        | boolean;
+    defaultOption?: {
+        label: string;
+        value?: any;
+    } | boolean;
     defaultCheckedType?: 'checkedAll';
     name: NamePath;
     formatter?: FormatterType;
@@ -59,13 +51,9 @@ export declare type SelectProps = Omit<FormItemProps, 'children'> & {
     childrenProps?: SelectComponentProps | MultipleSelectProps;
 };
 export declare function getValueByNamePath(target: any, namePath: NamePath): any;
-export declare function parseOptionList(
-    options: Array<{
-        [key: string]: any;
-    }>,
-    optionKeys: [string, string],
-    relationKey?: string,
-): IOptionItem[];
+export declare function parseOptionList(options: Array<{
+    [key: string]: any;
+}>, optionKeys: [string, string], relationKey?: string): IOptionItem[];
 declare const FormSelect: {
     (props: SelectProps): JSX.Element;
     typeList: string[];

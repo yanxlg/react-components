@@ -6,21 +6,20 @@ import { RichType } from '../../RichInput';
 import { InputProps as AntInputProps } from 'antd/es/input';
 import { FormatterType } from '../../utils/formatter';
 export declare type InputType = RichType;
-export declare type InputProps<T = string> = FormItemLabelProps &
-    CustomFormProps & {
-        form: FormInstance;
-        type: InputType;
-        placeholder?: string;
-        className?: string;
-        formItemClassName?: string;
-        onChange?: (name: FormItemName<T>, form: FormInstance) => void;
-        name: FormItemName<T>;
-        formatter?: FormatterType;
-        rules?: Rule[];
-        labelClassName?: string;
-        initialValue?: any;
-        hide?: boolean;
-    } & Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange'>;
+export declare type InputProps<T = string> = FormItemLabelProps & CustomFormProps & {
+    form: FormInstance;
+    type: InputType;
+    placeholder?: string;
+    className?: string;
+    formItemClassName?: string;
+    onChange?: (name: FormItemName<T>, form: FormInstance) => void;
+    name: FormItemName<T>;
+    formatter?: FormatterType;
+    rules?: Rule[];
+    labelClassName?: string;
+    initialValue?: any;
+    hide?: boolean;
+} & Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange'>;
 declare const FormInput: {
     (props: InputProps<string>): JSX.Element;
     typeList: string[];
