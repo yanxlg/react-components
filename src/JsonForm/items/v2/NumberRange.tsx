@@ -7,7 +7,6 @@ import { FormatterType } from '../../../utils/formatter';
 import { NamePath } from 'rc-field-form/lib/interface';
 import { InputProps as AntInputProps } from 'antd/es/input/Input';
 import classNames from 'classnames';
-import { getValueByNamePath } from './Select';
 import RichInput from '../../../RichInput';
 
 export type NumberRangeType = 'numberRange@2';
@@ -65,11 +64,6 @@ const FormInputRange = (props: NumberRangeProps) => {
     }, []);
 
     return useMemo(() => {
-        const itemClassName = [
-            formStyles.inlineBlock,
-            formStyles.marginNone,
-            formStyles.verticalMiddle,
-        ].join(' ');
         return (
             <Form.Item
                 className={className}
@@ -93,55 +87,36 @@ const FormInputRange = (props: NumberRangeProps) => {
             >
                 <Input.Group compact className={formStyles.flex}>
                     <Form.Item
-                        shouldUpdate={(prevValues, currentValues) =>
-                            getValueByNamePath(prevValues, name2) !==
-                            getValueByNamePath(currentValues, name2)
-                        }
-                        className={itemClassName}
+                        name={name1}
+                        className={formStyles.marginNone}
+                        validateTrigger="onBlur"
+                        initialValue={initialValue?.[0]}
                     >
-                        <Form.Item
-                            name={name1}
-                            className={formStyles.marginNone}
-                            validateTrigger="onBlur"
-                            initialValue={initialValue?.[0]}
-                        >
-                            <RichInput
-                                richType="number"
-                                precision={precision}
-                                {...event1Props}
-                                className={classNames(
-                                    formStyles.inputRange,
-                                    formStyles.inputRangeLeft,
-                                )}
-                                {...childrenProps}
-                            />
-                        </Form.Item>
+                        <RichInput
+                            richType="number"
+                            precision={precision}
+                            {...event1Props}
+                            className={classNames(formStyles.inputRange, formStyles.inputRangeLeft)}
+                            {...childrenProps}
+                        />
                     </Form.Item>
                     <Input className={formStyles.inputRangeSplit} placeholder="~" disabled />
                     <Form.Item
-                        className={itemClassName}
-                        shouldUpdate={(prevValues, currentValues) =>
-                            getValueByNamePath(prevValues, name1) !==
-                            getValueByNamePath(currentValues, name1)
-                        }
+                        name={name2}
+                        className={formStyles.marginNone}
+                        validateTrigger="onBlur"
+                        initialValue={initialValue?.[1]}
                     >
-                        <Form.Item
-                            name={name2}
-                            className={formStyles.marginNone}
-                            validateTrigger="onBlur"
-                            initialValue={initialValue?.[1]}
-                        >
-                            <RichInput
-                                richType="number"
-                                precision={precision}
-                                {...event2Props}
-                                className={classNames(
-                                    formStyles.inputRange,
-                                    formStyles.inputRangeRight,
-                                )}
-                                {...childrenProps}
-                            />
-                        </Form.Item>
+                        <RichInput
+                            richType="number"
+                            precision={precision}
+                            {...event2Props}
+                            className={classNames(
+                                formStyles.inputRange,
+                                formStyles.inputRangeRight,
+                            )}
+                            {...childrenProps}
+                        />
                     </Form.Item>
                     {addonAfter ? (
                         <span

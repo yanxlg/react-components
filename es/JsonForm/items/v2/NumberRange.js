@@ -35,7 +35,6 @@ var __rest = this && this.__rest || function (s, e) {
 import React, { useMemo } from 'react';
 import formStyles from '../../_form.less';
 import classNames from 'classnames';
-import { getValueByNamePath } from './Select';
 import RichInput from '../../../RichInput';
 var typeList = ['numberRange@2'];
 
@@ -71,7 +70,6 @@ var FormInputRange = function FormInputRange(props) {
     } : {};
   }, []);
   return useMemo(function () {
-    var itemClassName = [formStyles.inlineBlock, formStyles.marginNone, formStyles.verticalMiddle].join(' ');
     return React.createElement(_Form.Item, __assign({
       className: className,
       labelCol: __assign(__assign({}, labelCol), {
@@ -96,11 +94,6 @@ var FormInputRange = function FormInputRange(props) {
       compact: true,
       className: formStyles.flex
     }, React.createElement(_Form.Item, {
-      shouldUpdate: function shouldUpdate(prevValues, currentValues) {
-        return getValueByNamePath(prevValues, name2) !== getValueByNamePath(currentValues, name2);
-      },
-      className: itemClassName
-    }, React.createElement(_Form.Item, {
       name: name1,
       className: formStyles.marginNone,
       validateTrigger: "onBlur",
@@ -110,16 +103,11 @@ var FormInputRange = function FormInputRange(props) {
       precision: precision
     }, event1Props, {
       className: classNames(formStyles.inputRange, formStyles.inputRangeLeft)
-    }, childrenProps)))), React.createElement(_Input, {
+    }, childrenProps))), React.createElement(_Input, {
       className: formStyles.inputRangeSplit,
       placeholder: "~",
       disabled: true
     }), React.createElement(_Form.Item, {
-      className: itemClassName,
-      shouldUpdate: function shouldUpdate(prevValues, currentValues) {
-        return getValueByNamePath(prevValues, name1) !== getValueByNamePath(currentValues, name1);
-      }
-    }, React.createElement(_Form.Item, {
       name: name2,
       className: formStyles.marginNone,
       validateTrigger: "onBlur",
@@ -129,7 +117,7 @@ var FormInputRange = function FormInputRange(props) {
       precision: precision
     }, event2Props, {
       className: classNames(formStyles.inputRange, formStyles.inputRangeRight)
-    }, childrenProps)))), addonAfter ? React.createElement("span", {
+    }, childrenProps))), addonAfter ? React.createElement("span", {
       className: [formStyles.endExtra, formStyles.verticalMiddle].join(' ')
     }, addonAfter) : null));
   }, []);
