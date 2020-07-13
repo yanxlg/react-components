@@ -2,7 +2,7 @@ import { DatePicker, Form } from 'antd';
 import React, { useMemo } from 'react';
 import { FormItemName } from '../../index';
 import { FormInstance, FormItemProps, Rule } from 'antd/es/form';
-import formStyles from '../_form.less';
+import formStyles from '../../_form.less';
 import classNames from 'classnames';
 import { FormatterType } from '../../../utils/formatter';
 import { NamePath } from 'rc-field-form/lib/interface';

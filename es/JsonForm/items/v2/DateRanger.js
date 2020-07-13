@@ -33,7 +33,7 @@ var __rest = this && this.__rest || function (s, e) {
 };
 
 import React, { useMemo } from 'react';
-import formStyles from '../_form.less';
+import formStyles from '../../_form.less';
 import classNames from 'classnames';
 import { getValueByNamePath } from './Select';
 var typeList = ['dateRanger@2'];
