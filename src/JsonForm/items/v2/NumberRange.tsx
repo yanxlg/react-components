@@ -96,8 +96,11 @@ const FormInputRange = (props: NumberRangeProps) => {
                             richType="number"
                             precision={precision}
                             {...event1Props}
-                            className={classNames(formStyles.inputRange, formStyles.inputRangeLeft)}
                             {...childrenProps}
+                            className={classNames(
+                                childrenProps?.className || formStyles.inputRange,
+                                formStyles.inputRangeLeft,
+                            )}
                         />
                     </Form.Item>
                     <Input className={formStyles.inputRangeSplit} placeholder="~" disabled />
@@ -112,10 +115,9 @@ const FormInputRange = (props: NumberRangeProps) => {
                             precision={precision}
                             {...event2Props}
                             className={classNames(
-                                formStyles.inputRange,
+                                childrenProps?.className || formStyles.inputRange,
                                 formStyles.inputRangeRight,
                             )}
-                            {...childrenProps}
                         />
                     </Form.Item>
                     {addonAfter ? (
