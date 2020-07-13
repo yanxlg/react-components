@@ -96,7 +96,7 @@ export type FormField<T = string> = (
     | Omit<InputPropsV2, 'form'>
     | Omit<CheckboxGroupPropsV2, 'form'>
     | Omit<DateRangerPropsV2, 'form'>
-    | Omit<NumberRangeProps, 'form'>
+    | Omit<NumberRangePropsV2, 'form'>
 ) & {
     form?: FormInstance;
     key?: string;
