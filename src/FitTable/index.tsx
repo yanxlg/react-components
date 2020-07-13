@@ -10,7 +10,7 @@ import {
 } from 'antd/es/table/interface';
 import ColumnsSettingWrap from './ColumnsSettingWrap';
 import { ColumnsSettingProps } from './ColumnsSetting';
-import { EmptyArray, EmptyObject } from '../utils';
+import { EmptyObject } from '../utils';
 import { defaultPageSizeOptions } from '../ProTable/config';
 import formStyles from '../JsonForm/_form.less';
 import { PaginationProps } from 'antd/lib/pagination/Pagination';
@@ -77,7 +77,7 @@ function FitTable<T extends object = any>({
 
     const filtersRef = useRef<Record<string, Key[] | null>>(EmptyObject);
     const sorterRef = useRef<SorterResult<T> | SorterResult<T>[]>(EmptyObject);
-    const extraRef = useRef<TableCurrentDataSource<T>>({ currentDataSource: EmptyArray });
+    const extraRef = useRef<TableCurrentDataSource<T>>();
 
     const onTableChange = useCallback(
         (

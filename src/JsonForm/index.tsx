@@ -56,6 +56,10 @@ import FormCheckboxV2, {
     CheckboxGroupProps as CheckboxGroupPropsV2,
     CheckboxGroupType as CheckboxGroupTypeV2,
 } from './items/v2/CheckboxGroup';
+import FormDateRangerV2, {
+    DateRangerProps as DateRangerPropsV2,
+    DateRangerType as DateRangerTypeV2,
+} from './items/v2/DateRanger';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -87,6 +91,7 @@ export type FormField<T = string> = (
     | Omit<SelectPropsV2, 'form'>
     | Omit<InputPropsV2, 'form'>
     | Omit<CheckboxGroupPropsV2, 'form'>
+    | Omit<DateRangerPropsV2, 'form'>
 ) & {
     form?: FormInstance;
     key?: string;
@@ -408,6 +413,7 @@ export const getFormItem = (
                 {...(field as SelectPropsV2)}
                 type={type as SelectTypeV2}
                 form={form}
+                hidden={hide}
             />,
             itemCol,
         );
@@ -420,6 +426,7 @@ export const getFormItem = (
                 {...(field as any)}
                 type={type as InputTypeV2}
                 form={form}
+                hidden={hide}
             />,
             itemCol,
         );
@@ -432,6 +439,20 @@ export const getFormItem = (
                 {...(field as CheckboxGroupPropsV2)}
                 type={type as CheckboxGroupTypeV2}
                 form={form}
+                hidden={hide}
+            />,
+            itemCol,
+        );
+    }
+    if (FormDateRangerV2.typeList.includes(type)) {
+        return getColChildren(
+            <FormDateRangerV2
+                key={String(index)}
+                labelClassName={labelClassName}
+                {...(field as DateRangerPropsV2)}
+                type={type as DateRangerTypeV2}
+                form={form}
+                hidden={hide}
             />,
             itemCol,
         );
@@ -586,7 +607,10 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                             formatterName,
                             formatter.null,
                         )(form.getFieldValue(name));
-                    } else if (FormDateRanger.typeList.includes(type)) {
+                    } else if (
+                        FormDateRanger.typeList.includes(type) ||
+                        FormDateRangerV2.typeList.includes(type)
+                    ) {
                         const [name1, name2] = name;
                         values[name1] = getFormatterFunc(
                             formatterName?.[0],

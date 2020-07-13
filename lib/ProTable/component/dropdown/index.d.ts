@@ -7,7 +7,7 @@ export interface DropdownProps {
         name: React.ReactNode;
         key: string;
     }[];
-    onSelect?: (key: string) => void;
+    onSelect?: (key: string | number) => void;
 }
 /**
  * 默认的 index 列容器，提供一个好看的 index

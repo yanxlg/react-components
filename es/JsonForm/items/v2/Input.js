@@ -48,7 +48,8 @@ var FormInput = function FormInput(props) {
       type = props.type,
       childrenProps = props.childrenProps,
       labelCol = props.labelCol,
-      formItemProps = __rest(props, ["className", "onChange", "labelClassName", "form", "type", "childrenProps", "labelCol"]);
+      formatter = props.formatter,
+      formItemProps = __rest(props, ["className", "onChange", "labelClassName", "form", "type", "childrenProps", "labelCol", "formatter"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {

@@ -42,7 +42,7 @@ import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useScrollXY } from './hooks';
 import styles from './_index.less';
 import ColumnsSettingWrap from './ColumnsSettingWrap';
-import { EmptyArray, EmptyObject } from '../utils';
+import { EmptyObject } from '../utils';
 import { defaultPageSizeOptions } from '../ProTable/config';
 import formStyles from '../JsonForm/_form.less';
 export var showTotal = function showTotal(total) {
@@ -78,9 +78,7 @@ function FitTable(_a) {
   var scroll = useScrollXY(ref, bottom, minHeight, autoFitY, columns, rowSelection, propsScroll);
   var filtersRef = useRef(EmptyObject);
   var sorterRef = useRef(EmptyObject);
-  var extraRef = useRef({
-    currentDataSource: EmptyArray
-  });
+  var extraRef = useRef();
   var onTableChange = useCallback(function (page, filters, sorter, extra) {
     filtersRef.current = filters;
     sorterRef.current = sorter;

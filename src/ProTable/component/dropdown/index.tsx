@@ -12,7 +12,7 @@ export interface DropdownProps {
         name: React.ReactNode;
         key: string;
     }[];
-    onSelect?: (key: string) => void;
+    onSelect?: (key: string | number) => void;
 }
 
 /**

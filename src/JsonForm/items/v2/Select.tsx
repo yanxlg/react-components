@@ -121,6 +121,7 @@ const FormSelect = (props: SelectProps) => {
         defaultCheckedType,
         optionKeys = ['label', 'value'],
         labelCol,
+        formatter,
         ...formItemProps
     } = props;
 

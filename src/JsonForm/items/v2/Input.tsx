@@ -53,6 +53,7 @@ const FormInput = (props: InputProps) => {
         type,
         childrenProps,
         labelCol,
+        formatter,
         ...formItemProps
     } = props;
 

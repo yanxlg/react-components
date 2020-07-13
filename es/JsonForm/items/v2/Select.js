@@ -104,7 +104,8 @@ var FormSelect = function FormSelect(props) {
       _c = props.optionKeys,
       optionKeys = _c === void 0 ? ['label', 'value'] : _c,
       labelCol = props.labelCol,
-      formItemProps = __rest(props, ["className", "relation", "onChange", "labelClassName", "form", "options", "childrenProps", "defaultOption", "defaultCheckedType", "optionKeys", "labelCol"]);
+      formatter = props.formatter,
+      formItemProps = __rest(props, ["className", "relation", "onChange", "labelClassName", "form", "options", "childrenProps", "defaultOption", "defaultCheckedType", "optionKeys", "labelCol", "formatter"]);
 
   var withSelector = !!options['selector'];
   var withRequest = !!options['url'];

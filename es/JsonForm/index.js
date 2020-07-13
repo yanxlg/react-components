@@ -83,6 +83,7 @@ import FormLabel from './items/Label'; ////////////////////////////// ====v2====
 import FormSelectV2 from './items/v2/Select';
 import FormInputV2 from './items/v2/Input';
 import FormCheckboxV2 from './items/v2/CheckboxGroup';
+import FormDateRangerV2 from './items/v2/DateRanger';
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
@@ -335,7 +336,8 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       labelClassName: labelClassName
     }, field, {
       type: type,
-      form: form
+      form: form,
+      hidden: hide
     })), itemCol);
   }
 
@@ -345,7 +347,8 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       labelClassName: labelClassName
     }, field, {
       type: type,
-      form: form
+      form: form,
+      hidden: hide
     })), itemCol);
   }
 
@@ -355,7 +358,19 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       labelClassName: labelClassName
     }, field, {
       type: type,
-      form: form
+      form: form,
+      hidden: hide
+    })), itemCol);
+  }
+
+  if (FormDateRangerV2.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormDateRangerV2, __assign({
+      key: String(index),
+      labelClassName: labelClassName
+    }, field, {
+      type: type,
+      form: form,
+      hidden: hide
     })), itemCol);
   }
 
@@ -468,7 +483,7 @@ var JsonForm = function JsonForm(props, ref) {
 
         if (FormInput.typeList.includes(type) || FormTextArea.typeList.includes(type) || FormSelect.typeList.includes(type) || FormDatePicker.typeList.includes(type) || FormSelectV2.typeList.includes(type) || FormInputV2.typeList.includes(type)) {
           values[name_2] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_2));
-        } else if (FormDateRanger.typeList.includes(type)) {
+        } else if (FormDateRanger.typeList.includes(type) || FormDateRangerV2.typeList.includes(type)) {
           var name1 = name_2[0],
               name2 = name_2[1];
           values[name1] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[0], formatter["null"])(form.getFieldValue(name1));

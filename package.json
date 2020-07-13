@@ -1,6 +1,6 @@
 {
     "name": "react-components",
-    "version": "0.0.6-alpha.73",
+    "version": "0.0.6-alpha.74",
     "description": "",
     "repository": {
         "type": "git",
@@ -39,7 +39,7 @@
         "react-redux": "^7.2.0"
     },
     "devDependencies": {
-        "antd": "^4.3.3",
+        "antd": "^4.4.2",
         "@ant-design/icons": "^4.0.2",
         "umi-request": "^1.2.19",
         "@types/react-highlight-words": "^0.16.1",
