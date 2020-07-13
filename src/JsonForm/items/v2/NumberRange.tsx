@@ -109,7 +109,10 @@ const FormInputRange = (props: NumberRangeProps) => {
                                 richType="number"
                                 precision={precision}
                                 {...event1Props}
-                                className={formStyles.inputRangeLeft}
+                                className={classNames(
+                                    formStyles.inputRange,
+                                    formStyles.inputRangeLeft,
+                                )}
                                 {...childrenProps}
                             />
                         </Form.Item>
@@ -132,7 +135,10 @@ const FormInputRange = (props: NumberRangeProps) => {
                                 richType="number"
                                 precision={precision}
                                 {...event2Props}
-                                className={formStyles.inputRangeRight}
+                                className={classNames(
+                                    formStyles.inputRange,
+                                    formStyles.inputRangeRight,
+                                )}
                                 {...childrenProps}
                             />
                         </Form.Item>
