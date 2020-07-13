@@ -132,7 +132,7 @@ const FormSelect = (props: SelectProps) => {
     } = props;
 
     const withSelector = !!options['selector'];
-    const withRequest = !!options['url'] || typeof options === 'function';
+    const withRequest = !!options['url'] || !!options['service'];
     const withList = Array.isArray(options);
 
     const [mergeOptions, setMergeOptions] = useState<IOptionItem[]>(

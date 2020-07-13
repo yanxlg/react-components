@@ -49,7 +49,7 @@ const FormCheckboxGroup = (props: CheckboxGroupProps) => {
     } = props;
 
     const withSelector = !!options['selector'];
-    const withRequest = !!options['url'];
+    const withRequest = !!options['url'] || !!options['service'];
     const withList = Array.isArray(options);
 
     const [mergeOptions, setMergeOptions] = useState<CheckboxOptionType[]>(

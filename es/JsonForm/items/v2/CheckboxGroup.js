@@ -61,7 +61,7 @@ var FormCheckboxGroup = function FormCheckboxGroup(props) {
       formItemProps = __rest(props, ["labelClassName", "className", "onChange", "form", "childrenProps", "type", "options", "optionKeys", "showLoading", "labelCol"]);
 
   var withSelector = !!options['selector'];
-  var withRequest = !!options['url'];
+  var withRequest = !!options['url'] || !!options['service'];
   var withList = Array.isArray(options);
 
   var _d = useState(withList ? parseOptionList(options, optionKeys) : undefined),
