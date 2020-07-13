@@ -71,6 +71,7 @@ const FormInputRange = (props: NumberRangeProps) => {
                     ...labelCol,
                     className: classNames(labelCol?.className, labelClassName),
                 }}
+                name="___range"
                 rules={[
                     ({ getFieldValue }) => ({
                         validator(rule, value) {

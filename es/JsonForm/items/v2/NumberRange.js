@@ -75,6 +75,7 @@ var FormInputRange = function FormInputRange(props) {
       labelCol: __assign(__assign({}, labelCol), {
         className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
       }),
+      name: "___range",
       rules: [function (_a) {
         var getFieldValue = _a.getFieldValue;
         return {
