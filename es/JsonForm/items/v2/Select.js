@@ -54,7 +54,7 @@ import { useSelector } from 'react-redux';
 import useUpdate from '../../../hooks/useUpdate';
 import baseRequest from '../../../request';
 import formStyles from '../../_form.less';
-import { iterator } from '../../..';
+import { iterator } from '../../../utils/iterator';
 var typeList = ['select@2'];
 export function getValueByNamePath(target, namePath) {
   if (Array.isArray(namePath)) {

@@ -11,7 +11,7 @@ import baseRequest from '../../../request';
 import { FormatterType } from '../../../utils/formatter';
 import formStyles from '../../_form.less';
 import { FormItemName } from '../../index';
-import { iterator } from '../../..';
+import { iterator } from '../../../utils/iterator';
 import { StoreValue, Store } from 'antd/es/form/interface';
 
 export type SelectType = 'select@2';

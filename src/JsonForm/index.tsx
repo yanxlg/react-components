@@ -60,6 +60,10 @@ import FormDateRangerV2, {
     DateRangerProps as DateRangerPropsV2,
     DateRangerType as DateRangerTypeV2,
 } from './items/v2/DateRanger';
+import FormNumberRangeV2, {
+    NumberRangeProps as NumberRangePropsV2,
+    NumberRangeType as NumberRangeTypeV2,
+} from './items/v2/NumberRange';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -92,6 +96,7 @@ export type FormField<T = string> = (
     | Omit<InputPropsV2, 'form'>
     | Omit<CheckboxGroupPropsV2, 'form'>
     | Omit<DateRangerPropsV2, 'form'>
+    | Omit<NumberRangeProps, 'form'>
 ) & {
     form?: FormInstance;
     key?: string;
@@ -457,6 +462,19 @@ export const getFormItem = (
             itemCol,
         );
     }
+    if (FormNumberRangeV2.typeList.includes(type)) {
+        return getColChildren(
+            <FormNumberRangeV2
+                key={String(index)}
+                labelClassName={labelClassName}
+                {...(field as NumberRangePropsV2)}
+                type={type as NumberRangeTypeV2}
+                form={form}
+                hidden={hide}
+            />,
+            itemCol,
+        );
+    }
     return null;
 };
 
@@ -622,7 +640,8 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                         )(form.getFieldValue(name2));
                     } else if (
                         FormInputRange.typeList.includes(type) ||
-                        FormNumberRange.typeList.includes(type)
+                        FormNumberRange.typeList.includes(type) ||
+                        FormNumberRangeV2.typeList.includes(type)
                     ) {
                         const [name1, name2] = name;
                         values[name1 as string] = getFormatterFunc(

@@ -41,7 +41,7 @@ import classNames from 'classnames';
 import useUpdate from '../../../hooks/useUpdate';
 import { useSelector } from 'react-redux';
 import baseRequest from '../../../request';
-import { iterator } from '../../..';
+import { iterator } from '../../../utils/iterator';
 var typeList = ['checkboxGroup@2'];
 
 var FormCheckboxGroup = function FormCheckboxGroup(props) {

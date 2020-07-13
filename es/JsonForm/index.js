@@ -84,6 +84,7 @@ import FormSelectV2 from './items/v2/Select';
 import FormInputV2 from './items/v2/Input';
 import FormCheckboxV2 from './items/v2/CheckboxGroup';
 import FormDateRangerV2 from './items/v2/DateRanger';
+import FormNumberRangeV2 from './items/v2/NumberRange';
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
@@ -374,6 +375,17 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
     })), itemCol);
   }
 
+  if (FormNumberRangeV2.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormNumberRangeV2, __assign({
+      key: String(index),
+      labelClassName: labelClassName
+    }, field, {
+      type: type,
+      form: form,
+      hidden: hide
+    })), itemCol);
+  }
+
   return null;
 };
 export var getFormItems = function getFormItems(fieldList, form, labelClassName, itemCol, itemRow, showList) {
@@ -488,7 +500,7 @@ var JsonForm = function JsonForm(props, ref) {
               name2 = name_2[1];
           values[name1] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[0], formatter["null"])(form.getFieldValue(name1));
           values[name2] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[1], formatter["null"])(form.getFieldValue(name2));
-        } else if (FormInputRange.typeList.includes(type) || FormNumberRange.typeList.includes(type)) {
+        } else if (FormInputRange.typeList.includes(type) || FormNumberRange.typeList.includes(type) || FormNumberRangeV2.typeList.includes(type)) {
           var name1 = name_2[0],
               name2 = name_2[1];
           values[name1] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[0], formatter.number)(form.getFieldValue(name1));

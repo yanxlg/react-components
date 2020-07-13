@@ -23,4 +23,3 @@ export { default as useInterval } from './hooks/useInterval';
 export { default as useLoading } from './hooks/useLoading';
 export { default as useModal2 } from './hooks/useModal2';
 export { default as useUpdate } from './hooks/useUpdate';
-export * from './utils/iterator';

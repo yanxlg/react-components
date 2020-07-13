@@ -19,18 +19,27 @@ export type RichType =
 
 declare interface RichInputProps extends InputProps {
     richType?: RichType;
+    precision?: number; // 数字浮点精度
 }
 
-const RichInput: React.FC<RichInputProps> = ({ richType, value, onChange, ...props }) => {
+const RichInput: React.FC<RichInputProps> = ({
+    richType,
+    precision,
+    value,
+    onChange,
+    ...props
+}) => {
     const [innerValue, setInnerValue] = useState('');
 
     const onInnerChange = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
             const _value = e.target.value;
             if (richType) {
-                e.target.value =
+                let parseValue =
                     richType === 'number'
-                        ? numberFormatter(_value)
+                        ? precision === 0
+                            ? intFormatter(_value)
+                            : numberFormatter(_value)
                         : richType === 'integer'
                         ? intFormatter(_value)
                         : richType === 'input'
@@ -42,6 +51,12 @@ const RichInput: React.FC<RichInputProps> = ({ richType, value, onChange, ...pro
                         : richType === 'naturalNumber'
                         ? naturalNumber(_value)
                         : _value;
+                if (precision) {
+                    // 精度计算
+                    const regexp = new RegExp(`^\\d+(?:\\.\\d{0,${precision}})?`);
+                    parseValue = (parseValue.match(regexp) || [''])[0];
+                }
+                e.target.value = parseValue;
             }
             if (value === void 0) {
                 setInnerValue(_value);

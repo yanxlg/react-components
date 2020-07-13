@@ -35,9 +35,10 @@ import { intFormatter, naturalNumber, numberFormatter, numberSplit, positiveIntF
 
 var RichInput = function RichInput(_a) {
   var richType = _a.richType,
+      precision = _a.precision,
       value = _a.value,
       onChange = _a.onChange,
-      props = __rest(_a, ["richType", "value", "onChange"]);
+      props = __rest(_a, ["richType", "precision", "value", "onChange"]);
 
   var _b = useState(''),
       innerValue = _b[0],
@@ -47,7 +48,15 @@ var RichInput = function RichInput(_a) {
     var _value = e.target.value;
 
     if (richType) {
-      e.target.value = richType === 'number' ? numberFormatter(_value) : richType === 'integer' ? intFormatter(_value) : richType === 'input' ? _value : richType === 'positiveInteger' ? positiveIntFormatter(_value) : richType === 'numberSplit' ? numberSplit(_value) : richType === 'naturalNumber' ? naturalNumber(_value) : _value;
+      var parseValue = richType === 'number' ? precision === 0 ? intFormatter(_value) : numberFormatter(_value) : richType === 'integer' ? intFormatter(_value) : richType === 'input' ? _value : richType === 'positiveInteger' ? positiveIntFormatter(_value) : richType === 'numberSplit' ? numberSplit(_value) : richType === 'naturalNumber' ? naturalNumber(_value) : _value;
+
+      if (precision) {
+        // 精度计算
+        var regexp = new RegExp("^\\d+(?:\\.\\d{0," + precision + "})?");
+        parseValue = (parseValue.match(regexp) || [''])[0];
+      }
+
+      e.target.value = parseValue;
     }
 
     if (value === void 0) {

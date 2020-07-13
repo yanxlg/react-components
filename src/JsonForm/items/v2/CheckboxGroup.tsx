@@ -16,7 +16,7 @@ import useUpdate from '../../../hooks/useUpdate';
 import { useSelector } from 'react-redux';
 import { CheckboxOptionType } from 'antd/es/checkbox';
 import baseRequest from '../../../request';
-import { iterator } from '../../..';
+import { iterator } from '../../../utils/iterator';
 
 export type CheckboxGroupType = 'checkboxGroup@2';
 const typeList = ['checkboxGroup@2'];
