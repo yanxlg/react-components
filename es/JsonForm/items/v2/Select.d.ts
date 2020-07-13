@@ -9,7 +9,7 @@ export interface ISelector {
     selector: (state: any) => unknown;
     equalityFn?: (left: unknown, right: unknown) => boolean;
 }
-export interface IHttpOptions {
+export declare type IHttpOptions = {
     url: string;
     request?: {
         get: (url: string) => Promise<any>;
@@ -17,7 +17,11 @@ export interface IHttpOptions {
     };
     dataPath?: NamePath;
     parser?: 'object' | 'array';
-}
+} | {
+    dataPath?: NamePath;
+    parser?: 'object' | 'array';
+    service: () => Promise<any>;
+};
 export interface IOptionItem {
     label: string;
     value: any;

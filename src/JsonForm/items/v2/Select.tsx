@@ -22,15 +22,21 @@ export interface ISelector {
     equalityFn?: (left: unknown, right: unknown) => boolean;
 }
 
-export interface IHttpOptions {
-    url: string;
-    request?: {
-        get: (url: string) => Promise<any>;
-        [key: string]: any;
-    };
-    dataPath?: NamePath; // default:data
-    parser?: 'object' | 'array';
-}
+export type IHttpOptions =
+    | {
+          url: string;
+          request?: {
+              get: (url: string) => Promise<any>;
+              [key: string]: any;
+          };
+          dataPath?: NamePath; // default:data
+          parser?: 'object' | 'array';
+      }
+    | {
+          dataPath?: NamePath; // default:data
+          parser?: 'object' | 'array';
+          service: () => Promise<any>;
+      };
 
 export interface IOptionItem {
     label: string;
@@ -126,7 +132,7 @@ const FormSelect = (props: SelectProps) => {
     } = props;
 
     const withSelector = !!options['selector'];
-    const withRequest = !!options['url'];
+    const withRequest = !!options['url'] || typeof options === 'function';
     const withList = Array.isArray(options);
 
     const [mergeOptions, setMergeOptions] = useState<IOptionItem[]>(
@@ -164,10 +170,10 @@ const FormSelect = (props: SelectProps) => {
                 request = baseRequest,
                 dataPath = 'data',
                 parser = 'array',
-            } = options as IHttpOptions;
-            request
-                .get(url)
-                .then(result => {
+                service,
+            } = options as any;
+            (service ? service() : request.get(url))
+                .then((result: any) => {
                     const values = getValueByNamePath(result, dataPath);
                     const parseOptions =
                         parser === 'array'

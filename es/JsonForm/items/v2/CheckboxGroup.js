@@ -88,8 +88,9 @@ var FormCheckboxGroup = function FormCheckboxGroup(props) {
           _c = _a.dataPath,
           dataPath_1 = _c === void 0 ? 'data' : _c,
           _d = _a.parser,
-          parser_1 = _d === void 0 ? 'array' : _d;
-      request.get(url).then(function (result) {
+          parser_1 = _d === void 0 ? 'array' : _d,
+          service = _a.service;
+      (service ? service() : request.get(url)).then(function (result) {
         var values = getValueByNamePath(result, dataPath_1);
         var parseOptions = parser_1 === 'array' ? parseOptionList(values, optionKeys) : iterator(values, function (key, value) {
           return {

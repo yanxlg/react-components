@@ -108,7 +108,7 @@ var FormSelect = function FormSelect(props) {
       formItemProps = __rest(props, ["className", "relation", "onChange", "labelClassName", "form", "options", "childrenProps", "defaultOption", "defaultCheckedType", "optionKeys", "labelCol", "formatter"]);
 
   var withSelector = !!options['selector'];
-  var withRequest = !!options['url'];
+  var withRequest = !!options['url'] || typeof options === 'function';
   var withList = Array.isArray(options);
 
   var _d = useState(withList ? parseOptionList(options, optionKeys, relation === null || relation === void 0 ? void 0 : relation.key) : undefined),
@@ -135,8 +135,9 @@ var FormSelect = function FormSelect(props) {
           _c = _a.dataPath,
           dataPath_1 = _c === void 0 ? 'data' : _c,
           _d = _a.parser,
-          parser_1 = _d === void 0 ? 'array' : _d;
-      request.get(url).then(function (result) {
+          parser_1 = _d === void 0 ? 'array' : _d,
+          service = _a.service;
+      (service ? service() : request.get(url)).then(function (result) {
         var values = getValueByNamePath(result, dataPath_1);
         var parseOptions = parser_1 === 'array' ? parseOptionList(values, optionKeys, relation === null || relation === void 0 ? void 0 : relation.key) : iterator(values, function (key, value) {
           return {

@@ -81,10 +81,10 @@ const FormCheckboxGroup = (props: CheckboxGroupProps) => {
                 request = baseRequest,
                 dataPath = 'data',
                 parser = 'array',
-            } = options as IHttpOptions;
-            request
-                .get(url)
-                .then(result => {
+                service,
+            } = options as any;
+            (service ? service() : request.get(url))
+                .then((result: any) => {
                     const values = getValueByNamePath(result, dataPath);
                     const parseOptions =
                         parser === 'array'
