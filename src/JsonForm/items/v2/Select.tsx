@@ -29,11 +29,11 @@ export type IHttpOptions =
               get: (url: string) => Promise<any>;
               [key: string]: any;
           };
-          dataPath?: NamePath; // default:data
+          dataPath?: NamePath | null; // default:data
           parser?: 'object' | 'array';
       }
     | {
-          dataPath?: NamePath; // default:data
+          dataPath?: NamePath | null; // default:data
           parser?: 'object' | 'array';
           service: () => Promise<any>;
       };
@@ -72,7 +72,8 @@ export type SelectProps = Omit<FormItemProps, 'children'> & {
     childrenProps?: SelectComponentProps | MultipleSelectProps;
 };
 
-export function getValueByNamePath(target: any, namePath: NamePath): any {
+export function getValueByNamePath(target: any, namePath: NamePath | null): any {
+    if (namePath === null) return target;
     if (Array.isArray(namePath)) {
         const name = namePath.shift();
         if (namePath.length === 0) {

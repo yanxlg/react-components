@@ -15,10 +15,10 @@ export declare type IHttpOptions = {
         get: (url: string) => Promise<any>;
         [key: string]: any;
     };
-    dataPath?: NamePath;
+    dataPath?: NamePath | null;
     parser?: 'object' | 'array';
 } | {
-    dataPath?: NamePath;
+    dataPath?: NamePath | null;
     parser?: 'object' | 'array';
     service: () => Promise<any>;
 };
@@ -54,7 +54,7 @@ export declare type SelectProps = Omit<FormItemProps, 'children'> & {
     onChange?: (name: NamePath, form: FormInstance) => void;
     childrenProps?: SelectComponentProps | MultipleSelectProps;
 };
-export declare function getValueByNamePath(target: any, namePath: NamePath): any;
+export declare function getValueByNamePath(target: any, namePath: NamePath | null): any;
 export declare function parseOptionList(options: Array<{
     [key: string]: any;
 }>, optionKeys: [string, string], relationKey?: string): IOptionItem[];

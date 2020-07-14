@@ -57,6 +57,8 @@ import formStyles from '../../_form.less';
 import { iterator } from '../../../utils/iterator';
 var typeList = ['select@2'];
 export function getValueByNamePath(target, namePath) {
+  if (namePath === null) return target;
+
   if (Array.isArray(namePath)) {
     var name_1 = namePath.shift();
 
