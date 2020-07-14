@@ -96,31 +96,31 @@ var FormInputRange = function FormInputRange(props) {
       className: formStyles.flex
     }, React.createElement(_Form.Item, {
       name: name1,
-      className: formStyles.marginNone,
       validateTrigger: "onBlur",
-      initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[0]
+      initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[0],
+      noStyle: true
     }, React.createElement(RichInput, __assign({
       richType: "number",
       precision: precision
     }, event1Props, childrenProps, {
-      className: classNames((childrenProps === null || childrenProps === void 0 ? void 0 : childrenProps.className) || formStyles.inputRange, formStyles.inputRangeLeft)
+      className: classNames((childrenProps === null || childrenProps === void 0 ? void 0 : childrenProps.className) || formStyles.inputRange)
     }))), React.createElement(_Input, {
       className: formStyles.inputRangeSplit,
       placeholder: "~",
       disabled: true
     }), React.createElement(_Form.Item, {
       name: name2,
-      className: formStyles.marginNone,
       validateTrigger: "onBlur",
-      initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[1]
+      initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[1],
+      noStyle: true
     }, React.createElement(RichInput, __assign({
       richType: "number",
       precision: precision
     }, event2Props, {
       className: classNames((childrenProps === null || childrenProps === void 0 ? void 0 : childrenProps.className) || formStyles.inputRange, formStyles.inputRangeRight)
-    }))), addonAfter ? React.createElement("span", {
+    })))), addonAfter ? React.createElement("span", {
       className: [formStyles.endExtra, formStyles.verticalMiddle].join(' ')
-    }, addonAfter) : null));
+    }, addonAfter) : null);
   }, []);
 };
 

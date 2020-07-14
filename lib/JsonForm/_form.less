@@ -1,4 +1,3 @@
-@import "~antd/es/style/themes/default";
 @itemSpacing: 24px;
 @inputWidth: 150px;
 @inputLargeWidth: 320px;
@@ -196,12 +195,11 @@
 }
 
 .input-range-left {
-    border-right-color: transparent!important;
-    border-top-right-radius: 0!important;
-    border-bottom-right-radius: 0!important;
+    border-right-width: 0 !important;
+
     &:hover,
     &:focus {
-        border-right-color: @input-border-color!important;
+        border-right-width: 1px !important;
     }
 }
 

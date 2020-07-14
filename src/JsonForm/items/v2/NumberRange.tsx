@@ -89,9 +89,9 @@ const FormInputRange = (props: NumberRangeProps) => {
                 <Input.Group compact className={formStyles.flex}>
                     <Form.Item
                         name={name1}
-                        className={formStyles.marginNone}
                         validateTrigger="onBlur"
                         initialValue={initialValue?.[0]}
+                        noStyle={true}
                     >
                         <RichInput
                             richType="number"
@@ -100,16 +100,15 @@ const FormInputRange = (props: NumberRangeProps) => {
                             {...childrenProps}
                             className={classNames(
                                 childrenProps?.className || formStyles.inputRange,
-                                formStyles.inputRangeLeft,
                             )}
                         />
                     </Form.Item>
                     <Input className={formStyles.inputRangeSplit} placeholder="~" disabled />
                     <Form.Item
                         name={name2}
-                        className={formStyles.marginNone}
                         validateTrigger="onBlur"
                         initialValue={initialValue?.[1]}
+                        noStyle={true}
                     >
                         <RichInput
                             richType="number"
@@ -121,14 +120,12 @@ const FormInputRange = (props: NumberRangeProps) => {
                             )}
                         />
                     </Form.Item>
-                    {addonAfter ? (
-                        <span
-                            className={[formStyles.endExtra, formStyles.verticalMiddle].join(' ')}
-                        >
-                            {addonAfter}
-                        </span>
-                    ) : null}
                 </Input.Group>
+                {addonAfter ? (
+                    <span className={[formStyles.endExtra, formStyles.verticalMiddle].join(' ')}>
+                        {addonAfter}
+                    </span>
+                ) : null}
             </Form.Item>
         );
     }, []);
