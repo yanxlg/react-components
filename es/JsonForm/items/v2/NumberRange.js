@@ -103,7 +103,7 @@ var FormInputRange = function FormInputRange(props) {
       richType: "number",
       precision: precision
     }, event1Props, childrenProps, {
-      className: classNames((childrenProps === null || childrenProps === void 0 ? void 0 : childrenProps.className) || formStyles.inputRange)
+      className: classNames((childrenProps === null || childrenProps === void 0 ? void 0 : childrenProps.className) || formStyles.inputRange, formStyles.inputRangeFocus)
     }))), React.createElement(_Input, {
       className: formStyles.inputRangeSplit,
       placeholder: "~",
@@ -117,7 +117,7 @@ var FormInputRange = function FormInputRange(props) {
       richType: "number",
       precision: precision
     }, event2Props, {
-      className: classNames((childrenProps === null || childrenProps === void 0 ? void 0 : childrenProps.className) || formStyles.inputRange, formStyles.inputRangeRight)
+      className: classNames((childrenProps === null || childrenProps === void 0 ? void 0 : childrenProps.className) || formStyles.inputRange, formStyles.inputRangeRight, formStyles.inputRangeFocus)
     })))), addonAfter ? React.createElement("span", {
       className: [formStyles.endExtra, formStyles.verticalMiddle].join(' ')
     }, addonAfter) : null);

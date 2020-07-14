@@ -100,6 +100,7 @@ const FormInputRange = (props: NumberRangeProps) => {
                             {...childrenProps}
                             className={classNames(
                                 childrenProps?.className || formStyles.inputRange,
+                                formStyles.inputRangeFocus,
                             )}
                         />
                     </Form.Item>
@@ -117,6 +118,7 @@ const FormInputRange = (props: NumberRangeProps) => {
                             className={classNames(
                                 childrenProps?.className || formStyles.inputRange,
                                 formStyles.inputRangeRight,
+                                formStyles.inputRangeFocus,
                             )}
                         />
                     </Form.Item>
