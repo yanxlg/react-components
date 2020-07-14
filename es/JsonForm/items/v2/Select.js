@@ -71,21 +71,35 @@ export function getValueByNamePath(target, namePath) {
     return target[namePath];
   }
 }
-export function parseOptionList(options, optionKeys, relationKey) {
-  if (relationKey) {
-    return options.map(function (item) {
-      var _a;
+export function parseOptionList(options, optionKeys, relationKey, skipChildren) {
+  if (skipChildren === void 0) {
+    skipChildren = true;
+  }
 
-      return __assign(__assign({}, item), (_a = {
+  if (relationKey) {
+    return options.map(function (_a) {
+      var _b;
+
+      var children = _a.children,
+          item = __rest(_a, ["children"]);
+
+      return __assign(__assign(__assign({}, item), (_b = {
         label: item[optionKeys[0]],
         value: item[optionKeys[1]]
-      }, _a[relationKey] = parseOptionList(item[relationKey] || [], optionKeys, relationKey), _a));
+      }, _b[relationKey] = parseOptionList(item[relationKey] || [], optionKeys, relationKey, skipChildren), _b)), skipChildren ? {} : {
+        children: children
+      });
     });
   } else {
-    return options.map(function (item) {
-      return __assign(__assign({}, item), {
+    return options.map(function (_a) {
+      var children = _a.children,
+          item = __rest(_a, ["children"]);
+
+      return __assign(__assign(__assign({}, item), {
         label: item[optionKeys[0]],
         value: item[optionKeys[1]]
+      }), skipChildren ? {} : {
+        children: children
       });
     });
   }
@@ -107,15 +121,17 @@ var FormSelect = function FormSelect(props) {
       optionKeys = _c === void 0 ? ['label', 'value'] : _c,
       labelCol = props.labelCol,
       formatter = props.formatter,
-      formItemProps = __rest(props, ["className", "relation", "onChange", "labelClassName", "form", "options", "childrenProps", "defaultOption", "defaultCheckedType", "optionKeys", "labelCol", "formatter"]);
+      _d = props.skipChildren,
+      skipChildren = _d === void 0 ? true : _d,
+      formItemProps = __rest(props, ["className", "relation", "onChange", "labelClassName", "form", "options", "childrenProps", "defaultOption", "defaultCheckedType", "optionKeys", "labelCol", "formatter", "skipChildren"]);
 
   var withSelector = !!options['selector'];
   var withRequest = !!options['url'] || !!options['service'];
   var withList = Array.isArray(options);
 
-  var _d = useState(withList ? parseOptionList(options, optionKeys, relation === null || relation === void 0 ? void 0 : relation.key) : undefined),
-      mergeOptions = _d[0],
-      setMergeOptions = _d[1];
+  var _e = useState(withList ? parseOptionList(options, optionKeys, relation === null || relation === void 0 ? void 0 : relation.key, skipChildren) : undefined),
+      mergeOptions = _e[0],
+      setMergeOptions = _e[1];
 
   useUpdate(function () {
     if (Array.isArray(options)) {
@@ -124,7 +140,7 @@ var FormSelect = function FormSelect(props) {
   }, [options]);
   var reduxOptions = useSelector(withSelector ? function (state) {
     var primaryValue = options['selector'](state);
-    return primaryValue ? parseOptionList(primaryValue, optionKeys, relation === null || relation === void 0 ? void 0 : relation.key) : undefined;
+    return primaryValue ? parseOptionList(primaryValue, optionKeys, relation === null || relation === void 0 ? void 0 : relation.key, skipChildren) : undefined;
   } : function () {
     return undefined;
   }, options['equalityFn']);
@@ -141,7 +157,7 @@ var FormSelect = function FormSelect(props) {
           service = _a.service;
       (service ? service() : request.get(url)).then(function (result) {
         var values = getValueByNamePath(result, dataPath_1);
-        var parseOptions = parser_1 === 'array' ? parseOptionList(values, optionKeys, relation === null || relation === void 0 ? void 0 : relation.key) : iterator(values, function (key, value) {
+        var parseOptions = parser_1 === 'array' ? parseOptionList(values, optionKeys, relation === null || relation === void 0 ? void 0 : relation.key, skipChildren) : iterator(values, function (key, value) {
           return {
             label: value,
             value: key

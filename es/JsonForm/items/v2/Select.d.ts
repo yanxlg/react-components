@@ -47,6 +47,7 @@ export declare type SelectProps = Omit<FormItemProps, 'children'> & {
     labelClassName?: string | false;
     options: IOptionItem[] | IHttpOptions | ISelector;
     optionKeys?: [string, string];
+    skipChildren?: boolean;
     relation?: {
         name: NamePath;
         key?: string;
@@ -57,7 +58,7 @@ export declare type SelectProps = Omit<FormItemProps, 'children'> & {
 export declare function getValueByNamePath(target: any, namePath: NamePath | null): any;
 export declare function parseOptionList(options: Array<{
     [key: string]: any;
-}>, optionKeys: [string, string], relationKey?: string): IOptionItem[];
+}>, optionKeys: [string, string], relationKey?: string, skipChildren?: boolean): IOptionItem[];
 declare const FormSelect: {
     (props: SelectProps): JSX.Element;
     typeList: string[];

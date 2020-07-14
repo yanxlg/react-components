@@ -64,6 +64,7 @@ export type SelectProps = Omit<FormItemProps, 'children'> & {
     labelClassName?: string | false;
     options: IOptionItem[] | IHttpOptions | ISelector; // 支持异步获取， 支持配置api地址及response path进行配置
     optionKeys?: [string, string]; // option item key 映射到label value的字典
+    skipChildren?: boolean; // 数据中children是否解析
     relation?: {
         name: NamePath; // 依赖名称
         key?: string; // 关联key,默认为children
@@ -90,9 +91,10 @@ export function parseOptionList(
     options: Array<{ [key: string]: any }>,
     optionKeys: [string, string],
     relationKey?: string,
+    skipChildren: boolean = true,
 ): IOptionItem[] {
     if (relationKey) {
-        return options.map(item => {
+        return options.map(({ children, ...item }) => {
             return {
                 ...item,
                 label: item[optionKeys[0]] as string,
@@ -101,15 +103,18 @@ export function parseOptionList(
                     (item[relationKey] as any[]) || [],
                     optionKeys,
                     relationKey,
+                    skipChildren,
                 ),
+                ...(skipChildren ? {} : { children }),
             };
         });
     } else {
-        return options.map(item => {
+        return options.map(({ children, ...item }) => {
             return {
                 ...item,
                 label: item[optionKeys[0]] as string,
                 value: item[optionKeys[1]] as string,
+                ...(skipChildren ? {} : { children }),
             };
         });
     }
@@ -129,6 +134,7 @@ const FormSelect = (props: SelectProps) => {
         optionKeys = ['label', 'value'],
         labelCol,
         formatter,
+        skipChildren = true,
         ...formItemProps
     } = props;
 
@@ -142,6 +148,7 @@ const FormSelect = (props: SelectProps) => {
                   options as IOptionItem[],
                   optionKeys,
                   relation?.key,
+                  skipChildren,
               ) as IOptionItem[])
             : undefined,
     );
@@ -157,7 +164,7 @@ const FormSelect = (props: SelectProps) => {
             ? (state: any) => {
                   const primaryValue = options['selector'](state);
                   return primaryValue
-                      ? parseOptionList(primaryValue, optionKeys, relation?.key)
+                      ? parseOptionList(primaryValue, optionKeys, relation?.key, skipChildren)
                       : undefined;
               }
             : () => undefined,
@@ -178,7 +185,7 @@ const FormSelect = (props: SelectProps) => {
                     const values = getValueByNamePath(result, dataPath);
                     const parseOptions =
                         parser === 'array'
-                            ? parseOptionList(values, optionKeys, relation?.key)
+                            ? parseOptionList(values, optionKeys, relation?.key, skipChildren)
                             : iterator(values, (key, value) => {
                                   return {
                                       label: value,
