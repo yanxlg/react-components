@@ -15,6 +15,7 @@ import { defaultPageSizeOptions } from '../ProTable/config';
 import formStyles from '../JsonForm/_form.less';
 import { PaginationProps } from 'antd/lib/pagination/Pagination';
 import { DndProvider, useDrag, useDrop, createDndContext } from 'react-dnd';
+// @ts-ignore
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
 const RNDContext = createDndContext(HTML5Backend);
@@ -55,7 +56,7 @@ export const goButton = <Button className={styles.btnGo}>Go</Button>;
 
 const type = 'DragableBodyRow';
 
-const DragableHeaderCell = ({ index, moveRow, className, style, ...restProps }) => {
+const DragableHeaderCell = ({ index, moveRow, className, style, ...restProps }: any) => {
     const ref = React.useRef();
     const [{ isOver, dropClassName }, drop] = useDrop({
         accept: type,
@@ -70,6 +71,7 @@ const DragableHeaderCell = ({ index, moveRow, className, style, ...restProps }) 
             };
         },
         drop: item => {
+            // @ts-ignore
             moveRow(item.index, index);
         },
     });
@@ -223,6 +225,7 @@ function FitTable<T extends object = any>({
                 <Table<T>
                     key={columns.length}
                     scroll={scroll}
+                    // @ts-ignore
                     columns={_columns}
                     rowSelection={rowSelection}
                     {...props}

@@ -45,12 +45,73 @@ import ColumnsSettingWrap from './ColumnsSettingWrap';
 import { EmptyObject } from '../utils';
 import { defaultPageSizeOptions } from '../ProTable/config';
 import formStyles from '../JsonForm/_form.less';
+import { DndProvider, useDrag, useDrop, createDndContext } from 'react-dnd'; // @ts-ignore
+
+import { HTML5Backend } from 'react-dnd-html5-backend';
+var RNDContext = createDndContext(HTML5Backend);
 export var showTotal = function showTotal(total) {
   return React.createElement("span", null, "\u5171\u6709", total, "\u6761");
 };
 export var goButton = React.createElement(_Button, {
   className: styles.btnGo
 }, "Go");
+var type = 'DragableBodyRow';
+
+var DragableHeaderCell = function DragableHeaderCell(_a) {
+  var index = _a.index,
+      moveRow = _a.moveRow,
+      className = _a.className,
+      style = _a.style,
+      restProps = __rest(_a, ["index", "moveRow", "className", "style"]);
+
+  var ref = React.useRef();
+
+  var _b = useDrop({
+    accept: type,
+    collect: function collect(monitor) {
+      var dragIndex = (monitor.getItem() || {}).index;
+
+      if (dragIndex === index) {
+        return {};
+      }
+
+      return {
+        isOver: monitor.isOver(),
+        dropClassName: dragIndex < index ? ' drop-over-downward' : ' drop-over-upward'
+      };
+    },
+    drop: function drop(item) {
+      // @ts-ignore
+      moveRow(item.index, index);
+    }
+  }),
+      _c = _b[0],
+      isOver = _c.isOver,
+      dropClassName = _c.dropClassName,
+      drop = _b[1];
+
+  var _d = useDrag({
+    item: {
+      type: type,
+      index: index
+    },
+    collect: function collect(monitor) {
+      return {
+        isDragging: monitor.isDragging()
+      };
+    }
+  }),
+      drag = _d[1];
+
+  drop(drag(ref));
+  return React.createElement("th", __assign({
+    ref: ref,
+    className: "" + className + (isOver ? dropClassName : ''),
+    style: __assign({
+      cursor: 'move'
+    }, style)
+  }, restProps));
+};
 
 function FitTable(_a) {
   var _b = _a.bottom,
@@ -75,6 +136,7 @@ function FitTable(_a) {
       props = __rest(_a, ["bottom", "minHeight", "autoFitY", "columns", "rowSelection", "scroll", "onChange", "pagination", "toolBarRender", "onHeaderRow", "settingComponent"]);
 
   var ref = useRef(null);
+  var manager = useRef(RNDContext);
   var scroll = useScrollXY(ref, bottom, minHeight, autoFitY, columns, rowSelection, propsScroll);
   var filtersRef = useRef(EmptyObject);
   var sorterRef = useRef(EmptyObject);
@@ -143,17 +205,38 @@ function FitTable(_a) {
       };
     }
   }, [onHeaderRow]);
+  var moveColumn = useCallback(function (dragIndex, hoverIndex) {}, []); // columns转换
+
   var tableContent = useMemo(function () {
-    return React.createElement(_Table, __assign({
+    var _columns = columns.map(function (column, index) {
+      return __assign(__assign({}, column), {
+        onHeaderCell: function onHeaderCell() {
+          return {
+            index: index,
+            moveColumn: moveColumn
+          };
+        }
+      });
+    });
+
+    return React.createElement(DndProvider, {
+      manager: manager.current.dragDropManager
+    }, React.createElement(_Table, __assign({
       key: columns.length,
       scroll: scroll,
-      columns: columns,
+      // @ts-ignore
+      columns: _columns,
       rowSelection: rowSelection
     }, props, {
       pagination: false,
       onChange: onChange ? onTableChange : undefined,
-      onHeaderRow: onHeaderRowFn
-    }));
+      onHeaderRow: onHeaderRowFn,
+      components: {
+        header: {
+          cell: DragableHeaderCell
+        }
+      }
+    })));
   }, [props, propsScroll, rowSelection, columns, onChange]);
   var paginationTopContainer = useMemo(function () {
     var top = pagination && pagination.position && pagination.position.includes('topRight'); // 需要有top配置，默认不显示
