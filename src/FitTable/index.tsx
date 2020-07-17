@@ -14,6 +14,10 @@ import { EmptyObject } from '../utils';
 import { defaultPageSizeOptions } from '../ProTable/config';
 import formStyles from '../JsonForm/_form.less';
 import { PaginationProps } from 'antd/lib/pagination/Pagination';
+import { DndProvider, useDrag, useDrop, createDndContext } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+
+const RNDContext = createDndContext(HTML5Backend);
 
 declare module 'antd/es/table/interface' {
     interface ColumnType<RecordType> {
@@ -49,6 +53,43 @@ export const showTotal = (total: number) => {
 
 export const goButton = <Button className={styles.btnGo}>Go</Button>;
 
+const type = 'DragableBodyRow';
+
+const DragableHeaderCell = ({ index, moveRow, className, style, ...restProps }) => {
+    const ref = React.useRef();
+    const [{ isOver, dropClassName }, drop] = useDrop({
+        accept: type,
+        collect: monitor => {
+            const { index: dragIndex } = monitor.getItem() || {};
+            if (dragIndex === index) {
+                return {};
+            }
+            return {
+                isOver: monitor.isOver(),
+                dropClassName: dragIndex < index ? ' drop-over-downward' : ' drop-over-upward',
+            };
+        },
+        drop: item => {
+            moveRow(item.index, index);
+        },
+    });
+    const [, drag] = useDrag({
+        item: { type, index },
+        collect: monitor => ({
+            isDragging: monitor.isDragging(),
+        }),
+    });
+    drop(drag(ref));
+    return (
+        <th
+            ref={ref}
+            className={`${className}${isOver ? dropClassName : ''}`}
+            style={{ cursor: 'move', ...style }}
+            {...restProps}
+        />
+    );
+};
+
 function FitTable<T extends object = any>({
     bottom = 0,
     minHeight = 500,
@@ -65,6 +106,8 @@ function FitTable<T extends object = any>({
     ...props
 }: IFitTableProps<T>) {
     const ref = useRef<HTMLDivElement>(null);
+    const manager = useRef(RNDContext);
+
     const scroll = useScrollXY(
         ref,
         bottom,
@@ -161,19 +204,38 @@ function FitTable<T extends object = any>({
         },
         [onHeaderRow],
     );
+    const moveColumn = useCallback((dragIndex, hoverIndex) => {}, []);
+
+    // columns转换
 
     const tableContent = useMemo(() => {
+        const _columns = columns.map((column, index) => {
+            return {
+                ...column,
+                onHeaderCell: () => ({
+                    index: index,
+                    moveColumn,
+                }),
+            };
+        });
         return (
-            <Table<T>
-                key={columns.length}
-                scroll={scroll}
-                columns={columns}
-                rowSelection={rowSelection}
-                {...props}
-                pagination={false}
-                onChange={onChange ? onTableChange : undefined}
-                onHeaderRow={onHeaderRowFn}
-            />
+            <DndProvider manager={manager.current.dragDropManager}>
+                <Table<T>
+                    key={columns.length}
+                    scroll={scroll}
+                    columns={_columns}
+                    rowSelection={rowSelection}
+                    {...props}
+                    pagination={false}
+                    onChange={onChange ? onTableChange : undefined}
+                    onHeaderRow={onHeaderRowFn}
+                    components={{
+                        header: {
+                            cell: DragableHeaderCell,
+                        },
+                    }}
+                />
+            </DndProvider>
         );
     }, [props, propsScroll, rowSelection, columns, onChange]);
 

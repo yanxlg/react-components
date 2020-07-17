@@ -4,7 +4,10 @@ import { FormatterType } from '../../../utils/formatter';
 import { NamePath } from 'rc-field-form/lib/interface';
 import { InputProps as AntInputProps } from 'antd/es/input/Input';
 export declare type NumberRangeType = 'numberRange@2';
-export declare type NumberRangeProps = Omit<FormItemProps, 'children' | 'rules' | 'initialValue' | 'name'> & {
+export declare type NumberRangeProps = Omit<
+    FormItemProps,
+    'children' | 'rules' | 'initialValue' | 'name'
+> & {
     form: FormInstance;
     type: NumberRangeType;
     onChange?: (name: NamePath, form: FormInstance) => void;
