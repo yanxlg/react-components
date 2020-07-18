@@ -45,8 +45,7 @@ import ColumnsSettingWrap from './ColumnsSettingWrap';
 import { EmptyObject } from '../utils';
 import { defaultPageSizeOptions } from '../ProTable/config';
 import formStyles from '../JsonForm/_form.less';
-import { DndProvider, useDrag, useDrop, createDndContext } from 'react-dnd'; // @ts-ignore
-
+import { DndProvider, useDrag, useDrop, createDndContext } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 var RNDContext = createDndContext(HTML5Backend);
 export var showTotal = function showTotal(total) {
@@ -59,10 +58,10 @@ var type = 'DragableBodyRow';
 
 var DragableHeaderCell = function DragableHeaderCell(_a) {
   var index = _a.index,
-      moveRow = _a.moveRow,
+      moveColumn = _a.moveColumn,
       className = _a.className,
       style = _a.style,
-      restProps = __rest(_a, ["index", "moveRow", "className", "style"]);
+      restProps = __rest(_a, ["index", "moveColumn", "className", "style"]);
 
   var ref = React.useRef();
 
@@ -77,12 +76,12 @@ var DragableHeaderCell = function DragableHeaderCell(_a) {
 
       return {
         isOver: monitor.isOver(),
-        dropClassName: dragIndex < index ? ' drop-over-downward' : ' drop-over-upward'
+        dropClassName: dragIndex < index ? styles.dropOverRight : styles.dropOverLeft
       };
     },
     drop: function drop(item) {
       // @ts-ignore
-      moveRow(item.index, index);
+      moveColumn(item.index, index);
     }
   }),
       _c = _b[0],

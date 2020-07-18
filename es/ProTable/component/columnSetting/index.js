@@ -52,7 +52,7 @@ import React from 'react';
 import { ConfigConsumer } from "antd/es/config-provider/context";
 import { PushpinOutlined, SettingOutlined, VerticalAlignMiddleOutlined } from '@ant-design/icons';
 import { DndProvider } from 'react-dnd';
-import Backend from 'react-dnd-html5-backend';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import DnDItem from './DndItem';
 import './index.less';
 import { genColumnKey } from '../util';
@@ -128,7 +128,7 @@ var CheckboxListItem = function CheckboxListItem(_a) {
     setColumnsMap: setColumnsMap,
     columnKey: columnKey,
     fixed: "left",
-    title: "固定到左边",
+    title: '固定到左边',
     show: fixed !== 'left'
   }, React.createElement(PushpinOutlined, {
     style: {
@@ -210,7 +210,7 @@ var CheckboxList = function CheckboxList(_a) {
     }));
   });
   return React.createElement(DndProvider, {
-    backend: Backend
+    backend: HTML5Backend
   }, showTitle && React.createElement("span", {
     className: className + "-list-title"
   }, listTitle), listDom);
