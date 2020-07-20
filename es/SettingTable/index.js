@@ -27,7 +27,7 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import FitTable from '../FitTable2';
 import useTableSetting from '../hooks/useTableSetting';
 
@@ -41,14 +41,16 @@ function SettingTable(_a) {
       updateHideKeys = _b.updateHideKeys,
       updateSortKeys = _b.updateSortKeys;
 
-  return React.createElement(FitTable, __assign({
-    columnsSettingRender: true,
-    bordered: true,
-    hideKeys: hideKeys,
-    sortKeys: sortKeys,
-    onHideKeysChange: updateHideKeys,
-    onSortKeysChange: updateSortKeys
-  }, props));
+  return useMemo(function () {
+    return React.createElement(FitTable, __assign({
+      columnsSettingRender: true,
+      bordered: true,
+      hideKeys: hideKeys,
+      sortKeys: sortKeys,
+      onHideKeysChange: updateHideKeys,
+      onSortKeysChange: updateSortKeys
+    }, props));
+  }, [hideKeys, sortKeys, props]);
 }
 
-export default React.memo(SettingTable);
+export default SettingTable;
