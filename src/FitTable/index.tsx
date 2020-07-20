@@ -11,7 +11,7 @@ import {
 import ColumnsSettingWrap from './ColumnsSettingWrap';
 import { ColumnsSettingProps } from './ColumnsSetting';
 import { EmptyObject } from '../utils';
-import { defaultPageSizeOptions } from '../ProTable/config';
+import { defaultPageSizeOptions } from '../_Deprecated/ProTable/config';
 import formStyles from '../JsonForm/_form.less';
 import { PaginationProps } from 'antd/lib/pagination/Pagination';
 

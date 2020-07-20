@@ -4,7 +4,7 @@ import { Button, Input } from 'antd';
 import { FilterDropdownProps } from 'antd/es/table/interface';
 import { SearchOutlined } from '@ant-design/icons/lib';
 import Highlighter from 'react-highlight-words';
-import styles from '../ProTable/_index.less';
+import styles from '../_Deprecated/ProTable/_index.less';
 
 export type FilterColumns<T> = Omit<ColumnType<T>, 'render'> & {
     filterType?: 'input';

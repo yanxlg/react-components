@@ -1,10 +1,16 @@
 const gulp = require('gulp');
 const shelljs = require('shelljs');
 const pkg = require('./package.json');
+const path = require('path');
 
 
 gulp.task('clean', async (done)=>{
-    done();
+    shelljs.cd(path.join(process.cwd(),"./src"));
+    let ret = shelljs.exec("find . -name '*.d.ts' -delete").code;
+    if (!ret) {
+        ret = undefined;
+    }
+    done(ret);
 });
 
 gulp.task(

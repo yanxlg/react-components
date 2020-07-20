@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useMemo, useState } from 'react';
-import { ProColumns } from '../ProTable';
-import { SimpleRowSelection } from '../ProTable/Table';
+import { ProColumns } from '../_Deprecated/ProTable';
+import { SimpleRowSelection } from '../_Deprecated/ProTable/Table';
 import debounce from 'lodash/debounce';
 import { TableProps as RcTableProps } from 'rc-table/lib/Table';
 import { ColumnsType } from 'antd/lib/table/interface';

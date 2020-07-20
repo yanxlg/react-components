@@ -16,7 +16,7 @@ import { defaultPageSizeOptions } from '../_Deprecated/ProTable/config';
 import formStyles from '../JsonForm/_form.less';
 import { PaginationProps } from 'antd/lib/pagination/Pagination';
 import DraggableHeaderCell from './DraggableHeaderCell';
-import { FixedType } from 'rc-table/lib/interface';
+import { FixedType } from 'rc-table/es/interface';
 import DragDropProvider from './DragDropProvider';
 import assert from 'assert';
 
@@ -240,7 +240,7 @@ function FitTable<T extends object = any>({
                         } as any),
                 };
             })
-            .filter(item => {
+            .filter((item: any) => {
                 const filtered = !hideKeys || hideKeys.indexOf(getColumnKey(item)) === -1;
                 if (filtered) {
                     alignsArray.push(item.fixed);
@@ -254,7 +254,7 @@ function FitTable<T extends object = any>({
         const rightAlignSize = right ? right[0].split(',').length : 0;
         const length = filterColumns.length;
         // 获取left最长位，获取right最长位
-        return filterColumns.map((item, index) => {
+        return filterColumns.map((item: any, index: number) => {
             if (index + 1 <= leftAlignSize || index >= length - rightAlignSize) {
                 return item;
             } else {
