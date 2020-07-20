@@ -5,11 +5,13 @@ import useModal from '../hooks/useModal';
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
 import styles from './_index.less';
 import { TableProps } from 'antd/es/table';
+import { getColumnKey } from './index';
 
 export declare interface ColumnsSettingProps<T> {
     columns: TableProps<T>['columns'];
-    onColumnsChange: (columns: TableProps<T>['columns']) => void;
+    onHideKeysChange: (keys: string[]) => void;
     resetColumnsSetting?: boolean;
+    hideKeys?: string[];
     columnsSettingRender:
         | true
         | React.ComponentClass<{
@@ -26,23 +28,24 @@ const ColumnsSetting = <T,>({
     columns,
     columnsSettingRender: ColumnsSettingRender,
     resetColumnsSetting,
-    onColumnsChange,
+    onHideKeysChange,
+    hideKeys,
 }: ColumnsSettingProps<T>) => {
     const { visible, setVisibleProps, onClose } = useModal();
 
     const cacheColumnsShowList = useRef<string[]>([]);
 
     const [columnsShowList, setColumnsShowList] = useState<string[]>(
-        columns.filter(column => !column.defaultHide).map(column => column['dataIndex'] as string),
-    ); // 列
+        columns
+            .map(column => getColumnKey(column))
+            .filter(key => {
+                return !hideKeys || hideKeys.indexOf(key) === -1;
+            }),
+    );
 
     const _setColumnsShowList = useCallback(
         keys => {
-            // console.log(1111, keys)
-            setColumnsShowList([
-                columns?.filter(item => item.hideInSetting).map(item => item['dataIndex']),
-                ...keys,
-            ]);
+            setColumnsShowList(keys);
         },
         [columns],
     );
@@ -50,11 +53,13 @@ const ColumnsSetting = <T,>({
     // 重新初始化
     useEffect(() => {
         const keys = columns
-            .filter(column => !column.defaultHide)
-            .map(column => column['dataIndex'] as string);
+            .map(column => getColumnKey(column))
+            .filter(key => {
+                return !hideKeys || hideKeys.indexOf(key) === -1;
+            });
         cacheColumnsShowList.current = keys;
         _setColumnsShowList(keys);
-    }, [columns]);
+    }, [columns, hideKeys]);
 
     // drop修改
     useEffect(() => {
@@ -73,10 +78,12 @@ const ColumnsSetting = <T,>({
         columnsShowList.map(value => {
             list[value] = true;
         });
-        onColumnsChange(
-            columns.filter(column => {
-                return list[column['dataIndex'] as string];
-            }),
+        onHideKeysChange(
+            columns
+                .filter(column => {
+                    return !list[getColumnKey(column) as string];
+                })
+                .map(item => getColumnKey(item)),
         );
         onClose();
     }, [columnsShowList, columns]);
@@ -84,10 +91,9 @@ const ColumnsSetting = <T,>({
     const onCancel = useCallback(() => {
         if (resetColumnsSetting) {
             //重置
-            const keys = columns.map(column => column['dataIndex'] as string);
+            const keys = columns.map(column => getColumnKey(column));
             cacheColumnsShowList.current = keys;
             _setColumnsShowList(keys);
-            onColumnsChange(columns);
             onClose();
         } else {
             onClose();
@@ -109,13 +115,10 @@ const ColumnsSetting = <T,>({
                     <Checkbox.Group onChange={onChange} value={columnsShowList}>
                         <Row gutter={[0, 5]}>
                             {columns.map(column => {
-                                if (column.hideInSetting) {
-                                    return null;
-                                }
-                                const dataIndex = column['dataIndex'] as string;
+                                const key = getColumnKey(column);
                                 return (
-                                    <Col span={4} key={dataIndex}>
-                                        <Checkbox value={dataIndex}>{column.title}</Checkbox>
+                                    <Col span={4} key={key}>
+                                        <Checkbox value={key}>{column.title}</Checkbox>
                                     </Col>
                                 );
                             })}

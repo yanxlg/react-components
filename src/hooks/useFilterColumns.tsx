@@ -1,13 +1,13 @@
-import { ColumnType } from "antd/es/table";
-import React, { useCallback, useState, useMemo, useRef } from "react";
-import { Button, Input } from "antd";
-import { FilterDropdownProps } from "antd/es/table/interface";
-import { SearchOutlined } from "@ant-design/icons/lib";
-import Highlighter from "react-highlight-words";
-import styles from "../ProTable/_index.less";
+import { ColumnType } from 'antd/es/table';
+import React, { useCallback, useState, useMemo, useRef } from 'react';
+import { Button, Input } from 'antd';
+import { FilterDropdownProps } from 'antd/es/table/interface';
+import { SearchOutlined } from '@ant-design/icons/lib';
+import Highlighter from 'react-highlight-words';
+import styles from '../ProTable/_index.less';
 
-export type FilterColumns<T> = Omit<ColumnType<T>, "render"> & {
-    filterType?: "input";
+export type FilterColumns<T> = Omit<ColumnType<T>, 'render'> & {
+    filterType?: 'input';
     render?: (
         text: React.ReactNode,
         record: T,
@@ -19,8 +19,8 @@ export type FilterColumns<T> = Omit<ColumnType<T>, "render"> & {
 
 function useFilterColumns<T>(columns: FilterColumns<T>[]): ColumnType<T>[] {
     const [search, setSearch] = useState<{ searchText: string; searchedColumn: string }>({
-        searchText: "",
-        searchedColumn: "",
+        searchText: '',
+        searchedColumn: '',
     });
     const handleSearch = useCallback((searchText, searchedColumn) => {
         setSearch({
@@ -30,7 +30,7 @@ function useFilterColumns<T>(columns: FilterColumns<T>[]): ColumnType<T>[] {
     }, []);
     const handleReset = useCallback(searchedColumn => {
         setSearch({
-            searchText: "",
+            searchText: '',
             searchedColumn: searchedColumn,
         });
     }, []);
@@ -40,7 +40,7 @@ function useFilterColumns<T>(columns: FilterColumns<T>[]): ColumnType<T>[] {
     return useMemo<ColumnType<T>[]>(() => {
         return columns.map(column => {
             const { filterType, dataIndex, title, render } = column;
-            if (filterType === "input") {
+            if (filterType === 'input') {
                 return {
                     ...column,
                     filterDropdown: ({
@@ -91,8 +91,8 @@ function useFilterColumns<T>(columns: FilterColumns<T>[]): ColumnType<T>[] {
                         <SearchOutlined className={filtered ? styles.tableIconActive : undefined} />
                     ),
                     onFilter: (value: string, record: any) => {
-                        const showText = record.hasOwnProperty("__" + dataIndex)
-                            ? record["__" + dataIndex]
+                        const showText = record.hasOwnProperty('__' + dataIndex)
+                            ? record['__' + dataIndex]
                             : record[dataIndex as any];
                         return showText
                             .toString()

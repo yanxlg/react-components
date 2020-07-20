@@ -1,0 +1,87 @@
+.btn-go{
+  width: 46px;
+  height: 32px;
+  border-radius: 4px;
+  border: 1px solid rgba(217, 217, 217, 1);
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  margin-left: 32px;
+  padding: 0;
+}
+
+.relative{
+    position: relative;
+}
+
+.setting-btn{
+    position: absolute;
+    z-index: 100;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 240ms ease-in-out;
+    pointer-events: none;
+    top: -8px;
+    &:hover{
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+:global [data-show-setting]{
+    & > :local(.setting-btn){
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+.setting-modal{
+    width: 900px!important;
+    max-width: 90%;
+}
+
+.tool-spacing {
+    margin-bottom: 12px;
+}
+
+.drop-over{
+    &-right{
+        &:after{
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            border-right: 2px dashed #1890ff;
+        }
+    }
+    &-left{
+        &:after{
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            border-left: 2px dashed #1890ff;
+        }
+    }
+}
+.th{
+    &:hover{
+        .hide-icon{
+            opacity: 1;
+        }
+    }
+}
+
+.hide-icon{
+    position: absolute;
+    margin-left: 10px;
+    opacity: 0;
+    transition: opacity 200ms ease;
+    font-size: 14px;
+    color: #1890ff;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}

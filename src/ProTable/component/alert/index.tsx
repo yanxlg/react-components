@@ -13,9 +13,7 @@ export interface TableAlertProps {
     selectedRowKeys?: (number | string)[];
     alertInfoRender?: ((selectedRowKeys: (number | string)[]) => React.ReactNode) | false;
     onCleanSelected?: () => void;
-    alertOptionRender?:
-        | false
-        | ((props: { onCleanSelected?: () => void }) => React.ReactNode);
+    alertOptionRender?: false | ((props: { onCleanSelected?: () => void }) => React.ReactNode);
 }
 
 const defaultAlertOptionRender = (props: { onCleanSelected?: () => void }) => {
@@ -44,7 +42,6 @@ const TableAlert: ForwardRefRenderFunction<TableAlertRef, TableAlertProps> = (
     }: TableAlertProps,
     ref,
 ) => {
-
     const [innerSelectedRowKeys, setInnerSelectedRowKeys] = useState<(string | number)[]>([]);
     const _selectedRowKeys = selectedRowKeys !== void 0 ? selectedRowKeys : innerSelectedRowKeys;
 

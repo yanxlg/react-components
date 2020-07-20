@@ -90,7 +90,7 @@ const CheckboxListItem: React.FC<{
                     setColumnsMap={setColumnsMap}
                     columnKey={columnKey}
                     fixed="left"
-                    title={"固定到左边"}
+                    title={'固定到左边'}
                     show={fixed !== 'left'}
                 >
                     <PushpinOutlined

@@ -42,7 +42,7 @@ export interface ToolBarRef {
     updateSelectedState: (selectedRowKeys: (string | number)[]) => void;
 }
 
-const getButtonText = <T, U = {}>({ }: { }, config: OptionConfig) => ({
+const getButtonText = <T, U = {}>({}: {}, config: OptionConfig) => ({
     fullScreen: {
         text: '全屏',
         icon: <FullScreenIcon />,
@@ -157,7 +157,6 @@ const ToolBar: ForwardRefRenderFunction<ToolBarRef, ToolBarProps & ColumnSetting
     },
     ref,
 ) => {
-
     const [innerSelectedRowKeys, setInnerSelectedRowKeys] = useState<(string | number)[]>([]);
 
     const optionDom = useMemo(() => {

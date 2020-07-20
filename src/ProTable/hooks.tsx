@@ -1,11 +1,9 @@
 import { GetRowKey } from 'antd/es/table/interface';
 import React, { useCallback, useMemo, useRef } from 'react';
-import OptimizeCheckbox, {
-    CheckboxRef,
-} from './component/Checkbox';
+import OptimizeCheckbox, { CheckboxRef } from './component/Checkbox';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { ProColumns, SimpleRowSelection } from './Table';
-import styles from "./_index.less";
+import styles from './_index.less';
 
 function useRowSelection<T, U>(
     columns: ProColumns<T>[],
