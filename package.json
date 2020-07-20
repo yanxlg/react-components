@@ -1,6 +1,6 @@
 {
     "name": "react-components",
-    "version": "0.0.7-alpha.2",
+    "version": "0.0.7-alpha.3",
     "description": "",
     "repository": {
         "type": "git",
@@ -36,7 +36,8 @@
         "react-highlight-words": "^0.16.0",
         "dayjs": "^1.8.23",
         "abort-controller": "^3.0.0",
-        "react-redux": "^7.2.0"
+        "react-redux": "^7.2.0",
+        "@umijs/hooks": "^1.9.3"
     },
     "devDependencies": {
         "antd": "^4.4.2",

@@ -19,6 +19,7 @@ function useScrollXY<T>(
     const [y, setY] = useState<number | undefined | string>(scroll?.y);
 
     const scrollX = useMemo(() => {
+        // 初始需要scrollX 防止header空白，columns更新返回undefined，防止header抖动
         if (scroll?.x === true || scroll?.x === 'max-content') {
             let x: number = 0;
             if (rowSelection && rowSelection.columnWidth) {
@@ -65,6 +66,7 @@ function useScrollXY<T>(
             scrollToFirstRowOnChange: true,
             ...scroll,
             y: y,
+            // x: 'max-content',
             x: scrollX,
         };
     }, [scrollX, scroll, y]);

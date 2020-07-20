@@ -23,6 +23,7 @@ function useScrollXY(containerRef, bottom, minHeight, autoFitY, columns, rowSele
       setY = _a[1];
 
   var scrollX = useMemo(function () {
+    // 初始需要scrollX 防止header空白，columns更新返回undefined，防止header抖动
     if ((scroll === null || scroll === void 0 ? void 0 : scroll.x) === true || (scroll === null || scroll === void 0 ? void 0 : scroll.x) === 'max-content') {
       var x_1 = 0;
 
@@ -71,6 +72,7 @@ function useScrollXY(containerRef, bottom, minHeight, autoFitY, columns, rowSele
       scrollToFirstRowOnChange: true
     }, scroll), {
       y: y,
+      // x: 'max-content',
       x: scrollX
     });
   }, [scrollX, scroll, y]);

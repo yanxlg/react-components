@@ -3,8 +3,6 @@ import FitTable, { IFitTableProps } from './index';
 import ColumnsSetting from './ColumnsSetting';
 import styles from './_index.less';
 
-// columns => sort => filter
-
 const ColumnsSettingWrap = <T extends object = any>({
     columns,
     columnsSettingRender,
@@ -20,6 +18,7 @@ const ColumnsSettingWrap = <T extends object = any>({
                     {...props}
                     columns={columns}
                     hideKeys={hideKeys}
+                    onHideKeysChange={onHideKeysChange}
                     // @ts-ignore
                     settingComponent={
                         <ColumnsSetting

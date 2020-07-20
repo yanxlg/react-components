@@ -36,6 +36,8 @@ export interface PaginationConfig extends PaginationProps {
     position?: TablePaginationConfig['position'];
 }
 
+const defaultScroll: TableProps<any>['scroll'] = { x: true, scrollToFirstRowOnChange: true };
+
 export declare interface IFitTableProps<T>
     extends Omit<TableProps<T>, 'pagination'>,
         Partial<Pick<ColumnsSettingProps<T>, 'columnsSettingRender' | 'resetColumnsSetting'>> {
@@ -68,7 +70,7 @@ function FitTable<T extends object = any>({
     autoFitY = true,
     columns = [],
     rowSelection,
-    scroll: propsScroll,
+    scroll: propsScroll = defaultScroll,
     onChange,
     pagination,
     toolBarRender = () => null,
@@ -78,8 +80,16 @@ function FitTable<T extends object = any>({
     // @ts-ignore
     settingComponent,
     onSortKeysChange,
+    onHideKeysChange,
     ...props
 }: IFitTableProps<T>) {
+    const hideKeysRef = useRef(hideKeys);
+    useMemo(() => {
+        hideKeysRef.current = hideKeys;
+    }, [hideKeys]);
+
+    const sortKeysRef = useRef<string[]>([]); // 缓存真实sortKeys
+
     // columns => sort => filter
     if (process.env.NODE_ENV === 'development') {
         columns.forEach(item => {
@@ -90,16 +100,6 @@ function FitTable<T extends object = any>({
     }
 
     const ref = useRef<HTMLDivElement>(null);
-
-    const scroll = useScrollXY(
-        ref,
-        bottom,
-        minHeight,
-        autoFitY,
-        columns,
-        rowSelection,
-        propsScroll,
-    );
 
     const filtersRef = useRef<Record<string, Key[] | null>>(EmptyObject);
     const sorterRef = useRef<SorterResult<T> | SorterResult<T>[]>(EmptyObject);
@@ -189,22 +189,26 @@ function FitTable<T extends object = any>({
         [onHeaderRow],
     );
 
-    const moveColumn = useCallback(
-        (from, to) => {
-            if (from !== to) {
-                let keys = sortKeys || columns.map(item => getColumnKey(item));
-                if (to > from) {
-                    keys.splice(to + 1, 0, keys[from]);
-                    keys.splice(from, 1);
-                } else {
-                    keys.splice(to, 0, keys[from]);
-                    keys.splice(from + 1, 1);
-                }
-                onSortKeysChange?.(Array.from(keys));
+    const moveColumn = useCallback((from, to) => {
+        // 新增或删除column时怎么合理处理本地缓存
+        if (from !== to) {
+            let keys = sortKeysRef.current;
+            if (to > from) {
+                keys.splice(to + 1, 0, keys[from]);
+                keys.splice(from, 1);
+            } else {
+                keys.splice(to, 0, keys[from]);
+                keys.splice(from + 1, 1);
             }
-        },
-        [columns, sortKeys],
-    );
+            onSortKeysChange?.(Array.from(keys));
+        }
+    }, []);
+
+    const hideColumn = useCallback((key: string) => {
+        const set = new Set(hideKeysRef.current);
+        set.add(key);
+        onHideKeysChange(Array.from(set));
+    }, []); // 隐藏某一列
 
     const sortMap = useMemo(() => {
         let map: { [key: string]: number } = {};
@@ -223,20 +227,26 @@ function FitTable<T extends object = any>({
     // columns转换 columns => sort => filter
     const mergeColumns = useMemo(() => {
         let alignsArray: FixedType[] = [];
-
+        sortKeysRef.current = [];
         const filterColumns = columns
             .sort((a, b) => {
-                const preSortIndex = sortMap[getColumnKey(a)] || 0;
-                const nextSortIndex = sortMap[getColumnKey(b)] || 0;
-                return preSortIndex - nextSortIndex;
+                const preSortIndex = sortMap[getColumnKey(a)];
+                const nextSortIndex = sortMap[getColumnKey(b)];
+                if (preSortIndex !== void 0 && nextSortIndex !== void 0) {
+                    return preSortIndex - nextSortIndex;
+                }
+                return 0;
             })
             .map((column, index) => {
+                sortKeysRef.current.push(getColumnKey(column));
                 return {
                     ...column,
                     onHeaderCell: () =>
                         ({
                             index: index,
                             moveColumn,
+                            hideColumn,
+                            column,
                         } as any),
                 };
             })
@@ -267,10 +277,21 @@ function FitTable<T extends object = any>({
         // fixed处理不可断层
     }, [columns, hideKeys, sortKeys]);
 
+    const scroll = useScrollXY(
+        ref,
+        bottom,
+        minHeight,
+        autoFitY,
+        mergeColumns,
+        rowSelection,
+        propsScroll,
+    );
+
     const tableContent = useMemo(() => {
         return (
             <DragDropProvider>
                 <Table<T>
+                    bordered={true}
                     scroll={scroll}
                     columns={mergeColumns}
                     rowSelection={rowSelection}

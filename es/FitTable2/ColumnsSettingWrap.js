@@ -30,7 +30,7 @@ var __rest = this && this.__rest || function (s, e) {
 import React, { useMemo } from 'react';
 import FitTable from './index';
 import ColumnsSetting from './ColumnsSetting';
-import styles from './_index.less'; // columns => sort => filter
+import styles from './_index.less';
 
 var ColumnsSettingWrap = function ColumnsSettingWrap(_a) {
   var columns = _a.columns,
@@ -46,6 +46,7 @@ var ColumnsSettingWrap = function ColumnsSettingWrap(_a) {
     }, React.createElement(FitTable, __assign({}, props, {
       columns: columns,
       hideKeys: hideKeys,
+      onHideKeysChange: onHideKeysChange,
       // @ts-ignore
       settingComponent: React.createElement(ColumnsSetting, {
         columnsSettingRender: columnsSettingRender,

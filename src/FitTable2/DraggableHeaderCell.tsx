@@ -1,13 +1,18 @@
-import React, { HTMLAttributes } from 'react';
+import React, { HTMLAttributes, useCallback } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import styles from './_index.less';
 import classNames from 'classnames';
 import { DragObjectWithType } from 'react-dnd/lib/interfaces';
 import { StopOutlined } from '@ant-design/icons';
+import { ColumnGroupType, ColumnType } from 'antd/es/table';
+import { getColumnKey } from './index';
+import { Tooltip } from 'antd';
 
 interface IDraggableHeaderCellProps extends HTMLAttributes<HTMLTableHeaderCellElement> {
     index: number;
+    column: ColumnType<any> | ColumnGroupType<any>;
     moveColumn: (from: number, to: number) => void;
+    hideColumn: (key: string) => void;
 }
 
 interface IDragObject extends DragObjectWithType {
@@ -22,6 +27,8 @@ const DraggableHeaderCell: React.FC<IDraggableHeaderCellProps> = ({
     className,
     style,
     children,
+    hideColumn,
+    column,
     ...restProps
 }) => {
     const ref = React.useRef();
@@ -47,6 +54,11 @@ const DraggableHeaderCell: React.FC<IDraggableHeaderCellProps> = ({
             isDragging: monitor.isDragging(),
         }),
     });
+    const onHideColumn = useCallback(() => {
+        const key = getColumnKey(column);
+        hideColumn(key);
+    }, []);
+
     if (index === void 0) {
         return (
             <th className={className} style={style} {...restProps}>
@@ -69,7 +81,9 @@ const DraggableHeaderCell: React.FC<IDraggableHeaderCellProps> = ({
             {...restProps}
         >
             {children}
-            <StopOutlined className={styles.hideIcon} />
+            <Tooltip title="隐藏该列">
+                <StopOutlined className={styles.hideIcon} onClick={onHideColumn} />
+            </Tooltip>
         </th>
     );
 };

@@ -46,23 +46,25 @@
 
 .drop-over{
     &-right{
-        &:after{
+        &:before{
             content: '';
             position: absolute;
-            right: 0;
+            right: -1px;
             top: 0;
             height: 100%;
             border-right: 2px dashed #1890ff;
+            z-index: 100;
         }
     }
     &-left{
-        &:after{
+        &:before{
             content: '';
             position: absolute;
-            left: 0;
+            left: -1px;
             top: 0;
             height: 100%;
             border-left: 2px dashed #1890ff;
+            z-index: 100;
         }
     }
 }
@@ -76,7 +78,7 @@
 
 .hide-icon{
     position: absolute;
-    margin-left: 10px;
+    margin-left: 6px;
     opacity: 0;
     transition: opacity 200ms ease;
     font-size: 14px;

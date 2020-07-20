@@ -48,6 +48,10 @@ import formStyles from '../JsonForm/_form.less';
 import DraggableHeaderCell from './DraggableHeaderCell';
 import DragDropProvider from './DragDropProvider';
 import assert from 'assert';
+var defaultScroll = {
+  x: true,
+  scrollToFirstRowOnChange: true
+};
 export var showTotal = function showTotal(total) {
   return React.createElement("span", null, "\u5171\u6709", total, "\u6761");
 };
@@ -69,21 +73,29 @@ function FitTable(_a) {
       _e = _a.columns,
       columns = _e === void 0 ? [] : _e,
       rowSelection = _a.rowSelection,
-      propsScroll = _a.scroll,
+      _f = _a.scroll,
+      propsScroll = _f === void 0 ? defaultScroll : _f,
       onChange = _a.onChange,
       pagination = _a.pagination,
-      _f = _a.toolBarRender,
-      toolBarRender = _f === void 0 ? function () {
+      _g = _a.toolBarRender,
+      toolBarRender = _g === void 0 ? function () {
     return null;
-  } : _f,
+  } : _g,
       hideKeys = _a.hideKeys,
       sortKeys = _a.sortKeys,
       onHeaderRow = _a.onHeaderRow,
       // @ts-ignore
   settingComponent = _a.settingComponent,
       onSortKeysChange = _a.onSortKeysChange,
-      props = __rest(_a, ["bottom", "minHeight", "autoFitY", "columns", "rowSelection", "scroll", "onChange", "pagination", "toolBarRender", "hideKeys", "sortKeys", "onHeaderRow", "settingComponent", "onSortKeysChange"]); // columns => sort => filter
+      onHideKeysChange = _a.onHideKeysChange,
+      props = __rest(_a, ["bottom", "minHeight", "autoFitY", "columns", "rowSelection", "scroll", "onChange", "pagination", "toolBarRender", "hideKeys", "sortKeys", "onHeaderRow", "settingComponent", "onSortKeysChange", "onHideKeysChange"]);
 
+  var hideKeysRef = useRef(hideKeys);
+  useMemo(function () {
+    hideKeysRef.current = hideKeys;
+  }, [hideKeys]);
+  var sortKeysRef = useRef([]); // 缓存真实sortKeys
+  // columns => sort => filter
 
   if (process.env.NODE_ENV === 'development') {
     columns.forEach(function (item) {
@@ -94,7 +106,6 @@ function FitTable(_a) {
   }
 
   var ref = useRef(null);
-  var scroll = useScrollXY(ref, bottom, minHeight, autoFitY, columns, rowSelection, propsScroll);
   var filtersRef = useRef(EmptyObject);
   var sorterRef = useRef(EmptyObject);
   var extraRef = useRef();
@@ -163,10 +174,9 @@ function FitTable(_a) {
     }
   }, [onHeaderRow]);
   var moveColumn = useCallback(function (from, to) {
+    // 新增或删除column时怎么合理处理本地缓存
     if (from !== to) {
-      var keys = sortKeys || columns.map(function (item) {
-        return getColumnKey(item);
-      });
+      var keys = sortKeysRef.current;
 
       if (to > from) {
         keys.splice(to + 1, 0, keys[from]);
@@ -178,7 +188,13 @@ function FitTable(_a) {
 
       onSortKeysChange === null || onSortKeysChange === void 0 ? void 0 : onSortKeysChange(Array.from(keys));
     }
-  }, [columns, sortKeys]);
+  }, []);
+  var hideColumn = useCallback(function (key) {
+    var set = new Set(hideKeysRef.current);
+    set.add(key);
+    onHideKeysChange(Array.from(set));
+  }, []); // 隐藏某一列
+
   var sortMap = useMemo(function () {
     var map = {};
 
@@ -197,16 +213,25 @@ function FitTable(_a) {
 
   var mergeColumns = useMemo(function () {
     var alignsArray = [];
+    sortKeysRef.current = [];
     var filterColumns = columns.sort(function (a, b) {
-      var preSortIndex = sortMap[getColumnKey(a)] || 0;
-      var nextSortIndex = sortMap[getColumnKey(b)] || 0;
-      return preSortIndex - nextSortIndex;
+      var preSortIndex = sortMap[getColumnKey(a)];
+      var nextSortIndex = sortMap[getColumnKey(b)];
+
+      if (preSortIndex !== void 0 && nextSortIndex !== void 0) {
+        return preSortIndex - nextSortIndex;
+      }
+
+      return 0;
     }).map(function (column, index) {
+      sortKeysRef.current.push(getColumnKey(column));
       return __assign(__assign({}, column), {
         onHeaderCell: function onHeaderCell() {
           return {
             index: index,
-            moveColumn: moveColumn
+            moveColumn: moveColumn,
+            hideColumn: hideColumn,
+            column: column
           };
         }
       });
@@ -236,8 +261,10 @@ function FitTable(_a) {
       }
     }); // fixed处理不可断层
   }, [columns, hideKeys, sortKeys]);
+  var scroll = useScrollXY(ref, bottom, minHeight, autoFitY, mergeColumns, rowSelection, propsScroll);
   var tableContent = useMemo(function () {
     return React.createElement(DragDropProvider, null, React.createElement(_Table, __assign({
+      bordered: true,
       scroll: scroll,
       columns: mergeColumns,
       rowSelection: rowSelection
