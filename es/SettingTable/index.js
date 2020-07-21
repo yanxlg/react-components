@@ -33,9 +33,10 @@ import useTableSetting from '../hooks/useTableSetting';
 
 function SettingTable(_a) {
   var settingKey = _a.settingKey,
-      props = __rest(_a, ["settingKey"]);
+      settingVersion = _a.settingVersion,
+      props = __rest(_a, ["settingKey", "settingVersion"]);
 
-  var _b = useTableSetting(settingKey),
+  var _b = useTableSetting(settingKey, settingVersion),
       hideKeys = _b.hideKeys,
       sortKeys = _b.sortKeys,
       updateHideKeys = _b.updateHideKeys,

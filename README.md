@@ -9,6 +9,8 @@
     缓存指定页面，通常用于返回上一页时需要保留上一页数据
 - FitTable
     支持动态计算Table高度
+- SettingTable
+    支持拖拽重排列，支持缓存列配置
 - AutoEnlargeImg
     支持自动放大显示的图片
 - LazyImage
@@ -17,3 +19,7 @@
     支持数字、正数、正整数输入限制
 - hooks
     + useXY
+    
+    
+## TODOList
+- 虚拟table:antd-table-infinity
