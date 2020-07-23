@@ -59,19 +59,19 @@ var FormInput = function FormInput(props) {
     } : {};
   }, []);
   return useMemo(function () {
-    return React.createElement(_Form.Item, __assign({
+    return /*#__PURE__*/React.createElement(_Form.Item, __assign({
       className: className,
       labelCol: __assign(__assign({}, labelCol), {
         className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
       })
-    }, formItemProps), type === 'textarea@2' ? React.createElement(TextArea, __assign({
+    }, formItemProps), type === 'textarea@2' ? /*#__PURE__*/React.createElement(TextArea, __assign({
       allowClear: true,
       className: formStyles.formItemDefault,
       autoSize: {
         minRows: 1,
         maxRows: 6
       }
-    }, childrenProps, eventProps)) : React.createElement(RichInput, __assign({
+    }, childrenProps, eventProps)) : /*#__PURE__*/React.createElement(RichInput, __assign({
       allowClear: true,
       className: formStyles.formItemDefault
     }, childrenProps, eventProps, {

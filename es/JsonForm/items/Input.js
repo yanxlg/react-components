@@ -61,10 +61,10 @@ var FormInput = function FormInput(props) {
     } : {};
   }, []);
   return useMemo(function () {
-    return React.createElement(_Form.Item, {
+    return /*#__PURE__*/React.createElement(_Form.Item, {
       className: formItemClassName,
       name: name,
-      label: React.createElement("span", {
+      label: /*#__PURE__*/React.createElement("span", {
         className: labelClassName
       }, label),
       rules: rules,
@@ -73,7 +73,7 @@ var FormInput = function FormInput(props) {
       style: hide ? {
         display: 'none'
       } : {}
-    }, React.createElement(RichInput, __assign({
+    }, /*#__PURE__*/React.createElement(RichInput, __assign({
       placeholder: placeholder,
       className: className
     }, _props, eventProps, {

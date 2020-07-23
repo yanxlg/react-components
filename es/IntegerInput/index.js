@@ -37,7 +37,7 @@ var IntegerInput = function IntegerInput(_a) {
   var positive = _a.positive,
       props = __rest(_a, ["positive"]);
 
-  return React.createElement(_InputNumber, __assign({}, props, {
+  return /*#__PURE__*/React.createElement(_InputNumber, __assign({}, props, {
     min: 0,
     formatter: positive ? positiveIntFormatter : intFormatter
   }));

@@ -6,9 +6,9 @@ var RNDContext = createDndContext(HTML5Backend);
 function DragAndDrop(_a) {
   var children = _a.children;
   var manager = useRef(RNDContext);
-  return React.createElement(DndProvider, {
+  return /*#__PURE__*/React.createElement(DndProvider, {
     manager: manager.current.dragDropManager
   }, children);
 }
 
-export default React.memo(DragAndDrop);
+export default /*#__PURE__*/React.memo(DragAndDrop);

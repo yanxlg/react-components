@@ -3,25 +3,25 @@ const shelljs = require('shelljs');
 const pkg = require('./package.json');
 const path = require('path');
 
-
-gulp.task('clean', async (done)=>{
-    shelljs.cd(path.join(process.cwd(),"./src"));
-    let ret = shelljs.exec("find . -name '*.d.ts' -delete").code;
-    if (!ret) {
-        ret = undefined;
-    }
-    done(ret);
+gulp.task('clean', async done => {
+    // shelljs.cd(path.join(process.cwd(),"./src"));
+    // let ret = shelljs.exec("find . -name '*.d.ts' -delete").code;
+    // if (!ret) {
+    //     ret = undefined;
+    // }
+    // done(ret);
+    done();
 });
 
 gulp.task(
     'compile',
-    gulp.series("clean",done => {
-        let ret = shelljs.exec("npm run compile").code;
+    gulp.series('clean', done => {
+        let ret = shelljs.exec('npm run compile').code;
         if (!ret) {
             ret = undefined;
         }
         done(ret);
-    })
+    }),
 );
 
 // 先获取当前分支，然后提交当前分支，合并到develop分支，合并到master分支
@@ -38,7 +38,7 @@ gulp.task(
         shelljs.exec(`git push origin ${version}:${version}`);
         shelljs.exec('git push origin master:master');
         done();
-    })
+    }),
 );
 
 gulp.task(
@@ -55,5 +55,5 @@ gulp.task(
         shelljs.exec(`git push origin ${version}:${version}`);
         shelljs.exec('git push origin master:master');
         done();
-    })
+    }),
 );

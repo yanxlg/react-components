@@ -11,8 +11,8 @@ var DensityIcon = function DensityIcon(_a) {
   var tableSize = _a.tableSize,
       setTableSize = _a.setTableSize;
   return useMemo(function () {
-    return React.createElement(_Dropdown, {
-      overlay: React.createElement(_Menu, {
+    return /*#__PURE__*/React.createElement(_Dropdown, {
+      overlay: /*#__PURE__*/React.createElement(_Menu, {
         selectedKeys: [tableSize],
         onClick: function onClick(_a) {
           var key = _a.key;
@@ -21,17 +21,17 @@ var DensityIcon = function DensityIcon(_a) {
         style: {
           width: 80
         }
-      }, React.createElement(_Menu.Item, {
+      }, /*#__PURE__*/React.createElement(_Menu.Item, {
         key: "large"
-      }, "\u9ED8\u8BA4"), React.createElement(_Menu.Item, {
+      }, "\u9ED8\u8BA4"), /*#__PURE__*/React.createElement(_Menu.Item, {
         key: "middle"
-      }, "\u4E2D\u7B49"), React.createElement(_Menu.Item, {
+      }, "\u4E2D\u7B49"), /*#__PURE__*/React.createElement(_Menu.Item, {
         key: "small"
       }, "\u7D27\u51D1")),
       trigger: ['click']
-    }, React.createElement(_Tooltip, {
+    }, /*#__PURE__*/React.createElement(_Tooltip, {
       title: '表格密度'
-    }, React.createElement(ColumnHeightOutlined, null)));
+    }, /*#__PURE__*/React.createElement(ColumnHeightOutlined, null)));
   }, [tableSize, setTableSize]);
 };
 

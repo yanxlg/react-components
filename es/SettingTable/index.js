@@ -43,7 +43,7 @@ function SettingTable(_a) {
       updateSortKeys = _b.updateSortKeys;
 
   return useMemo(function () {
-    return React.createElement(FitTable, __assign({
+    return /*#__PURE__*/React.createElement(FitTable, __assign({
       columnsSettingRender: true,
       bordered: true,
       hideKeys: hideKeys,

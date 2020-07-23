@@ -20,7 +20,7 @@ export declare type CascaderProps<T = string> = FormItemLabelProps & CustomFormP
     hide?: boolean;
 } & Omit<AntdCascaderProps, 'loading' | 'onChange' | 'className'>;
 declare const FormCascader: {
-    (props: CascaderProps<string>): JSX.Element;
+    (props: CascaderProps): JSX.Element;
     typeList: string[];
 };
 export default FormCascader;
