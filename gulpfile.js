@@ -4,12 +4,13 @@ const pkg = require('./package.json');
 const path = require('path');
 
 gulp.task('clean', async done => {
-    // shelljs.cd(path.join(process.cwd(),"./src"));
+    shelljs.cd(path.join(process.cwd(), './src'));
     // let ret = shelljs.exec("find . -name '*.d.ts' -delete").code;
     // if (!ret) {
     //     ret = undefined;
     // }
     // done(ret);
+    shelljs.rm('-rf', './**/*.d.ts');
     done();
 });
 
