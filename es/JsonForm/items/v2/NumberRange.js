@@ -93,7 +93,7 @@ var FormInputRange = function FormInputRange(props) {
       }]
     }, formItemProps), /*#__PURE__*/React.createElement(_Input.Group, {
       compact: true,
-      className: formStyles.flex
+      className: classNames(formStyles.flex, formStyles.flexAlign)
     }, /*#__PURE__*/React.createElement(_Form.Item, {
       name: name1,
       validateTrigger: "onBlur",
@@ -118,9 +118,9 @@ var FormInputRange = function FormInputRange(props) {
       precision: precision
     }, event2Props, {
       className: classNames((childrenProps === null || childrenProps === void 0 ? void 0 : childrenProps.className) || formStyles.inputRange, formStyles.inputRangeRight, formStyles.inputRangeFocus)
-    })))), addonAfter ? /*#__PURE__*/React.createElement("span", {
+    }))), addonAfter ? /*#__PURE__*/React.createElement("span", {
       className: [formStyles.endExtra, formStyles.verticalMiddle].join(' ')
-    }, addonAfter) : null);
+    }, addonAfter) : null));
   }, []);
 };
 

@@ -86,7 +86,7 @@ const FormInputRange = (props: NumberRangeProps) => {
                 ]}
                 {...formItemProps}
             >
-                <Input.Group compact className={formStyles.flex}>
+                <Input.Group compact className={classNames(formStyles.flex, formStyles.flexAlign)}>
                     <Form.Item
                         name={name1}
                         validateTrigger="onBlur"
@@ -122,12 +122,14 @@ const FormInputRange = (props: NumberRangeProps) => {
                             )}
                         />
                     </Form.Item>
+                    {addonAfter ? (
+                        <span
+                            className={[formStyles.endExtra, formStyles.verticalMiddle].join(' ')}
+                        >
+                            {addonAfter}
+                        </span>
+                    ) : null}
                 </Input.Group>
-                {addonAfter ? (
-                    <span className={[formStyles.endExtra, formStyles.verticalMiddle].join(' ')}>
-                        {addonAfter}
-                    </span>
-                ) : null}
             </Form.Item>
         );
     }, []);
