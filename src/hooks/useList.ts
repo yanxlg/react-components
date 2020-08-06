@@ -159,7 +159,7 @@ function useList<T, Q = any, E = {}>({
                       }
                     : {};
             return getListData({
-                page: current,
+                page: sorter && sorter.field ? 1 : current,
                 page_count: pageSize,
                 ...sorterConfig,
                 ...extraQueryRef.current,
