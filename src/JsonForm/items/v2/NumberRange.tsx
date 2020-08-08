@@ -26,6 +26,7 @@ export type NumberRangeProps = Omit<
     initialValue?: [any] | [any, any];
     childrenProps?: Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange'>;
     addonAfter?: React.ReactNode;
+    maxDigits?: number;
 };
 
 const FormInputRange = (props: NumberRangeProps) => {
@@ -40,6 +41,7 @@ const FormInputRange = (props: NumberRangeProps) => {
         initialValue,
         addonAfter,
         childrenProps,
+        maxDigits,
         ...formItemProps
     } = props;
 
@@ -96,6 +98,7 @@ const FormInputRange = (props: NumberRangeProps) => {
                         <RichInput
                             richType="number"
                             precision={precision}
+                            maxDigits={maxDigits}
                             {...event1Props}
                             {...childrenProps}
                             className={classNames(
@@ -114,6 +117,7 @@ const FormInputRange = (props: NumberRangeProps) => {
                         <RichInput
                             richType="number"
                             precision={precision}
+                            maxDigits={maxDigits}
                             {...event2Props}
                             className={classNames(
                                 childrenProps?.className || formStyles.inputRange,

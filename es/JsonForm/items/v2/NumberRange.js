@@ -53,7 +53,8 @@ var FormInputRange = function FormInputRange(props) {
       initialValue = props.initialValue,
       addonAfter = props.addonAfter,
       childrenProps = props.childrenProps,
-      formItemProps = __rest(props, ["className", "name", "onChange", "labelClassName", "labelCol", "form", "precision", "initialValue", "addonAfter", "childrenProps"]);
+      maxDigits = props.maxDigits,
+      formItemProps = __rest(props, ["className", "name", "onChange", "labelClassName", "labelCol", "form", "precision", "initialValue", "addonAfter", "childrenProps", "maxDigits"]);
 
   var event1Props = useMemo(function () {
     return _onChange ? {
@@ -101,7 +102,8 @@ var FormInputRange = function FormInputRange(props) {
       noStyle: true
     }, /*#__PURE__*/React.createElement(RichInput, __assign({
       richType: "number",
-      precision: precision
+      precision: precision,
+      maxDigits: maxDigits
     }, event1Props, childrenProps, {
       className: classNames((childrenProps === null || childrenProps === void 0 ? void 0 : childrenProps.className) || formStyles.inputRange, formStyles.inputRangeFocus)
     }))), /*#__PURE__*/React.createElement(_Input, {
@@ -115,7 +117,8 @@ var FormInputRange = function FormInputRange(props) {
       noStyle: true
     }, /*#__PURE__*/React.createElement(RichInput, __assign({
       richType: "number",
-      precision: precision
+      precision: precision,
+      maxDigits: maxDigits
     }, event2Props, {
       className: classNames((childrenProps === null || childrenProps === void 0 ? void 0 : childrenProps.className) || formStyles.inputRange, formStyles.inputRangeRight, formStyles.inputRangeFocus)
     }))), addonAfter ? /*#__PURE__*/React.createElement("span", {

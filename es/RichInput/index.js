@@ -36,9 +36,10 @@ import { intFormatter, naturalNumber, numberFormatter, numberSplit, positiveIntF
 var RichInput = function RichInput(_a) {
   var richType = _a.richType,
       precision = _a.precision,
+      maxDigits = _a.maxDigits,
       value = _a.value,
       onChange = _a.onChange,
-      props = __rest(_a, ["richType", "precision", "value", "onChange"]);
+      props = __rest(_a, ["richType", "precision", "maxDigits", "value", "onChange"]);
 
   var _b = useState(''),
       innerValue = _b[0],
@@ -53,6 +54,12 @@ var RichInput = function RichInput(_a) {
       if (precision) {
         // 精度计算
         var regexp = new RegExp("^\\d+(?:\\.\\d{0," + precision + "})?");
+        parseValue = (parseValue.match(regexp) || [''])[0];
+      }
+
+      if (maxDigits) {
+        // 保留整数位数
+        var regexp = new RegExp("^\\d{1, " + maxDigits + "}(?:\\.\\d*)?");
         parseValue = (parseValue.match(regexp) || [''])[0];
       }
 

@@ -20,11 +20,13 @@ export type RichType =
 declare interface RichInputProps extends InputProps {
     richType?: RichType;
     precision?: number; // 数字浮点精度
+    maxDigits?: number; // 整数的最大位数
 }
 
 const RichInput: React.FC<RichInputProps> = ({
     richType,
     precision,
+    maxDigits,
     value,
     onChange,
     ...props
@@ -54,6 +56,11 @@ const RichInput: React.FC<RichInputProps> = ({
                 if (precision) {
                     // 精度计算
                     const regexp = new RegExp(`^\\d+(?:\\.\\d{0,${precision}})?`);
+                    parseValue = (parseValue.match(regexp) || [''])[0];
+                }
+                if (maxDigits) {
+                    // 保留整数位数
+                    const regexp = new RegExp(`^\\d{1, ${maxDigits}}(?:\\.\\d*)?`);
                     parseValue = (parseValue.match(regexp) || [''])[0];
                 }
                 e.target.value = parseValue;
