@@ -58,10 +58,9 @@ const RichInput: React.FC<RichInputProps> = ({
                     const regexp = new RegExp(`^\\d+(?:\\.\\d{0,${precision}})?`);
                     parseValue = (parseValue.match(regexp) || [''])[0];
                 }
-                if (maxDigits) {
-                    // 保留整数位数
-                    const regexp = new RegExp(`^\\d{1, ${maxDigits}}(?:\\.\\d*)?`);
-                    parseValue = (parseValue.match(regexp) || [''])[0];
+                if (maxDigits && Number(parseValue) > Math.pow(10, maxDigits)) {
+                    // 保留整数位数为设置的长度
+                    parseValue = String(parseValue).substr(1);
                 }
                 e.target.value = parseValue;
             }
