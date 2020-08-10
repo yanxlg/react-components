@@ -60,7 +60,7 @@ const RichInput: React.FC<RichInputProps> = ({
                 }
                 if (maxDigits && Number(parseValue) > Math.pow(10, maxDigits)) {
                     // 保留整数位数为设置的长度
-                    parseValue = String(parseValue).substr(1);
+                    parseValue = String(parseValue).slice(0, -1);
                 }
                 e.target.value = parseValue;
             }
