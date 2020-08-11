@@ -39,7 +39,8 @@ export type CascaderProps<T = string> = FormItemLabelProps &
         labelClassName?: string;
         initialValue?: any;
         hide?: boolean;
-    } & Omit<AntdCascaderProps, 'loading' | 'onChange' | 'className'>;
+        options?: CascaderOptionType[];
+    } & Omit<AntdCascaderProps, 'loading' | 'onChange' | 'className' | 'options'>;
 
 const FormCascader = (props: CascaderProps) => {
     const {
