@@ -106,7 +106,11 @@ const ColumnsSetting = <T,>({
                 className={styles.settingModal}
             >
                 {ColumnsSettingRender === true ? (
-                    <Checkbox.Group onChange={onChange} value={columnsShowList}>
+                    <Checkbox.Group
+                        onChange={onChange}
+                        value={columnsShowList}
+                        className={styles.checkoutGroup}
+                    >
                         <Row gutter={[0, 5]}>
                             {columns.map(column => {
                                 if (column.hideInSetting) {

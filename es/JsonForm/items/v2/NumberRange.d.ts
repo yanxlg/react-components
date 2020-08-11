@@ -15,6 +15,7 @@ export declare type NumberRangeProps = Omit<FormItemProps, 'children' | 'rules' 
     initialValue?: [any] | [any, any];
     childrenProps?: Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange'>;
     addonAfter?: React.ReactNode;
+    maxDigits?: number;
 };
 declare const FormInputRange: {
     (props: NumberRangeProps): JSX.Element;

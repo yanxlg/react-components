@@ -32,19 +32,20 @@ var __rest = this && this.__rest || function (s, e) {
   return t;
 };
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import formStyles from '../_form.less';
 var typeList = ['cascader'];
 
-function filter(inputValue, path) {
+function _filter(inputValue, path, fieldNames) {
   return path.some(function (option) {
-    return option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1;
+    return option[fieldNames ? fieldNames.label : 'label'].toLowerCase().indexOf(inputValue.toLowerCase()) > -1;
   });
 }
 
 var FormCascader = function FormCascader(props) {
   var name = props.name,
       label = props.label,
+      optionList = props.optionList,
       _a = props.className,
       className = _a === void 0 ? formStyles.formItemDefault : _a,
       _b = props.formItemClassName,
@@ -57,8 +58,23 @@ var FormCascader = function FormCascader(props) {
       disabled = props.disabled,
       initialValue = props.initialValue,
       hide = props.hide,
-      extraProps = __rest(props, ["name", "label", "className", "formItemClassName", "onChange", "labelClassName", "form", "rules", "placeholder", "disabled", "initialValue", "hide"]);
+      options = props.options,
+      extraProps = __rest(props, ["name", "label", "optionList", "className", "formItemClassName", "onChange", "labelClassName", "form", "rules", "placeholder", "disabled", "initialValue", "hide", "options"]);
 
+  var _c = useState(undefined),
+      list = _c[0],
+      setList = _c[1];
+
+  var isFunction = typeof optionList === 'function';
+  useEffect(function () {
+    if (isFunction) {
+      optionList().then(function (list) {
+        setList(list);
+      })["catch"](function () {
+        setList([]);
+      });
+    }
+  }, []);
   var eventProps = useMemo(function () {
     return _onChange ? {
       onChange: function onChange() {
@@ -83,10 +99,14 @@ var FormCascader = function FormCascader(props) {
       className: className,
       placeholder: placeholder,
       showSearch: {
-        filter: filter
+        filter: function filter(inputValue, path) {
+          return _filter(inputValue, path, extraProps.fieldNames);
+        }
       }
-    }, eventProps, extraProps)));
-  }, [extraProps, disabled, hide]);
+    }, eventProps, extraProps, {
+      options: options ? options : list
+    })));
+  }, [extraProps, disabled, hide, list]);
 };
 
 FormCascader.typeList = typeList;

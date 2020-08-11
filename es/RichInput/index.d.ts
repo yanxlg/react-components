@@ -4,6 +4,7 @@ export declare type RichType = 'input' | 'integer' | 'number' | 'positiveInteger
 declare interface RichInputProps extends InputProps {
     richType?: RichType;
     precision?: number;
+    maxDigits?: number;
 }
 declare const RichInput: React.FC<RichInputProps>;
 export default RichInput;

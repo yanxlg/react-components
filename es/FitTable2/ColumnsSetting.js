@@ -98,7 +98,8 @@ var ColumnsSetting = function ColumnsSetting(_a) {
       className: styles.settingModal
     }, ColumnsSettingRender === true ? React.createElement(_Checkbox.Group, {
       onChange: onChange,
-      value: columnsShowList
+      value: columnsShowList,
+      className: styles.checkoutGroup
     }, React.createElement(_Row, {
       gutter: [0, 5]
     }, columns.map(function (column) {

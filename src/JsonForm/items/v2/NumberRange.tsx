@@ -26,6 +26,7 @@ export type NumberRangeProps = Omit<
     initialValue?: [any] | [any, any];
     childrenProps?: Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange'>;
     addonAfter?: React.ReactNode;
+    maxDigits?: number;
 };
 
 const FormInputRange = (props: NumberRangeProps) => {
@@ -40,6 +41,7 @@ const FormInputRange = (props: NumberRangeProps) => {
         initialValue,
         addonAfter,
         childrenProps,
+        maxDigits,
         ...formItemProps
     } = props;
 
@@ -86,7 +88,7 @@ const FormInputRange = (props: NumberRangeProps) => {
                 ]}
                 {...formItemProps}
             >
-                <Input.Group compact className={formStyles.flex}>
+                <Input.Group compact className={classNames(formStyles.flex, formStyles.flexAlign)}>
                     <Form.Item
                         name={name1}
                         validateTrigger="onBlur"
@@ -96,6 +98,7 @@ const FormInputRange = (props: NumberRangeProps) => {
                         <RichInput
                             richType="number"
                             precision={precision}
+                            maxDigits={maxDigits}
                             {...event1Props}
                             {...childrenProps}
                             className={classNames(
@@ -114,6 +117,7 @@ const FormInputRange = (props: NumberRangeProps) => {
                         <RichInput
                             richType="number"
                             precision={precision}
+                            maxDigits={maxDigits}
                             {...event2Props}
                             className={classNames(
                                 childrenProps?.className || formStyles.inputRange,
@@ -122,12 +126,14 @@ const FormInputRange = (props: NumberRangeProps) => {
                             )}
                         />
                     </Form.Item>
+                    {addonAfter ? (
+                        <span
+                            className={[formStyles.endExtra, formStyles.verticalMiddle].join(' ')}
+                        >
+                            {addonAfter}
+                        </span>
+                    ) : null}
                 </Input.Group>
-                {addonAfter ? (
-                    <span className={[formStyles.endExtra, formStyles.verticalMiddle].join(' ')}>
-                        {addonAfter}
-                    </span>
-                ) : null}
             </Form.Item>
         );
     }, []);
