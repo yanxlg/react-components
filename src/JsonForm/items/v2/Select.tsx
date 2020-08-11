@@ -105,7 +105,7 @@ export function parseOptionList(
                     relationKey,
                     skipChildren,
                 ),
-                ...(skipChildren ? {} : { children }),
+                ...(skipChildren || relationKey === 'children' ? {} : { children }),
             };
         });
     } else {

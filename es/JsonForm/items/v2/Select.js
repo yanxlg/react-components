@@ -86,7 +86,7 @@ export function parseOptionList(options, optionKeys, relationKey, skipChildren) 
       return __assign(__assign(__assign({}, item), (_b = {
         label: item[optionKeys[0]],
         value: item[optionKeys[1]]
-      }, _b[relationKey] = parseOptionList(item[relationKey] || [], optionKeys, relationKey, skipChildren), _b)), skipChildren ? {} : {
+      }, _b[relationKey] = parseOptionList(item[relationKey] || [], optionKeys, relationKey, skipChildren), _b)), skipChildren || relationKey === 'children' ? {} : {
         children: children
       });
     });
