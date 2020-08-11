@@ -45,8 +45,8 @@ function _filter(inputValue, path, fieldNames) {
 
 var FormCascader = function FormCascader(props) {
   var name = props.name,
-      // label,
-  optionList = props.optionList,
+      label = props.label,
+      optionList = props.optionList,
       _a = props.className,
       className = _a === void 0 ? formStyles.formItemDefault : _a,
       _b = props.formItemClassName,
@@ -61,7 +61,7 @@ var FormCascader = function FormCascader(props) {
       hide = props.hide,
       options = props.options,
       labelCol = props.labelCol,
-      extraProps = __rest(props, ["name", "optionList", "className", "formItemClassName", "onChange", "labelClassName", "form", "rules", "placeholder", "disabled", "initialValue", "hide", "options", "labelCol"]);
+      extraProps = __rest(props, ["name", "label", "optionList", "className", "formItemClassName", "onChange", "labelClassName", "form", "rules", "placeholder", "disabled", "initialValue", "hide", "options", "labelCol"]);
 
   var _c = useState(undefined),
       list = _c[0],
@@ -89,6 +89,7 @@ var FormCascader = function FormCascader(props) {
       name: name,
       className: formItemClassName,
       // label={<span className={labelClassName}>{label}</span>}
+      label: label,
       labelCol: __assign(__assign({}, labelCol), {
         className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
       }),

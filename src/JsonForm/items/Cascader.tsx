@@ -46,7 +46,7 @@ export type CascaderProps<T = string> = FormItemLabelProps &
 const FormCascader = (props: CascaderProps) => {
     const {
         name,
-        // label,
+        label,
         optionList,
         className = formStyles.formItemDefault,
         formItemClassName = formStyles.formItem,
@@ -95,6 +95,7 @@ const FormCascader = (props: CascaderProps) => {
                 name={name}
                 className={formItemClassName}
                 // label={<span className={labelClassName}>{label}</span>}
+                label={label}
                 labelCol={{
                     ...labelCol,
                     className: classNames(labelCol?.className, labelClassName),
