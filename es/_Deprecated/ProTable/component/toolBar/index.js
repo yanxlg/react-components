@@ -44,19 +44,19 @@ var getButtonText = function getButtonText(_a, config) {
   return {
     fullScreen: {
       text: '全屏',
-      icon: React.createElement(FullScreenIcon, null)
+      icon: /*#__PURE__*/React.createElement(FullScreenIcon, null)
     },
     reload: {
       text: '刷新',
-      icon: React.createElement(ReloadOutlined, null)
+      icon: /*#__PURE__*/React.createElement(ReloadOutlined, null)
     },
     setting: {
       text: '列设置',
-      icon: React.createElement(SettingOutlined, null)
+      icon: /*#__PURE__*/React.createElement(SettingOutlined, null)
     },
     density: {
       text: '表格密度',
-      icon: React.createElement(DensityIcon, {
+      icon: /*#__PURE__*/React.createElement(DensityIcon, {
         tableSize: config.density.tableSize,
         setTableSize: config.density.setTableSize
       })
@@ -82,7 +82,7 @@ var renderDefaultOption = function renderDefaultOption(options, className, defau
     }
 
     if (key === 'setting') {
-      return React.createElement(ColumnSetting, {
+      return /*#__PURE__*/React.createElement(ColumnSetting, {
         key: key,
         columns: defaultOptions.columns,
         columnsMap: defaultOptions.columnsMap,
@@ -93,27 +93,27 @@ var renderDefaultOption = function renderDefaultOption(options, className, defau
     }
 
     if (key === 'fullScreen') {
-      return React.createElement("span", {
+      return /*#__PURE__*/React.createElement("span", {
         key: key,
         style: {
           marginLeft: index === 0 ? 8 : 16
         },
         className: className,
         onClick: value
-      }, React.createElement(FullScreenIcon, null));
+      }, /*#__PURE__*/React.createElement(FullScreenIcon, null));
     }
 
     var optionItem = getButtonText(defaultOptions, options)[key];
 
     if (optionItem) {
-      return React.createElement("span", {
+      return /*#__PURE__*/React.createElement("span", {
         key: key,
         style: {
           marginLeft: index === 0 ? 8 : 16
         },
         className: className,
         onClick: value && typeof value === 'function' ? value : undefined
-      }, React.createElement(_Tooltip, {
+      }, /*#__PURE__*/React.createElement(_Tooltip, {
         title: optionItem.text
       }, optionItem.icon));
     }
@@ -164,39 +164,39 @@ var ToolBar = function ToolBar(_a, ref) {
     };
   }, []);
   return useMemo(function () {
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       className: className
-    }, React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", {
       className: className + "-title"
-    }, headerTitle), React.createElement("div", {
+    }, headerTitle), /*#__PURE__*/React.createElement("div", {
       className: className + "-option"
     }, actions.filter(function (item) {
       return item;
     }).map(function (node, index) {
-      return React.createElement("div", {
+      return /*#__PURE__*/React.createElement("div", {
         // eslint-disable-next-line react/no-array-index-key
         key: index,
         className: className + "-item"
       }, node);
-    }), React.createElement("div", {
+    }), /*#__PURE__*/React.createElement("div", {
       className: className + "-default-option"
-    }, optionDom.length > 0 && actions.length > 0 && React.createElement(_Divider, {
+    }, optionDom.length > 0 && actions.length > 0 && /*#__PURE__*/React.createElement(_Divider, {
       type: "vertical"
     }), optionDom)));
   }, [actions, optionDom, toolBarRender]);
 };
 
-var ToolbarWrap = forwardRef(ToolBar);
+var ToolbarWrap = /*#__PURE__*/forwardRef(ToolBar);
 
 var WarpToolBar = function WarpToolBar(props) {
-  return React.createElement(ConfigConsumer, null, function (_a) {
+  return /*#__PURE__*/React.createElement(ConfigConsumer, null, function (_a) {
     var getPrefixCls = _a.getPrefixCls;
     var className = getPrefixCls('pro-table-toolbar');
 
     var toolbarRef = props.toolbarRef,
         _props = __rest(props, ["toolbarRef"]);
 
-    return React.createElement(ToolbarWrap, __assign({
+    return /*#__PURE__*/React.createElement(ToolbarWrap, __assign({
       className: className
     }, _props, {
       ref: toolbarRef

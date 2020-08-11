@@ -53,7 +53,7 @@ var LazyImage = function LazyImage(_a, ref) {
       preventLoading = _a.preventLoading,
       props = __rest(_a, ["className", "once", "height", "offset", "overflow", "resize", "scroll", "throttle", "debounce", "scrollContainer", "unmountIfInvisible", "preventLoading"]);
 
-  return React.createElement(LazyLoad, {
+  return /*#__PURE__*/React.createElement(LazyLoad, {
     scrollContainer: scrollContainer,
     once: once,
     height: height,
@@ -65,13 +65,13 @@ var LazyImage = function LazyImage(_a, ref) {
     throttle: throttle,
     unmountIfInvisible: unmountIfInvisible,
     preventLoading: preventLoading,
-    placeholder: React.createElement(_Skeleton.Input, {
+    placeholder: /*#__PURE__*/React.createElement(_Skeleton.Input, {
       active: true,
       className: classNames(className, formStyles.inlineBlock)
     })
-  }, React.createElement("img", __assign({}, props, {
+  }, /*#__PURE__*/React.createElement("img", __assign({}, props, {
     className: className
   })));
 };
 
-export default forwardRef(LazyImage);
+export default /*#__PURE__*/forwardRef(LazyImage);

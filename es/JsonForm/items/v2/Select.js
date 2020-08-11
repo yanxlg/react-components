@@ -86,7 +86,7 @@ export function parseOptionList(options, optionKeys, relationKey, skipChildren) 
       return __assign(__assign(__assign({}, item), (_b = {
         label: item[optionKeys[0]],
         value: item[optionKeys[1]]
-      }, _b[relationKey] = parseOptionList(item[relationKey] || [], optionKeys, relationKey, skipChildren), _b)), skipChildren || relationKey === 'children' ? {} : {
+      }, _b[relationKey] = parseOptionList(children || [], optionKeys, relationKey, skipChildren), _b)), skipChildren || relationKey === 'children' ? {} : {
         children: children
       });
     });
@@ -289,13 +289,13 @@ var FormSelect = function FormSelect(props) {
 
     var multiple = childrenProps && (childrenProps.mode === 'tags' || childrenProps.mode === 'multiple');
     var data = multiple ? getTreeData(list) : getSelectData(list);
-    return React.createElement(_Form.Item, __assign({
+    return /*#__PURE__*/React.createElement(_Form.Item, __assign({
       className: className,
       labelCol: __assign(__assign({}, labelCol), {
         className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
       }),
       normalize: defaultCheckedType === 'checkedAll' ? g_normalise(list) : undefined
-    }, formItemProps), multiple ? React.createElement(_TreeSelect, __assign({
+    }, formItemProps), multiple ? /*#__PURE__*/React.createElement(_TreeSelect, __assign({
       treeNodeLabelProp: "label",
       treeCheckable: true,
       treeDefaultExpandAll: true,
@@ -308,7 +308,7 @@ var FormSelect = function FormSelect(props) {
     }, childrenProps, eventProps, {
       loading: loading,
       treeData: data
-    })) : React.createElement(_Select, __assign({
+    })) : /*#__PURE__*/React.createElement(_Select, __assign({
       className: formStyles.formItemDefault
     }, childrenProps, {
       options: data,
@@ -319,7 +319,7 @@ var FormSelect = function FormSelect(props) {
     if (relation === void 0) {
       return formItem();
     } else {
-      return React.createElement(_Form.Item, {
+      return /*#__PURE__*/React.createElement(_Form.Item, {
         noStyle: true,
         shouldUpdate: function shouldUpdate(prevValues, currentValues) {
           var namePath = relation.name;

@@ -14,11 +14,11 @@ var FullScreenIcon = function FullScreenIcon() {
     };
   }, []);
   return useMemo(function () {
-    return fullscreen ? React.createElement(_Tooltip, {
+    return fullscreen ? /*#__PURE__*/React.createElement(_Tooltip, {
       title: '退出全屏'
-    }, React.createElement(FullscreenExitOutlined, null)) : React.createElement(_Tooltip, {
+    }, /*#__PURE__*/React.createElement(FullscreenExitOutlined, null)) : /*#__PURE__*/React.createElement(_Tooltip, {
       title: '全屏'
-    }, React.createElement(FullscreenOutlined, null));
+    }, /*#__PURE__*/React.createElement(FullscreenOutlined, null));
   }, [fullscreen]);
 };
 

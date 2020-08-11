@@ -53,9 +53,9 @@ var FormTree = function FormTree(props) {
   var requiredProps = required ? {
     required: required
   } : {};
-  return React.createElement(_Form.Item, __assign({
+  return /*#__PURE__*/React.createElement(_Form.Item, __assign({
     name: name,
-    label: label ? React.createElement("span", {
+    label: label ? /*#__PURE__*/React.createElement("span", {
       className: labelClassName
     }, label) : undefined,
     className: formItemClassName
@@ -67,7 +67,7 @@ var FormTree = function FormTree(props) {
     } : {},
     valuePropName: 'checkedKeys',
     trigger: 'onCheck'
-  }), React.createElement(_Tree, __assign({
+  }), /*#__PURE__*/React.createElement(_Tree, __assign({
     className: className
   }, _props)));
 };
