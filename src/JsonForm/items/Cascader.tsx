@@ -8,6 +8,7 @@ import { CascaderProps as AntdCascaderProps, FieldNamesType } from 'antd/es/casc
 import { FormatterType } from '../../utils/formatter';
 import { CascaderOptionType } from 'antd/es/cascader';
 import { IOptionItem } from './Select';
+import classNames from 'classnames';
 
 export type CascaderType = 'cascader';
 const typeList = ['cascader'];
@@ -45,7 +46,7 @@ export type CascaderProps<T = string> = FormItemLabelProps &
 const FormCascader = (props: CascaderProps) => {
     const {
         name,
-        label,
+        // label,
         optionList,
         className = formStyles.formItemDefault,
         formItemClassName = formStyles.formItem,
@@ -58,6 +59,7 @@ const FormCascader = (props: CascaderProps) => {
         initialValue,
         hide,
         options,
+        labelCol,
         ...extraProps
     } = props;
 
@@ -92,7 +94,11 @@ const FormCascader = (props: CascaderProps) => {
             <Form.Item
                 name={name}
                 className={formItemClassName}
-                label={<span className={labelClassName}>{label}</span>}
+                // label={<span className={labelClassName}>{label}</span>}
+                labelCol={{
+                    ...labelCol,
+                    className: classNames(labelCol?.className, labelClassName),
+                }}
                 rules={rules}
                 initialValue={initialValue}
                 style={
