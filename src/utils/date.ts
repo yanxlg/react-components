@@ -52,3 +52,30 @@ export function localToUtc() {}
 export function dateToUnix(date?: Dayjs | number) {
     return typeof date === 'number' ? date : (date?.unix() as number);
 }
+
+// 时间选择框当UTC时间
+export function startUtcDateToUnix(moment?: Dayjs): number | undefined {
+    return moment
+        ? moment
+              .clone()
+              .hour(0)
+              .minute(0)
+              .second(0)
+              .add(8, 'h')
+              .unix()
+        : undefined;
+}
+
+// 时间选择框当UTC时间
+export function endUtcDateToUnix(moment?: Dayjs): number | undefined {
+    return moment
+        ? moment
+              .clone()
+              .add(1, 'd')
+              .hour(0)
+              .minute(0)
+              .second(0)
+              .add(8, 'h')
+              .unix()
+        : undefined;
+}

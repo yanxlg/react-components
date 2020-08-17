@@ -1,6 +1,6 @@
 // 核心思想：以addOn形式支持外部提供内部逻辑
 import { Formatters } from 'react-components';
-import { endDateToUnix, startDateToUnix } from './date';
+import { endDateToUnix, startDateToUnix, startUtcDateToUnix, endUtcDateToUnix } from './date';
 import addOn from './addOn';
 
 export const isNull = function(value: any) {
@@ -70,6 +70,8 @@ declare module 'react-components' {
         null: typeof transNullValue;
         start_date: typeof startDateToUnix;
         end_date: typeof endDateToUnix;
+        start_date_utc: typeof startUtcDateToUnix;
+        end_date_utc: typeof endUtcDateToUnix;
     }
 }
 
@@ -84,6 +86,8 @@ const formatter = addOn<Formatters>({
     number_str_arr: transNumberStrArr,
     start_date: startDateToUnix,
     end_date: endDateToUnix,
+    start_date_utc: startUtcDateToUnix,
+    end_date_utc: endUtcDateToUnix,
 });
 
 export default formatter;

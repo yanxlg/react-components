@@ -1,4 +1,4 @@
-import { endDateToUnix, startDateToUnix } from './date';
+import { endDateToUnix, startDateToUnix, startUtcDateToUnix, endUtcDateToUnix } from './date';
 import addOn from './addOn';
 export var isNull = function isNull(value) {
   return value === null || value === void 0;
@@ -57,6 +57,8 @@ var formatter = addOn({
   number_arr: transNumberArray,
   number_str_arr: transNumberStrArr,
   start_date: startDateToUnix,
-  end_date: endDateToUnix
+  end_date: endDateToUnix,
+  start_date_utc: startUtcDateToUnix,
+  end_date_utc: endUtcDateToUnix
 });
 export default formatter;
