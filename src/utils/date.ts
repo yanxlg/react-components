@@ -29,10 +29,10 @@ export function endDateToUnix(moment?: Dayjs): number | undefined {
     return moment
         ? moment
               .clone()
-              .add(1, 'd')
-              .hour(0)
-              .minute(0)
-              .second(0)
+              //   .add(1, 'd')
+              .hour(23)
+              .minute(59)
+              .second(59)
               .unix()
         : undefined;
 }
@@ -71,10 +71,10 @@ export function endUtcDateToUnix(moment?: Dayjs): number | undefined {
     return moment
         ? moment
               .clone()
-              .add(1, 'd')
-              .hour(0)
-              .minute(0)
-              .second(0)
+              //   .add(1, 'd')
+              .hour(23)
+              .minute(59)
+              .second(59)
               .add(8, 'h')
               .unix()
         : undefined;
