@@ -12,7 +12,8 @@ export { default as PopConfirmLoadingButton } from './PopConfirmLoadingButton';
 export { default as Config } from './Config';
 export { default as request } from './request';
 export { default as message } from './message';
-export { default as api } from './api'; // hooks
+export { default as api } from './api';
+export { default as FitTableV2 } from './FitTable2'; // hooks
 
 export { default as useFilterColumns } from './hooks/useFilterColumns';
 export { default as useList } from './hooks/useList';

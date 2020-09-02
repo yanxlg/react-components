@@ -6,3 +6,5 @@ export declare function endDateToUnix(moment?: Dayjs): number | undefined;
 export declare function utcToLocal(dateString?: string | number, placeholder?: string): string;
 export declare function localToUtc(): void;
 export declare function dateToUnix(date?: Dayjs | number): number;
+export declare function startUtcDateToUnix(moment?: Dayjs): number | undefined;
+export declare function endUtcDateToUnix(moment?: Dayjs): number | undefined;

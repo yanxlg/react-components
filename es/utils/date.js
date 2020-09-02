@@ -13,7 +13,8 @@ export function startDateToUnix(moment) {
   return moment ? moment.clone().hour(0).minute(0).second(0).unix() : undefined;
 }
 export function endDateToUnix(moment) {
-  return moment ? moment.clone().add(1, 'd').hour(0).minute(0).second(0).unix() : undefined;
+  return moment ? moment.clone() //   .add(1, 'd')
+  .hour(23).minute(59).second(59).unix() : undefined;
 }
 export function utcToLocal(dateString, placeholder) {
   if (placeholder === void 0) {
@@ -26,4 +27,13 @@ export function utcToLocal(dateString, placeholder) {
 export function localToUtc() {}
 export function dateToUnix(date) {
   return typeof date === 'number' ? date : date === null || date === void 0 ? void 0 : date.unix();
+} // 时间选择框当UTC时间
+
+export function startUtcDateToUnix(moment) {
+  return moment ? moment.clone().hour(0).minute(0).second(0).add(8, 'h').unix() : undefined;
+} // 时间选择框当UTC时间
+
+export function endUtcDateToUnix(moment) {
+  return moment ? moment.clone() //   .add(1, 'd')
+  .hour(23).minute(59).second(59).add(8, 'h').unix() : undefined;
 }

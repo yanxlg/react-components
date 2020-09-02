@@ -1,5 +1,5 @@
 import { Formatters } from 'react-components';
-import { endDateToUnix, startDateToUnix } from './date';
+import { endDateToUnix, startDateToUnix, startUtcDateToUnix, endUtcDateToUnix } from './date';
 export declare const isNull: (value: any) => boolean;
 export declare function transNullValue(value?: any): any;
 export declare function transJoinStr(value?: any): any;
@@ -17,6 +17,8 @@ declare module 'react-components' {
         null: typeof transNullValue;
         start_date: typeof startDateToUnix;
         end_date: typeof endDateToUnix;
+        start_date_utc: typeof startUtcDateToUnix;
+        end_date_utc: typeof endUtcDateToUnix;
     }
 }
 export declare type FormatterType = keyof Omit<Formatters, 'extend'> | ((value: any) => any);

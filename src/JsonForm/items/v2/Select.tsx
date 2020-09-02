@@ -100,7 +100,7 @@ export function parseOptionList(
                 label: item[optionKeys[0]] as string,
                 value: item[optionKeys[1]] as string,
                 [relationKey]: parseOptionList(
-                    (item[relationKey] as any[]) || [],
+                    (children as any[]) || [],
                     optionKeys,
                     relationKey,
                     skipChildren,

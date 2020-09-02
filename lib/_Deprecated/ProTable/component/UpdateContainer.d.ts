@@ -5,6 +5,5 @@ export declare interface UpdateContainerRef {
 declare interface UpdateContainerProps<S> {
     children: (data: S | undefined) => React.ReactNode[] | null;
 }
-declare const _default: React.ForwardRefExoticComponent<UpdateContainerProps<any> &
-    React.RefAttributes<UpdateContainerRef>>;
+declare const _default: React.ForwardRefExoticComponent<UpdateContainerProps<any> & React.RefAttributes<UpdateContainerRef>>;
 export default _default;

@@ -34,6 +34,7 @@ var __rest = this && this.__rest || function (s, e) {
 
 import React, { useMemo, useState, useEffect } from 'react';
 import formStyles from '../_form.less';
+import classNames from 'classnames';
 var typeList = ['cascader'];
 
 function _filter(inputValue, path, fieldNames) {
@@ -59,7 +60,8 @@ var FormCascader = function FormCascader(props) {
       initialValue = props.initialValue,
       hide = props.hide,
       options = props.options,
-      extraProps = __rest(props, ["name", "label", "optionList", "className", "formItemClassName", "onChange", "labelClassName", "form", "rules", "placeholder", "disabled", "initialValue", "hide", "options"]);
+      labelCol = props.labelCol,
+      extraProps = __rest(props, ["name", "label", "optionList", "className", "formItemClassName", "onChange", "labelClassName", "form", "rules", "placeholder", "disabled", "initialValue", "hide", "options", "labelCol"]);
 
   var _c = useState(undefined),
       list = _c[0],
@@ -86,9 +88,11 @@ var FormCascader = function FormCascader(props) {
     return React.createElement(_Form.Item, {
       name: name,
       className: formItemClassName,
-      label: React.createElement("span", {
-        className: labelClassName
-      }, label),
+      // label={<span className={labelClassName}>{label}</span>}
+      label: label,
+      labelCol: __assign(__assign({}, labelCol), {
+        className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
+      }),
       rules: rules,
       initialValue: initialValue,
       style: hide ? {
