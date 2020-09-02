@@ -5,13 +5,21 @@ export declare interface ColumnsSettingProps<T> {
     columns: TableProps<T>['columns'];
     onColumnsChange: (columns: TableProps<T>['columns']) => void;
     resetColumnsSetting?: boolean;
-    columnsSettingRender: true | React.ComponentClass<{
-        value: Array<CheckboxValueType>;
-        onChange: (checkedValue: Array<CheckboxValueType>) => void;
-    }> | React.FC<{
-        value: Array<CheckboxValueType>;
-        onChange: (checkedValue: Array<CheckboxValueType>) => void;
-    }>;
+    columnsSettingRender:
+        | true
+        | React.ComponentClass<{
+              value: Array<CheckboxValueType>;
+              onChange: (checkedValue: Array<CheckboxValueType>) => void;
+          }>
+        | React.FC<{
+              value: Array<CheckboxValueType>;
+              onChange: (checkedValue: Array<CheckboxValueType>) => void;
+          }>;
 }
-declare const ColumnsSetting: <T>({ columns, columnsSettingRender: ColumnsSettingRender, resetColumnsSetting, onColumnsChange, }: ColumnsSettingProps<T>) => JSX.Element;
+declare const ColumnsSetting: <T>({
+    columns,
+    columnsSettingRender: ColumnsSettingRender,
+    resetColumnsSetting,
+    onColumnsChange,
+}: ColumnsSettingProps<T>) => JSX.Element;
 export default ColumnsSetting;
