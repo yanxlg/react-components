@@ -64,6 +64,15 @@ import FormNumberRangeV2, {
     NumberRangeProps as NumberRangePropsV2,
     NumberRangeType as NumberRangeTypeV2,
 } from './items/v2/NumberRange';
+import FormRadioGroupV2, {
+    RadioGroupProps as RadioGroupPropsV2,
+    RadioGroupType as RadioGroupTypeV2,
+} from './items/v2/RadioGroup';
+
+import FormLabelV2, {
+    LabelProps as LabelPropsV2,
+    LabelType as LabelTypeV2,
+} from './items/v2/Label';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -97,6 +106,8 @@ export type FormField<T = string> = (
     | Omit<CheckboxGroupPropsV2, 'form'>
     | Omit<DateRangerPropsV2, 'form'>
     | Omit<NumberRangePropsV2, 'form'>
+    | Omit<RadioGroupPropsV2, 'form'>
+    | Omit<LabelPropsV2<T>, 'form'>
 ) & {
     form?: FormInstance;
     key?: string;
@@ -151,6 +162,17 @@ export const getFormItem = (
                 type={type as LabelType}
                 form={form}
                 hide={hide}
+            />,
+            itemCol,
+        );
+    }
+    if (FormLabelV2.typeList.includes(type)) {
+        return getColChildren(
+            <FormLabelV2
+                key={String(name)}
+                labelClassName={labelClassName}
+                {...(field as LabelPropsV2)}
+                type={type as LabelTypeV2}
             />,
             itemCol,
         );
@@ -475,6 +497,19 @@ export const getFormItem = (
             itemCol,
         );
     }
+    if (FormRadioGroupV2.typeList.includes(type)) {
+        return getColChildren(
+            <FormRadioGroupV2
+                key={String(index)}
+                labelClassName={labelClassName}
+                {...(field as RadioGroupPropsV2)}
+                type={type as RadioGroupTypeV2}
+                form={form}
+                hidden={hide}
+            />,
+            itemCol,
+        );
+    }
     return null;
 };
 
@@ -569,7 +604,7 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
             const target = targetFieldList || fieldList;
             (target as any[]).map((field: any) => {
                 const { type } = field;
-                if (FormLabel.typeList.includes(type)) {
+                if (FormLabel.typeList.includes(type) || FormLabelV2.typeList.includes(type)) {
                     // 没有值需要获取
                 } else if (FormPassword.typeList.includes(type)) {
                     const { formatter: formatterName, name } = (field as unknown) as any;

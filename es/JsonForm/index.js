@@ -85,6 +85,8 @@ import FormInputV2 from './items/v2/Input';
 import FormCheckboxV2 from './items/v2/CheckboxGroup';
 import FormDateRangerV2 from './items/v2/DateRanger';
 import FormNumberRangeV2 from './items/v2/NumberRange';
+import FormRadioGroupV2 from './items/v2/RadioGroup';
+import FormLabelV2 from './items/v2/Label';
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
@@ -110,6 +112,15 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
       type: type,
       form: form,
       hide: hide
+    })), itemCol);
+  }
+
+  if (FormLabelV2.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormLabelV2, __assign({
+      key: String(name),
+      labelClassName: labelClassName
+    }, field, {
+      type: type
     })), itemCol);
   }
 
@@ -386,6 +397,17 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
     })), itemCol);
   }
 
+  if (FormRadioGroupV2.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormRadioGroupV2, __assign({
+      key: String(index),
+      labelClassName: labelClassName
+    }, field, {
+      type: type,
+      form: form,
+      hidden: hide
+    })), itemCol);
+  }
+
   return null;
 };
 export var getFormItems = function getFormItems(fieldList, form, labelClassName, itemCol, itemRow, showList) {
@@ -460,7 +482,7 @@ var JsonForm = function JsonForm(props, ref) {
     target.map(function (field) {
       var type = field.type;
 
-      if (FormLabel.typeList.includes(type)) {// 没有值需要获取
+      if (FormLabel.typeList.includes(type) || FormLabelV2.typeList.includes(type)) {// 没有值需要获取
       } else if (FormPassword.typeList.includes(type)) {
         var _a = field,
             formatterName = _a.formatter,
