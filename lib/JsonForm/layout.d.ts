@@ -18,12 +18,7 @@ declare type BaseLayoutProps<T = string> = {
 declare interface CardLayoutProps<T = string> extends BaseLayoutProps<T>, Omit<CardProps, 'type'> {
     layoutType: 'card';
 }
-declare interface DefaultLayoutProps<T = string>
-    extends BaseLayoutProps<T>,
-        Omit<
-            React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-            'type'
-        > {
+declare interface DefaultLayoutProps<T = string> extends BaseLayoutProps<T>, Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'type'> {
     layoutType?: 'default';
 }
 export declare type LayoutProps<T = string> = CardLayoutProps<T> | DefaultLayoutProps<T>;

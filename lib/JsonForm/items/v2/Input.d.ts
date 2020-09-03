@@ -5,13 +5,7 @@ import { FormatterType } from '../../../utils/formatter';
 import { NamePath } from 'rc-field-form/lib/interface';
 import { TextAreaProps as AntTextAreaProps } from 'antd/es/input/TextArea';
 export declare type InputTypeAll = InputType | TextareaType;
-declare type InputType =
-    | 'input@2'
-    | 'integer@2'
-    | 'number@2'
-    | 'positiveInteger@2'
-    | 'numberSplit@2'
-    | 'naturalNumber@2';
+declare type InputType = 'input@2' | 'integer@2' | 'number@2' | 'positiveInteger@2' | 'numberSplit@2' | 'naturalNumber@2';
 declare type TextareaType = 'textarea@2';
 declare type InputTypeProp = {
     type: InputType;

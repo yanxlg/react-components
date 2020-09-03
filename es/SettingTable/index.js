@@ -28,7 +28,7 @@ var __rest = this && this.__rest || function (s, e) {
 };
 
 import React, { useMemo } from 'react';
-import FitTable from '../FitTable2';
+import FitTable from '../FitTableV2';
 import useTableSetting from '../hooks/useTableSetting';
 
 function SettingTable(_a) {
