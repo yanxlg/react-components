@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import FitTable, { IFitTableProps } from '../FitTable2';
+import FitTable, { IFitTableProps } from '../FitTableV2';
 import useTableSetting from '../hooks/useTableSetting';
 
 interface SettingTableProps<T> extends IFitTableProps<T> {
