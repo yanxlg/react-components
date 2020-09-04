@@ -133,6 +133,7 @@ export interface JsonFormRef {
     validateFields: ValidateFields;
     setFieldsValue: (value: Store) => void;
     resetFields: (fields?: NamePath[]) => void;
+    getOriginValues: () => Store;
 }
 
 export const getColChildren = (children: ReactElement, itemCol?: ColProps, times: number = 1) => {
@@ -440,7 +441,7 @@ export const getFormItem = (
                 {...(field as SelectPropsV2)}
                 type={type as SelectTypeV2}
                 form={form}
-                hidden={hide}
+                hidden={(field as SelectPropsV2).hidden || hide}
             />,
             itemCol,
         );
@@ -453,7 +454,7 @@ export const getFormItem = (
                 {...(field as any)}
                 type={type as InputTypeV2}
                 form={form}
-                hidden={hide}
+                hidden={(field as any).hidden || hide}
             />,
             itemCol,
         );
@@ -466,7 +467,7 @@ export const getFormItem = (
                 {...(field as CheckboxGroupPropsV2)}
                 type={type as CheckboxGroupTypeV2}
                 form={form}
-                hidden={hide}
+                hidden={(field as CheckboxGroupPropsV2).hidden || hide}
             />,
             itemCol,
         );
@@ -479,7 +480,7 @@ export const getFormItem = (
                 {...(field as DateRangerPropsV2)}
                 type={type as DateRangerTypeV2}
                 form={form}
-                hidden={hide}
+                hidden={(field as DateRangerPropsV2).hidden || hide}
             />,
             itemCol,
         );
@@ -492,7 +493,7 @@ export const getFormItem = (
                 {...(field as NumberRangePropsV2)}
                 type={type as NumberRangeTypeV2}
                 form={form}
-                hidden={hide}
+                hidden={(field as NumberRangePropsV2).hidden || hide}
             />,
             itemCol,
         );
@@ -505,7 +506,7 @@ export const getFormItem = (
                 {...(field as RadioGroupPropsV2)}
                 type={type as RadioGroupTypeV2}
                 form={form}
-                hidden={hide}
+                hidden={(field as RadioGroupPropsV2).hidden || hide}
             />,
             itemCol,
         );
@@ -582,6 +583,9 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
         () => {
             return {
                 getFieldsValue: getValues,
+                getOriginValues: () => {
+                    return form.getFieldsValue();
+                },
                 validateFields: () => {
                     return form.validateFields().then(() => {
                         return getValues();

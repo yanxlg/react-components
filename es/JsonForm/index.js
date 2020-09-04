@@ -349,7 +349,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
     }, field, {
       type: type,
       form: form,
-      hidden: hide
+      hidden: field.hidden || hide
     })), itemCol);
   }
 
@@ -360,7 +360,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
     }, field, {
       type: type,
       form: form,
-      hidden: hide
+      hidden: field.hidden || hide
     })), itemCol);
   }
 
@@ -371,7 +371,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
     }, field, {
       type: type,
       form: form,
-      hidden: hide
+      hidden: field.hidden || hide
     })), itemCol);
   }
 
@@ -382,7 +382,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
     }, field, {
       type: type,
       form: form,
-      hidden: hide
+      hidden: field.hidden || hide
     })), itemCol);
   }
 
@@ -393,7 +393,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
     }, field, {
       type: type,
       form: form,
-      hidden: hide
+      hidden: field.hidden || hide
     })), itemCol);
   }
 
@@ -404,7 +404,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
     }, field, {
       type: type,
       form: form,
-      hidden: hide
+      hidden: field.hidden || hide
     })), itemCol);
   }
 
@@ -463,6 +463,9 @@ var JsonForm = function JsonForm(props, ref) {
   useImperativeHandle(ref, function () {
     return {
       getFieldsValue: getValues,
+      getOriginValues: function getOriginValues() {
+        return form.getFieldsValue();
+      },
       validateFields: function validateFields() {
         return form.validateFields().then(function () {
           return getValues();

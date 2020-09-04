@@ -6,7 +6,7 @@ export declare type LabelProps<T = string> = Omit<FormItemProps, 'children'> & {
     className?: string;
     labelClassName?: string;
     content: React.ReactNode;
-    childProps: {
+    childProps?: {
         className?: string;
     };
 };

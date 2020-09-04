@@ -1,6 +1,4 @@
 declare module 'react-components' {
-    interface Formatters {
-    }
-    interface Utils {
-    }
+    interface Formatters {}
+    interface Utils {}
 }
