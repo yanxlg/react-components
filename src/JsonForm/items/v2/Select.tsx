@@ -237,7 +237,7 @@ const FormSelect = (props: SelectProps) => {
                     options: mergeList,
                 };
             } else {
-                const loading = withRequest && !mOptions;
+                const loading = !mOptions;
                 const mergeList = mOptions || ([] as IOptionItem[]);
                 return {
                     loading: loading,
