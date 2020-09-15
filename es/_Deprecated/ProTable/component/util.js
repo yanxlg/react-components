@@ -27,7 +27,7 @@ export var parsingText = function parsingText(text, valueEnum, pure) {
 
     var status_1 = domText.status;
     var Status = TableStatus[status_1 || 'Init'];
-    return React.createElement(Status, null, domText.text);
+    return /*#__PURE__*/React.createElement(Status, null, domText.text);
   }
 
   return domText.text || domText;

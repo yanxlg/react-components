@@ -139,14 +139,14 @@ var FormCheckboxGroup = function FormCheckboxGroup(props) {
         loading = _a.loading,
         options = _a.options;
 
-    return React.createElement(_Form.Item, __assign({
+    return /*#__PURE__*/React.createElement(_Form.Item, __assign({
       className: className,
       labelCol: __assign(__assign({}, labelCol), {
         className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
       })
-    }, formItemProps), loading && showLoading ? React.createElement(_Spin, {
+    }, formItemProps), loading && showLoading ? /*#__PURE__*/React.createElement(_Spin, {
       spinning: true
-    }) : React.createElement(_Checkbox.Group, __assign({}, childrenProps, {
+    }) : /*#__PURE__*/React.createElement(_Checkbox.Group, __assign({}, childrenProps, {
       options: options
     }, eventProps)));
   }, [mergeOptions, reduxOptions, childrenProps, formItemProps]);

@@ -34,6 +34,7 @@ var __rest = this && this.__rest || function (s, e) {
 
 import React, { useMemo } from 'react';
 import formStyles from '../_form.less';
+import classNames from 'classnames';
 var typeList = ['radioGroup'];
 
 var FormRadioGroup = function FormRadioGroup(props) {
@@ -51,7 +52,8 @@ var FormRadioGroup = function FormRadioGroup(props) {
       options = props.options,
       initialValue = props.initialValue,
       hide = props.hide,
-      _props = __rest(props, ["name", "label", "labelClassName", "formItemClassName", "className", "onChange", "form", "rules", "radioType", "options", "initialValue", "hide"]);
+      labelCol = props.labelCol,
+      _props = __rest(props, ["name", "label", "labelClassName", "formItemClassName", "className", "onChange", "form", "rules", "radioType", "options", "initialValue", "hide", "labelCol"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -60,18 +62,19 @@ var FormRadioGroup = function FormRadioGroup(props) {
       }
     } : {};
   }, []);
-  return React.createElement(_Form.Item, {
+  return /*#__PURE__*/React.createElement(_Form.Item, {
     name: name,
-    label: label ? React.createElement("span", {
-      className: labelClassName
-    }, label) : undefined,
+    label: label ? label : undefined,
     className: formItemClassName,
     rules: rules,
     initialValue: initialValue,
+    labelCol: __assign(__assign({}, labelCol), {
+      className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
+    }),
     style: hide ? {
       display: 'none'
     } : {}
-  }, React.createElement(_Radio.Group, __assign({
+  }, /*#__PURE__*/React.createElement(_Radio.Group, __assign({
     className: className
   }, eventProps, _props), options.map(function (option) {
     var _a = typeof option === 'string' ? {
@@ -82,12 +85,12 @@ var FormRadioGroup = function FormRadioGroup(props) {
         value = _a.value;
 
     if (radioType === 'radio') {
-      return React.createElement(_Radio, {
+      return /*#__PURE__*/React.createElement(_Radio, {
         key: String(value),
         value: value
       }, label);
     } else {
-      return React.createElement(_Radio.Button, {
+      return /*#__PURE__*/React.createElement(_Radio.Button, {
         key: String(value),
         value: value
       }, label);

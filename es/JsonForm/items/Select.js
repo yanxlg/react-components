@@ -212,10 +212,10 @@ var FormSelect = function FormSelect(props) {
           loading = _a.loading,
           list = _a.optionList;
 
-      return React.createElement(_Form.Item, {
+      return /*#__PURE__*/React.createElement(_Form.Item, {
         name: name,
         className: formItemClassName,
-        label: React.createElement("span", {
+        label: /*#__PURE__*/React.createElement("span", {
           className: labelClassName
         }, label),
         rules: rules,
@@ -224,17 +224,17 @@ var FormSelect = function FormSelect(props) {
         style: hide ? {
           display: 'none'
         } : {}
-      }, React.createElement(_Select, __assign({
+      }, /*#__PURE__*/React.createElement(_Select, __assign({
         disabled: disabled,
         className: className,
         loading: loading,
         mode: mode,
         maxTagCount: maxTagCount
-      }, eventProps, extraProps), syncDefaultOption ? React.createElement(_Select.Option, {
+      }, eventProps, extraProps), syncDefaultOption ? /*#__PURE__*/React.createElement(_Select.Option, {
         value: syncDefaultOption.value,
         title: syncDefaultOption.name
       }, syncDefaultOption.name) : null, list.map(function (item) {
-        return React.createElement(_Select.Option, {
+        return /*#__PURE__*/React.createElement(_Select.Option, {
           key: item.value,
           value: item.value,
           title: item.name,
@@ -242,7 +242,7 @@ var FormSelect = function FormSelect(props) {
         }, item.name);
       })));
     } else {
-      return React.createElement(_Form.Item, {
+      return /*#__PURE__*/React.createElement(_Form.Item, {
         noStyle: true,
         shouldUpdate: function shouldUpdate(prevValues, currentValues) {
           var name = optionListDependence.name;
@@ -266,10 +266,10 @@ var FormSelect = function FormSelect(props) {
             loading = _b.loading,
             list = _b.optionList;
 
-        return React.createElement(_Form.Item, {
+        return /*#__PURE__*/React.createElement(_Form.Item, {
           name: name,
           className: formItemClassName,
-          label: React.createElement("span", {
+          label: /*#__PURE__*/React.createElement("span", {
             className: labelClassName
           }, label),
           rules: rules,
@@ -278,17 +278,17 @@ var FormSelect = function FormSelect(props) {
           style: hide ? {
             display: 'none'
           } : {}
-        }, React.createElement(_Select, __assign({
+        }, /*#__PURE__*/React.createElement(_Select, __assign({
           disabled: disabled,
           className: className,
           loading: loading,
           mode: mode,
           maxTagCount: maxTagCount
-        }, eventProps, extraProps), syncDefaultOption ? React.createElement(_Select.Option, {
+        }, eventProps, extraProps), syncDefaultOption ? /*#__PURE__*/React.createElement(_Select.Option, {
           value: syncDefaultOption.value,
           title: syncDefaultOption.name
         }, syncDefaultOption.name) : null, list.map(function (item) {
-          return React.createElement(_Select.Option, {
+          return /*#__PURE__*/React.createElement(_Select.Option, {
             key: item.value,
             value: item.value,
             title: item.name,

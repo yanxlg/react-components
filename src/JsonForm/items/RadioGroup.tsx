@@ -5,6 +5,7 @@ import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
 import { FormInstance, Rule } from 'antd/es/form';
 import { RadioGroupProps as AntdRadioGroupProps } from 'antd/lib/radio/interface';
 import formStyles from '../_form.less';
+import classNames from 'classnames';
 
 export type RadioGroupType = 'radioGroup';
 const typeList = ['radioGroup'];
@@ -39,6 +40,7 @@ const FormRadioGroup = (props: RadioGroupProps) => {
         options,
         initialValue,
         hide,
+        labelCol,
         ..._props
     } = props;
 
@@ -55,10 +57,14 @@ const FormRadioGroup = (props: RadioGroupProps) => {
     return (
         <Form.Item
             name={name}
-            label={label ? <span className={labelClassName}>{label}</span> : undefined}
+            label={label ? label : undefined}
             className={formItemClassName}
             rules={rules}
             initialValue={initialValue}
+            labelCol={{
+                ...labelCol,
+                className: classNames(labelCol?.className, labelClassName),
+            }}
             style={
                 hide
                     ? {
