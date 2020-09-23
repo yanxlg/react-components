@@ -21,7 +21,7 @@ export declare type InputRangeProps<T = string> = FormItemLabelProps & CustomFor
     hide?: boolean;
 };
 declare const FormInputRange: {
-    (props: InputRangeProps): JSX.Element;
+    (props: InputRangeProps<string>): JSX.Element;
     typeList: string[];
 };
 export default FormInputRange;

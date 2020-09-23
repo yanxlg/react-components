@@ -61,14 +61,14 @@ var genEllipsis = function genEllipsis(dom, item, text) {
     return dom;
   }
 
-  return /*#__PURE__*/React.createElement(_Tooltip, {
+  return React.createElement(_Tooltip, {
     title: text
-  }, /*#__PURE__*/React.createElement("div", null, dom));
+  }, React.createElement("div", null, dom));
 };
 
 var genCopyable = function genCopyable(dom, item) {
   if (item.copyable || item.ellipsis) {
-    return /*#__PURE__*/React.createElement(_Typography.Paragraph, {
+    return React.createElement(_Typography.Paragraph, {
       style: {
         width: item.width && item.width - 32,
         margin: 0,
@@ -360,7 +360,7 @@ var ProTable = function ProTable(props) {
   }, [proOptions, size]);
   var toolbar = useMemo(function () {
     if (optimize) {
-      return toolBarRender === false ? null : /*#__PURE__*/React.createElement(Toolbar, {
+      return toolBarRender === false ? null : React.createElement(Toolbar, {
         columns: tableColumns,
         sortKeyColumns: sortKeyColumns,
         setSortKeyColumns: setSortKeyColumns,
@@ -372,7 +372,7 @@ var ProTable = function ProTable(props) {
         toolBarRender: toolBarRender
       });
     } else {
-      return toolBarRender === false ? null : /*#__PURE__*/React.createElement(Toolbar, {
+      return toolBarRender === false ? null : React.createElement(Toolbar, {
         columns: tableColumns,
         sortKeyColumns: sortKeyColumns,
         setSortKeyColumns: setSortKeyColumns,
@@ -396,14 +396,14 @@ var ProTable = function ProTable(props) {
     }
 
     if (optimize) {
-      return /*#__PURE__*/React.createElement(TableAlert, {
+      return React.createElement(TableAlert, {
         ref: alertRef,
         onCleanSelected: onCleanSelected,
         alertOptionRender: rest.tableAlertOptionRender,
         alertInfoRender: tableAlertRender
       });
     } else {
-      return /*#__PURE__*/React.createElement(TableAlert, {
+      return React.createElement(TableAlert, {
         selectedRowKeys: selectedRowKeys,
         onCleanSelected: onCleanSelected,
         alertOptionRender: rest.tableAlertOptionRender,
@@ -421,7 +421,7 @@ var ProTable = function ProTable(props) {
     }
   }, []);
   var table = useMemo(function () {
-    return /*#__PURE__*/React.createElement(FitTable, __assign({}, rest, {
+    return React.createElement(FitTable, __assign({}, rest, {
       scroll: propsScroll,
       size: size,
       rowSelection: propsRowSelection === undefined || isEmptyObject(propsRowSelection) ? undefined : rowSelection,
@@ -442,19 +442,19 @@ var ProTable = function ProTable(props) {
   }, [columns, pagination, size, propsRowSelection, loading]);
 
   if (proColumns.length < 1) {
-    return /*#__PURE__*/React.createElement(_Empty, null);
+    return React.createElement(_Empty, null);
   }
 
-  return /*#__PURE__*/React.createElement(_ConfigProvider, {
+  return React.createElement(_ConfigProvider, {
     getPopupContainer: function getPopupContainer() {
       return rootRef.current || document.body;
     }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, React.createElement("div", {
     className: className,
     id: "ant-design-pro-table",
     style: style,
     ref: rootRef
-  }, /*#__PURE__*/React.createElement(_Card, {
+  }, React.createElement(_Card, {
     bordered: true,
     style: {
       height: '100%'
@@ -472,9 +472,9 @@ var ProTable = function ProTable(props) {
 
 
 var ProviderWarp = function ProviderWarp(props) {
-  return /*#__PURE__*/React.createElement(ConfigConsumer, null, function (_a) {
+  return React.createElement(ConfigConsumer, null, function (_a) {
     var getPrefixCls = _a.getPrefixCls;
-    return /*#__PURE__*/React.createElement(ProTable, __assign({
+    return React.createElement(ProTable, __assign({
       defaultClassName: getPrefixCls('pro-table')
     }, props));
   });

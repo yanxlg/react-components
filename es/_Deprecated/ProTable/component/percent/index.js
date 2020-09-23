@@ -19,9 +19,9 @@ var Percent = function Percent(_a) {
   var style = showColor ? {
     color: getColorByRealValue(realValue)
   } : {};
-  return /*#__PURE__*/React.createElement("span", {
+  return React.createElement("span", {
     style: style
-  }, prefix && /*#__PURE__*/React.createElement("span", null, prefix), showSymbol && /*#__PURE__*/React.createElement(Fragment, null, getSymbolByRealValue(realValue), "\xA0"), getRealTextWithPrecision(realValue, precision), suffix && suffix);
+  }, prefix && React.createElement("span", null, prefix), showSymbol && React.createElement(Fragment, null, getSymbolByRealValue(realValue), "\xA0"), getRealTextWithPrecision(realValue, precision), suffix && suffix);
 };
 
 export default Percent;

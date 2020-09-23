@@ -35,17 +35,17 @@ var FormLabel = function FormLabel(props) {
       _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "labelClassName", "form", "type", "colon", "hide", "content"]);
 
   return useMemo(function () {
-    return /*#__PURE__*/React.createElement(_Form.Item, {
+    return React.createElement(_Form.Item, {
       className: formItemClassName,
       name: name,
-      label: /*#__PURE__*/React.createElement("span", {
+      label: React.createElement("span", {
         className: labelClassName
       }, label),
       colon: colon,
       style: hide ? {
         display: 'none'
       } : {}
-    }, /*#__PURE__*/React.createElement("div", {
+    }, React.createElement("div", {
       className: className
     }, content));
   }, [_props, hide]);

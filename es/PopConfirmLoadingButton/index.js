@@ -50,9 +50,9 @@ var PopConfirmLoadingButton = function PopConfirmLoadingButton(_a) {
     });
   }, [popConfirmProps === null || popConfirmProps === void 0 ? void 0 : popConfirmProps.onConfirm]);
   return useMemo(function () {
-    return /*#__PURE__*/React.createElement(_Popconfirm, __assign({}, popConfirmProps, {
+    return React.createElement(_Popconfirm, __assign({}, popConfirmProps, {
       onConfirm: onConfirm
-    }, others), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement(_Button, __assign({}, buttonProps, {
+    }, others), React.createElement("span", null, React.createElement(_Button, __assign({}, buttonProps, {
       loading: loading
     }))));
   }, [popConfirmProps, buttonProps, loading]);

@@ -79,10 +79,10 @@ var FormNumberRange = function FormNumberRange(props) {
   var _type = type.replace('Range', '');
 
   return useMemo(function () {
-    return /*#__PURE__*/React.createElement(_Form.Item, {
+    return React.createElement(_Form.Item, {
       className: formItemClassName,
       name: "_range",
-      label: /*#__PURE__*/React.createElement("span", {
+      label: React.createElement("span", {
         className: labelClassName
       }, label),
       colon: colon,
@@ -105,26 +105,26 @@ var FormNumberRange = function FormNumberRange(props) {
           }
         };
       }], rules)
-    }, /*#__PURE__*/React.createElement(_Input.Group, {
+    }, React.createElement(_Input.Group, {
       compact: true,
       className: formStyles.flex
-    }, /*#__PURE__*/React.createElement(_Form.Item, {
+    }, React.createElement(_Form.Item, {
       name: name1,
       className: classnames(formStyles.marginNone),
       initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[0]
-    }, /*#__PURE__*/React.createElement(RichInput, __assign({
+    }, React.createElement(RichInput, __assign({
       richType: _type,
       placeholder: placeholder,
       className: classnames(className, formStyles.inputRangeLeft)
-    }, _props))), /*#__PURE__*/React.createElement(_Input, {
+    }, _props))), React.createElement(_Input, {
       className: formStyles.inputRangeSplit,
       placeholder: "~",
       disabled: true
-    }), /*#__PURE__*/React.createElement(_Form.Item, {
+    }), React.createElement(_Form.Item, {
       name: name2,
       className: classnames(formStyles.marginNone),
       initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[1]
-    }, /*#__PURE__*/React.createElement(RichInput, __assign({
+    }, React.createElement(RichInput, __assign({
       richType: _type,
       placeholder: placeholder,
       className: classnames(className, formStyles.inputRangeRight)

@@ -19,7 +19,7 @@ export declare type DateRangerProps<T = string> = FormItemLabelProps & CustomFor
     hide?: boolean;
 };
 declare const FormDateRanger: {
-    (props: DateRangerProps): JSX.Element;
+    (props: DateRangerProps<string>): JSX.Element;
     typeList: string[];
 };
 export default FormDateRanger;

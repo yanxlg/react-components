@@ -37,7 +37,7 @@ export declare type SelectProps<T = string> = FormItemLabelProps & CustomFormPro
     hide?: boolean;
 } & Omit<AntdSelectProps<string>, 'loading' | 'onChange' | 'className' | 'options'>;
 declare const FormSelect: {
-    (props: SelectProps): JSX.Element;
+    (props: SelectProps<string>): JSX.Element;
     typeList: string[];
 };
 export default FormSelect;

@@ -41,7 +41,7 @@ var FormCheckbox = function FormCheckbox(props) {
       }
     } : {};
   }, []);
-  return /*#__PURE__*/React.createElement(_Form.Item, {
+  return React.createElement(_Form.Item, {
     name: name,
     className: formItemClassName,
     valuePropName: "checked",
@@ -50,7 +50,7 @@ var FormCheckbox = function FormCheckbox(props) {
     style: hide ? {
       display: 'none'
     } : {}
-  }, /*#__PURE__*/React.createElement(_Checkbox, __assign({
+  }, React.createElement(_Checkbox, __assign({
     className: className
   }, eventProps), label));
 };

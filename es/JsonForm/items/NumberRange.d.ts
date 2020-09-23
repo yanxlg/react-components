@@ -20,7 +20,7 @@ export declare type NumberRangeProps<T = string> = FormItemLabelProps & CustomFo
     hide?: boolean;
 } & Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange' | 'name'>;
 declare const FormNumberRange: {
-    (props: NumberRangeProps): JSX.Element;
+    (props: NumberRangeProps<string>): JSX.Element;
     typeList: string[];
 };
 export default FormNumberRange;

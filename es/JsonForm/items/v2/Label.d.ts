@@ -11,7 +11,7 @@ export declare type LabelProps<T = string> = Omit<FormItemProps, 'children'> & {
     };
 };
 declare const FormLabel: {
-    (props: LabelProps): JSX.Element;
+    (props: LabelProps<T>): JSX.Element;
     typeList: string[];
 };
 export default FormLabel;

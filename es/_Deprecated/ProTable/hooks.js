@@ -103,7 +103,7 @@ function useRowSelection(columns, rowKey, dataSource, rowSelection, optimize, on
 
     var isString = typeof rowKey === 'string';
     return {
-      title: /*#__PURE__*/React.createElement(OptimizeCheckbox, {
+      title: React.createElement(OptimizeCheckbox, {
         value: "all",
         disabled: dataSource.length === 0,
         ref: function ref(_ref) {
@@ -119,7 +119,7 @@ function useRowSelection(columns, rowKey, dataSource, rowSelection, optimize, on
       className: styles.rowSelectionRow,
       render: function render(_, record, index) {
         var rowValue = isString ? record[rowKey] : rowKey ? rowKey(record) : index;
-        return /*#__PURE__*/React.createElement(OptimizeCheckbox, {
+        return React.createElement(OptimizeCheckbox, {
           value: rowValue,
           ref: function ref(_ref2) {
             return _ref2 && itemsRefList.current.set(rowValue, _ref2);

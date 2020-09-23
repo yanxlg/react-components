@@ -45,12 +45,12 @@ var FormLabel = function FormLabel(props) {
       childProps = props.childProps,
       formItemProps = __rest(props, ["className", "labelClassName", "colon", "content", "labelCol", "childProps"]);
 
-  return /*#__PURE__*/React.createElement(_Form.Item, __assign({
+  return React.createElement(_Form.Item, __assign({
     className: className,
     labelCol: __assign(__assign({}, labelCol), {
       className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
     })
-  }, formItemProps), /*#__PURE__*/React.createElement("div", __assign({
+  }, formItemProps), React.createElement("div", __assign({
     className: formStyles.formItemDefault
   }, childProps), content));
 };

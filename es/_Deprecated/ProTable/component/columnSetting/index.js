@@ -67,9 +67,9 @@ var ToolTipIcon = function ToolTipIcon(_a) {
       fixed = _a.fixed;
 
   if (show) {
-    return /*#__PURE__*/React.createElement(_Tooltip, {
+    return React.createElement(_Tooltip, {
       title: title
-    }, /*#__PURE__*/React.createElement("span", {
+    }, React.createElement("span", {
       onClick: function onClick() {
         var _a;
 
@@ -97,10 +97,10 @@ var CheckboxListItem = function CheckboxListItem(_a) {
   var config = columnsMap[columnKey || 'null'] || {
     show: true
   };
-  return /*#__PURE__*/React.createElement("span", {
+  return React.createElement("span", {
     className: className + "-list-item",
     key: columnKey
-  }, /*#__PURE__*/React.createElement(_Checkbox, {
+  }, React.createElement(_Checkbox, {
     onChange: function onChange(e) {
       var _a;
 
@@ -121,34 +121,34 @@ var CheckboxListItem = function CheckboxListItem(_a) {
       }
     },
     checked: config.show !== false
-  }, title), /*#__PURE__*/React.createElement("span", {
+  }, title), React.createElement("span", {
     className: className + "-list-item-option"
-  }, /*#__PURE__*/React.createElement(ToolTipIcon, {
+  }, React.createElement(ToolTipIcon, {
     columnsMap: columnsMap,
     setColumnsMap: setColumnsMap,
     columnKey: columnKey,
     fixed: "left",
     title: '固定到左边',
     show: fixed !== 'left'
-  }, /*#__PURE__*/React.createElement(PushpinOutlined, {
+  }, React.createElement(PushpinOutlined, {
     style: {
       transform: 'rotate(-90deg)'
     }
-  })), /*#__PURE__*/React.createElement(ToolTipIcon, {
+  })), React.createElement(ToolTipIcon, {
     columnsMap: columnsMap,
     setColumnsMap: setColumnsMap,
     columnKey: columnKey,
     fixed: undefined,
     title: '取消固定',
     show: !!fixed
-  }, /*#__PURE__*/React.createElement(VerticalAlignMiddleOutlined, null)), /*#__PURE__*/React.createElement(ToolTipIcon, {
+  }, React.createElement(VerticalAlignMiddleOutlined, null)), React.createElement(ToolTipIcon, {
     columnsMap: columnsMap,
     setColumnsMap: setColumnsMap,
     columnKey: columnKey,
     fixed: "right",
     title: '固定到右边',
     show: fixed !== 'right'
-  }, /*#__PURE__*/React.createElement(PushpinOutlined, null))));
+  }, React.createElement(PushpinOutlined, null))));
 };
 
 var CheckboxList = function CheckboxList(_a) {
@@ -193,14 +193,14 @@ var CheckboxList = function CheckboxList(_a) {
         rest = __rest(_a, ["key", "dataIndex", "title", "fixed"]);
 
     var columnKey = genColumnKey(key, dataIndex || rest.index);
-    return /*#__PURE__*/React.createElement(DnDItem, {
+    return React.createElement(DnDItem, {
       index: index,
       id: columnKey + "_" + rest.index,
       key: columnKey,
       end: function end(id, targetIndex) {
         move(id, targetIndex);
       }
-    }, /*#__PURE__*/React.createElement(CheckboxListItem, {
+    }, React.createElement(CheckboxListItem, {
       setColumnsMap: setColumnsMap,
       columnKey: columnKey || "" + index,
       columnsMap: columnsMap,
@@ -209,9 +209,9 @@ var CheckboxList = function CheckboxList(_a) {
       className: className
     }));
   });
-  return /*#__PURE__*/React.createElement(DndProvider, {
+  return React.createElement(DndProvider, {
     backend: HTML5Backend
-  }, showTitle && /*#__PURE__*/React.createElement("span", {
+  }, showTitle && React.createElement("span", {
     className: className + "-list-title"
   }, listTitle), listDom);
 };
@@ -243,9 +243,9 @@ var GroupCheckboxList = function GroupCheckboxList(_a) {
   });
   var showRight = rightList && rightList.length > 0;
   var showLeft = leftList && leftList.length > 0;
-  return /*#__PURE__*/React.createElement("div", {
+  return React.createElement("div", {
     className: className + "-list"
-  }, /*#__PURE__*/React.createElement(CheckboxList, {
+  }, React.createElement(CheckboxList, {
     columnsMap: columnsMap,
     setColumnsMap: setColumnsMap,
     setSortKeyColumns: setSortKeyColumns,
@@ -253,7 +253,7 @@ var GroupCheckboxList = function GroupCheckboxList(_a) {
     title: '固定在左侧',
     list: leftList,
     className: className
-  }), /*#__PURE__*/React.createElement(CheckboxList, {
+  }), React.createElement(CheckboxList, {
     columnsMap: columnsMap,
     setColumnsMap: setColumnsMap,
     setSortKeyColumns: setSortKeyColumns,
@@ -262,7 +262,7 @@ var GroupCheckboxList = function GroupCheckboxList(_a) {
     title: '不固定',
     showTitle: showLeft || showRight,
     className: className
-  }), /*#__PURE__*/React.createElement(CheckboxList, {
+  }), React.createElement(CheckboxList, {
     columnsMap: columnsMap,
     setColumnsMap: setColumnsMap,
     setSortKeyColumns: setSortKeyColumns,
@@ -310,15 +310,15 @@ var ColumnSetting = function ColumnSetting(props) {
     return !value || value.show === false;
   });
   var indeterminate = selectKeys.length > 0 && selectKeys.length !== localColumns.length;
-  return /*#__PURE__*/React.createElement(ConfigConsumer, null, function (_a) {
+  return React.createElement(ConfigConsumer, null, function (_a) {
     var getPrefixCls = _a.getPrefixCls;
     var className = getPrefixCls('pro-table-column-setting');
     var toolBarClassName = getPrefixCls('pro-table-toolbar');
-    return /*#__PURE__*/React.createElement(_Popover, {
+    return React.createElement(_Popover, {
       arrowPointAtCenter: true,
-      title: /*#__PURE__*/React.createElement("div", {
+      title: React.createElement("div", {
         className: className + "-title"
-      }, /*#__PURE__*/React.createElement(_Checkbox, {
+      }, React.createElement(_Checkbox, {
         indeterminate: indeterminate,
         checked: selectKeys.length === 0 && selectKeys.length !== localColumns.length,
         onChange: function onChange(e) {
@@ -328,7 +328,7 @@ var ColumnSetting = function ColumnSetting(props) {
             setAllSelectAction(false);
           }
         }
-      }, "\u5217\u5C55\u793A"), /*#__PURE__*/React.createElement("a", {
+      }, "\u5217\u5C55\u793A"), React.createElement("a", {
         onClick: function onClick() {
           setColumnsMap({});
           setSortKeyColumns([]);
@@ -336,7 +336,7 @@ var ColumnSetting = function ColumnSetting(props) {
       }, "\u91CD\u7F6E")),
       trigger: "click",
       placement: "bottomRight",
-      content: /*#__PURE__*/React.createElement(GroupCheckboxList, {
+      content: React.createElement(GroupCheckboxList, {
         className: className,
         localColumns: localColumns,
         sortKeyColumns: sortKeyColumns,
@@ -344,9 +344,9 @@ var ColumnSetting = function ColumnSetting(props) {
         setColumnsMap: setColumnsMap,
         columnsMap: columnsMap
       })
-    }, /*#__PURE__*/React.createElement(_Tooltip, {
+    }, React.createElement(_Tooltip, {
       title: '列设置'
-    }, /*#__PURE__*/React.createElement(SettingOutlined, {
+    }, React.createElement(SettingOutlined, {
       className: toolBarClassName + "-item-icon",
       style: {
         fontSize: 16

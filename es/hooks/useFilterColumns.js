@@ -59,11 +59,11 @@ function useFilterColumns(columns) {
                 selectedKeys = _a.selectedKeys,
                 confirm = _a.confirm,
                 clearFilters = _a.clearFilters;
-            return /*#__PURE__*/React.createElement("div", {
+            return React.createElement("div", {
               style: {
                 padding: 8
               }
-            }, /*#__PURE__*/React.createElement(_Input, {
+            }, React.createElement(_Input, {
               ref: searchInputRef,
               placeholder: "\u7B5B\u9009 " + title,
               value: selectedKeys[0],
@@ -75,16 +75,16 @@ function useFilterColumns(columns) {
                 handleSearch(selectedKeys[0], dataIndex);
               },
               className: styles.tableFilterInput
-            }), /*#__PURE__*/React.createElement(_Button, {
+            }), React.createElement(_Button, {
               type: "primary",
               onClick: function onClick() {
                 confirm();
                 handleSearch(selectedKeys[0], dataIndex);
               },
-              icon: /*#__PURE__*/React.createElement(SearchOutlined, null),
+              icon: React.createElement(SearchOutlined, null),
               size: "small",
               className: styles.tableFilterBtn
-            }, "\u7B5B\u9009"), /*#__PURE__*/React.createElement(_Button, {
+            }, "\u7B5B\u9009"), React.createElement(_Button, {
               onClick: function onClick() {
                 clearFilters === null || clearFilters === void 0 ? void 0 : clearFilters();
                 handleReset(dataIndex);
@@ -94,7 +94,7 @@ function useFilterColumns(columns) {
             }, "\u6E05\u7A7A"));
           },
           filterIcon: function filterIcon(filtered) {
-            return /*#__PURE__*/React.createElement(SearchOutlined, {
+            return React.createElement(SearchOutlined, {
               className: filtered ? styles.tableIconActive : undefined
             });
           },
@@ -114,7 +114,7 @@ function useFilterColumns(columns) {
           render: function render(text, record, index, dom) {
             var _a;
 
-            return search.searchedColumn === dataIndex ? _render ? _render(text, record, index, search.searchText, dom) : /*#__PURE__*/React.createElement(Highlighter, {
+            return search.searchedColumn === dataIndex ? _render ? _render(text, record, index, search.searchText, dom) : React.createElement(Highlighter, {
               highlightClassName: styles.tableHighlight,
               searchWords: [search.searchText],
               autoEscape: true,

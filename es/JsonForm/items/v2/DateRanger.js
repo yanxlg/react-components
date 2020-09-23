@@ -71,12 +71,12 @@ var FormDateRanger = function FormDateRanger(props) {
   }, []);
   return useMemo(function () {
     var itemClassName = classNames(formStyles.inlineBlock, formStyles.marginNone, formStyles.verticalMiddle);
-    return /*#__PURE__*/React.createElement(_Form.Item, __assign({
+    return React.createElement(_Form.Item, __assign({
       labelCol: __assign(__assign({}, labelCol), {
         className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
       }),
       className: className
-    }, formItemProps), /*#__PURE__*/React.createElement(_Form.Item, {
+    }, formItemProps), React.createElement(_Form.Item, {
       shouldUpdate: function shouldUpdate(prevValues, currentValues) {
         return getValueByNamePath(prevValues, name2) !== getValueByNamePath(currentValues, name2);
       },
@@ -84,20 +84,20 @@ var FormDateRanger = function FormDateRanger(props) {
     }, function (_a) {
       var getFieldValue = _a.getFieldValue;
       var endTime = getFieldValue(name2);
-      return /*#__PURE__*/React.createElement(_Form.Item, {
+      return React.createElement(_Form.Item, {
         name: name1,
         className: formStyles.marginNone,
         rules: rules === null || rules === void 0 ? void 0 : rules[0],
         initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[0],
         colon: false
-      }, /*#__PURE__*/React.createElement(_DatePicker, __assign({
+      }, React.createElement(_DatePicker, __assign({
         disabledDate: function disabledDate(currentDate) {
           return currentDate ? endTime ? currentDate.isAfter(endTime) : false : false;
         }
       }, childrenProps, event1Props)));
-    }), /*#__PURE__*/React.createElement("span", {
+    }), React.createElement("span", {
       className: classNames(formStyles.formColon, formStyles.verticalMiddle)
-    }, "-"), /*#__PURE__*/React.createElement(_Form.Item, {
+    }, "-"), React.createElement(_Form.Item, {
       className: itemClassName,
       shouldUpdate: function shouldUpdate(prevValues, currentValues) {
         return getValueByNamePath(prevValues, name1) !== getValueByNamePath(currentValues, name1);
@@ -105,13 +105,13 @@ var FormDateRanger = function FormDateRanger(props) {
     }, function (_a) {
       var getFieldValue = _a.getFieldValue;
       var startTime = getFieldValue(name1);
-      return /*#__PURE__*/React.createElement(_Form.Item, {
+      return React.createElement(_Form.Item, {
         name: name2,
         className: formStyles.marginNone,
         rules: rules === null || rules === void 0 ? void 0 : rules[1],
         initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[1],
         colon: false
-      }, /*#__PURE__*/React.createElement(_DatePicker, __assign({
+      }, React.createElement(_DatePicker, __assign({
         disabledDate: function disabledDate(currentDate) {
           return currentDate ? startTime ? currentDate.isBefore(startTime) : false : false;
         }

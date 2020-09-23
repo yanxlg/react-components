@@ -85,20 +85,20 @@ var FormPassword = function FormPassword(props) {
         e.preventDefault();
       }
     };
-    return /*#__PURE__*/React.cloneElement( /*#__PURE__*/ /*#__PURE__*/React.isValidElement(icon) ? icon : /*#__PURE__*/React.createElement('span', null, icon), iconProps);
+    return /*#__PURE__*/React.cloneElement( /*#__PURE__*/React.isValidElement(icon) ? icon : /*#__PURE__*/React.createElement('span', null, icon), iconProps);
   }, [visible]);
   return useMemo(function () {
-    return /*#__PURE__*/React.createElement(_Form.Item, {
+    return React.createElement(_Form.Item, {
       className: formItemClassName,
       name: name,
-      label: /*#__PURE__*/React.createElement("span", {
+      label: React.createElement("span", {
         className: labelClassName
       }, label),
       rules: rules,
       colon: colon,
       initialValue: initialValue,
       validateTrigger: validateTrigger
-    }, /*#__PURE__*/React.createElement(_Input, __assign({
+    }, React.createElement(_Input, __assign({
       className: className
     }, _props, eventProps, {
       suffix: suffix,

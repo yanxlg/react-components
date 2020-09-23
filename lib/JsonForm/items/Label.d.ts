@@ -14,7 +14,7 @@ export declare type LabelProps<T = string> = FormItemLabelProps & CustomFormProp
     content: React.ReactNode;
 } & Omit<AntInputProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange'>;
 declare const FormLabel: {
-    (props: LabelProps): JSX.Element;
+    (props: LabelProps<T>): JSX.Element;
     typeList: string[];
 };
 export default FormLabel;

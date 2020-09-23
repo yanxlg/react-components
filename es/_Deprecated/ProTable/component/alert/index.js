@@ -6,7 +6,7 @@ import './index.less';
 
 var defaultAlertOptionRender = function defaultAlertOptionRender(props) {
   var onCleanSelected = props.onCleanSelected;
-  return [/*#__PURE__*/React.createElement("a", {
+  return [React.createElement("a", {
     onClick: onCleanSelected,
     key: "0"
   }, "\u6E05\u7A7A")];
@@ -18,7 +18,7 @@ var TableAlert = function TableAlert(_a, ref) {
       onCleanSelected = _a.onCleanSelected,
       _c = _a.alertInfoRender,
       alertInfoRender = _c === void 0 ? function () {
-    return /*#__PURE__*/React.createElement("span", null, "\u5DF2\u9009\u62E9 ", /*#__PURE__*/React.createElement("a", {
+    return React.createElement("span", null, "\u5DF2\u9009\u62E9 ", React.createElement("a", {
       style: {
         fontWeight: 600
       }
@@ -44,7 +44,7 @@ var TableAlert = function TableAlert(_a, ref) {
     onCleanSelected: onCleanSelected
   });
   return useMemo(function () {
-    return /*#__PURE__*/React.createElement(ConfigConsumer, null, function (_a) {
+    return React.createElement(ConfigConsumer, null, function (_a) {
       var getPrefixCls = _a.getPrefixCls;
       var className = getPrefixCls('pro-table-alert');
 
@@ -58,14 +58,14 @@ var TableAlert = function TableAlert(_a, ref) {
         return null;
       }
 
-      return /*#__PURE__*/React.createElement("div", {
+      return React.createElement("div", {
         className: className
-      }, /*#__PURE__*/React.createElement(_Alert, {
-        message: /*#__PURE__*/React.createElement("div", {
+      }, React.createElement(_Alert, {
+        message: React.createElement("div", {
           className: className + "-info"
-        }, /*#__PURE__*/React.createElement("div", {
+        }, React.createElement("div", {
           className: className + "-info-content"
-        }, dom), option && /*#__PURE__*/React.createElement("div", {
+        }, dom), option && React.createElement("div", {
           className: className + "-info-option"
         }, option)),
         type: "info",
@@ -75,4 +75,4 @@ var TableAlert = function TableAlert(_a, ref) {
   }, [_selectedRowKeys]);
 };
 
-export default /*#__PURE__*/forwardRef(TableAlert);
+export default forwardRef(TableAlert);

@@ -23,7 +23,7 @@ declare interface DefaultLayoutProps<T = string> extends BaseLayoutProps<T>, Omi
 }
 export declare type LayoutProps<T = string> = CardLayoutProps<T> | DefaultLayoutProps<T>;
 declare const Layout: {
-    (props: LayoutProps): JSX.Element;
+    (props: LayoutProps<string>): JSX.Element;
     typeList: string[];
 };
 export default Layout;

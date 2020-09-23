@@ -21,7 +21,7 @@ import React from 'react';
 import { numberFormatter } from "../RichInput/utils";
 
 var NumberInput = function NumberInput(props) {
-  return /*#__PURE__*/React.createElement(_InputNumber, __assign({}, props, {
+  return React.createElement(_InputNumber, __assign({}, props, {
     min: 0,
     formatter: numberFormatter
   }));

@@ -120,10 +120,10 @@ var FormDatePicker = function FormDatePicker(props) {
       }
     } : {};
   }, []);
-  return /*#__PURE__*/React.createElement(_Form.Item, {
+  return React.createElement(_Form.Item, {
     name: name,
     className: formItemClassName,
-    label: /*#__PURE__*/React.createElement("span", {
+    label: React.createElement("span", {
       className: labelClassName
     }, label),
     rules: rules,
@@ -131,7 +131,7 @@ var FormDatePicker = function FormDatePicker(props) {
     style: hide ? {
       display: 'none'
     } : {}
-  }, /*#__PURE__*/React.createElement(_DatePicker, __assign({
+  }, React.createElement(_DatePicker, __assign({
     className: className,
     placeholder: placeholder,
     disabledDate: disabledDate,

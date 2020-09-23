@@ -21,7 +21,7 @@ var CustomFragment = function CustomFragment(_a) {
   var form = _a.form,
       Component = _a.Component,
       props = _a.props;
-  return /*#__PURE__*/React.createElement(Component, __assign({
+  return React.createElement(Component, __assign({
     form: form
   }, props));
 };

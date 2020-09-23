@@ -69,7 +69,7 @@ var LoadingButton = function LoadingButton(_a) {
     setLoading(!!outerLoading);
   }, [outerLoading]);
   return useMemo(function () {
-    return /*#__PURE__*/React.createElement(_Button, __assign({}, _props, {
+    return React.createElement(_Button, __assign({}, _props, {
       icon: icon,
       className: classNames(className, icon ? btnStyles.btnWithoutAnim : ''),
       loading: loading,

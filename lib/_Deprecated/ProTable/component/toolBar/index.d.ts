@@ -24,5 +24,5 @@ export interface ToolBarProps {
 export interface ToolBarRef {
     updateSelectedState: (selectedRowKeys: (string | number)[]) => void;
 }
-declare const WarpToolBar: (props: ToolBarProps & ColumnSettingProps) => JSX.Element;
+declare const WarpToolBar: (props: ToolBarProps & ColumnSettingProps<any>) => JSX.Element;
 export default WarpToolBar;

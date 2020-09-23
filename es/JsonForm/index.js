@@ -87,13 +87,14 @@ import FormDateRangerV2 from './items/v2/DateRanger';
 import FormNumberRangeV2 from './items/v2/NumberRange';
 import FormRadioGroupV2 from './items/v2/RadioGroup';
 import FormLabelV2 from './items/v2/Label';
+import FormSwitch from './items/v2/Switch';
 export var getColChildren = function getColChildren(children, itemCol, times) {
   if (times === void 0) {
     times = 1;
   }
 
   if (itemCol) {
-    return /*#__PURE__*/React.createElement(_Col, __assign({}, itemCol), children);
+    return React.createElement(_Col, __assign({}, itemCol), children);
   } else {
     return children;
   }
@@ -104,8 +105,18 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
 
   var name = field['name'];
 
+  if (FormSwitch.typeList.includes(type)) {
+    return getColChildren(React.createElement(FormSwitch, __assign({
+      key: String(name),
+      labelClassName: labelClassName
+    }, field, {
+      type: type,
+      form: form
+    })), itemCol);
+  }
+
   if (FormLabel.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormLabel, __assign({
+    return getColChildren(React.createElement(FormLabel, __assign({
       key: String(name),
       labelClassName: labelClassName
     }, field, {
@@ -116,7 +127,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormLabelV2.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormLabelV2, __assign({
+    return getColChildren(React.createElement(FormLabelV2, __assign({
       key: String(name),
       labelClassName: labelClassName
     }, field, {
@@ -125,7 +136,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormInput.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormInput, __assign({
+    return getColChildren(React.createElement(FormInput, __assign({
       key: String(name),
       labelClassName: labelClassName
     }, field, {
@@ -136,7 +147,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormPassword.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormPassword, __assign({
+    return getColChildren(React.createElement(FormPassword, __assign({
       key: String(name),
       labelClassName: labelClassName
     }, field, {
@@ -146,7 +157,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormSelect.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormSelect, __assign({
+    return getColChildren(React.createElement(FormSelect, __assign({
       key: String(name),
       labelClassName: labelClassName
     }, field, {
@@ -157,7 +168,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormCheckbox.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormCheckbox, __assign({
+    return getColChildren(React.createElement(FormCheckbox, __assign({
       key: String(name),
       labelClassName: labelClassName
     }, field, {
@@ -168,7 +179,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormDatePicker.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormDatePicker, __assign({
+    return getColChildren(React.createElement(FormDatePicker, __assign({
       key: String(name),
       labelClassName: labelClassName
     }, field, {
@@ -179,7 +190,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormDateRanger.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormDateRanger, __assign({
+    return getColChildren(React.createElement(FormDateRanger, __assign({
       key: String(name),
       labelClassName: labelClassName
     }, field, {
@@ -190,7 +201,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormCheckboxGroup.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormCheckboxGroup, __assign({
+    return getColChildren(React.createElement(FormCheckboxGroup, __assign({
       key: String(name),
       labelClassName: labelClassName
     }, field, {
@@ -201,7 +212,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormRadioGroup.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormRadioGroup, __assign({
+    return getColChildren(React.createElement(FormRadioGroup, __assign({
       key: String(name),
       labelClassName: labelClassName
     }, field, {
@@ -212,7 +223,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormInputRange.typeList.includes(type)) {
-    return /*#__PURE__*/React.createElement(FormInputRange, __assign({
+    return React.createElement(FormInputRange, __assign({
       key: String(name),
       labelClassName: labelClassName
     }, field, {
@@ -223,7 +234,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (Layout.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(Layout, __assign({
+    return getColChildren(React.createElement(Layout, __assign({
       key: String(index),
       labelClassName: labelClassName
     }, field, {
@@ -235,7 +246,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (DynamicItem.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(DynamicItem, __assign({
+    return getColChildren(React.createElement(DynamicItem, __assign({
       key: String(index),
       labelClassName: labelClassName
     }, field, {
@@ -247,7 +258,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (HideItem.typeList.includes(type)) {
-    return /*#__PURE__*/React.createElement(HideItem, __assign({
+    return React.createElement(HideItem, __assign({
       key: String(index)
     }, field, {
       type: type,
@@ -256,7 +267,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormTextArea.typeList.includes(type)) {
-    return /*#__PURE__*/React.createElement(FormTextArea, __assign({
+    return React.createElement(FormTextArea, __assign({
       key: String(index),
       labelClassName: labelClassName
     }, field, {
@@ -267,7 +278,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormCascader.typeList.includes(type)) {
-    return /*#__PURE__*/React.createElement(FormCascader, __assign({
+    return React.createElement(FormCascader, __assign({
       key: String(index),
       labelClassName: labelClassName
     }, field, {
@@ -278,7 +289,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (CustomFragment.typeList.includes(type)) {
-    return /*#__PURE__*/React.createElement(CustomFragment, __assign({
+    return React.createElement(CustomFragment, __assign({
       key: String(index)
     }, field, {
       type: type,
@@ -287,7 +298,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormTreeSelect.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormTreeSelect, __assign({
+    return getColChildren(React.createElement(FormTreeSelect, __assign({
       key: String(name),
       labelClassName: labelClassName
     }, field, {
@@ -298,7 +309,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (LoadingItem.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(LoadingItem, __assign({
+    return getColChildren(React.createElement(LoadingItem, __assign({
       key: String(name)
     }, field, _extends({}, field.placeholder, {
       labelClassName: field.placeholder.labelClassName || labelClassName
@@ -309,7 +320,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormNumberRange.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormNumberRange, __assign({
+    return getColChildren(React.createElement(FormNumberRange, __assign({
       key: String(name),
       labelClassName: labelClassName
     }, field, {
@@ -320,7 +331,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormTree.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormTree, __assign({
+    return getColChildren(React.createElement(FormTree, __assign({
       key: String(name),
       labelClassName: labelClassName
     }, field, {
@@ -331,7 +342,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (CollapseLayout.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(CollapseLayout, __assign({
+    return getColChildren(React.createElement(CollapseLayout, __assign({
       key: String(index),
       labelClassName: labelClassName
     }, field, {
@@ -343,7 +354,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormSelectV2.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormSelectV2, __assign({
+    return getColChildren(React.createElement(FormSelectV2, __assign({
       key: String(index),
       labelClassName: labelClassName
     }, field, {
@@ -354,7 +365,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormInputV2.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormInputV2, __assign({
+    return getColChildren(React.createElement(FormInputV2, __assign({
       key: String(index),
       labelClassName: labelClassName
     }, field, {
@@ -365,7 +376,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormCheckboxV2.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormCheckboxV2, __assign({
+    return getColChildren(React.createElement(FormCheckboxV2, __assign({
       key: String(index),
       labelClassName: labelClassName
     }, field, {
@@ -376,7 +387,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormDateRangerV2.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormDateRangerV2, __assign({
+    return getColChildren(React.createElement(FormDateRangerV2, __assign({
       key: String(index),
       labelClassName: labelClassName
     }, field, {
@@ -387,7 +398,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormNumberRangeV2.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormNumberRangeV2, __assign({
+    return getColChildren(React.createElement(FormNumberRangeV2, __assign({
       key: String(index),
       labelClassName: labelClassName
     }, field, {
@@ -398,7 +409,7 @@ export var getFormItem = function getFormItem(_a, form, labelClassName, itemCol,
   }
 
   if (FormRadioGroupV2.typeList.includes(type)) {
-    return getColChildren( /*#__PURE__*/React.createElement(FormRadioGroupV2, __assign({
+    return getColChildren(React.createElement(FormRadioGroupV2, __assign({
       key: String(index),
       labelClassName: labelClassName
     }, field, {
@@ -419,7 +430,7 @@ export var getFormItems = function getFormItems(fieldList, form, labelClassName,
   });
 
   if (itemCol) {
-    return /*#__PURE__*/React.createElement(_Row, __assign({}, itemRow ? itemRow : {}, {
+    return React.createElement(_Row, __assign({}, itemRow ? itemRow : {}, {
       className: formStyles.formRow
     }), fields);
   } else {
@@ -485,12 +496,21 @@ var JsonForm = function JsonForm(props, ref) {
     target.map(function (field) {
       var type = field.type;
 
-      if (FormLabel.typeList.includes(type) || FormLabelV2.typeList.includes(type)) {// 没有值需要获取
-      } else if (FormPassword.typeList.includes(type)) {
+      if (FormSwitch.typeList.includes(type)) {
         var _a = field,
-            formatterName = _a.formatter,
+            _b = _a.onValue,
+            onValue = _b === void 0 ? 'on' : _b,
+            _c = _a.offValue,
+            offValue = _c === void 0 ? 'off' : _c,
             name_1 = _a.name;
-        values[name_1] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_1));
+        var checked = form.getFieldValue(name_1);
+        values[name_1] = checked ? onValue : offValue; // 没有值需要获取
+      } else if (FormLabel.typeList.includes(type) || FormLabelV2.typeList.includes(type)) {// 没有值需要获取
+      } else if (FormPassword.typeList.includes(type)) {
+        var _d = field,
+            formatterName = _d.formatter,
+            name_2 = _d.name;
+        values[name_2] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_2));
       } else if (Layout.typeList.includes(type)) {
         // layout 组件
         values = __assign(__assign({}, values), getValues(field.fieldList));
@@ -514,20 +534,20 @@ var JsonForm = function JsonForm(props, ref) {
           values = __assign(__assign({}, values), _value);
         }
       } else {
-        var _b = field,
-            formatterName = _b.formatter,
-            name_2 = _b.name;
+        var _e = field,
+            formatterName = _e.formatter,
+            name_3 = _e.name;
 
         if (FormInput.typeList.includes(type) || FormTextArea.typeList.includes(type) || FormSelect.typeList.includes(type) || FormDatePicker.typeList.includes(type) || FormSelectV2.typeList.includes(type) || FormInputV2.typeList.includes(type)) {
-          values[name_2] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_2));
+          values[name_3] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_3));
         } else if (FormDateRanger.typeList.includes(type) || FormDateRangerV2.typeList.includes(type)) {
-          var name1 = name_2[0],
-              name2 = name_2[1];
+          var name1 = name_3[0],
+              name2 = name_3[1];
           values[name1] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[0], formatter["null"])(form.getFieldValue(name1));
           values[name2] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[1], formatter["null"])(form.getFieldValue(name2));
         } else if (FormInputRange.typeList.includes(type) || FormNumberRange.typeList.includes(type) || FormNumberRangeV2.typeList.includes(type)) {
-          var name1 = name_2[0],
-              name2 = name_2[1];
+          var name1 = name_3[0],
+              name2 = name_3[1];
           values[name1] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[0], formatter.number)(form.getFieldValue(name1));
           values[name2] = getFormatterFunc(formatterName === null || formatterName === void 0 ? void 0 : formatterName[1], formatter.number)(form.getFieldValue(name2));
         } else if (CustomFragment.typeList.includes(type)) {
@@ -538,10 +558,10 @@ var JsonForm = function JsonForm(props, ref) {
           values = __assign(__assign({}, values), _values);
         } else {
           // name 可能是数组
-          if (Array.isArray(name_2)) {
-            values[name_2[0]] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_2[0]));
+          if (Array.isArray(name_3)) {
+            values[name_3[0]] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_3[0]));
           } else {
-            values[name_2] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_2));
+            values[name_3] = getFormatterFunc(formatterName, formatter["null"])(form.getFieldValue(name_3));
           }
         }
       }
@@ -554,7 +574,7 @@ var JsonForm = function JsonForm(props, ref) {
   }, [collapse]);
   var collapseBtn = useMemo(function () {
     if (enableCollapse) {
-      return /*#__PURE__*/React.createElement("div", {
+      return React.createElement("div", {
         ref: btnWrap,
         style: {
           display: 'flex',
@@ -562,13 +582,13 @@ var JsonForm = function JsonForm(props, ref) {
           alignItems: 'flex-end'
         },
         className: formStyles.formItem
-      }, /*#__PURE__*/React.createElement(_Button, {
+      }, React.createElement(_Button, {
         type: "link",
         style: {
           "float": 'right'
         },
         onClick: onCollapseChange
-      }, collapse ? /*#__PURE__*/React.createElement(React.Fragment, null, "\u6536\u8D77", /*#__PURE__*/React.createElement(UpOutlined, null)) : /*#__PURE__*/React.createElement(React.Fragment, null, "\u5C55\u5F00", /*#__PURE__*/React.createElement(DownOutlined, null))));
+      }, collapse ? React.createElement(React.Fragment, null, "\u6536\u8D77", React.createElement(UpOutlined, null)) : React.createElement(React.Fragment, null, "\u5C55\u5F00", React.createElement(DownOutlined, null))));
     } else {
       return null;
     }
@@ -579,35 +599,35 @@ var JsonForm = function JsonForm(props, ref) {
   }, [fieldList, collapse, collapseItems]);
   var wrapChildren = useMemo(function () {
     return React.Children.map(children, function (child) {
-      return /*#__PURE__*/React.createElement("span", {
+      return React.createElement("span", {
         className: formStyles.formItem
       }, child);
     });
   }, [children]);
   var formContent = useMemo(function () {
-    return /*#__PURE__*/React.createElement(React.Fragment, null, fromItemList, wrapChildren);
+    return React.createElement(React.Fragment, null, fromItemList, wrapChildren);
   }, [fieldList, children, collapse, collapseItems]);
   return useMemo(function () {
     if (enableCollapse) {
-      return /*#__PURE__*/React.createElement("div", {
+      return React.createElement("div", {
         className: containerClassName
-      }, /*#__PURE__*/React.createElement("div", {
+      }, React.createElement("div", {
         className: classNames(formStyles.flex, formStyles.flex1)
-      }, /*#__PURE__*/React.createElement("div", {
+      }, React.createElement("div", {
         className: classNames(formStyles.flex1, formStyles.flexRow),
         style: {
           flexWrap: 'wrap'
         }
-      }, /*#__PURE__*/React.createElement(_Form, __assign({
+      }, React.createElement(_Form, __assign({
         layout: "inline"
       }, _props, {
         form: form,
         className: className
       }), formContent)), collapseBtn));
     } else {
-      return /*#__PURE__*/React.createElement("div", {
+      return React.createElement("div", {
         className: containerClassName
-      }, /*#__PURE__*/React.createElement(_Form, __assign({
+      }, React.createElement(_Form, __assign({
         layout: "inline"
       }, _props, {
         form: form,
@@ -617,4 +637,4 @@ var JsonForm = function JsonForm(props, ref) {
   }, [fieldList, collapse, children, collapseItems, enableCollapse]);
 };
 
-export default /*#__PURE__*/forwardRef(JsonForm);
+export default forwardRef(JsonForm);

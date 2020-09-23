@@ -59,19 +59,19 @@ import useLoadingState from './useLoadingState';
  */
 
 function useList(_a) {
-  var _b, _c;
-
   var queryList = _a.queryList,
       formRef = _a.formRef,
       extraQuery = _a.extraQuery,
       defaultState = _a.defaultState,
-      _d = _a.autoQuery,
-      autoQuery = _d === void 0 ? true : _d,
-      _e = _a.pageNumberKey,
-      pageNumberKey = _e === void 0 ? config.defaultPageNumberKey : _e,
-      _f = _a.pageSizeKey,
-      pageSizeKey = _f === void 0 ? config.defaultPageSizeKey : _f,
+      _b = _a.autoQuery,
+      autoQuery = _b === void 0 ? true : _b,
+      _c = _a.pageNumberKey,
+      pageNumberKey = _c === void 0 ? config.defaultPageNumberKey : _c,
+      _d = _a.pageSizeKey,
+      pageSizeKey = _d === void 0 ? config.defaultPageSizeKey : _d,
       convertQuery = _a.convertQuery;
+
+  var _e, _f;
 
   var _g = useLoadingState(),
       loading = _g[0],
@@ -80,8 +80,8 @@ function useList(_a) {
   var extraQueryRef = useRef(undefined);
   extraQueryRef.current = extraQuery; // extraQuery支持外部更新，每次覆盖
 
-  var pageNumber = useRef((_b = defaultState === null || defaultState === void 0 ? void 0 : defaultState.pageNumber) !== null && _b !== void 0 ? _b : config.defaultPageNumber);
-  var pageSize = useRef((_c = defaultState === null || defaultState === void 0 ? void 0 : defaultState.pageSize) !== null && _c !== void 0 ? _c : config.defaultPageSize);
+  var pageNumber = useRef((_e = defaultState === null || defaultState === void 0 ? void 0 : defaultState.pageNumber) !== null && _e !== void 0 ? _e : config.defaultPageNumber);
+  var pageSize = useRef((_f = defaultState === null || defaultState === void 0 ? void 0 : defaultState.pageSize) !== null && _f !== void 0 ? _f : config.defaultPageSize);
 
   var _h = useState([]),
       dataSource = _h[0],

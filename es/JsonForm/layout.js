@@ -49,10 +49,10 @@ var Layout = function Layout(props) {
 
   switch (layoutType) {
     case 'card':
-      return /*#__PURE__*/React.createElement(_Card, __assign({}, _props), header, getFormItems(fieldList, form, labelClassName, itemCol, itemRow), footer);
+      return React.createElement(_Card, __assign({}, _props), header, getFormItems(fieldList, form, labelClassName, itemCol, itemRow), footer);
 
     default:
-      return /*#__PURE__*/React.createElement("div", __assign({}, _props), header, getFormItems(fieldList, form, labelClassName, itemCol, itemRow), footer);
+      return React.createElement("div", __assign({}, _props), header, getFormItems(fieldList, form, labelClassName, itemCol, itemRow), footer);
   }
 };
 

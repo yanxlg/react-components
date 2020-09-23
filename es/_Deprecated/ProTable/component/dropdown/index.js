@@ -21,24 +21,24 @@ var DropdownButton = function DropdownButton(_a) {
       onSelect = _a.onSelect,
       className = _a.className,
       style = _a.style;
-  return /*#__PURE__*/React.createElement(ConfigConsumer, null, function (_a) {
+  return React.createElement(ConfigConsumer, null, function (_a) {
     var getPrefixCls = _a.getPrefixCls;
     var tempClassName = getPrefixCls('pro-table-dropdown');
-    var menu = /*#__PURE__*/React.createElement(_Menu, {
+    var menu = React.createElement(_Menu, {
       onClick: function onClick(params) {
         return onSelect && onSelect(params.key);
       }
     }, menus.map(function (item) {
-      return /*#__PURE__*/React.createElement(_Menu.Item, {
+      return React.createElement(_Menu.Item, {
         key: item.key
       }, item.name);
     }));
-    return /*#__PURE__*/React.createElement(_Dropdown, {
+    return React.createElement(_Dropdown, {
       overlay: menu,
       className: classnames(tempClassName, className)
-    }, /*#__PURE__*/React.createElement(_Button, {
+    }, React.createElement(_Button, {
       style: style
-    }, children, " ", /*#__PURE__*/React.createElement(DownOutlined, null)));
+    }, children, " ", React.createElement(DownOutlined, null)));
   });
 };
 
@@ -48,24 +48,24 @@ var TableDropdown = function TableDropdown(_a) {
       onSelect = _a.onSelect,
       _b = _a.menus,
       menus = _b === void 0 ? [] : _b;
-  return /*#__PURE__*/React.createElement(ConfigConsumer, null, function (_a) {
+  return React.createElement(ConfigConsumer, null, function (_a) {
     var getPrefixCls = _a.getPrefixCls;
     var className = getPrefixCls('pro-table-dropdown');
-    var menu = /*#__PURE__*/React.createElement(_Menu, {
+    var menu = React.createElement(_Menu, {
       onClick: function onClick(params) {
         return onSelect && onSelect(params.key);
       }
     }, menus.map(function (item) {
-      return /*#__PURE__*/React.createElement(_Menu.Item, {
+      return React.createElement(_Menu.Item, {
         key: item.key
       }, item.name);
     }));
-    return /*#__PURE__*/React.createElement(_Dropdown, {
+    return React.createElement(_Dropdown, {
       overlay: menu,
       className: classnames(className, propsClassName)
-    }, /*#__PURE__*/React.createElement("a", {
+    }, React.createElement("a", {
       style: style
-    }, /*#__PURE__*/React.createElement(EllipsisOutlined, null)));
+    }, React.createElement(EllipsisOutlined, null)));
   });
 };
 

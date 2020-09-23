@@ -1,7 +1,7 @@
+import "antd/es/switch/style/css";
+import _Switch from "antd/es/switch";
 import "antd/es/form/style/css";
 import _Form from "antd/es/form";
-import "antd/es/input/style/css";
-import _Input from "antd/es/input";
 
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
@@ -33,13 +33,11 @@ var __rest = this && this.__rest || function (s, e) {
 };
 
 import React, { useMemo } from 'react';
-import RichInput from '../../../RichInput';
 import formStyles from '../../_form.less';
 import classNames from 'classnames';
-var typeList = ['input@2', 'integer@2', 'number@2', 'positiveInteger@2', 'textarea@2'];
-var TextArea = _Input.TextArea;
+var typeList = ['switch@2'];
 
-var FormInput = function FormInput(props) {
+var FormSwitch = function FormSwitch(props) {
   var _a = props.className,
       className = _a === void 0 ? formStyles.formItem : _a,
       _onChange = props.onChange,
@@ -48,8 +46,7 @@ var FormInput = function FormInput(props) {
       type = props.type,
       childrenProps = props.childrenProps,
       labelCol = props.labelCol,
-      formatter = props.formatter,
-      formItemProps = __rest(props, ["className", "onChange", "labelClassName", "form", "type", "childrenProps", "labelCol", "formatter"]);
+      formItemProps = __rest(props, ["className", "onChange", "labelClassName", "form", "type", "childrenProps", "labelCol"]);
 
   var eventProps = useMemo(function () {
     return _onChange ? {
@@ -64,21 +61,11 @@ var FormInput = function FormInput(props) {
       labelCol: __assign(__assign({}, labelCol), {
         className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
       })
-    }, formItemProps), type === 'textarea@2' ? React.createElement(TextArea, __assign({
-      allowClear: true,
-      className: formStyles.formItemDefault,
-      autoSize: {
-        minRows: 1,
-        maxRows: 6
-      }
-    }, childrenProps, eventProps)) : React.createElement(RichInput, __assign({
-      allowClear: true,
+    }, formItemProps), React.createElement(_Switch, __assign({
       className: formStyles.formItemDefault
-    }, childrenProps, eventProps, {
-      richType: type.replace(/@\d+/, '')
-    })));
+    }, childrenProps, eventProps)));
   }, [childrenProps, formItemProps]);
 };
 
-FormInput.typeList = typeList;
-export default FormInput;
+FormSwitch.typeList = typeList;
+export default FormSwitch;

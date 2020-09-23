@@ -26,7 +26,7 @@ export declare type TreeSelectProps<T = string> = FormItemLabelProps & CustomFor
     hide?: boolean;
 } & Omit<AntdTreeSelectProps<string>, 'loading' | 'onChange' | 'className'>;
 declare const FormTreeSelect: {
-    (props: TreeSelectProps): JSX.Element;
+    (props: TreeSelectProps<string>): JSX.Element;
     typeList: string[];
 };
 export default FormTreeSelect;

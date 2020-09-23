@@ -69,10 +69,10 @@ var FormTextArea = function FormTextArea(props) {
     } : {};
   }, []);
   return useMemo(function () {
-    return /*#__PURE__*/React.createElement(_Form.Item, {
+    return React.createElement(_Form.Item, {
       className: formItemClassName,
       name: name,
-      label: /*#__PURE__*/React.createElement("span", {
+      label: React.createElement("span", {
         className: labelClassName
       }, label),
       rules: rules,
@@ -80,7 +80,7 @@ var FormTextArea = function FormTextArea(props) {
       style: hide ? {
         display: 'none'
       } : {}
-    }, /*#__PURE__*/React.createElement(TextArea, __assign({
+    }, React.createElement(TextArea, __assign({
       autoSize: autoSize,
       // placeholder={placeholder}
       className: className

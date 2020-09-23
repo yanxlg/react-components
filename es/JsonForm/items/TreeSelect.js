@@ -235,10 +235,10 @@ var FormTreeSelect = function FormTreeSelect(props) {
         list = _a.optionList;
 
     var treeData = getTreeData(list);
-    return /*#__PURE__*/React.createElement(_Form.Item, {
+    return React.createElement(_Form.Item, {
       name: name,
       className: formItemClassName,
-      label: /*#__PURE__*/React.createElement("span", {
+      label: React.createElement("span", {
         className: labelClassName
       }, label),
       rules: rules,
@@ -246,7 +246,7 @@ var FormTreeSelect = function FormTreeSelect(props) {
       style: hide ? {
         display: 'none'
       } : {}
-    }, /*#__PURE__*/React.createElement(_TreeSelect, __assign({
+    }, React.createElement(_TreeSelect, __assign({
       treeNodeLabelProp: "name",
       loading: loading,
       className: className,
@@ -261,7 +261,7 @@ var FormTreeSelect = function FormTreeSelect(props) {
     if (optionListDependence === void 0) {
       return getFormItem();
     } else {
-      return /*#__PURE__*/React.createElement(_Form.Item, {
+      return React.createElement(_Form.Item, {
         noStyle: true,
         shouldUpdate: function shouldUpdate(prevValues, currentValues) {
           var name = optionListDependence.name;

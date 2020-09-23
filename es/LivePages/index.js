@@ -72,7 +72,7 @@ var LivePages = function LivePages(_a) {
         activeIndex = _a.activeIndex,
         routerList = _a.routerList;
 
-    return /*#__PURE__*/React.createElement(React.Fragment, null, routerList.map(function (_a, index) {
+    return React.createElement(React.Fragment, null, routerList.map(function (_a, index) {
       var Component = _a.component,
           live = _a.live,
           mounted = _a.mounted,
@@ -81,10 +81,10 @@ var LivePages = function LivePages(_a) {
 
       var show = activeIndex === index;
       var render = live && mounted || show;
-      return render ? /*#__PURE__*/React.createElement("div", {
+      return render ? React.createElement("div", {
         key: path,
         className: show ? styles.pageShow : styles.hide
-      }, /*#__PURE__*/React.createElement(Component, __assign({}, props))) : null;
+      }, React.createElement(Component, __assign({}, props))) : null;
     }));
   }, [location.pathname]);
 };

@@ -46,9 +46,9 @@ import { EmptyObject } from '../utils';
 import { defaultPageSizeOptions } from '../_Deprecated/ProTable/config';
 import formStyles from '../JsonForm/_form.less';
 export var showTotal = function showTotal(total) {
-  return /*#__PURE__*/React.createElement("span", null, "\u5171\u6709", total, "\u6761");
+  return React.createElement("span", null, "\u5171\u6709", total, "\u6761");
 };
-export var goButton = /*#__PURE__*/React.createElement(_Button, {
+export var goButton = React.createElement(_Button, {
   className: styles.btnGo
 }, "Go");
 
@@ -97,7 +97,7 @@ function FitTable(_a) {
     }
   }, []);
   var paginationComponent = useMemo(function () {
-    return pagination ? /*#__PURE__*/React.createElement(_Pagination, __assign({}, __assign({
+    return pagination ? React.createElement(_Pagination, __assign({}, __assign({
       pageSizeOptions: defaultPageSizeOptions,
       showQuickJumper: {
         goButton: goButton
@@ -144,7 +144,7 @@ function FitTable(_a) {
     }
   }, [onHeaderRow]);
   var tableContent = useMemo(function () {
-    return /*#__PURE__*/React.createElement(_Table, __assign({
+    return React.createElement(_Table, __assign({
       key: columns.length,
       scroll: scroll,
       columns: columns,
@@ -158,23 +158,23 @@ function FitTable(_a) {
   var paginationTopContainer = useMemo(function () {
     var top = pagination && pagination.position && pagination.position.includes('topRight'); // 需要有top配置，默认不显示
 
-    return top ? /*#__PURE__*/React.createElement(_Row, null, /*#__PURE__*/React.createElement(_Col, {
+    return top ? React.createElement(_Row, null, React.createElement(_Col, {
       className: styles.toolSpacing,
       flex: 1
-    }, toolBarRender()), /*#__PURE__*/React.createElement(_Col, {
+    }, toolBarRender()), React.createElement(_Col, {
       className: styles.toolSpacing
     }, paginationComponent)) : null;
   }, [pagination, toolBarRender]);
   var paginationBottomContainer = useMemo(function () {
     var bottom = pagination ? pagination.position === void 0 || pagination.position.includes('bottomRight') : false;
-    return bottom ? /*#__PURE__*/React.createElement(_Row, {
+    return bottom ? React.createElement(_Row, {
       className: formStyles.formItem
-    }, /*#__PURE__*/React.createElement(_Col, {
+    }, React.createElement(_Col, {
       flex: 1
-    }), /*#__PURE__*/React.createElement(_Col, null, paginationComponent)) : null;
+    }), React.createElement(_Col, null, paginationComponent)) : null;
   }, [pagination]);
   return useMemo(function () {
-    return /*#__PURE__*/React.createElement("div", null, paginationTopContainer, /*#__PURE__*/React.createElement("div", {
+    return React.createElement("div", null, paginationTopContainer, React.createElement("div", {
       ref: ref,
       className: styles.relative
     }, settingComponent, tableContent), paginationBottomContainer);
@@ -187,11 +187,11 @@ function FitTableWrap(_a) {
 
   return useMemo(function () {
     if (columnsSettingRender) {
-      return /*#__PURE__*/React.createElement(ColumnsSettingWrap, __assign({}, props, {
+      return React.createElement(ColumnsSettingWrap, __assign({}, props, {
         columnsSettingRender: columnsSettingRender
       }));
     } else {
-      return /*#__PURE__*/React.createElement(FitTable, __assign({}, props));
+      return React.createElement(FitTable, __assign({}, props));
     }
   }, [props]);
 }

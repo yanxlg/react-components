@@ -18,11 +18,11 @@ var HideItem = function HideItem(_a) {
       type = _a.type,
       name = _a.name,
       initialValue = _a.initialValue;
-  return /*#__PURE__*/React.createElement(_Form.Item, {
+  return React.createElement(_Form.Item, {
     noStyle: true,
     name: name,
     initialValue: initialValue
-  }, /*#__PURE__*/React.createElement(DateItem, null));
+  }, React.createElement(DateItem, null));
 };
 
 HideItem.typeList = typeList;

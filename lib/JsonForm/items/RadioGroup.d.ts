@@ -19,7 +19,7 @@ export declare type RadioGroupProps<T = string> = FormItemLabelProps & CustomFor
     hide?: boolean;
 } & Omit<AntdRadioGroupProps, 'onChange'>;
 declare const FormRadioGroup: {
-    (props: RadioGroupProps): JSX.Element;
+    (props: RadioGroupProps<string>): JSX.Element;
     typeList: string[];
 };
 export default FormRadioGroup;

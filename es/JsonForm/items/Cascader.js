@@ -85,7 +85,7 @@ var FormCascader = function FormCascader(props) {
     } : {};
   }, []);
   return useMemo(function () {
-    return /*#__PURE__*/React.createElement(_Form.Item, {
+    return React.createElement(_Form.Item, {
       name: name,
       className: formItemClassName,
       // label={<span className={labelClassName}>{label}</span>}
@@ -98,7 +98,7 @@ var FormCascader = function FormCascader(props) {
       style: hide ? {
         display: 'none'
       } : {}
-    }, /*#__PURE__*/React.createElement(_Cascader, __assign({
+    }, React.createElement(_Cascader, __assign({
       disabled: disabled,
       className: className,
       placeholder: placeholder,

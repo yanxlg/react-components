@@ -94,22 +94,22 @@ var DraggableHeaderCell = function DraggableHeaderCell(_a) {
   }, []);
 
   if (index === void 0) {
-    return /*#__PURE__*/React.createElement("th", __assign({
+    return React.createElement("th", __assign({
       className: className,
       style: style
     }, restProps), children);
   }
 
   drop(drag(ref));
-  return /*#__PURE__*/React.createElement("th", __assign({
+  return React.createElement("th", __assign({
     ref: ref,
     className: classNames(className, (_b = {}, _b[dropClassName] = isOver, _b), styles.th),
     style: __assign({
       cursor: 'move'
     }, style)
-  }, restProps), children, /*#__PURE__*/React.createElement(_Tooltip, {
+  }, restProps), children, React.createElement(_Tooltip, {
     title: "\u9690\u85CF\u8BE5\u5217"
-  }, /*#__PURE__*/React.createElement(StopOutlined, {
+  }, React.createElement(StopOutlined, {
     className: styles.hideIcon,
     onClick: onHideColumn
   })));

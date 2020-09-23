@@ -62,7 +62,7 @@ var FormRadioGroup = function FormRadioGroup(props) {
       }
     } : {};
   }, []);
-  return /*#__PURE__*/React.createElement(_Form.Item, {
+  return React.createElement(_Form.Item, {
     name: name,
     label: label ? label : undefined,
     className: formItemClassName,
@@ -74,7 +74,7 @@ var FormRadioGroup = function FormRadioGroup(props) {
     style: hide ? {
       display: 'none'
     } : {}
-  }, /*#__PURE__*/React.createElement(_Radio.Group, __assign({
+  }, React.createElement(_Radio.Group, __assign({
     className: className
   }, eventProps, _props), options.map(function (option) {
     var _a = typeof option === 'string' ? {
@@ -85,12 +85,12 @@ var FormRadioGroup = function FormRadioGroup(props) {
         value = _a.value;
 
     if (radioType === 'radio') {
-      return /*#__PURE__*/React.createElement(_Radio, {
+      return React.createElement(_Radio, {
         key: String(value),
         value: value
       }, label);
     } else {
-      return /*#__PURE__*/React.createElement(_Radio.Button, {
+      return React.createElement(_Radio.Button, {
         key: String(value),
         value: value
       }, label);
