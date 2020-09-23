@@ -73,6 +73,10 @@ import FormLabelV2, {
     LabelProps as LabelPropsV2,
     LabelType as LabelTypeV2,
 } from './items/v2/Label';
+import FormSwitch, {
+    SwitchProps as SwitchPropsV2,
+    SwitchType as SwitchTypeV2,
+} from './items/v2/Switch';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -108,6 +112,7 @@ export type FormField<T = string> = (
     | Omit<NumberRangePropsV2, 'form'>
     | Omit<RadioGroupPropsV2, 'form'>
     | Omit<LabelPropsV2<T>, 'form'>
+    | Omit<SwitchPropsV2<T>, 'form'>
 ) & {
     form?: FormInstance;
     key?: string;
@@ -154,6 +159,18 @@ export const getFormItem = (
     hide?: boolean,
 ) => {
     const name = field['name'];
+    if (FormSwitch.typeList.includes(type)) {
+        return getColChildren(
+            <FormSwitch
+                key={String(name)}
+                labelClassName={labelClassName}
+                {...(field as SwitchPropsV2)}
+                type={type as SwitchTypeV2}
+                form={form}
+            />,
+            itemCol,
+        );
+    }
     if (FormLabel.typeList.includes(type)) {
         return getColChildren(
             <FormLabel
@@ -608,7 +625,19 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
             const target = targetFieldList || fieldList;
             (target as any[]).map((field: any) => {
                 const { type } = field;
-                if (FormLabel.typeList.includes(type) || FormLabelV2.typeList.includes(type)) {
+                if (FormSwitch.typeList.includes(type)) {
+                    const {
+                        onValue = 'on',
+                        offValue = 'off',
+                        name,
+                    } = (field as unknown) as SwitchPropsV2;
+                    const checked = form.getFieldValue(name);
+                    values[name as string] = checked ? onValue : offValue;
+                    // 没有值需要获取
+                } else if (
+                    FormLabel.typeList.includes(type) ||
+                    FormLabelV2.typeList.includes(type)
+                ) {
                     // 没有值需要获取
                 } else if (FormPassword.typeList.includes(type)) {
                     const { formatter: formatterName, name } = (field as unknown) as any;
