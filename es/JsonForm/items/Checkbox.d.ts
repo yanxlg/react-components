@@ -17,7 +17,7 @@ export declare type CheckboxProps<T = string> = FormItemLabelProps & CustomFormP
     hide?: boolean;
 } & Omit<AntdCheckboxProps, 'onChange' | 'name'>;
 declare const FormCheckbox: {
-    (props: CheckboxProps<string>): JSX.Element;
+    (props: CheckboxProps): JSX.Element;
     typeList: string[];
 };
 export default FormCheckbox;

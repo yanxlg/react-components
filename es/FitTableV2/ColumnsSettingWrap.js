@@ -41,14 +41,14 @@ var ColumnsSettingWrap = function ColumnsSettingWrap(_a) {
       props = __rest(_a, ["columns", "columnsSettingRender", "resetColumnsSetting", "onHideKeysChange", "hideKeys"]);
 
   return useMemo(function () {
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       className: styles.relative
-    }, React.createElement(FitTable, __assign({}, props, {
+    }, /*#__PURE__*/React.createElement(FitTable, __assign({}, props, {
       columns: columns,
       hideKeys: hideKeys,
       onHideKeysChange: onHideKeysChange,
       // @ts-ignore
-      settingComponent: React.createElement(ColumnsSetting, {
+      settingComponent: /*#__PURE__*/React.createElement(ColumnsSetting, {
         columnsSettingRender: columnsSettingRender,
         columns: columns,
         hideKeys: hideKeys,

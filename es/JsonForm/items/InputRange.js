@@ -83,47 +83,47 @@ var FormInputRange = function FormInputRange(props) {
   }, []);
   return useMemo(function () {
     var itemClassName = [formStyles.inlineBlock, formStyles.marginNone, formStyles.verticalMiddle].join(' ');
-    return React.createElement(_Form.Item, {
-      label: React.createElement("span", {
+    return /*#__PURE__*/React.createElement(_Form.Item, {
+      label: /*#__PURE__*/React.createElement("span", {
         className: labelClassName
       }, label),
       className: "" + formItemClassName,
       style: hide ? {
         display: 'none'
       } : {}
-    }, React.createElement(_Form.Item, {
+    }, /*#__PURE__*/React.createElement(_Form.Item, {
       shouldUpdate: function shouldUpdate(prevValues, currentValues) {
         return prevValues[name2] !== currentValues[name2];
       },
       className: itemClassName
-    }, React.createElement(_Form.Item, {
+    }, /*#__PURE__*/React.createElement(_Form.Item, {
       name: name1,
       className: formStyles.marginNone,
       validateTrigger: "onBlur",
       rules: rules === null || rules === void 0 ? void 0 : rules[0],
       initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[0]
-    }, React.createElement(_InputNumber, __assign({
+    }, /*#__PURE__*/React.createElement(_InputNumber, __assign({
       min: 0,
       precision: precision,
       className: className
-    }, event1Props)))), React.createElement("span", {
+    }, event1Props)))), /*#__PURE__*/React.createElement("span", {
       className: [formStyles.formColon, formStyles.verticalMiddle].join(' ')
-    }, "-"), React.createElement(_Form.Item, {
+    }, "-"), /*#__PURE__*/React.createElement(_Form.Item, {
       className: itemClassName,
       shouldUpdate: function shouldUpdate(prevValues, currentValues) {
         return prevValues[name1] !== currentValues[name1];
       }
-    }, React.createElement(_Form.Item, {
+    }, /*#__PURE__*/React.createElement(_Form.Item, {
       name: name2,
       className: formStyles.marginNone,
       validateTrigger: "onBlur",
       rules: rules === null || rules === void 0 ? void 0 : rules[1],
       initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[1]
-    }, React.createElement(_InputNumber, __assign({
+    }, /*#__PURE__*/React.createElement(_InputNumber, __assign({
       min: 0,
       precision: precision,
       className: className
-    }, event2Props)))), endExtra ? React.createElement("span", {
+    }, event2Props)))), endExtra ? /*#__PURE__*/React.createElement("span", {
       className: [formStyles.endExtra, formStyles.verticalMiddle].join(' ')
     }, endExtra) : null);
   }, [hide]);
