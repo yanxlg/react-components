@@ -77,6 +77,10 @@ import FormSwitch, {
     SwitchProps as SwitchPropsV2,
     SwitchType as SwitchTypeV2,
 } from './items/v2/Switch';
+import FormCascaderV2, {
+    CascaderProps as CascaderPropsV2,
+    CascaderType as CascaderTypeV2,
+} from './items/v2/Cascader';
 
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
@@ -113,6 +117,7 @@ export type FormField<T = string> = (
     | Omit<RadioGroupPropsV2, 'form'>
     | Omit<LabelPropsV2<T>, 'form'>
     | Omit<SwitchPropsV2<T>, 'form'>
+    | Omit<CascaderPropsV2<T>, 'form'>
 ) & {
     form?: FormInstance;
     key?: string;
@@ -524,6 +529,19 @@ export const getFormItem = (
                 type={type as RadioGroupTypeV2}
                 form={form}
                 hidden={(field as RadioGroupPropsV2).hidden || hide}
+            />,
+            itemCol,
+        );
+    }
+    if (FormCascaderV2.typeList.includes(type)) {
+        return getColChildren(
+            <FormCascaderV2
+                key={String(index)}
+                labelClassName={labelClassName}
+                {...(field as CascaderPropsV2)}
+                type={type as CascaderTypeV2}
+                form={form}
+                hidden={(field as CascaderPropsV2).hidden || hide}
             />,
             itemCol,
         );

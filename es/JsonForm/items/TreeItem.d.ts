@@ -17,7 +17,7 @@ export declare type FormTreeProps<T = string> = FormItemLabelProps & CustomFormP
     hide?: boolean;
 } & TreeProps;
 declare const FormTree: {
-    (props: FormTreeProps<string>): JSX.Element;
+    (props: FormTreeProps): JSX.Element;
     typeList: string[];
 };
 export default FormTree;

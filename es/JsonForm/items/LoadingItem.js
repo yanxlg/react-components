@@ -48,21 +48,21 @@ var LoadingItem = function LoadingItem(_a) {
       setLoadState(false);
     });
   }, []);
-  return loadState ? getColChildren(React.createElement(_Form.Item, {
+  return loadState ? getColChildren( /*#__PURE__*/React.createElement(_Form.Item, {
     className: formItemClassName,
-    label: React.createElement("span", {
+    label: /*#__PURE__*/React.createElement("span", {
       className: labelClassName
     }, label),
     colon: colon
-  }, React.createElement(_Spin, {
+  }, /*#__PURE__*/React.createElement(_Spin, {
     spinning: true
-  })), itemCol) : field === void 0 ? getColChildren(React.createElement(_Form.Item, {
+  })), itemCol) : field === void 0 ? getColChildren( /*#__PURE__*/React.createElement(_Form.Item, {
     className: formItemClassName,
-    label: React.createElement("span", {
+    label: /*#__PURE__*/React.createElement("span", {
       className: labelClassName
     }, label),
     colon: colon
-  }, React.createElement(LoadingButton, {
+  }, /*#__PURE__*/React.createElement(LoadingButton, {
     type: "link",
     onClick: onReload
   }, "\u91CD\u8BD5")), itemCol) : getFormItem(field, form, labelClassName, itemCol, itemRow);

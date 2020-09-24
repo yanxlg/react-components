@@ -11,12 +11,12 @@ var IndexColumn = function IndexColumn(_a) {
   var _b = _a.border,
       border = _b === void 0 ? false : _b,
       children = _a.children;
-  return React.createElement(ConfigConsumer, null, function (_a) {
+  return /*#__PURE__*/React.createElement(ConfigConsumer, null, function (_a) {
     var _b;
 
     var getPrefixCls = _a.getPrefixCls;
     var className = getPrefixCls('pro-table-index-column');
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       className: classnames(className, (_b = {}, _b[className + "-border"] = border, _b['top-three'] = children > 2, _b))
     }, children);
   });

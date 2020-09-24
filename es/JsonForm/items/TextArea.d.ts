@@ -19,7 +19,7 @@ export declare type TextAreaProps<T = string> = FormItemLabelProps & CustomFormP
     hide?: boolean;
 } & Omit<AntTextAreaProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange'>;
 declare const FormTextArea: {
-    (props: TextAreaProps<string>): JSX.Element;
+    (props: TextAreaProps): JSX.Element;
     typeList: string[];
 };
 export default FormTextArea;
