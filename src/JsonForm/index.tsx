@@ -122,11 +122,8 @@ export type FormField<T = string> = (
     | Omit<RadioGroupPropsV2, 'form'>
     | Omit<LabelPropsV2<T>, 'form'>
     | Omit<SwitchPropsV2<T>, 'form'>
-<<<<<<< HEAD
     | Omit<FormPasswordPropsV2<T>, 'form'>
-=======
     | Omit<CascaderPropsV2<T>, 'form'>
->>>>>>> 34e90efaab722f5856579e43d9c7ac3069b0487b
 ) & {
     form?: FormInstance;
     key?: string;
