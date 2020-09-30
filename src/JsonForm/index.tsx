@@ -78,6 +78,11 @@ import FormSwitch, {
     SwitchType as SwitchTypeV2,
 } from './items/v2/Switch';
 
+import FormPasswordV2, {
+    FormPasswordProps as FormPasswordPropsV2,
+    PasswordType as PasswordTypeV2,
+} from './items/v2/Password';
+
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
     labelClassName?: string;
@@ -113,6 +118,7 @@ export type FormField<T = string> = (
     | Omit<RadioGroupPropsV2, 'form'>
     | Omit<LabelPropsV2<T>, 'form'>
     | Omit<SwitchPropsV2<T>, 'form'>
+    | Omit<FormPasswordPropsV2<T>, 'form'>
 ) & {
     form?: FormInstance;
     key?: string;
@@ -159,6 +165,18 @@ export const getFormItem = (
     hide?: boolean,
 ) => {
     const name = field['name'];
+    if (FormPasswordV2.typeList.includes(type)) {
+        return getColChildren(
+            <FormPasswordV2
+                key={String(name)}
+                labelClassName={labelClassName}
+                {...(field as FormPasswordPropsV2)}
+                type={type as PasswordTypeV2}
+                form={form}
+            />,
+            itemCol,
+        );
+    }
     if (FormSwitch.typeList.includes(type)) {
         return getColChildren(
             <FormSwitch
@@ -639,7 +657,10 @@ const JsonForm: ForwardRefRenderFunction<JsonFormRef, JsonFormProps> = (props, r
                     FormLabelV2.typeList.includes(type)
                 ) {
                     // 没有值需要获取
-                } else if (FormPassword.typeList.includes(type)) {
+                } else if (
+                    FormPassword.typeList.includes(type) ||
+                    FormPasswordV2.typeList.includes(type)
+                ) {
                     const { formatter: formatterName, name } = (field as unknown) as any;
                     values[name as string] = getFormatterFunc(
                         formatterName,
