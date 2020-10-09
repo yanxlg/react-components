@@ -106,7 +106,7 @@ var ColumnsSetting = function ColumnsSetting(_a) {
     }
   }, []);
   var modal = useMemo(function () {
-    return React.createElement(_Modal, {
+    return /*#__PURE__*/React.createElement(_Modal, {
       title: "\u81EA\u5B9A\u4E49\u5B57\u6BB5\u5C55\u793A",
       cancelText: resetColumnsSetting ? '还原默认' : '不保存',
       okText: "\u4FDD\u5B58",
@@ -114,11 +114,11 @@ var ColumnsSetting = function ColumnsSetting(_a) {
       onCancel: onCancel,
       visible: !!visible,
       className: styles.settingModal
-    }, ColumnsSettingRender === true ? React.createElement(_Checkbox.Group, {
+    }, ColumnsSettingRender === true ? /*#__PURE__*/React.createElement(_Checkbox.Group, {
       onChange: onChange,
       value: columnsShowList,
       className: styles.checkoutGroup
-    }, React.createElement(_Row, {
+    }, /*#__PURE__*/React.createElement(_Row, {
       gutter: [0, 5]
     }, columns.map(function (column) {
       if (column.hideInSetting) {
@@ -126,13 +126,13 @@ var ColumnsSetting = function ColumnsSetting(_a) {
       }
 
       var dataIndex = column['dataIndex'];
-      return React.createElement(_Col, {
+      return /*#__PURE__*/React.createElement(_Col, {
         span: 4,
         key: dataIndex
-      }, React.createElement(_Checkbox, {
+      }, /*#__PURE__*/React.createElement(_Checkbox, {
         value: dataIndex
       }, column.title));
-    }))) : React.createElement(ColumnsSettingRender, {
+    }))) : /*#__PURE__*/React.createElement(ColumnsSettingRender, {
       value: columnsShowList,
       onChange: onChange
     }));
@@ -141,7 +141,7 @@ var ColumnsSetting = function ColumnsSetting(_a) {
     setVisibleProps(true);
   }, []);
   return useMemo(function () {
-    return React.createElement(React.Fragment, null, React.createElement(_Button, {
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_Button, {
       className: styles.settingBtn,
       size: "small",
       onClick: showModal

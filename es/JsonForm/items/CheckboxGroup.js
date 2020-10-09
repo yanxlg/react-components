@@ -61,9 +61,9 @@ var FormCheckboxGroup = function FormCheckboxGroup(props) {
   var requiredProps = required ? {
     required: required
   } : {};
-  return React.createElement(_Form.Item, __assign({
+  return /*#__PURE__*/React.createElement(_Form.Item, __assign({
     name: name,
-    label: label ? React.createElement("span", {
+    label: label ? /*#__PURE__*/React.createElement("span", {
       className: labelClassName
     }, label) : undefined,
     className: formItemClassName
@@ -73,7 +73,7 @@ var FormCheckboxGroup = function FormCheckboxGroup(props) {
     style: hide ? {
       display: 'none'
     } : {}
-  }), React.createElement(_Checkbox.Group, __assign({
+  }), /*#__PURE__*/React.createElement(_Checkbox.Group, __assign({
     className: className
   }, eventProps, _props)));
 };

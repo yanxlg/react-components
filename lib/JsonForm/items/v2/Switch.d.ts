@@ -14,7 +14,7 @@ export declare type SwitchProps<T = string> = Omit<FormItemProps, 'children'> & 
     offValue?: string;
 };
 declare const FormSwitch: {
-    (props: SwitchProps<T>): JSX.Element;
+    (props: SwitchProps): JSX.Element;
     typeList: string[];
 };
 export default FormSwitch;

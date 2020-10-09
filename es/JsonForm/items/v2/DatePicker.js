@@ -34,27 +34,21 @@ var __rest = this && this.__rest || function (s, e) {
 
 import React, { useCallback, useMemo } from 'react';
 import dayjs from 'dayjs';
-import formStyles from '../_form.less';
-var typeList = ['datePicker'];
+import formStyles from '../../_form.less';
+import classNames from 'classnames';
+var typeList = ['datePicker@2'];
 
 var FormDatePicker = function FormDatePicker(props) {
-  var name = props.name,
-      placeholder = props.placeholder,
-      label = props.label,
-      _a = props.className,
-      className = _a === void 0 ? formStyles.formItemDefault : _a,
-      _b = props.formItemClassName,
-      formItemClassName = _b === void 0 ? formStyles.formItem : _b,
+  var _a = props.className,
+      className = _a === void 0 ? formStyles.formItem : _a,
+      labelCol = props.labelCol,
+      labelClassName = props.labelClassName,
+      form = props.form,
       dateBeginWith = props.dateBeginWith,
       dateEndWith = props.dateEndWith,
       _onChange = props.onChange,
-      labelClassName = props.labelClassName,
-      form = props.form,
-      rules = props.rules,
-      picker = props.picker,
-      initialValue = props.initialValue,
-      hide = props.hide,
-      _props = __rest(props, ["name", "placeholder", "label", "className", "formItemClassName", "dateBeginWith", "dateEndWith", "onChange", "labelClassName", "form", "rules", "picker", "initialValue", "hide"]);
+      childrenProps = props.childrenProps,
+      formItemProps = __rest(props, ["className", "labelCol", "labelClassName", "form", "dateBeginWith", "dateEndWith", "onChange", "childrenProps"]);
 
   var disabledStartDate = useCallback(function (dateBeginWith) {
     if (!dateBeginWith || dateBeginWith.length === 0) {
@@ -62,7 +56,7 @@ var FormDatePicker = function FormDatePicker(props) {
     }
 
     return function (startTime) {
-      var timeMax = undefined; // 取最小值=> endOf('d');
+      var timeMax; // 取最小值=> endOf('d');
 
       dateBeginWith.map(function (dependence) {
         var date = dependence === 'now' ? dayjs() : form.getFieldValue(dependence);
@@ -89,7 +83,7 @@ var FormDatePicker = function FormDatePicker(props) {
     }
 
     return function (endTime) {
-      var timeMax = undefined; // 取最大值=> startOf('d');
+      var timeMax; // 取最大值=> startOf('d');
 
       dateEndWith.map(function (dependence) {
         var date = dependence === 'now' ? dayjs() : form.getFieldValue(dependence);
@@ -120,23 +114,17 @@ var FormDatePicker = function FormDatePicker(props) {
       }
     } : {};
   }, []);
-  return /*#__PURE__*/React.createElement(_Form.Item, {
-    name: name,
-    className: formItemClassName,
-    label: /*#__PURE__*/React.createElement("span", {
-      className: labelClassName
-    }, label),
-    rules: rules,
-    initialValue: initialValue,
-    style: hide ? {
-      display: 'none'
-    } : {}
-  }, /*#__PURE__*/React.createElement(_DatePicker, __assign({
-    className: className,
-    placeholder: placeholder,
-    disabledDate: disabledDate,
-    picker: picker
-  }, eventProps, _props)));
+  return useMemo(function () {
+    return /*#__PURE__*/React.createElement(_Form.Item, __assign({
+      className: className,
+      labelCol: __assign(__assign({}, labelCol), {
+        className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
+      })
+    }, formItemProps), /*#__PURE__*/React.createElement(_DatePicker, __assign({
+      className: formStyles.formItemDefault,
+      disabledDate: disabledDate
+    }, eventProps, childrenProps)));
+  }, []);
 };
 
 FormDatePicker.typeList = typeList;

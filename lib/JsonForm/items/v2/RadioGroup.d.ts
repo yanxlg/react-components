@@ -14,7 +14,7 @@ export declare type RadioGroupProps<T = string> = Omit<FormItemProps, 'children'
     childrenProps?: Omit<AntdRadioGroupProps, 'onChange'>;
 };
 declare const FormRadioGroup: {
-    (props: RadioGroupProps<string>): JSX.Element;
+    (props: RadioGroupProps): JSX.Element;
     typeList: string[];
 };
 export default FormRadioGroup;

@@ -83,15 +83,15 @@ var FormPassword = function FormPassword(props) {
         e.preventDefault();
       }
     };
-    return /*#__PURE__*/React.cloneElement( /*#__PURE__*/React.isValidElement(icon) ? icon : /*#__PURE__*/React.createElement('span', null, icon), iconProps);
+    return /*#__PURE__*/React.cloneElement( /*#__PURE__*/ /*#__PURE__*/React.isValidElement(icon) ? icon : /*#__PURE__*/React.createElement('span', null, icon), iconProps);
   }, [visible]);
   return useMemo(function () {
-    return React.createElement(_Form.Item, __assign({
+    return /*#__PURE__*/React.createElement(_Form.Item, __assign({
       className: className,
       labelCol: __assign(__assign({}, labelCol), {
         className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
       })
-    }, formItemProps), React.createElement(_Input, __assign({
+    }, formItemProps), /*#__PURE__*/React.createElement(_Input, __assign({
       className: formStyles.formItemDefault
     }, childrenProps, eventProps, {
       suffix: suffix,

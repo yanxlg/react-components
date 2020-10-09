@@ -87,6 +87,11 @@ import FormPasswordV2, {
     PasswordType as PasswordTypeV2,
 } from './items/v2/Password';
 
+import FormDatePickerV2, {
+    DatePickerProps as DatePickerPropsV2,
+    DatePickerType as DatePickerTypeV2,
+} from './items/v2/DatePicker';
+
 // normalize 可以实现formatter, 即可避免使用ref=>后期实现转换
 export declare interface CustomFormProps {
     labelClassName?: string;
@@ -124,6 +129,7 @@ export type FormField<T = string> = (
     | Omit<SwitchPropsV2<T>, 'form'>
     | Omit<FormPasswordPropsV2<T>, 'form'>
     | Omit<CascaderPropsV2<T>, 'form'>
+    | Omit<DatePickerPropsV2<T>, 'form'>
 ) & {
     form?: FormInstance;
     key?: string;
@@ -560,6 +566,19 @@ export const getFormItem = (
                 type={type as CascaderTypeV2}
                 form={form}
                 hidden={(field as CascaderPropsV2).hidden || hide}
+            />,
+            itemCol,
+        );
+    }
+    if (FormDatePickerV2.typeList.includes(type)) {
+        return getColChildren(
+            <FormDatePickerV2
+                key={String(index)}
+                labelClassName={labelClassName}
+                {...(field as DatePickerPropsV2)}
+                type={type as DatePickerTypeV2}
+                form={form}
+                hidden={(field as DatePickerPropsV2).hidden || hide}
             />,
             itemCol,
         );
