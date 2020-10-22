@@ -85,7 +85,6 @@ var FormCascader = function FormCascader(props) {
         className: classnames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
       })
     }, formItemProps), /*#__PURE__*/React.createElement(_Cascader, __assign({
-      className: className,
       showSearch: {
         filter: function filter(inputValue, path) {
           return _filter(inputValue, path, childrenProps.fieldNames);

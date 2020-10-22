@@ -81,7 +81,6 @@ const FormCascader = (props: CascaderProps) => {
                 {...formItemProps}
             >
                 <Cascader
-                    className={className}
                     showSearch={{
                         filter: (inputValue, path) =>
                             filter(inputValue, path, childrenProps.fieldNames),
