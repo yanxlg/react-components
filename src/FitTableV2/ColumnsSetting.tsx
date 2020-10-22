@@ -37,6 +37,7 @@ const ColumnsSetting = <T,>({
 
     const [columnsShowList, setColumnsShowList] = useState<string[]>(
         columns
+            .filter(column => !column.defaultHide)
             .map(column => getColumnKey(column))
             .filter(key => {
                 return !hideKeys || hideKeys.indexOf(key) === -1;

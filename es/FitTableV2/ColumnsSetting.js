@@ -27,7 +27,9 @@ var ColumnsSetting = function ColumnsSetting(_a) {
 
   var cacheColumnsShowList = useRef([]);
 
-  var _c = useState(columns.map(function (column) {
+  var _c = useState(columns.filter(function (column) {
+    return !column.defaultHide;
+  }).map(function (column) {
     return getColumnKey(column);
   }).filter(function (key) {
     return !hideKeys || hideKeys.indexOf(key) === -1;
