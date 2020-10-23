@@ -21,7 +21,7 @@ export type CascaderProps<T = string> = Omit<FormItemProps, 'children'> & {
     name: NamePath;
     labelClassName?: string;
     childrenProps?: Omit<AntdCascaderProps, 'onChange' | 'options'> & {
-        options: CascaderOptionType[];
+        options?: CascaderOptionType[];
         service?: () => Promise<any>;
         dataPath?: string | null; // default:data
     };
