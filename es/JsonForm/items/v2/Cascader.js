@@ -92,7 +92,7 @@ var FormCascader = function FormCascader(props) {
       },
       options: service ? optionList : options
     }, eventProps, restChildrenProps)));
-  }, [optionList, options]);
+  }, [optionList, options, restChildrenProps]);
 };
 
 FormCascader.typeList = typeList;
