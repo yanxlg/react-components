@@ -91,7 +91,7 @@ const FormCascader = (props: CascaderProps) => {
                 />
             </Form.Item>
         );
-    }, [optionList]);
+    }, [optionList, options]);
 };
 
 FormCascader.typeList = typeList;
