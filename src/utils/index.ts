@@ -21,7 +21,7 @@ export const clearEmptyVal = (data: any, excludeKeys?: string[]): any => {
             .filter(item => {
                 return !isEmptyString(item) && item !== undefined && item !== null;
             })
-            .map(item => clearEmptyVal(item));
+            .map(item => clearEmptyVal(item, excludeKeys));
     } else {
         let result = {} as any;
         for (let key in data) {
@@ -30,7 +30,7 @@ export const clearEmptyVal = (data: any, excludeKeys?: string[]): any => {
                 if (excludeKeys && excludeKeys.includes(key)) {
                     result[key] = val;
                 } else if (!isEmptyString(val) && val !== undefined && val !== null) {
-                    result[key] = clearEmptyVal(val);
+                    result[key] = clearEmptyVal(val, excludeKeys);
                 }
             }
         }
