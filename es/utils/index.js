@@ -19,7 +19,7 @@ export var clearEmptyVal = function clearEmptyVal(data, excludeKeys) {
     return data.filter(function (item) {
       return !isEmptyString(item) && item !== undefined && item !== null;
     }).map(function (item) {
-      return clearEmptyVal(item);
+      return clearEmptyVal(item, excludeKeys);
     });
   } else {
     var result = {};
@@ -31,7 +31,7 @@ export var clearEmptyVal = function clearEmptyVal(data, excludeKeys) {
         if (excludeKeys && excludeKeys.includes(key)) {
           result[key] = val;
         } else if (!isEmptyString(val) && val !== undefined && val !== null) {
-          result[key] = clearEmptyVal(val);
+          result[key] = clearEmptyVal(val, excludeKeys);
         }
       }
     }

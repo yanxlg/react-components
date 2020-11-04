@@ -1,7 +1,4 @@
-declare const useTableSetting: (
-    settingKey: string,
-    version?: string,
-) => {
+declare const useTableSetting: (settingKey: string, version?: string) => {
     settingKey: string;
     hideKeys: string[];
     sortKeys: string[];
