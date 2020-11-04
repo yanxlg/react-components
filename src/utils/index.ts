@@ -11,7 +11,7 @@ export function isNumber(value?: string | number) {
 
 export const isEmptyString = (value: any) => typeof value === 'string' && value.trim() === '';
 
-export const clearEmptyVal = (data: any): any => {
+export const clearEmptyVal = (data: any, excludeKeys?: string[]): any => {
     // formData直接返回
     if (typeof data !== 'object' || data instanceof FormData) {
         return data;
@@ -27,7 +27,9 @@ export const clearEmptyVal = (data: any): any => {
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
                 let val = data[key];
-                if (!isEmptyString(val) && val !== undefined && val !== null) {
+                if (excludeKeys && excludeKeys.includes(key)) {
+                    result[key] = val;
+                } else if (!isEmptyString(val) && val !== undefined && val !== null) {
                     result[key] = clearEmptyVal(val);
                 }
             }

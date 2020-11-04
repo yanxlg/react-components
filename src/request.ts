@@ -12,8 +12,10 @@ declare module 'umi-request' {
     interface RequestMethod {
         replace: (request: RequestMethod) => void;
     }
+
     interface RequestOptionsInit {
         skipResponseInterceptors?: boolean; // 是否跳过内部错误判断
+        excludeKeys?: string[];
     }
 }
 
@@ -100,13 +102,13 @@ function addDefaultInterceptors(req: RequestMethod) {
             options.headers = Object.assign({}, options.headers, {
                 request_id: requestId(),
             });
-            const { params, data, ...extra } = options;
+            const { params, data, excludeKeys, ...extra } = options;
             return {
                 url,
                 options: {
                     ...extra,
-                    params: params ? clearEmptyVal(params) : undefined,
-                    data: data ? clearEmptyVal(data) : undefined,
+                    params: params ? clearEmptyVal(params, excludeKeys) : undefined,
+                    data: data ? clearEmptyVal(data, excludeKeys) : undefined,
                 },
             };
         },
