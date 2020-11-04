@@ -6,22 +6,13 @@ export declare interface ColumnsSettingProps<T> {
     onHideKeysChange: (keys: string[]) => void;
     resetColumnsSetting?: boolean;
     hideKeys?: string[];
-    columnsSettingRender:
-        | true
-        | React.ComponentClass<{
-              value: Array<CheckboxValueType>;
-              onChange: (checkedValue: Array<CheckboxValueType>) => void;
-          }>
-        | React.FC<{
-              value: Array<CheckboxValueType>;
-              onChange: (checkedValue: Array<CheckboxValueType>) => void;
-          }>;
+    columnsSettingRender: true | React.ComponentClass<{
+        value: Array<CheckboxValueType>;
+        onChange: (checkedValue: Array<CheckboxValueType>) => void;
+    }> | React.FC<{
+        value: Array<CheckboxValueType>;
+        onChange: (checkedValue: Array<CheckboxValueType>) => void;
+    }>;
 }
-declare const ColumnsSetting: <T>({
-    columns,
-    columnsSettingRender: ColumnsSettingRender,
-    resetColumnsSetting,
-    onHideKeysChange,
-    hideKeys,
-}: ColumnsSettingProps<T>) => JSX.Element;
+declare const ColumnsSetting: <T>({ columns, columnsSettingRender: ColumnsSettingRender, resetColumnsSetting, onHideKeysChange, hideKeys, }: ColumnsSettingProps<T>) => JSX.Element;
 export default ColumnsSetting;
