@@ -21,7 +21,7 @@ export type CascaderProps<T = string> = Omit<FormItemProps, 'children'> & {
     name: NamePath;
     labelClassName?: string;
     childrenProps?: Omit<AntdCascaderProps, 'onChange' | 'options'> & {
-        options: CascaderOptionType[];
+        options?: CascaderOptionType[];
         service?: () => Promise<any>;
         dataPath?: string | null; // default:data
     };
@@ -81,7 +81,6 @@ const FormCascader = (props: CascaderProps) => {
                 {...formItemProps}
             >
                 <Cascader
-                    className={className}
                     showSearch={{
                         filter: (inputValue, path) =>
                             filter(inputValue, path, childrenProps.fieldNames),
@@ -92,7 +91,7 @@ const FormCascader = (props: CascaderProps) => {
                 />
             </Form.Item>
         );
-    }, [optionList]);
+    }, [optionList, options, restChildrenProps]);
 };
 
 FormCascader.typeList = typeList;
