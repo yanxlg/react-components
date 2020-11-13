@@ -15,8 +15,8 @@ var UpdateContainer = function UpdateContainer(_a, ref) {
     };
   }, []);
   return useMemo(function () {
-    return React.createElement("span", null, children(data));
+    return /*#__PURE__*/React.createElement("span", null, children(data));
   }, [children, data]);
 };
 
-export default forwardRef(UpdateContainer);
+export default /*#__PURE__*/forwardRef(UpdateContainer);

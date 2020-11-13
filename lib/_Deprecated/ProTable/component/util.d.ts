@@ -1,5 +1,6 @@
-import React, { ReactText } from 'react';
+import React, { ReactNode, ReactText } from 'react';
 import { DataIndex } from 'rc-table/lib/interface';
+import { StatusType } from './status';
 /**
  * 转化 text 和 valueEnum
  * 通过 type 来添加 Status
@@ -7,10 +8,10 @@ import { DataIndex } from 'rc-table/lib/interface';
  * @param valueEnum
  * @param prue 纯净模式，不增加 status
  */
-export declare const parsingText: (text: React.ReactText, valueEnum?: {
+export declare const parsingText: (text: string | number, valueEnum?: {
     [key: string]: string | number | boolean | {} | React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)>) | (new (props: any) => React.Component<any, any, any>)> | React.ReactNodeArray | React.ReactPortal | {
-        text: React.ReactNode;
-        type: "Success" | "Error" | "Processing" | "Default" | "Warning";
+        text: ReactNode;
+        type: StatusType;
     };
 }, pure?: boolean) => {};
 /**
@@ -19,8 +20,8 @@ export declare const parsingText: (text: React.ReactText, valueEnum?: {
  */
 export declare const parsingValueEnumToArray: (valueEnum?: {
     [key: string]: string | number | boolean | {} | React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)>) | (new (props: any) => React.Component<any, any, any>)> | React.ReactNodeArray | React.ReactPortal | {
-        text: React.ReactNode;
-        type: "Success" | "Error" | "Processing" | "Default" | "Warning";
+        text: ReactNode;
+        type: StatusType;
     };
 }) => {
     value: string;
@@ -39,5 +40,5 @@ export declare function getProgressStatus(text: number): 'success' | 'exception'
  * @param key
  * @param dataIndex
  */
-export declare const genColumnKey: (key?: React.ReactText, dataIndex?: DataIndex) => React.ReactText;
+export declare const genColumnKey: (key?: React.ReactText | undefined, dataIndex?: DataIndex) => React.ReactText;
 export default function get(entity: any, path: ReactText | ReactText[]): any;

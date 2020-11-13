@@ -86,7 +86,7 @@ var Card = function Card(_a) {
 
   var opacity = isDragging ? 0 : 1;
   drag(drop(ref));
-  return React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     ref: ref,
     style: {
       opacity: opacity
