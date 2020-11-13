@@ -65,7 +65,7 @@ const RichInput: React.FC<RichInputProps> = ({
                 e.target.value = parseValue;
             }
             if (value === void 0) {
-                setInnerValue(_value);
+                setInnerValue(e.target.value);
                 onChange && onChange(e);
             } else {
                 onChange && onChange(e);
