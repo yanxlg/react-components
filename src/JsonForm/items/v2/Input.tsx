@@ -22,7 +22,15 @@ type InputType =
 
 type TextareaType = 'textarea@2';
 
-const typeList = ['input@2', 'integer@2', 'number@2', 'positiveInteger@2', 'textarea@2'];
+const typeList = [
+    'input@2',
+    'integer@2',
+    'number@2',
+    'positiveInteger@2',
+    'textarea@2',
+    'numberSplit@2',
+    'naturalNumber@2',
+];
 
 const { TextArea } = Input;
 

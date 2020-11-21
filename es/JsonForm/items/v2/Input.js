@@ -36,7 +36,7 @@ import React, { useMemo } from 'react';
 import RichInput from '../../../RichInput';
 import formStyles from '../../_form.less';
 import classNames from 'classnames';
-var typeList = ['input@2', 'integer@2', 'number@2', 'positiveInteger@2', 'textarea@2'];
+var typeList = ['input@2', 'integer@2', 'number@2', 'positiveInteger@2', 'textarea@2', 'numberSplit@2', 'naturalNumber@2'];
 var TextArea = _Input.TextArea;
 
 var FormInput = function FormInput(props) {
