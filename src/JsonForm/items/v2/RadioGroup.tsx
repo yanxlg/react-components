@@ -40,7 +40,7 @@ const FormRadioGroup = (props: RadioGroupProps) => {
                   },
               }
             : {};
-    }, []);
+    }, [onChange]);
 
     return (
         <Form.Item

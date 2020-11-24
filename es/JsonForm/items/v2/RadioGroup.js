@@ -54,7 +54,7 @@ var FormRadioGroup = function FormRadioGroup(props) {
         _onChange(name, form);
       }
     } : {};
-  }, []);
+  }, [_onChange]);
   return /*#__PURE__*/React.createElement(_Form.Item, __assign({
     className: className,
     labelCol: __assign(__assign({}, labelCol), {
