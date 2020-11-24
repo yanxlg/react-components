@@ -99,7 +99,7 @@ const FormDatePicker = (props: DatePickerProps) => {
                   },
               }
             : {};
-    }, []);
+    }, [onChange]);
 
     return useMemo(() => {
         return (
@@ -119,7 +119,7 @@ const FormDatePicker = (props: DatePickerProps) => {
                 />
             </Form.Item>
         );
-    }, []);
+    }, [eventProps, childrenProps, formItemProps]);
 };
 
 FormDatePicker.typeList = typeList;

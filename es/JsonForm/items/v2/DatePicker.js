@@ -113,18 +113,18 @@ var FormDatePicker = function FormDatePicker(props) {
         _onChange(name, form);
       }
     } : {};
-  }, []);
+  }, [_onChange]);
   return useMemo(function () {
-    return React.createElement(_Form.Item, __assign({
+    return /*#__PURE__*/React.createElement(_Form.Item, __assign({
       className: className,
       labelCol: __assign(__assign({}, labelCol), {
         className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
       })
-    }, formItemProps), React.createElement(_DatePicker, __assign({
+    }, formItemProps), /*#__PURE__*/React.createElement(_DatePicker, __assign({
       className: formStyles.formItemDefault,
       disabledDate: disabledDate
     }, eventProps, childrenProps)));
-  }, []);
+  }, [eventProps, childrenProps, formItemProps]);
 };
 
 FormDatePicker.typeList = typeList;

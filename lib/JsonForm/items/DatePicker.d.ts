@@ -24,7 +24,7 @@ export declare type DatePickerProps<T = string> = FormItemLabelProps & CustomFor
     hide?: boolean;
 } & Omit<PickerProps<Dayjs>, 'onChange'>;
 declare const FormDatePicker: {
-    (props: DatePickerProps<string>): JSX.Element;
+    (props: DatePickerProps): JSX.Element;
     typeList: string[];
 };
 export default FormDatePicker;

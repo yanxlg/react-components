@@ -74,7 +74,7 @@ var RichInput = function RichInput(_a) {
   }, [value, onChange, richType]);
   var showValue = value !== void 0 ? value : innerValue;
   return useMemo(function () {
-    return React.createElement(_Input, __assign({
+    return /*#__PURE__*/React.createElement(_Input, __assign({
       value: showValue,
       allowClear: true
     }, props, {

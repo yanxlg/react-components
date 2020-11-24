@@ -57,12 +57,12 @@ var ColumnsSettingWrap = function ColumnsSettingWrap(_a) {
     }));
   }, [columns]);
   return useMemo(function () {
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       className: styles.relative
-    }, React.createElement(FitTable, __assign({}, props, {
+    }, /*#__PURE__*/React.createElement(FitTable, __assign({}, props, {
       columns: filterColumns.current,
       // @ts-ignore
-      settingComponent: React.createElement(ColumnsSetting, {
+      settingComponent: /*#__PURE__*/React.createElement(ColumnsSetting, {
         columnsSettingRender: columnsSettingRender,
         columns: columns,
         onColumnsChange: setFilterColumns,
