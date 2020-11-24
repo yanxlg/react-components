@@ -61,14 +61,14 @@ var FormDateRanger = function FormDateRanger(props) {
         _onChange(name1, form);
       }
     } : {};
-  }, []);
+  }, [_onChange]);
   var event2Props = useMemo(function () {
     return _onChange ? {
       onChange: function onChange() {
         _onChange(name2, form);
       }
     } : {};
-  }, []);
+  }, [_onChange]);
   return useMemo(function () {
     var itemClassName = classNames(formStyles.inlineBlock, formStyles.marginNone, formStyles.verticalMiddle);
     return /*#__PURE__*/React.createElement(_Form.Item, __assign({
@@ -117,7 +117,7 @@ var FormDateRanger = function FormDateRanger(props) {
         }
       }, childrenProps, event2Props)));
     }));
-  }, [childrenProps]);
+  }, [childrenProps, _onChange]);
 };
 
 FormDateRanger.typeList = typeList;
