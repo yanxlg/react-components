@@ -51,7 +51,7 @@ const FormDateRanger = (props: DateRangerProps) => {
                   },
               }
             : {};
-    }, []);
+    }, [onChange]);
 
     const event2Props = useMemo(() => {
         return onChange
@@ -61,7 +61,7 @@ const FormDateRanger = (props: DateRangerProps) => {
                   },
               }
             : {};
-    }, []);
+    }, [onChange]);
 
     return useMemo(() => {
         const itemClassName = classNames(
@@ -147,7 +147,7 @@ const FormDateRanger = (props: DateRangerProps) => {
                 </Form.Item>
             </Form.Item>
         );
-    }, [childrenProps]);
+    }, [childrenProps, onChange]);
 };
 
 FormDateRanger.typeList = typeList;
