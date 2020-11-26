@@ -23,16 +23,18 @@ const LoadingButton: React.FC<ILoadingButtonProps> = ({
             // 根据result 类型判断是否需要loading
             if (onDefaultClick) {
                 const result = onDefaultClick(event);
-                if (result['then']) {
-                    // promise
-                    setLoading(true);
-                }
-                if (result['finally']) {
-                    result['finally'](() => {
+                if (result) {
+                    if (result['then']) {
+                        // promise
+                        setLoading(true);
+                    }
+                    if (result['finally']) {
+                        result['finally'](() => {
+                            setLoading(false);
+                        });
+                    } else {
                         setLoading(false);
-                    });
-                } else {
-                    setLoading(false);
+                    }
                 }
             }
         },
