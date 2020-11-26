@@ -174,11 +174,11 @@ function useList(_a) {
     return getListData(__assign({}, extraQueryRef.current));
   }, []);
   var onSearch = useCallback(function () {
-    var _a;
+    var _a, _b;
 
     return getListData(__assign({
-      page: 1,
-      page_count: (_a = defaultState === null || defaultState === void 0 ? void 0 : defaultState.pageSize) !== null && _a !== void 0 ? _a : config.defaultPageSize
+      page: (_a = defaultState === null || defaultState === void 0 ? void 0 : defaultState.pageNumber) !== null && _a !== void 0 ? _a : config.defaultPageNumber,
+      page_count: (_b = defaultState === null || defaultState === void 0 ? void 0 : defaultState.pageSize) !== null && _b !== void 0 ? _b : config.defaultPageSize
     }, extraQueryRef.current));
   }, []);
   var onChange = useCallback(function (_a, filters, sorter) {

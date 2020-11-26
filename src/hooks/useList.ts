@@ -142,7 +142,7 @@ function useList<T, Q = any, E = {}>({
     const onSearch = useCallback(
         () =>
             getListData({
-                page: 1,
+                page: defaultState?.pageNumber ?? config.defaultPageNumber,
                 page_count: defaultState?.pageSize ?? config.defaultPageSize,
                 ...extraQueryRef.current,
             }),
