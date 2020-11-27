@@ -45,7 +45,8 @@ var AutoEnLargeImg = function AutoEnLargeImg(_a) {
       srcList = _a.srcList,
       children = _a.children,
       enlargeContent = _a.enlargeContent,
-      props = __rest(_a, ["className", "enLargeClassName", "src", "srcList", "children", "enlargeContent"]);
+      lazy = _a.lazy,
+      props = __rest(_a, ["className", "enLargeClassName", "src", "srcList", "children", "enlargeContent", "lazy"]);
 
   return useMemo(function () {
     if (Array.isArray(srcList) && srcList.length > 0) {
@@ -89,7 +90,11 @@ var AutoEnLargeImg = function AutoEnLargeImg(_a) {
       }) : enlargeContent,
       title: null,
       autoAdjustOverflow: true
-    }, src ? React.createElement(LazyImage, __assign({
+    }, src ? lazy ? React.createElement(LazyImage, __assign({
+      src: src,
+      className: className,
+      alt: ""
+    }, props)) : React.createElement("img", __assign({
       src: src,
       className: className,
       alt: ""

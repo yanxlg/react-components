@@ -9,7 +9,7 @@ type IAutoEnLargeImgProps = {
     src?: string;
     srcList?: string[];
     enlargeContent?: ReactElement;
-    lazy?: boolean;
+    noLazy?: boolean;
 } & LazyImageProps;
 
 const AutoEnLargeImg: React.FC<IAutoEnLargeImgProps> = ({
@@ -19,7 +19,7 @@ const AutoEnLargeImg: React.FC<IAutoEnLargeImgProps> = ({
     srcList,
     children,
     enlargeContent,
-    lazy,
+    noLazy,
     ...props
 }) => {
     return useMemo(() => {
@@ -68,10 +68,10 @@ const AutoEnLargeImg: React.FC<IAutoEnLargeImgProps> = ({
                 autoAdjustOverflow={true}
             >
                 {src ? (
-                    lazy ? (
-                        <LazyImage src={src} className={className} alt="" {...props} />
-                    ) : (
+                    noLazy ? (
                         <img src={src} className={className} alt="" {...props} />
+                    ) : (
+                        <LazyImage src={src} className={className} alt="" {...props} />
                     )
                 ) : (
                     (children as React.ReactElement)
