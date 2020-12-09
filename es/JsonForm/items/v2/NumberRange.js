@@ -71,7 +71,7 @@ var FormInputRange = function FormInputRange(props) {
     } : {};
   }, []);
   return useMemo(function () {
-    return React.createElement(_Form.Item, __assign({
+    return /*#__PURE__*/React.createElement(_Form.Item, __assign({
       className: className,
       labelCol: __assign(__assign({}, labelCol), {
         className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
@@ -92,36 +92,36 @@ var FormInputRange = function FormInputRange(props) {
           }
         };
       }]
-    }, formItemProps), React.createElement(_Input.Group, {
+    }, formItemProps), /*#__PURE__*/React.createElement(_Input.Group, {
       compact: true,
       className: classNames(formStyles.flex, formStyles.flexAlign)
-    }, React.createElement(_Form.Item, {
+    }, /*#__PURE__*/React.createElement(_Form.Item, {
       name: name1,
       validateTrigger: "onBlur",
       initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[0],
       noStyle: true
-    }, React.createElement(RichInput, __assign({
+    }, /*#__PURE__*/React.createElement(RichInput, __assign({
       richType: "number",
       precision: precision,
       maxDigits: maxDigits
     }, event1Props, childrenProps, {
       className: classNames((childrenProps === null || childrenProps === void 0 ? void 0 : childrenProps.className) || formStyles.inputRange, formStyles.inputRangeFocus)
-    }))), React.createElement(_Input, {
+    }))), /*#__PURE__*/React.createElement(_Input, {
       className: formStyles.inputRangeSplit,
       placeholder: "~",
       disabled: true
-    }), React.createElement(_Form.Item, {
+    }), /*#__PURE__*/React.createElement(_Form.Item, {
       name: name2,
       validateTrigger: "onBlur",
       initialValue: initialValue === null || initialValue === void 0 ? void 0 : initialValue[1],
       noStyle: true
-    }, React.createElement(RichInput, __assign({
+    }, /*#__PURE__*/React.createElement(RichInput, __assign({
       richType: "number",
       precision: precision,
       maxDigits: maxDigits
     }, event2Props, {
       className: classNames((childrenProps === null || childrenProps === void 0 ? void 0 : childrenProps.className) || formStyles.inputRange, formStyles.inputRangeRight, formStyles.inputRangeFocus)
-    }))), addonAfter ? React.createElement("span", {
+    }))), addonAfter ? /*#__PURE__*/React.createElement("span", {
       className: [formStyles.endExtra, formStyles.verticalMiddle].join(' ')
     }, addonAfter) : null));
   }, []);

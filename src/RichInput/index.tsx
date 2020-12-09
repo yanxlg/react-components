@@ -55,7 +55,7 @@ const RichInput: React.FC<RichInputProps> = ({
                         : _value;
                 if (precision) {
                     // 精度计算
-                    const regexp = new RegExp(`^\\d+(?:\\.\\d{0,${precision}})?`);
+                    const regexp = new RegExp(`^\-?\\d+(?:\\.\\d{0,${precision}})?`);
                     parseValue = (parseValue.match(regexp) || [''])[0];
                 }
                 if (maxDigits && Number(parseValue) > Math.pow(10, maxDigits)) {

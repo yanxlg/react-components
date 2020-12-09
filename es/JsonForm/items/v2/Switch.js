@@ -56,12 +56,12 @@ var FormSwitch = function FormSwitch(props) {
     } : {};
   }, []);
   return useMemo(function () {
-    return React.createElement(_Form.Item, __assign({
+    return /*#__PURE__*/React.createElement(_Form.Item, __assign({
       className: className,
       labelCol: __assign(__assign({}, labelCol), {
         className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
       })
-    }, formItemProps), React.createElement(_Switch, __assign({
+    }, formItemProps), /*#__PURE__*/React.createElement(_Switch, __assign({
       className: formStyles.formItemDefault
     }, childrenProps, eventProps)));
   }, [childrenProps, formItemProps]);

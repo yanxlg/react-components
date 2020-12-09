@@ -89,7 +89,7 @@ var Checkbox = function Checkbox(_a, ref) {
   var checked = state.checked,
       indeterminate = state.indeterminate;
   return useMemo(function () {
-    return React.createElement(_Checkbox, __assign({}, props, {
+    return /*#__PURE__*/React.createElement(_Checkbox, __assign({}, props, {
       checked: checked,
       indeterminate: indeterminate,
       onChange: onInnerChange
@@ -97,4 +97,4 @@ var Checkbox = function Checkbox(_a, ref) {
   }, [checked, indeterminate, onChange]);
 };
 
-export default forwardRef(Checkbox);
+export default /*#__PURE__*/forwardRef(Checkbox);

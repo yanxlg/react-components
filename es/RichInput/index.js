@@ -53,7 +53,7 @@ var RichInput = function RichInput(_a) {
 
       if (precision) {
         // 精度计算
-        var regexp = new RegExp("^\\d+(?:\\.\\d{0," + precision + "})?");
+        var regexp = new RegExp("^-?\\d+(?:\\.\\d{0," + precision + "})?");
         parseValue = (parseValue.match(regexp) || [''])[0];
       }
 
@@ -74,7 +74,7 @@ var RichInput = function RichInput(_a) {
   }, [value, onChange, richType]);
   var showValue = value !== void 0 ? value : innerValue;
   return useMemo(function () {
-    return React.createElement(_Input, __assign({
+    return /*#__PURE__*/React.createElement(_Input, __assign({
       value: showValue,
       allowClear: true
     }, props, {

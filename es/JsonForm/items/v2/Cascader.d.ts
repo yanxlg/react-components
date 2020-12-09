@@ -17,7 +17,7 @@ export declare type CascaderProps<T = string> = Omit<FormItemProps, 'children'> 
     };
 };
 declare const FormCascader: {
-    (props: CascaderProps<string>): JSX.Element;
+    (props: CascaderProps): JSX.Element;
     typeList: string[];
 };
 export default FormCascader;

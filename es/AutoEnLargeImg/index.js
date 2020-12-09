@@ -45,27 +45,27 @@ var AutoEnLargeImg = function AutoEnLargeImg(_a) {
       srcList = _a.srcList,
       children = _a.children,
       enlargeContent = _a.enlargeContent,
-      lazy = _a.lazy,
-      props = __rest(_a, ["className", "enLargeClassName", "src", "srcList", "children", "enlargeContent", "lazy"]);
+      noLazy = _a.noLazy,
+      props = __rest(_a, ["className", "enLargeClassName", "src", "srcList", "children", "enlargeContent", "noLazy"]);
 
   return useMemo(function () {
     if (Array.isArray(srcList) && srcList.length > 0) {
-      return React.createElement(_Popover, {
+      return /*#__PURE__*/React.createElement(_Popover, {
         placement: "right",
         content: function content() {
-          return React.createElement("div", {
+          return /*#__PURE__*/React.createElement("div", {
             style: {
               width: 240,
               height: 240
             }
-          }, React.createElement(_Carousel, {
+          }, /*#__PURE__*/React.createElement(_Carousel, {
             style: {
               position: 'relative'
             }
           }, srcList.map(function (val) {
-            return React.createElement("div", {
+            return /*#__PURE__*/React.createElement("div", {
               key: val
-            }, React.createElement("img", {
+            }, /*#__PURE__*/React.createElement("img", {
               src: val === null || val === void 0 ? void 0 : val.replace('150_150', '240_240'),
               alt: "",
               className: styles.enlarge + " " + enLargeClassName
@@ -74,27 +74,27 @@ var AutoEnLargeImg = function AutoEnLargeImg(_a) {
         },
         title: null,
         autoAdjustOverflow: true
-      }, React.createElement(LazyImage, __assign({
+      }, /*#__PURE__*/React.createElement(LazyImage, __assign({
         src: srcList[0],
         className: className,
         alt: ""
       }, props)));
     }
 
-    return src || children ? React.createElement(_Popover, {
+    return src || children ? /*#__PURE__*/React.createElement(_Popover, {
       placement: "right",
-      content: src ? React.createElement("img", {
+      content: src ? /*#__PURE__*/React.createElement("img", {
         src: src.replace('150_150', '240_240'),
         alt: "",
         className: styles.enlarge + " " + enLargeClassName
       }) : enlargeContent,
       title: null,
       autoAdjustOverflow: true
-    }, src ? lazy ? React.createElement(LazyImage, __assign({
+    }, src ? noLazy ? /*#__PURE__*/React.createElement("img", __assign({
       src: src,
       className: className,
       alt: ""
-    }, props)) : React.createElement("img", __assign({
+    }, props)) : /*#__PURE__*/React.createElement(LazyImage, __assign({
       src: src,
       className: className,
       alt: ""

@@ -55,12 +55,12 @@ var FormRadioGroup = function FormRadioGroup(props) {
       }
     } : {};
   }, [_onChange]);
-  return React.createElement(_Form.Item, __assign({
+  return /*#__PURE__*/React.createElement(_Form.Item, __assign({
     className: className,
     labelCol: __assign(__assign({}, labelCol), {
       className: classNames(labelCol === null || labelCol === void 0 ? void 0 : labelCol.className, labelClassName)
     })
-  }, formItemProps), React.createElement(_Radio.Group, __assign({}, eventProps, childrenProps)));
+  }, formItemProps), /*#__PURE__*/React.createElement(_Radio.Group, __assign({}, eventProps, childrenProps)));
 };
 
 FormRadioGroup.typeList = typeList;

@@ -20,7 +20,7 @@ export declare interface CollapseLayoutProps<T = string> extends CollapseProps {
     controlByIcon?: boolean;
 }
 declare const CollapseLayout: {
-    (props: CollapseLayoutProps<string>): JSX.Element;
+    (props: CollapseLayoutProps): JSX.Element;
     typeList: string[];
 };
 export default CollapseLayout;

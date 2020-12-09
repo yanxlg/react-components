@@ -15,7 +15,7 @@ var DynamicItem = function DynamicItem(_a) {
       labelClassName = _a.labelClassName,
       itemCol = _a.itemCol,
       itemRow = _a.itemRow;
-  return React.createElement(_Form.Item, {
+  return /*#__PURE__*/React.createElement(_Form.Item, {
     shouldUpdate: shouldUpdate,
     noStyle: true
   }, function () {

@@ -15,7 +15,7 @@ export declare type FormPasswordProps<T = string> = Omit<FormItemProps, 'childre
     childrenProps?: Omit<PasswordProps, 'type' | 'size' | 'onPressEnter' | 'form' | 'onChange'>;
 };
 declare const FormPassword: {
-    (props: FormPasswordProps<T>): JSX.Element;
+    (props: FormPasswordProps): JSX.Element;
     typeList: string[];
 };
 export default FormPassword;

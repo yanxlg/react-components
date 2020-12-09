@@ -81,7 +81,7 @@ var CollapseLayout = function CollapseLayout(props) {
       return function (props) {
         var _icon = expandIcon(props);
 
-        return React.cloneElement(_icon, __assign(__assign({}, _icon.props), {
+        return /*#__PURE__*/React.cloneElement(_icon, __assign(__assign({}, _icon.props), {
           onClick: controlByIcon ? toggleActive : undefined
         }));
       };
@@ -92,13 +92,13 @@ var CollapseLayout = function CollapseLayout(props) {
 
   var isHeaderFormComponent = typeof _header === 'object' && _header.hasOwnProperty('name');
 
-  return React.createElement(_Collapse, __assign({
+  return /*#__PURE__*/React.createElement(_Collapse, __assign({
     className: formStyles.formCollapse
   }, _props, {
     activeKey: key,
     onChange: onMixChange,
     expandIcon: icon
-  }), React.createElement(_Collapse.Panel, __assign({
+  }), /*#__PURE__*/React.createElement(_Collapse.Panel, __assign({
     header: isHeaderFormComponent ? getFormItems([_header], form) : _header
   }, __props), getFormItems(fieldList, form, labelClassName, itemCol, itemRow)));
 };
