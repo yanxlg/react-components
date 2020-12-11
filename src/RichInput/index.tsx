@@ -29,9 +29,10 @@ const RichInput: React.FC<RichInputProps> = ({
     maxDigits,
     value,
     onChange,
+    defaultValue,
     ...props
 }) => {
-    const [innerValue, setInnerValue] = useState('');
+    const [innerValue, setInnerValue] = useState(defaultValue || '');
 
     const onInnerChange = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
